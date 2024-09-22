@@ -31,17 +31,15 @@
                 <a class="nav-link <?= $pageTitle == 'Welcome to Our King Coffee Shop' ? 'active' : '' ?>" href="/">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link <?= $pageTitle == 'Customers' ? 'active' : '' ?>" href="post.php">Customers</a>
+                <a class="nav-link <?= $pageTitle == 'Instructors' ? 'active' : '' ?>" href="instructor.php">Instructors</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link <?= $pageTitle == 'Products' ? 'active' : '' ?>" href="post-result.php">Products</a>
+                <a class="nav-link <?= $pageTitle == 'Course' ? 'active' : '' ?>" href="course.php">Courses</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link <?= $pageTitle == 'Order Coffee' ? 'active' : '' ?>" href="get.php">Order Coffee</a> ----instructor with course
+                <a class="nav-link <?= $pageTitle == 'Instructors-with-course' ? 'active' : '' ?>" href="instructors-with-course.php">Instructor with courses</a> ----instructor with course
               </li>
-              <li class="nav-item">
-                <a class="nav-link <?= $pageTitle == 'Order Details' ? 'active' : '' ?>" href="get-result.php">Order Details</a>
-              </li>
+             
             </ul>
           </div>
         </div>
