@@ -5,7 +5,7 @@
      <tr>
        <th> ID </th>
      <th>Name</th>
-     <th>office</th>
+     <th>Address</th>
      </tr>
      
    </thead> 
