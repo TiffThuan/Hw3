@@ -31,16 +31,16 @@
                 <a class="nav-link <?= $pageTitle == 'Welcome to Our King Coffee Shop' ? 'active' : '' ?>" href="/">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link <?= $pageTitle == 'Contact Us' ? 'active' : '' ?>" href="post.php">Contact Us</a>
+                <a class="nav-link <?= $pageTitle == 'Customers' ? 'active' : '' ?>" href="post.php">Customers</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link <?= $pageTitle == 'Contact Result' ? 'active' : '' ?>" href="post-result.php">Contact Result</a>
+                <a class="nav-link <?= $pageTitle == 'Products' ? 'active' : '' ?>" href="post-result.php">Products</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link <?= $pageTitle == 'Order Coffee' ? 'active' : '' ?>" href="get.php">Order Coffee</a>
+                <a class="nav-link <?= $pageTitle == 'Order Coffee' ? 'active' : '' ?>" href="get.php">Order Coffee</a> ----instructor with course
               </li>
               <li class="nav-item">
-                <a class="nav-link <?= $pageTitle == 'Order Result' ? 'active' : '' ?>" href="get-result.php">Order Result</a>
+                <a class="nav-link <?= $pageTitle == 'Order Details' ? 'active' : '' ?>" href="get-result.php">Order Details</a>
               </li>
             </ul>
           </div>
