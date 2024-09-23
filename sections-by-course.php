@@ -1,0 +1,11 @@
+<?php
+
+require_once ('util-db.php');
+require_once('model-sections-by-course.php');
+
+$pageTitle = "Section by Course";
+include 'view-header.php';
+$sections = selectSectionsByCourse($_Post['cid']);
+include 'view sections-by-course.php;
+include 'view-footer.php';
+?>
