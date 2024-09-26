@@ -31,13 +31,13 @@
                 <a class="nav-link <?= $pageTitle == 'Welcome to Our King Coffee Shop' ? 'active' : '' ?>" href="/">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link <?= $pageTitle == 'Instructors' ? 'active' : '' ?>" href="instructor.php">Instructors</a>
+                <a class="nav-link <?= $pageTitle == 'Instructors' ? 'active' : '' ?>" href="instructors.php">Instructors</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link <?= $pageTitle == 'Course' ? 'active' : '' ?>" href="courses.php">Courses</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link <?= $pageTitle == 'Instructors-with-course' ? 'active' : '' ?>" href="instructors-with-course.php">Instructor with courses</a> ----instructor with course
+                <a class="nav-link <?= $pageTitle == 'Instructors-with-course' ? 'active' : '' ?>" href="instructors-with-course.php">Instructor with courses</a>
               </li>
              
             </ul>
