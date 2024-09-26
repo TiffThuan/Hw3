@@ -2,7 +2,7 @@
 <div class="card-group">
 <?php
 
-while ($instructor = $instructors -> fetch_assoc() {
+while ($instructor = $instructors -> fetch_assoc()) {
 ?>
          <div class="card">
    
