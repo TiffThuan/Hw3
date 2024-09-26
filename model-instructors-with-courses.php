@@ -4,9 +4,8 @@
 function selectInstructors() {
     try {
         $conn = get_db_connection();
+        // Correct the SQL query string
         $stmt = $conn->prepare("SELECT customer_id, firstname, lastname, address FROM customers");
-
-    
         $stmt->execute();
         $result = $stmt->get_result();
         $conn->close();
