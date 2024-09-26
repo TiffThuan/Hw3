@@ -1,10 +1,8 @@
-
-
 <?php
 function selectCoursesByInstructor($iid) {
     try {
         $conn = get_db_connection();
-        $stmt = $conn->prepare("SELECT o.order_id, customer_id, order_date, total_amount, status 
+        $stmt = $conn->prepare("SELECT od.order_id, o.customer_id, o.order_date, o.total_amount, o.status, od.quantity, od.price 
                                 FROM orders o 
                                 JOIN order_details od ON o.order_id = od.order_id 
                                 WHERE o.customer_id = ?");
