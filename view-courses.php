@@ -13,7 +13,7 @@
    </thead> 
     <tbody>
       <?php
-while ($course = $courses -> fetch_assoc() {
+while ($course = $courses -> fetch_assoc()) {
     ?>
        <tr>
          <td><?php echo $course['order_id'];?> </td>
@@ -21,9 +21,10 @@ while ($course = $courses -> fetch_assoc() {
          <td><?php echo $course['status'];?>  </td>
          <td>
            <form method ="post" action ="sections-by-course.php">
-             <input type ="hidden" name ="cid" value = "<?php echo $course['order_id'];?> ">
+            <input type ="hidden" name ="cid" value = "<?php echo $course['order_id'];?> ">
             <div class="mb-3">
-            <button type="submit" class="btn btn-primary">Section</button>
+              <button type="submit" class="btn btn-primary">Section</button>
+            </div>
           </form>
          </td>
        </tr>
