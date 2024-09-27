@@ -37,7 +37,7 @@
                 <a class="nav-link <?= $pageTitle == 'Course' ? 'active' : '' ?>" href="courses.php">Courses</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link <?= $pageTitle == 'Instructors-with-course' ? 'active' : '' ?>" href="instructors-with-course.php">Instructor with courses</a>
+                <a class="nav-link <?= $pageTitle == 'Instructors With Courses' ? 'active' : '' ?>" href="instructors-with-courses.php">Instructor with courses</a>
               </li>
              
             </ul>
