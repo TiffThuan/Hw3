@@ -1,4 +1,5 @@
-function selectOrdersByCustomer($customer_id) {
+<?php
+    function selectOrdersByCustomer($customer_id) {
     try {
         $conn = get_db_connection();
         $stmt = $conn->prepare("
@@ -18,7 +19,7 @@ function selectOrdersByCustomer($customer_id) {
         if ($stmt === false) {
             throw new Exception("Failed to prepare SQL statement: " . $conn->error);
         }
-        $stmt->bind_param("i", $customer_id); // Bind the customer_id parameter
+        $stmt->bind_param("i", $customer_id); // Make sure customer_id is an integer
         $stmt->execute();
     
         $result = $stmt->get_result();
@@ -33,3 +34,4 @@ function selectOrdersByCustomer($customer_id) {
         throw $e;
     }
 }
+?>
