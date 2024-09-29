@@ -1,7 +1,8 @@
 <?php
-    function selectOrdersByCustomer($customer_id) {
+function selectOrdersByCustomer($customer_id) {
+    $conn = null; // Initialize connection variable
     try {
-        $conn = get_db_connection();
+        $conn = get_db_connection(); // Assuming this function correctly returns a database connection
         $stmt = $conn->prepare("
             SELECT 
                 o.order_id, 
@@ -15,23 +16,27 @@
             JOIN order_details od ON o.order_id = od.order_id 
             WHERE o.customer_id = ?
         ");
-        
+
         if ($stmt === false) {
             throw new Exception("Failed to prepare SQL statement: " . $conn->error);
         }
-        $stmt->bind_param("i", $customer_id); // Make sure customer_id is an integer
-        $stmt->execute();
-    
+        
+        $stmt->bind_param("i", $customer_id); // Bind the customer_id parameter as an integer
+        $stmt->execute(); // Execute the statement
+
+        // Get the result and fetch as an associative array
         $result = $stmt->get_result();
+        $orders = $result->fetch_all(MYSQLI_ASSOC); // Fetch all orders as an associative array
+
         $stmt->close(); // Close the statement
         $conn->close(); // Close the connection
-        return $result;
+        return $orders; // Return the array of orders
     } catch (Exception $e) {
         // Ensure the connection is properly closed in case of an error
-        if (isset($conn)) {
+        if ($conn) {
             $conn->close();
         }
-        throw $e;
+        throw $e; // Rethrow the exception for further handling
     }
 }
 ?>
