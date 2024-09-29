@@ -1,37 +1,41 @@
 <h1>Customers with Orders</h1>
 <div class="card-group">
-  <?php
-
-  // Loop through the list of customers
-  while ($customer = $customers -> fetch_assoc()) {
-  ?>
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title"><?php echo $customer['firstname'] . " " . $customer['lastname']; ?></h5>
-        <p class="card-text">
-          <ul class="list-group">
-            <?php
-            // Fetch orders for the current customer
-            $orders = selectOrdersByCustomer($customer['customer_id']);
-            while($order = $orders -> fetch_assoc()) {
-              ?>
-              <li class="list-group-item">
-                Order ID: <?php echo $order['order_id']; ?> 
-                - Status: <?php echo $order['status']; ?> 
-                - Total: $<?php echo number_format($order['total_amount'], 2); ?>
-              </li>
-              <?php
-            }
-            ?>
-          </ul>
-        </p>
-        <p class="card-text">
-          <small class="text-body-secondary">Address: <?php echo $customer['address']; ?></small>
-        </p>
-      </div>
-    </div>
-
-  <?php
-  }
-  ?>
+<?php
+// Ensure $customers contains valid data
+if ($customers->num_rows == 0) {
+    echo "No customers found."; // Debugging step: Check if customers data is present
+} else {
+    while ($customer = $customers->fetch_assoc()) {
+        ?>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title"><?php echo $customer['firstname']; ?></h5>
+                <p class="card-text">
+                    <ul class="list-group">
+                        <?php
+                        // Fetch the orders for each customer
+                        $orders = selectOrdersByCustomer($customer['customer_id']);
+                        if ($orders->num_rows == 0) {
+                            echo "<li class='list-group-item'>No orders found for this customer.</li>"; // Debugging step
+                        } else {
+                            while ($order = $orders->fetch_assoc()) {
+                                ?>
+                                <li class="list-group-item">
+                                    <?php echo $order['order_id']; ?> - <?php echo $order['status']; ?> - <?php echo $order['quantity']; ?> - <?php echo $order['price']; ?>
+                                </li>
+                                <?php
+                            }
+                        }
+                        ?>
+                    </ul>
+                </p>
+                <p class="card-text">
+                    <small class="text-body-secondary">Address: <?php echo $customer['address']; ?></small>
+                </p>
+            </div>
+        </div>
+        <?php
+    }
+}
+?>
 </div>
