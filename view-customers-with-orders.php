@@ -1,9 +1,8 @@
-<h1>Customers with Orders</h1>
+<h1>Customers with Orders and Products</h1>
 <div class="card-group">
 <?php
-// Ensure $customers contains valid data
 if ($customers->num_rows == 0) {
-    echo "No customers found."; // Debugging step: Check if customers data is present
+    echo "No customers found.";
 } else {
     while ($customer = $customers->fetch_assoc()) {
         ?>
@@ -16,12 +15,34 @@ if ($customers->num_rows == 0) {
                         // Fetch the orders for each customer
                         $orders = selectOrdersByCustomer($customer['customer_id']);
                         if ($orders->num_rows == 0) {
-                            echo "<li class='list-group-item'>No orders found for this customer.</li>"; // Debugging step
+                            echo "<li class='list-group-item'>No orders found for this customer.</li>";
                         } else {
                             while ($order = $orders->fetch_assoc()) {
                                 ?>
                                 <li class="list-group-item">
-                                    <?php echo $order['order_id']; ?> - <?php echo $order['status']; ?> - <?php echo $order['quantity']; ?> - <?php echo $order['price']; ?>
+                                    <strong>Order ID:</strong> <?php echo $order['order_id']; ?> - 
+                                    <strong>Status:</strong> <?php echo $order['status']; ?> - 
+                                    <strong>Total:</strong> <?php echo $order['total_amount']; ?>
+
+                                    <ul class="list-group mt-2">
+                                    <?php
+                                    // Fetch products for each order
+                                    $products = selectProductsByOrder($order['order_id']); // Create this model function
+                                    if ($products->num_rows == 0) {
+                                        echo "<li class='list-group-item'>No products found for this order.</li>";
+                                    } else {
+                                        while ($product = $products->fetch_assoc()) {
+                                            ?>
+                                            <li class="list-group-item">
+                                                <strong>Product:</strong> <?php echo $product['name']; ?> - 
+                                                <strong>Category:</strong> <?php echo $product['category']; ?> - 
+                                                <strong>Price:</strong> <?php echo $product['price']; ?>
+                                            </li>
+                                            <?php
+                                        }
+                                    }
+                                    ?>
+                                    </ul>
                                 </li>
                                 <?php
                             }
