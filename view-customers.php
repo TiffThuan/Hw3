@@ -11,15 +11,19 @@
     </thead>
     <tbody>
       <?php
-      while ($customer = $customers->fetch_assoc()) {
-          ?>
-          <tr>
-            <td><?php echo $customer['customer_id']; ?></td>
-            <td><?php echo $customer['firstname'] . ' ' . $customer['lastname']; ?></td>
-            <td><?php echo $customer['address']; ?></td>
-            <td><a href="orders-by-customer.php?id=<?php echo $customer['customer_id']; ?>">View Orders</a></td>
-          </tr>
-          <?php
+      if ($customers->num_rows === 0) {
+          echo "<tr><td colspan='4'>No customers found.</td></tr>";
+      } else {
+          while ($customer = $customers->fetch_assoc()) {
+              ?>
+              <tr>
+                <td><?php echo htmlspecialchars($customer['customer_id']); ?></td>
+                <td><?php echo htmlspecialchars($customer['firstname'] . ' ' . $customer['lastname']); ?></td>
+                <td><?php echo htmlspecialchars($customer['address']); ?></td>
+                <td><a href="orders-by-customer.php?id=<?php echo htmlspecialchars($customer['customer_id']); ?>">View Orders</a></td>
+              </tr>
+              <?php
+          }
       }
       ?>
     </tbody>
