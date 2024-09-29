@@ -7,7 +7,7 @@ function selectSectionsByCourse($cid) {
         
         // Use a proper JOIN clause to get relevant fields from order_details
         $stmt = $conn->prepare("
-            SELECT o.order_id, od.customer_id, o.order_date, o.total_amount, o.status 
+            SELECT o.order_id, o.customer_id, o.order_date, o.total_amount, o.status 
             FROM orders o 
             JOIN order_details od ON o.order_id = od.order_id 
             WHERE o.order_id = ?");
