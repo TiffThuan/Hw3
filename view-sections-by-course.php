@@ -13,7 +13,7 @@
    </thead> 
     <tbody>
       <?php
-while ($section= $sections -> fetch_assoc() {
+while ($section= $sections -> fetch_assoc()) {
     ?>
        <tr>
          <td><?php echo $section['order_id'];?> </td>
