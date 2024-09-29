@@ -26,6 +26,7 @@ while ($course = $courses -> fetch_assoc()) {
               <button type="submit" class="btn btn-primary">Section</button>
             </div>
           </form>
+           <a href="sections-by-course.php?cid=<?php echo $course['order_id']; ?>" class="btn btn-secondary">Link to Section</a>
          </td>
        </tr>
        <?php
