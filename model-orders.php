@@ -1,11 +1,9 @@
 
-
 <?php
-function selectCourses() {
+function selectOrders() {
     try {
         $conn = get_db_connection();
-        $stmt = $conn->prepare("SELECT order_id, customer_id, order_date, total_amount, status 
-                                FROM orders");
+        $stmt = $conn->prepare("SELECT order_id, customer_id, order_date, total_amount, status FROM orders");
         $stmt->execute();
         $result = $stmt->get_result();
         $conn->close();
@@ -15,5 +13,6 @@ function selectCourses() {
         throw $e;
     }
 }
-?>
 
+
+?>
