@@ -12,10 +12,6 @@
         </thead>
         <tbody>
         <?php
-        // Fetch orders
-        if ($orders->num_rows == 0) {
-            echo "<tr><td colspan='5'>No orders found.</td></tr>"; // Debugging step
-        } else {
             while ($order = $orders->fetch_assoc()) {
                 ?>
                 <tr>
@@ -24,6 +20,15 @@
                     <td><?php echo $order['total_amount']; ?></td>
                     <td><?php echo $order['status']; ?></td>
                     <td><?php echo $order['order_date']; ?></td>
+                    <td>
+                        <form method ="post" action ="details-by-order.php">
+                            <input type ="hidden" name ="cid" value = "<?php echo $order['order_id'];?> ">
+                                <div class="mb-3">
+                                  <button type="submit" class="btn btn-primary"> Order Details</button>
+                                </div>
+                      </form>
+
+                    </td>
                 </tr>
                 <?php
             }
