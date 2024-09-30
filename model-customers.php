@@ -1,5 +1,3 @@
-
-
 <?php
 function selectCustomers() {
     try {
@@ -14,5 +12,4 @@ function selectCustomers() {
         throw $e;
     }
 }
-
 ?>
