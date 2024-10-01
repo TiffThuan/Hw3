@@ -7,7 +7,7 @@
                 <th>Name</th>
                 <th>Email</th>
                 <th>Phone</th>
-                <th></th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -19,7 +19,7 @@
                     <td><?php echo htmlspecialchars($customer['firstname']) . ' ' . htmlspecialchars($customer['lastname']); ?></td>
                     <td><?php echo htmlspecialchars($customer['email']); ?></td>
                     <td><?php echo htmlspecialchars($customer['phone']); ?></td>
-                    <td><a href="orders-by-customer.php?customer_id=<?php echo $customer['customer_id']; ?>">View Orders</a></td>
+                    <td><a href="orders.php?customer_id=<?php echo $customer['customer_id']; ?>">View Orders</a></td>
                 </tr>
             <?php
             }
