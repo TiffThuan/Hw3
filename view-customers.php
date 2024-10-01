@@ -20,7 +20,7 @@
                 <td><?php echo htmlspecialchars($customer['customer_id']); ?></td>
                 <td><?php echo htmlspecialchars($customer['firstname'] . ' ' . $customer['lastname']); ?></td>
                 <td><?php echo htmlspecialchars($customer['address']); ?></td>
-                <td><a href="orders-by-customer.php?id=<?php echo htmlspecialchars($customer['customer_id']); ?>">View Orders</a></td>
+                <td><a href="orders-by-customer.php?customer_id=<?php echo $customer['customer_id']; ?>">View Orders</a></td>
               </tr>
               <?php
           }
