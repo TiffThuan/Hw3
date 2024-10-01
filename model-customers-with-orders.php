@@ -23,7 +23,7 @@ function selectCustomers() {
     }
 }
 
-function selectOrdersByCustomer($customer_id) {
+function selectCustomersWithOrders($customer_id) {
     try {
         $conn = get_db_connection();
         $stmt = $conn->prepare("
