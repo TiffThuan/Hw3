@@ -27,13 +27,9 @@ function selectOrdersByCustomer($customer_id) {
     try {
         $conn = get_db_connection();
         $stmt = $conn->prepare("
-            SELECT 
-                o.order_id, 
-                o.customer_id, 
-                o.order_date, 
-                o.total_amount, 
-                o.status 
+            SELECT o.order_id, c.firstname AS customer_name, o.order_date, o.total_amount, o.status 
             FROM orders o
+            JOIN customers c ON o.customer_id = c.customer_id
             WHERE o.customer_id = ?
         ");
         $stmt->bind_param("i", $customer_id); // Corrected the bind_param syntax
