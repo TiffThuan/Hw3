@@ -2,7 +2,7 @@
 function selectProducts() {
     try {
         $conn = get_db_connection();
-        $stmt = $conn->prepare("SELECT productid, product_name, price FROM products"); // Added commas between columns
+        $stmt = $conn->prepare("SELECT productid, product_name, price, stock FROM products");
         $stmt->execute();
         $result = $stmt->get_result();
         $conn->close();
@@ -12,5 +12,4 @@ function selectProducts() {
         throw $e;
     }
 }
-
 ?>
