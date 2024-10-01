@@ -12,14 +12,19 @@ function selectCustomers() {
         // Get the result set
         $result = $stmt->get_result();
         
-        // Close the connection
-        $conn->close();
+        // Close the statement (optional good practice)
+        $stmt->close();
         
+        // Return the result set
         return $result;
     } catch (Exception $e) {
-        // Close the connection and handle any errors
-        $conn->close();
+        // Handle the exception
         throw $e;
+    } finally {
+        // Ensure connection is closed, whether an exception occurs or not
+        if ($conn) {
+            $conn->close();
+        }
     }
 }
 
@@ -32,16 +37,28 @@ function selectCustomersWithOrders($customer_id) {
             JOIN customers c ON o.customer_id = c.customer_id
             WHERE o.customer_id = ?
         ");
-        $stmt->bind_param("i", $customer_id); // Corrected the bind_param syntax
+        
+        // Bind the customer_id parameter
+        $stmt->bind_param("i", $customer_id);
         $stmt->execute();
+        
+        // Get the result set
         $result = $stmt->get_result();
-        $conn->close();
+        
+        // Close the statement (optional)
+        $stmt->close();
+        
+        // Return the result set
         return $result;
     } catch (Exception $e) {
-        $conn->close();
+        // Handle the exception
         throw $e;
+    } finally {
+        // Ensure connection is closed
+        if ($conn) {
+            $conn->close();
+        }
     }
 }
-
 
 ?>
