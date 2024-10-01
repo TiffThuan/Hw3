@@ -7,6 +7,6 @@ $pageTitle = "Customers with Orders";
 include 'view-header.php';
 
 $customersWithOrders = selectCustomersWithOrders();
-include 'view-customers-with-orders.php'; // Load view
+include 'view-customers-with-orders.php';
 include 'view-footer.php';
 ?>
