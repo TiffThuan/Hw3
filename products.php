@@ -1,13 +1,11 @@
 <?php
-require_once('util-db.php');
-require_once('model-products.php'); // Make sure this model exists
+require_once ('util-db.php');
+require_once('model-products.php');
 
-$pageTitle = "Available Products"; // Update title
+$pageTitle = "Products"; 
 include 'view-header.php';
 
-// Fetch all products
-$products = selectProducts(); // Ensure this function is defined in your model
-
-include 'view-products.php'; // Create this view to display products
+$products = selectProducts();
+include 'view-products.php'; 
 include 'view-footer.php';
 ?>
