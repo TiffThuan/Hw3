@@ -35,7 +35,7 @@ if ($customers->num_rows == 0) {
                                             ?>
                                             <li class="list-group-item">
                                                 <strong>Product:</strong> <?php echo $product['name']; ?> - 
-                                                <strong>Category:</strong> <?php echo $product['category']; ?> - 
+                                                <strong>Description:</strong> <?php echo $product['description']; ?> - 
                                                 <strong>Price:</strong> <?php echo $product['price']; ?>
                                             </li>
                                             <?php
