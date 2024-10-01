@@ -1,25 +1,21 @@
 <?php
-require_once('util-db.php');
+require_once ('util-db.php');
 require_once('model-orders-by-customer.php');
 
-$pageTitle = "Orders by Customer"; // Update title
+$pageTitle = "Orders by Customer"; 
 include 'view-header.php';
 
-// Validate and retrieve customer_id from GET parameters
-if (isset($_GET['customer_id']) && is_numeric($_GET['customer_id'])) {
-    $customer_id = intval($_GET['customer_id']); // Ensure it's an integer
-
-    // Retrieve orders by customer_id
+$customer_id = isset($_GET['customer_id']) ? intval($_GET['customer_id']) : null; // Ensure you retrieve the correct ID
+if ($customer_id) {
     $orders = selectOrdersByCustomer($customer_id);
-    
-    // Check if any orders were returned
-    if (!$orders || $orders->num_rows === 0) {
+    if ($orders->num_rows === 0) {
         echo "<p>No orders found for this customer.</p>";
+    } else {
+        include 'view-orders-by-customer.php'; 
     }
 } else {
-    echo "<p>Invalid Customer ID. Please provide a valid Customer ID.</p>";
+    echo "Invalid Customer ID. Please provide a valid Customer ID.";
 }
 
-include 'view-orders-by-customer.php'; 
 include 'view-footer.php';
 ?>
