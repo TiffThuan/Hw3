@@ -1,6 +1,6 @@
 <?php
 require_once('util-db.php');
-require_once('model-orders.php'); // Ensure the correct model is included
+require_once('model-orders.php'); 
 
 $pageTitle = "Orders by Customer";
 include 'view-header.php';
@@ -9,8 +9,10 @@ include 'view-header.php';
 ini_set('display_errors', 1); 
 error_reporting(E_ALL);
 
-// Fetch customer_id from the URL (should be passed as ?customer_id=...)
+// Fetch customer_id from the URL and debug it
 $customer_id = isset($_GET['customer_id']) ? intval($_GET['customer_id']) : null;
+
+echo "<p>Debug: Customer ID fetched from URL is: {$customer_id}</p>"; // Add this line for debugging
 
 if ($customer_id && $customer_id > 0) {
     // Fetch orders by this customer_id
@@ -26,4 +28,3 @@ if ($customer_id && $customer_id > 0) {
 }
 
 include 'view-footer.php';
-?>
