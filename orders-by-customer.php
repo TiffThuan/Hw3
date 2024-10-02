@@ -8,14 +8,22 @@ error_reporting(E_ALL);
 $pageTitle = "Orders by Customer";
 include 'view-header.php';
 
-$orders=selectOrders()
-    if (! $orders || $orders->num_rows == 0) {
-        "<p>No orders found for this customer.</p>"; 
+// Step 1: Fetch the customer ID from the URL
+if (isset($_GET['customer_id']) && is_numeric($_GET['customer_id'])) {
+    $customer_id = intval($_GET['customer_id']);
+
+    // Step 2: Fetch the orders for the given customer
+    $orders = selectOrdersByCustomer($customer_id);
+
+    if (!$orders || $orders->num_rows == 0) {
+        echo "<p>No orders found for this customer.</p>"; 
     } else {
-        echo include 'view-orders-by-customer.php'; 
+        // Step 3: Include the view to display orders
+        include 'view-orders-by-customer.php'; 
     }
 } else {
-  
+    echo "<p>Invalid or missing customer ID.</p>";
+}
 
 include 'view-footer.php';
 ?>
