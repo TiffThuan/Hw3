@@ -1,16 +1,27 @@
 <?php
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 require_once('util-db.php');
 require_once('model-orders-by-customer.php');
 
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
+
 
 $pageTitle = "Orders by Customer";
 include 'view-header.php';
 
+// Debugging: Show all query parameters
+echo "<pre>";
+print_r($_GET);
+echo "</pre>";
+
 // Check if customer_id is set and valid
 if (isset($_GET['customer_id']) && !empty($_GET['customer_id'])) {
-    $customer_id = intval($_GET['customer_id']); // Make sure it's an integer
+    $customer_id = intval($_GET['customer_id']); // Convert to integer
+    echo "Debug: Customer ID fetched from URL is: " . $customer_id . "<br>"; // Debugging output
+
     if ($customer_id > 0) {
         // Fetch orders by customer ID
         $orders = selectOrdersByCustomer($customer_id);
