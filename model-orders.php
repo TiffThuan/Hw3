@@ -12,7 +12,7 @@ function selectOrders() {
         
         return $result;
     } catch (Exception $e) {
-         $conn->close()
+         $conn->close();
         throw $e;
        
     }
