@@ -1,5 +1,4 @@
 <?php
-
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -7,14 +6,12 @@ error_reporting(E_ALL);
 require_once('util-db.php');
 require_once('model-orders-by-customer.php');
 
-
-
 $pageTitle = "Orders by Customer";
 include 'view-header.php';
 
 // Debugging: Show all query parameters
 echo "<pre>";
-print_r($_GET);
+print_r($_GET); // This will show if there are any GET parameters.
 echo "</pre>";
 
 // Check if customer_id is set and valid
