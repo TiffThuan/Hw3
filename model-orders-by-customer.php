@@ -9,14 +9,23 @@ function selectOrdersByCustomer($customer_id) {
                                 FROM orders 
                                 WHERE customer_id = ?");
         
+        if (!$stmt) {
+            throw new Exception("Failed to prepare statement: " . $conn->error);
+        }
 
         $stmt->bind_param("i", $customer_id);
         $stmt->execute();
         $result = $stmt->get_result();
+
+        if (!$result) {
+            throw new Exception("Failed to fetch result: " . $stmt->error);
+        }
+
         $stmt->close();
 
         return $result;
     } catch (Exception $e) {
+        // Handle the error (e.g., log it and display a user-friendly message)
         throw $e;
     } finally {
         if ($conn) {
@@ -24,6 +33,7 @@ function selectOrdersByCustomer($customer_id) {
         }
     }
 }
+
 function selectOrders() {
     $conn = null;
     try {
@@ -31,12 +41,23 @@ function selectOrders() {
         $stmt = $conn->prepare("SELECT o.order_id, o.order_date, c.firstname, c.lastname, o.total_amount 
                                 FROM orders o 
                                 JOIN customers c ON o.customer_id = c.customer_id");
+
+        if (!$stmt) {
+            throw new Exception("Failed to prepare statement: " . $conn->error);
+        }
+
         $stmt->execute();
         $result = $stmt->get_result();
+
+        if (!$result) {
+            throw new Exception("Failed to fetch result: " . $stmt->error);
+        }
+
         $stmt->close();
         
         return $result;
     } catch (Exception $e) {
+        // Handle the error (e.g., log it and display a user-friendly message)
         throw $e;
     } finally {
         if ($conn) {
@@ -44,4 +65,5 @@ function selectOrders() {
         }
     }
 }
+
 ?>
