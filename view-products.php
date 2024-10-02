@@ -7,6 +7,7 @@
                 <th>Product Name</th>
                 <th>Product Description</th>
                 <th>Price</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -18,6 +19,7 @@
                     <td><?php echo htmlspecialchars($product['product_name']); ?></td>
                     <td><?php echo htmlspecialchars($product['product_description']); ?></td>
                     <td><?php echo htmlspecialchars($product['price']); ?></td>
+                    <td><a href="order.php?order_id=<?php echo $order['order_id']; ?>">View Orders</a></td>
                 </tr>
             <?php
             }
