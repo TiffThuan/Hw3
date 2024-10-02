@@ -25,3 +25,5 @@ if ($order_id) {
 }
 
 include 'view-footer.php';
+?>
+
