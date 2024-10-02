@@ -25,3 +25,5 @@ function selectOrderDetails($order_id) {
         }
     }
 }
+?>
+
