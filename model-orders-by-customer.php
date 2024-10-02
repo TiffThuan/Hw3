@@ -5,11 +5,11 @@ function selectOrdersByCustomer($customer_id) {
     $conn = null;
     try {
         $conn = get_db_connection();
-        $stmt = $conn->prepare("SELECT o.order_id, o.order_date, o.total_amount 
-                                FROM orders o 
-                                WHERE o.customer_id = ?");
+        $stmt = $conn->prepare("SELECT order_id, order_date, total_amount 
+                                FROM orders 
+                                WHERE customer_id = ?");
         
-        // Bind the customer_id to the query
+
         $stmt->bind_param("i", $customer_id);
         $stmt->execute();
         $result = $stmt->get_result();
