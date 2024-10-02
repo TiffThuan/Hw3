@@ -12,7 +12,12 @@ error_reporting(E_ALL);
 // Fetch customer_id from the URL and debug it
 $customer_id = isset($_GET['customer_id']) ? intval($_GET['customer_id']) : null;
 
-echo "<p>Debug: Customer ID fetched from URL is: {$customer_id}</p>"; // Debugging line
+echo "<p>Debug: Customer ID fetched from URL is: {$customer_id}</p>"; // Add this line for debugging
+
+// Debugging the entire GET array
+echo "<pre>";
+print_r($_GET);
+echo "</pre>";
 
 if ($customer_id && $customer_id > 0) {
     // Fetch orders by this customer_id
