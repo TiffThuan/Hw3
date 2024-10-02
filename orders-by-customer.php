@@ -11,7 +11,7 @@ include 'view-header.php';
 
 // Debugging: Show all query parameters
 echo "<pre>";
-print_r($_GET); // This will show if there are any GET parameters.
+print_r($_GET); // Show all GET parameters, it will help to see if 'customer_id' is passed.
 echo "</pre>";
 
 // Check if customer_id is set and valid
@@ -22,7 +22,7 @@ if (isset($_GET['customer_id']) && !empty($_GET['customer_id'])) {
     if ($customer_id > 0) {
         // Fetch orders by customer ID
         $orders = selectOrdersByCustomer($customer_id);
-        
+
         if ($orders && $orders->num_rows > 0) {
             include 'view-orders-by-customer.php';
         } else {
