@@ -25,3 +25,4 @@ function selectOrdersByCustomer($customer_id) {
         }
     }
 }
+?>
