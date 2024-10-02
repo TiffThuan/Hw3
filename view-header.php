@@ -21,7 +21,7 @@
                     <a class="nav-link" href="products.php">Products</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="customers-with-orders.php">Customers</a>
+                    <a class="nav-link" href="customers.php">Customers</a>
                 </li>
             </ul>
         </div>
