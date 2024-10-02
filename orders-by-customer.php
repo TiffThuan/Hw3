@@ -9,16 +9,15 @@ include 'view-header.php';
 ini_set('display_errors', 1); 
 error_reporting(E_ALL);
 
-// Check if customer_id is passed via GET
+// Get customer_id from the URL
 $customer_id = isset($_GET['customer_id']) ? intval($_GET['customer_id']) : null;
 
-// If a valid customer ID is provided
-if ($customer_id && $customer_id > 0) {
-    $orders = selectOrdersByCustomer($customer_id); // Fetch orders for the specific customer
-
-    // If orders exist, display them
+if ($customer_id) {
+    $orders = selectOrdersByCustomer($customer_id);
+    
+    // Check if any orders exist for this customer
     if ($orders && $orders->num_rows > 0) {
-        include 'view-orders-by-customer.php'; // Order listing template
+        include 'view-orders-by-customer.php'; // Template to display orders by customer
     } else {
         echo "<p>No orders found for this customer.</p>";
     }
@@ -27,4 +26,3 @@ if ($customer_id && $customer_id > 0) {
 }
 
 include 'view-footer.php';
-?>
