@@ -12,7 +12,7 @@ error_reporting(E_ALL);
 // Fetch customer_id from the URL and debug it
 $customer_id = isset($_GET['customer_id']) ? intval($_GET['customer_id']) : null;
 
-echo "<p>Debug: Customer ID fetched from URL is: {$customer_id}</p>"; // Add this line for debugging
+echo "<p>Debug: Customer ID fetched from URL is: {$customer_id}</p>"; // Debugging line
 
 if ($customer_id && $customer_id > 0) {
     // Fetch orders by this customer_id
@@ -28,3 +28,4 @@ if ($customer_id && $customer_id > 0) {
 }
 
 include 'view-footer.php';
+?>
