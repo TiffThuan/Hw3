@@ -18,6 +18,9 @@ if ($customer_id && $customer_id > 0) {
     // Fetch orders by this customer_id
     $orders = selectOrdersByCustomer($customer_id);
 
+    // Fetch customer information for display
+    $customer = selectCustomerById($customer_id); // Ensure you have this function defined
+
     if ($orders && $orders->num_rows > 0) {
         include 'view-orders-by-customer.php'; // This will display the orders
     } else {
@@ -28,4 +31,5 @@ if ($customer_id && $customer_id > 0) {
 }
 
 include 'view-footer.php';
+
 ?>
