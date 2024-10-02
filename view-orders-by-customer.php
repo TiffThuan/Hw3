@@ -1,4 +1,5 @@
-<h1>Orders by Customer</h1>
+<h1>Orders for <?php echo htmlspecialchars($customer['firstname'] . ' ' . $customer['lastname']); ?></h1>
+
 <div class="table-responsive">
     <table class="table">
         <thead>
@@ -6,24 +7,24 @@
                 <th>Order ID</th>
                 <th>Order Date</th>
                 <th>Total Amount</th>
-                <th>Status</th>
-                <th>Quantity</th>
-                <th>Price</th>
+                <th>Actions</th>
             </tr>
-        </thead> 
+        </thead>
         <tbody>
             <?php
-            while ($order = $orders->fetch_assoc()) {
+            if ($orders && $orders->num_rows > 0) {
+                while ($order = $orders->fetch_assoc()) {
             ?>
-                <tr>
-                    <td><?php echo htmlspecialchars($order['order_id']); ?></td>
-                    <td><?php echo htmlspecialchars($order['order_date']); ?></td>
-                    <td><?php echo htmlspecialchars($order['total_amount']); ?></td>
-                    <td><?php echo htmlspecialchars($order['status']); ?></td>
-                    <td><?php echo htmlspecialchars($order['quantity']); ?></td>
-                    <td><?php echo htmlspecialchars($order['price']); ?></td>
-                </tr>
+                    <tr>
+                        <td><?php echo htmlspecialchars($order['order_id']); ?></td>
+                        <td><?php echo htmlspecialchars($order['order_date']); ?></td>
+                        <td><?php echo htmlspecialchars($order['total_amount']); ?></td>
+                        <td><a href="order-details.php?order_id=<?php echo $order['order_id']; ?>">View Details</a></td>
+                    </tr>
             <?php
+                }
+            } else {
+                echo "<tr><td colspan='4'>No orders found for this customer.</td></tr>";
             }
             ?>  
         </tbody>
