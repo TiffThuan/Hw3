@@ -28,7 +28,7 @@ function selectOrdersByCustomer($customer_id) {
         $stmt = $conn->prepare("SELECT o.order_id, o.order_date, c.firstname, c.lastname, o.total_amount 
                                 FROM orders o 
                                 JOIN customers c ON o.customer_id = c.customer_id
-                                WHERE o.customer_id = ?");
+                                WHERE o.customer_id = 1");
         
         // Bind the customer_id to the query
         $stmt->bind_param("i", $customer_id);
