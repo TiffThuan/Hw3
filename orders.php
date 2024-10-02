@@ -20,3 +20,4 @@ if ($orders && $orders->num_rows > 0) {
 }
 
 include 'view-footer.php';
+?>
