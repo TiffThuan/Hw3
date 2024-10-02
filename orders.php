@@ -9,7 +9,7 @@ include 'view-header.php';
 ini_set('display_errors', 1); 
 error_reporting(E_ALL);
 
-// Fetch all orders (this is not dependent on customer_id)
+// Fetch all orders without customer_id check
 $orders = selectOrders(); 
 
 // Check if any orders exist, if not show a message
@@ -20,4 +20,3 @@ if ($orders && $orders->num_rows > 0) {
 }
 
 include 'view-footer.php';
-?>
