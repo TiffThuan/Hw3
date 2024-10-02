@@ -12,18 +12,23 @@
         </thead>
         <tbody>
             <?php
-            while ($order = $orders->fetch_assoc()) {
-            ?>
-                <tr>
-                    <td><?php echo htmlspecialchars($order['order_id']); ?></td>
-                    <td><?php echo htmlspecialchars($order['order_date']); ?></td>
-                    <td><?php echo htmlspecialchars($order['firstname'] . ' ' . $order['lastname']); ?></td>
-                    <td><?php echo htmlspecialchars($order['total_amount']); ?></td>
-                    <td><a href="order-details.php?order_id=<?php echo $order['order_id']; ?>">View Details</a></td>
-                </tr>
-            <?php
+            if ($orders->num_rows > 0) {
+                while ($order = $orders->fetch_assoc()) {
+                    ?>
+                    <tr>
+                        <td><?php echo htmlspecialchars($order['order_id']); ?></td>
+                        <td><?php echo htmlspecialchars($order['order_date']); ?></td>
+                        <td><?php echo htmlspecialchars($order['firstname'] . ' ' . $order['lastname']); ?></td>
+                        <td><?php echo htmlspecialchars($order['total_amount']); ?></td>
+                        <td><a href="order-details.php?order_id=<?php echo $order['order_id']; ?>">View Details</a></td>
+                    </tr>
+                    <?php
+                }
+            } else {
+                echo "<tr><td colspan='5'>No orders found!</td></tr>";
             }
-            ?>  
+            ?>
         </tbody>
     </table>
 </div>
+
