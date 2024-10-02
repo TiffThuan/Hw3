@@ -1,8 +1,6 @@
 <?php
 
-// Select all orders with customer details
 function selectOrders() {
-    $conn = null;
     try {
         $conn = get_db_connection();
         $stmt = $conn->prepare("SELECT o.order_id, o.order_date, c.firstname, c.lastname, o.total_amount 
@@ -14,11 +12,9 @@ function selectOrders() {
         
         return $result;
     } catch (Exception $e) {
+         $conn->close()
         throw $e;
-    } finally {
-        if ($conn) {
-            $conn->close();
-        }
+       
     }
 }
 ?>
