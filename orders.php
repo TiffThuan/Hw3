@@ -1,6 +1,6 @@
 <?php
 require_once('util-db.php');
-require_once('model-orders.php'); 
+require_once('model-orders.php'); // Use model-orders.php for order retrieval functions
 
 $pageTitle = "Orders";
 include 'view-header.php';
@@ -9,12 +9,12 @@ include 'view-header.php';
 ini_set('display_errors', 1); 
 error_reporting(E_ALL);
 
-// Fetch all orders
+// Fetch all orders (this is not dependent on customer_id)
 $orders = selectOrders(); 
 
 // Check if any orders exist, if not show a message
 if ($orders && $orders->num_rows > 0) {
-    include 'view-orders.php'; // Order listing
+    include 'view-orders.php'; // This is your order listing template
 } else {
     echo "No orders found!";
 }
