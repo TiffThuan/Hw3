@@ -28,7 +28,7 @@ function selectOrders() {
     }
 }
 
-function selectOrdersByCustomer($customer_id) { // Change the parameter name to customer_id
+function selectOrdersByCustomer($customer_id) {
     $conn = null;
     try {
         $conn = get_db_connection();
@@ -40,7 +40,7 @@ function selectOrdersByCustomer($customer_id) { // Change the parameter name to 
             throw new Exception("Failed to prepare statement: " . $conn->error);
         }
 
-        $stmt->bind_param("i", $customer_id); // Bind the correct parameter
+        $stmt->bind_param("i", $customer_id); // Correctly bind the customer_id
         $stmt->execute();
         $result = $stmt->get_result();
 
@@ -49,15 +49,14 @@ function selectOrdersByCustomer($customer_id) { // Change the parameter name to 
         }
 
         $stmt->close();
-
         return $result;
     } catch (Exception $e) {
-        // Handle the error (e.g., log it and display a user-friendly message)
-        throw $e;
+        throw $e; // Handle or log the error as needed
     } finally {
         if ($conn) {
             $conn->close();
         }
     }
 }
+
 ?>
