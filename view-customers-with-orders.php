@@ -24,6 +24,7 @@ if ($customers->num_rows == 0) {
                                     <strong>Status:</strong> <?php echo $order['status']; ?> - 
                                     <strong>Total Amount:</strong> <?php echo $order['total_amount']; ?> - 
                                     <strong>Order Date:</strong> <?php echo $order['order_date']; ?>
+                                <strong> Actions </strong> <a href="order-details.php?order_id=<?php echo $order['order_id']; ?>">View Details</a>?>
                                 </li>
                                 <?php
                             }
