@@ -19,6 +19,7 @@ function selectOrders() {
         }
     }
 }
+
 // Function to fetch orders by a specific customer ID
 function selectOrdersByCustomer($customer_id) {
     $conn = null;
