@@ -9,14 +9,8 @@ require_once('model-orders.php');
 $pageTitle = "Orders";
 include 'view-header.php';
 
-if (isset($_GET['product_id'])) {
-    $product_id = intval($_GET['product_id']);
-    // Call a new function to get orders based on product_id
-    $orders = selectProducts($product_id);
-} else {
-    // Fallback: Show all orders if no product_id is provided
-    $orders = selectOrders(); 
-}
+$orders = selectOrders(); 
+
 
 include 'view-orders.php';
 include 'view-footer.php';
