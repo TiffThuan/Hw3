@@ -1,5 +1,4 @@
 <?php
-
 ini_set('display_errors', 1); 
 ini_set('display_startup_errors', 1); 
 error_reporting(E_ALL);
@@ -10,16 +9,13 @@ require_once('model-orders.php');
 $pageTitle = "Orders";
 include 'view-header.php';
 
-// Check if a product_id is passed via the query string
-$product_id = isset($_GET['product_id']) ? intval($_GET['product_id']) : 0;
-
-// Fetch orders, optionally filtered by product_id
-if ($product_id > 0) {
-    // If product_id is provided, get only the orders for that product
+if (isset($_GET['product_id'])) {
+    $product_id = intval($_GET['product_id']);
+    // Call a new function to get orders based on product_id
     $orders = selectOrdersByProduct($product_id);
 } else {
-    // Otherwise, get all orders
-    $orders = selectOrders();
+    // Fallback: Show all orders if no product_id is provided
+    $orders = selectOrders(); 
 }
 
 include 'view-orders.php';
