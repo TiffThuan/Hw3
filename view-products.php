@@ -1,4 +1,3 @@
-
 <h1>Products</h1>
 <div class="table-responsive">
     <table class="table">
@@ -14,13 +13,15 @@
         <tbody>
             <?php
             while ($product = $products->fetch_assoc()) {
-            ?>
+                ?>
                 <tr>
                     <td><?php echo htmlspecialchars($product['productid']); ?></td>
                     <td><?php echo htmlspecialchars($product['product_name']); ?></td>
                     <td><?php echo htmlspecialchars($product['product_description']); ?></td>
                     <td><?php echo htmlspecialchars($product['price']); ?></td>
-                   <td><a href="order-details.php?order_id=<?php echo $order['order_id']; ?>">Order Infos</a></td>
+                    <!-- Pass product_id in the URL instead of order_id -->
+                    <td><a href="order-details.php?product_id=<?php echo htmlspecialchars($product['productid']); ?>">Order Infos</a></td>
+                </tr>
             <?php
             }
             ?>  
