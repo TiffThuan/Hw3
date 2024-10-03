@@ -1,16 +1,31 @@
 <?php
 
-
-function selectProducts() {
+function selectProducts($product_id = null) {
     try {
         $conn = get_db_connection();
-        $stmt = $conn->prepare("SELECT productid, product_name, product_description, price FROM products");
+        
+        if ($product_id) {
+            // Fetch order details for a specific product
+            $stmt = $conn->prepare("SELECT od.order_id, o.order_date, od.quantity, od.price 
+                                    FROM order_details od
+                                    JOIN orders o ON od.order_id = o.order_id
+                                    WHERE od.product_id = ?");
+            $stmt->bind_param("i", $product_id);
+        } else {
+            // Fetch all products if no product_id is provided
+            $stmt = $conn->prepare("SELECT productid, product_name, product_description, price FROM products");
+        }
+
         $stmt->execute();
         $result = $stmt->get_result();
-        $conn->close();
+        $stmt->close();  // Close the statement
+        $conn->close();  // Close the connection
+
         return $result;
     } catch (Exception $e) {
-        $conn->close();
+        if ($conn) {
+            $conn->close();  // Ensure the connection is closed in case of error
+        }
         throw $e;
     }
 }
