@@ -12,7 +12,7 @@ include 'view-header.php';
 if (isset($_GET['product_id'])) {
     $product_id = intval($_GET['product_id']);
     // Call a new function to get orders based on product_id
-    $orders = selectOrdersByProduct($product_id);
+    $orders = selectProducts($product_id);
 } else {
     // Fallback: Show all orders if no product_id is provided
     $orders = selectOrders(); 
