@@ -41,23 +41,6 @@ function selectOrderDetails($order_id) {
         throw $e;
     }
 }
-function selectProducts() {
-    try {
-        $conn = get_db_connection();
-        $stmt = $conn->prepare("SELECT productid, product_name, product_description, price FROM products");
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $stmt->close();  // Close statement after execution
-        $conn->close();  // Close connection after query
-        
-        return $result;
-    } catch (Exception $e) {
-        if ($conn) {
-            $conn->close();  // Ensure the connection is closed in case of error
-        }
-        throw $e;
-    }
-}
 
 
 ?>
