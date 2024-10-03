@@ -19,8 +19,7 @@
                     <td><?php echo htmlspecialchars($product['product_name']); ?></td>
                     <td><?php echo htmlspecialchars($product['product_description']); ?></td>
                     <td><?php echo htmlspecialchars($product['price']); ?></td>
-                    <!-- Pass product_id in the URL instead of order_id -->
-                    <td><a href="order-details.php?product_id=<?php echo htmlspecialchars($product['productid']); ?>">Order Infos</a></td>
+                   
                 </tr>
             <?php
             }
