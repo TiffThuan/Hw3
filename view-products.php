@@ -19,9 +19,7 @@
                     <td><?php echo htmlspecialchars($product['product_name']); ?></td>
                     <td><?php echo htmlspecialchars($product['product_description']); ?></td>
                     <td><?php echo htmlspecialchars($product['price']); ?></td>
-                    <!-- Pass product_id to orders.php to view related orders -->
-                    <td><a href="orders.php?product_id=<?php echo htmlspecialchars($product['productid']); ?>">View Orders</a></td>
-                </tr>
+                   <td><a href="order-details.php?order_id=<?php echo $order['order_id']; ?>">Order Infos</a></td>
             <?php
             }
             ?>  
