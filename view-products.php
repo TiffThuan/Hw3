@@ -7,7 +7,7 @@
                 <th>Product Name</th>
                 <th>Product Description</th>
                 <th>Price</th>
-                <th>Action</th>
+              
             </tr>
         </thead>
         <tbody>
