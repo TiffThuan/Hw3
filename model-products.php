@@ -1,23 +1,27 @@
 <?php
 
-function selectOrders() {
+function selectOrderDetails($order_id) {
+    $conn = null;
     try {
         $conn = get_db_connection();
-        $stmt = $conn->prepare("SELECT c.firstname AS customer_name, o.order_date, o.total_amount, o.status 
-                                FROM orders o
-                                JOIN customers c ON o.customer_id = c.customer_id
-                                WHERE o.customer_id =?");
+        $stmt = $conn->prepare("SELECT od.order_id, p.product_name, od.quantity, od.price 
+                                FROM order_details od
+                                JOIN products p ON od.product_id = p.productid
+                                WHERE od.order_id = ?");
+        
+        // Bind the order_id to the query
+        $stmt->bind_param("i", $order_id);
         $stmt->execute();
         $result = $stmt->get_result();
         $stmt->close();
-        $conn->close(); // Close the connection after the query
-        
+
         return $result;
     } catch (Exception $e) {
+        throw $e;
+    } finally {
         if ($conn) {
             $conn->close();
         }
-        throw $e;
     }
 }
 
