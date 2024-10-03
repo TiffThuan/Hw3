@@ -47,12 +47,17 @@ function selectProducts() {
         $stmt = $conn->prepare("SELECT productid, product_name, product_description, price FROM products");
         $stmt->execute();
         $result = $stmt->get_result();
-        $conn->close();
+        $stmt->close();  // Close statement after execution
+        $conn->close();  // Close connection after query
+        
         return $result;
     } catch (Exception $e) {
-        $conn->close();
+        if ($conn) {
+            $conn->close();  // Ensure the connection is closed in case of error
+        }
         throw $e;
     }
 }
+
 
 ?>
