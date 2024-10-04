@@ -20,7 +20,7 @@
                         <td><?php echo htmlspecialchars($order['order_date']); ?></td>
                         <td><?php echo htmlspecialchars($order['firstname'] . ' ' . $order['lastname']); ?></td>
                         <td><?php echo htmlspecialchars($order['total_amount']); ?></td>
-                        <td><a href="order-details.php?order_id=<?php echo $order['order_id']; ?>">View Details</a></td>
+                        <td> <a href="order-details.php?order_id=<?php echo $order['order_id']; ?>" class="btn btn-primary"> View Details</a></td>
                     </tr>
             <?php
                 }
