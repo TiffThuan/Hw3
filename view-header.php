@@ -21,10 +21,10 @@
                     <a class="nav-link" href="orders.php">Orders</a> <!-- Link to Orders -->
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="products.php">Products</a> <!-- Link to Products -->
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="customers.php">Customers</a> <!-- Link to Customers -->
+                </li>
+                 <li class="nav-item">
+                    <a class="nav-link" href="products.php">Products</a> <!-- Link to Products -->
                 </li>
             </ul>
         </div>
