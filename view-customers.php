@@ -28,15 +28,15 @@
             while ($customer = $customers->fetch_assoc()) {
             ?>
                 <tr>
-                    <td><?php echo ($customer['customer_id']); ?></td>
-                    <td><?php echo ($customer['firstname'] . ' ' . $customer['lastname']); ?></td>
-                    <td><?php echo ($customer['email']); ?></td>
-                    <td><?php echo ($customer['phone']); ?></td>
+                    <td><?php echo htmlspecialchars($customer['customer_id']); ?></td>
+                    <td><?php echo htmlspecialchars($customer['firstname'] . ' ' . $customer['lastname']); ?></td>
+                    <td><?php echo htmlspecialchars($customer['email']); ?></td>
+                    <td><?php echo htmlspecialchars($customer['phone']); ?></td>
                 
                     <td> </td>
-                    //create delete button
+                    
                     <td>  
-                        <form method ="post" action="orders-by-customer.php">
+                        <form method ="post" action="">
                             <input type="hidden" name="cid" value="<?php echo $customer['customer_id']; ?> ">
                             <input type="hidden" name="actionType" value="Delete">
                             <button type="submit"  class="btn btn-primary">
