@@ -5,10 +5,6 @@ require_once('model-customers.php');
 $pageTitle = "Customers"; 
 include 'view-header.php';
 
-echo "<pre>";
-print_r($_POST); // Debugging POST data
-echo "</pre>";
-
 if (isset ($_POST['actionType'])) {
     switch($_POST['actionType']) {
         case "Add":
