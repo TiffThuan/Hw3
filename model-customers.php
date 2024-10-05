@@ -17,14 +17,18 @@ function insertCustomers($cFName, $cLName, $cEmail, $cPhone) {
     try {
         $conn = get_db_connection();
         $stmt = $conn->prepare("INSERT INTO `mycoffeeshop_database`.`customers`
-                                (`firstname`,
-                                `lastname`,
-                                `email`,
-                                `phone`)
-                                VALUES
-                                (?,?,?,?);");
-        $stmt->bind_param("ssss", $cFName, $cLName, $cEmail, $cPhone);   //ss: number of string variables
+                                (`firstname`, `lastname`, `email`, `phone`)
+                                VALUES (?, ?, ?, ?);");
+        if (!$stmt) {
+            throw new Exception("Prepare statement failed: " . $conn->error);
+        }
+
+        $stmt->bind_param("ssss", $cFName, $cLName, $cEmail, $cPhone);
         $success = $stmt->execute();
+
+        if (!$success) {
+            throw new Exception("Execute statement failed: " . $stmt->error);
+        }
     
         $conn->close();
         return $success;
@@ -33,6 +37,7 @@ function insertCustomers($cFName, $cLName, $cEmail, $cPhone) {
         throw $e;
     }
 }
+
 
 function updateCustomers($cFName, $cLName, $cEmail, $cPhone,$cid) {
     try {
