@@ -16,7 +16,7 @@ switch($_POST['actionType']){
     break;
 
       case "Edit":
-      if (editCustomers($_POST['cFName'],$_POST['cLName'],$_POST['cEmail'],$_POST['cPhone'],$_POST['cid'])) {
+      if (updateCustomers($_POST['cFName'],$_POST['cLName'],$_POST['cEmail'],$_POST['cPhone'],$_POST['cid'])) {
          echo '<div class = "alert alert-success" role= "alert"> Customer edited ....</div>'; 
       } else {
           echo '<div class = "alert alert-danger" role= "alert"> Error edited ....</div>';  
