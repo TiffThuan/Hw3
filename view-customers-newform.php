@@ -35,6 +35,7 @@
             <label for="cPhone" class="form-label"> Phone</label>
             <input type="text" class="form-control" id="cPhone" name="cPhone">
           </div>
+                <input type= "hidden" name = "actionType", value="Add">
           <div class="col-12">
             <button type="submit" class="btn btn-primary">Save</button>
           </div>
