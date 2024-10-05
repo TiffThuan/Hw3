@@ -3,9 +3,9 @@
         <h1>Customers</h1>
     </div>
     <div class = "col-auto">
-        <?php
-        include "view-customers-newform.php"
-        ?>
+<?php
+include "view-customers-newform.php"
+?>
     </div> 
 </div>    
 
@@ -33,7 +33,11 @@
                     <td><?php echo htmlspecialchars($customer['email']); ?></td>
                     <td><?php echo htmlspecialchars($customer['phone']); ?></td>
                 
-                    <td> </td>
+                    <td>
+                        <?php
+                        include "view-customers-editform.php";
+                        ?>
+                    </td>
                     
                     <td>  
                         <form method ="post" action="">
