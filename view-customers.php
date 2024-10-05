@@ -19,7 +19,7 @@
                     <td><?php echo htmlspecialchars($customer['firstname']) . ' ' . htmlspecialchars($customer['lastname']); ?></td>
                     <td><?php echo htmlspecialchars($customer['email']); ?></td>
                     <td><?php echo htmlspecialchars($customer['phone']); ?></td>
-                    <td><a href="customers-with-orders.php?customer_id=<?php echo $customer['customer_id']; ?>"> " class="btn btn-primary"> Customers With Orders</a></td>
+                    <td><a href="customers-with-orders.php?customer_id=<?php echo $customer['customer_id']; ?>" class="btn btn-primary"> Customers With Orders</a></td>          
                 </tr>
             <?php
             }
