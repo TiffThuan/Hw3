@@ -14,6 +14,14 @@ switch($_POST['actionType']){
           echo '<div class = "alert alert-danger" role= "alert"> Error added ....</div>';  
       }
     break;
+
+        case "Delete":
+      if (deleteCustomers($_POST['cid'])) {
+         echo '<div class = "alert alert-success" role= "alert"> Customer deleted ....</div>'; 
+      } else {
+          echo '<div class = "alert alert-danger" role= "alert"> Error deleted ....</div>';  
+      }
+    break;
     }
 }
 $customers = selectCustomers();
