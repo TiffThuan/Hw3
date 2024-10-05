@@ -16,7 +16,6 @@ function selectCustomers() {
 function insertCustomers($cFName, $cLName, $cEmail, $cPhone) {
     try {
         $conn = get_db_connection();
-        echo "Inserting Customer: $cFName $cLName, $cEmail, $cPhone";
         $stmt = $conn->prepare("INSERT INTO `mycoffeeshop_database`.`customers`
                                 (`firstname`, `lastname`, `email`, `phone`)
                                 VALUES (?, ?, ?, ?);");
