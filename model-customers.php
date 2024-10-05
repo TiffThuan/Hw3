@@ -32,15 +32,17 @@ function insertCustomers($cFName, $cLName, $cEmail, $cPhone) {
 
 
 
-function updateCustomers($cFName, $cLName, $cEmail, $cPhone,$cid) {
+function updateCustomers($cFName, $cLName, $cEmail, $cPhone, $cid) {
     try {
         $conn = get_db_connection();
+        // Remove the parentheses around the SET clause
         $stmt = $conn->prepare("UPDATE `mycoffeeshop_database`.`customers` SET
-                                (`firstname` = ?,
-                                `lastname`= ?,
-                                `email`=?,
-                                `phone`=?) WHERE customer_id = ?");
-        $stmt->bind_param("ssssi", $cFName, $cLName, $cEmail, $cPhone,$cid);   
+                                firstname = ?, 
+                                lastname = ?, 
+                                email = ?, 
+                                phone = ? 
+                                WHERE customer_id = ?");
+        $stmt->bind_param("ssssi", $cFName, $cLName, $cEmail, $cPhone, $cid);   
         $success = $stmt->execute();
     
         $conn->close();
@@ -50,6 +52,7 @@ function updateCustomers($cFName, $cLName, $cEmail, $cPhone,$cid) {
         throw $e;
     }
 }
+
 
 function deleteCustomers($cid) {
     try {
