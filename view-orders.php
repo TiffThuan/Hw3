@@ -38,6 +38,9 @@
                                 <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?');">Delete</button>
                             </form>
                         </td>
+                        <div>
+                            <a href="view-customers.php" class="btn btn-info">View Customers With Order</a>
+                        </div>
                     </tr>
                     <?php include "view-orders-editform.php"; ?>
             <?php
