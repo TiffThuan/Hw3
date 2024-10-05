@@ -43,4 +43,50 @@ function selectOrderDetails($order_id) {
         }
     }
 }
+
+function insertOrder($customer_id, $total_amount) {
+    try {
+        $conn = get_db_connection();
+        $stmt = $conn->prepare("INSERT INTO `mycoffeeshop_database`.`orders` (`customer_id`, `total_amount`) VALUES (?, ?);");
+        $stmt->bind_param("id", $customer_id, $total_amount);
+        $success = $stmt->execute();
+    
+        $conn->close();
+        return $success;
+    } catch (Exception $e) {
+        $conn->close();
+        throw $e;
+    }
+}
+
+function updateOrder($order_id, $customer_id, $total_amount) {
+    try {
+        $conn = get_db_connection();
+        $stmt = $conn->prepare("UPDATE `mycoffeeshop_database`.`orders` SET customer_id = ?, total_amount = ? WHERE order_id = ?");
+        $stmt->bind_param("idi", $customer_id, $total_amount, $order_id);   
+        $success = $stmt->execute();
+        
+        $conn->close();
+        return $success;
+    } catch (Exception $e) {
+        $conn->close();
+        throw $e;
+    }
+}
+
+function deleteOrder($order_id) {
+    try {
+        $conn = get_db_connection();
+        $stmt = $conn->prepare("DELETE FROM `mycoffeeshop_database`.`orders` WHERE order_id = ?");
+        $stmt->bind_param("i", $order_id);   
+        $success = $stmt->execute();
+    
+        $conn->close();
+        return $success;
+    } catch (Exception $e) {
+        $conn->close();
+        throw $e;
+    }
+}
+?>
 ?>
