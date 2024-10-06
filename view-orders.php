@@ -6,7 +6,6 @@
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newOrderModal">
                 Add New Order
             </button>
-            <?php include 'view-orders-newform.php'; ?>
         </div>
     </div>
 
@@ -66,5 +65,5 @@
     </table>
 </div>
 
-<!-- New Order Modal -->
+<!-- New Order Modal (Included Once, at the Bottom) -->
 <?php include 'view-orders-newform.php'; ?>
