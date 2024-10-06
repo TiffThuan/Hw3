@@ -6,40 +6,47 @@
     </svg>
 </button>
 
-<!-- Modal -->
+<!-- New Order Modal -->
 <div class="modal fade" id="newOrderModal" tabindex="-1" aria-labelledby="newOrderModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="newOrderModalLabel">New Order</h1>
+                <h5 class="modal-title" id="newOrderModalLabel">Add New Order</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form class="row g-3" method="post" action="">
-                    <div class="col-md-6">
-                        <label for="customerId" class="form-label">Customer</label>
-                        <select class="form-select" id="customerId" name="customerId" required>
+                <form method="post" action="">
+                    <!-- Customer Dropdown -->
+                    <div class="form-group mb-3">
+                        <label for="customer_id">Customer</label>
+                        <select class="form-control" id="customer_id" name="customer_id" required>
                             <option value="">Select Customer</option>
                             <?php
-                            // Assume $customers is an array of customer options passed to this view
-                            foreach ($customers as $customer) {
-                                echo "<option value='" . htmlspecialchars($customer['customer_id']) . "'>" . htmlspecialchars($customer['firstname'] . ' ' . $customer['lastname']) . "</option>";
+                            // Fetch customers from the database
+                            $customers = getCustomers(); // Ensure this function retrieves the customers
+                            if ($customers && $customers->num_rows > 0) {
+                                while ($customer = $customers->fetch_assoc()) {
+                                    echo "<option value='" . htmlspecialchars($customer['customer_id']) . "'>" .
+                                        htmlspecialchars($customer['firstname']) . " " . htmlspecialchars($customer['lastname']) .
+                                        "</option>";
+                                }
+                            } else {
+                                echo "<option disabled>No customers found</option>";
                             }
                             ?>
                         </select>
                     </div>
-                    <div class="col-md-6">
-                        <label for="orderDate" class="form-label">Order Date</label>
-                        <input type="date" class="form-control" id="orderDate" name="orderDate" required>
+                    <!-- Order Date Field -->
+                    <div class="form-group mb-3">
+                        <label for="order_date">Order Date</label>
+                        <input type="datetime-local" class="form-control" id="order_date" name="order_date" required>
                     </div>
-                    <div class="col-12">
-                        <label for="totalAmount" class="form-label">Total Amount</label>
-                        <input type="number" class="form-control" id="totalAmount" name="totalAmount" step="0.01" required>
+                    <!-- Total Amount Field -->
+                    <div class="form-group mb-3">
+                        <label for="total_amount">Total Amount</label>
+                        <input type="number" class="form-control" id="total_amount" name="total_amount" step="0.01" required>
                     </div>
-                    <input type="hidden" name="actionType" value="AddOrder">
-                    <div class="col-12">
-                        <button type="submit" class="btn btn-primary">Save</button>
-                    </div>
+                    <button type="submit" class="btn btn-primary">Save Order</button>
                 </form>
             </div>
         </div>
