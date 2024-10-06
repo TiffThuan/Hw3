@@ -31,11 +31,7 @@
                         <td><?php echo htmlspecialchars($order['firstname'] . ' ' . $order['lastname']); ?></td>
                         <td><?php echo htmlspecialchars($order['total_amount']); ?></td>
                         <td>
-                            <!-- Edit Button -->
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editOrderModal<?php echo $order['order_id']; ?>">
-                                Edit
-                            </button>
-
+                           
                             <!-- Delete Button -->
                             <form method="post" action="" style="display:inline;">
                                 <input type="hidden" name="order_id" value="<?php echo $order['order_id']; ?>">
