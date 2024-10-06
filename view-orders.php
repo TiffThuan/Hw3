@@ -9,7 +9,7 @@
             <?php include 'view-orders-newform.php'; ?>
         </div>
     </div>
-    
+
     <table class="table">
         <thead>
             <tr>
@@ -31,9 +31,9 @@
                         <td><?php echo htmlspecialchars($order['order_date']); ?></td>
                         <td><?php echo htmlspecialchars($order['firstname'] . ' ' . $order['lastname']); ?></td>
                         <td><?php echo htmlspecialchars($order['total_amount']); ?></td>
-                        <td> <?php include "view-orders-editform.php"; ?> </td>    
+
+                        <!-- Action Buttons -->
                         <td>
-                          
                             <!-- Delete Button -->
                             <form method="post" action="" style="display:inline;">
                                 <input type="hidden" name="order_id" value="<?php echo $order['order_id']; ?>">
@@ -41,19 +41,30 @@
                                 <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?');">Delete</button>
                             </form>
 
-                              <!-- Edit Button -->
+                            <!-- Edit Button -->
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editOrderModal<?php echo $order['order_id']; ?>">
                                 Edit
                             </button>
                         </td>
-                      <td> <a href="order-details.php?order_id=<?php echo $order['order_id']; ?>" class="btn btn-primary">View Details</a></td>
+
+                        <!-- View Details Button -->
+                        <td>
+                            <a href="order-details.php?order_id=<?php echo $order['order_id']; ?>" class="btn btn-primary">View Details</a>
+                        </td>
                     </tr>
-                  
-                   
+
+                    <!-- Include Edit Modal for Each Order (moved outside the table cell) -->
+                    <?php include "view-orders-editform.php"; ?>
+                    
             <?php
                 }
+            } else {
+                echo "<tr><td colspan='6'>No orders found!</td></tr>";
+            }
             ?>
         </tbody>
     </table>
 </div>
 
+<!-- New Order Modal -->
+<?php include 'view-orders-newform.php'; ?>
