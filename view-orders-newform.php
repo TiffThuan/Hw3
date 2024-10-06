@@ -18,7 +18,7 @@
                 <form method="post" action="">
                     <div class="mb-3">
                         <label for="orderDate" class="form-label">Order Date</label>
-                        <input type="datetime-local" class="form-control" id="orderDate" name="order_date" required>
+                        <input type="date" class="form-control" id="orderDate" name="order_date" required>
                     </div>
                     <div class="mb-3">
                         <label for="customerName" class="form-label">Customer Name</label>
