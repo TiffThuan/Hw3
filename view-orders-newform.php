@@ -1,3 +1,12 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newOrderModal">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-plus" viewBox="0 0 16 16">
+        <path d="M8 0a1 1 0 0 1 1 1v1h4a1 1 0 0 1 .96 1.28l-1 4a1 1 0 0 1-.96.72H5a1 1 0 0 1 0-2h6.59l.67-2.5H5.84L5 2H1a1 1 0 0 1 0-2h4a1 1 0 0 1 1 1v1h4a1 1 0 0 1 1 1v1h-1V1H8v1H7V1H5v1H1a1 1 0 0 1 0 2h4a1 1 0 0 1 .84.45l.67 2.5H12l.4-1.5H8V0z"/>
+        <path fill-rule="evenodd" d="M12 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM6 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+    </svg>
+</button>
+
+
 <!-- Edit Order Modal -->
 <div class="modal fade" id="editOrderModal<?php echo $order['order_id']; ?>" tabindex="-1" aria-labelledby="editOrderModalLabel<?php echo $order['order_id']; ?>" aria-hidden="true">
     <div class="modal-dialog">
