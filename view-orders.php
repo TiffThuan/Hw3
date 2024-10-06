@@ -40,12 +40,16 @@
                                 <input type="hidden" name="actionType" value="Delete">
                                 <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?');">Delete</button>
                             </form>
+                            <!-- Edit Button -->
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editOrderModal<?php echo $order['order_id']; ?>">
+                                Edit
+                            </button>
                         </td>
                         <td>
                             <a href="order-details.php?order_id=<?php echo $order['order_id']; ?>" class="btn btn-info">View Details</a>
                         </td>
                     </tr>
-                    
+
                     <!-- Edit Order Modal -->
                     <div class="modal fade" id="editOrderModal<?php echo $order['order_id']; ?>" tabindex="-1" aria-labelledby="editOrderModalLabel<?php echo $order['order_id']; ?>" aria-hidden="true">
                         <div class="modal-dialog">
