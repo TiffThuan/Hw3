@@ -2,13 +2,16 @@
 <div class="table-responsive">
     <div class="row mb-3">
         <div class="col">
+            <!-- Only include the "Add New Order" Button here -->
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newOrderModal">
                 Add New Order
             </button>
-            <?php include 'view-orders-newform.php'; ?>
         </div>
     </div>
-    
+
+    <!-- Include the New Order Modal here -->
+    <?php include 'view-orders-newform.php'; ?>
+
     <table class="table">
         <thead>
             <tr>
@@ -31,7 +34,6 @@
                         <td><?php echo htmlspecialchars($order['firstname'] . ' ' . $order['lastname']); ?></td>
                         <td><?php echo htmlspecialchars($order['total_amount']); ?></td>
                         <td>
-                           
                             <!-- Delete Button -->
                             <form method="post" action="" style="display:inline;">
                                 <input type="hidden" name="order_id" value="<?php echo $order['order_id']; ?>">
@@ -43,7 +45,7 @@
                             <a href="order-details.php?order_id=<?php echo $order['order_id']; ?>" class="btn btn-info">View Details</a>
                         </td>
                     </tr>
-
+                    
                     <!-- Edit Order Modal -->
                     <div class="modal fade" id="editOrderModal<?php echo $order['order_id']; ?>" tabindex="-1" aria-labelledby="editOrderModalLabel<?php echo $order['order_id']; ?>" aria-hidden="true">
                         <div class="modal-dialog">
@@ -74,7 +76,6 @@
                             </div>
                         </div>
                     </div>
-
             <?php
                 }
             } else {
