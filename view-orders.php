@@ -42,10 +42,7 @@
                                 <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?');">Delete</button>
                             </form>
                         </td>
-                        <td>
-                            <!-- View Customers With Order Button -->
-                            <a href="view-customers.php" class="btn btn-info">View Customers With Order</a>
-                        </td>
+                      <td> <a href="order-details.php?order_id=<?php echo $order['order_id']; ?>" class="btn btn-primary">Details</a></td>
                     </tr>
                     <!-- Include Edit Order Modal -->
                     <?php include "view-orders-editform.php"; ?>
