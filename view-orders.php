@@ -2,10 +2,13 @@
 <div class="table-responsive">
     <div class="row mb-3">
         <div class="col">
-            <!-- "Add New Order" Button -->
+            <!-- "Add New Order" Button - Only Included Once -->
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newOrderModal">
                 Add New Order
             </button>
+            <!-- New Order Modal (Included Once, at the Bottom) -->
+            <?php include 'view-orders-newform.php'; ?>
+
         </div>
     </div>
 
@@ -52,7 +55,7 @@
                         </td>
                     </tr>
 
-                    <!-- Include Edit Modal for Each Order (moved outside the table cell) -->
+                    <!-- Include Edit Modal for Each Order (outside the table cell) -->
                     <?php include "view-orders-editform.php"; ?>
                     
             <?php
@@ -65,5 +68,3 @@
     </table>
 </div>
 
-<!-- New Order Modal (Included Once, at the Bottom) -->
-<?php include 'view-orders-newform.php'; ?>
