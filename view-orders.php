@@ -1,16 +1,7 @@
 <h1>Orders</h1>
 <div class="table-responsive">
-    <div class="row mb-3">
-        <div class="col">
-            <!-- "Add New Order" Button -->
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newOrderModal">
-                Add New Order
-            </button>
-        </div>
-    </div>
 
-    <!-- Include the New Order Modal -->
-    <?php include 'view-orders-newform.php'; ?>
+
 
     <table class="table">
         <thead>
@@ -43,8 +34,7 @@
                         </td>
                     </tr>
 
-                    <!-- Include the Edit Modal for each order -->
-                    <?php include "view-orders-editform.php"; ?>
+        
             <?php
                 }
             } else {
