@@ -1,8 +1,5 @@
 <h1>Orders</h1>
 <div class="table-responsive">
-
-
-
     <table class="table">
         <thead>
             <tr>
@@ -10,8 +7,7 @@
                 <th>Order Date</th>
                 <th>Customer</th>
                 <th>Total Amount</th>
-                <th>Actions</th>
-                <th>View Customers</th>
+                <th>View Details</th>
             </tr>
         </thead>
         <tbody>
@@ -25,7 +21,7 @@
                         <td><?php echo htmlspecialchars($order['firstname'] . ' ' . $order['lastname']); ?></td>
                         <td><?php echo htmlspecialchars($order['total_amount']); ?></td>
                         
-                        <!-- Actions - Including form for POST -->
+                        <!-- View Details Button using POST -->
                         <td>
                             <form method="POST" action="order-details.php">
                                 <input type="hidden" name="order_id" value="<?php echo $order['order_id']; ?>">
@@ -33,12 +29,10 @@
                             </form>
                         </td>
                     </tr>
-
-        
             <?php
                 }
             } else {
-                echo "<tr><td colspan='6'>No orders found!</td></tr>";
+                echo "<tr><td colspan='5'>No orders found!</td></tr>";
             }
             ?>
         </tbody>
