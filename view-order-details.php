@@ -1,25 +1,24 @@
-<h1>Order Details for Order ID: <?php echo htmlspecialchars($order_id); ?></h1>
-
+<h1>Order Details</h1>
 <div class="table-responsive">
     <table class="table">
         <thead>
             <tr>
-                <th>Product</th>
+                <th>Order ID</th>
+                <th>Product Name</th>
                 <th>Quantity</th>
                 <th>Price</th>
-                <th>Total</th>
             </tr>
         </thead>
         <tbody>
             <?php
             if ($orderDetails && $orderDetails->num_rows > 0) {
-                while ($detail = $orderDetails->fetch_assoc()) {
+                while ($orderDetail = $orderDetails->fetch_assoc()) {
             ?>
                     <tr>
-                        <td><?php echo htmlspecialchars($detail['product_name']); ?></td>
-                        <td><?php echo htmlspecialchars($detail['quantity']); ?></td>
-                        <td><?php echo htmlspecialchars($detail['price']); ?></td>
-                        <td><?php echo htmlspecialchars($detail['quantity'] * $detail['price']); ?></td>
+                        <td><?php echo htmlspecialchars($orderDetail['order_id']); ?></td>
+                        <td><?php echo htmlspecialchars($orderDetail['product_name']); ?></td>
+                        <td><?php echo htmlspecialchars($orderDetail['quantity']); ?></td>
+                        <td><?php echo htmlspecialchars($orderDetail['price']); ?></td>
                     </tr>
             <?php
                 }
