@@ -17,16 +17,16 @@
             <div class="modal-body">
                 <form method="post" action="">
                     <div class="mb-3">
-                        <label for="orderDate" class="form-label">Order Date</label>
-                        <input type="date" class="form-control" id="orderDate" name="order_date" required>
+                        <label for="order_date" class="form-label">Order Date</label>
+                        <input type="date" class="form-control" id="order_date" name="order_date" required>
                     </div>
                     <div class="mb-3">
-                        <label for="customerName" class="form-label">Customer Name</label>
-                        <input type="text" class="form-control" id="customerName" name="customer_name" required>
+                        <label for="customer_name" class="form-label">Customer Name</label>
+                        <input type="text" class="form-control" id="customer_name" name="customer_name" required>
                     </div>
                     <div class="mb-3">
-                        <label for="totalAmount" class="form-label">Total Amount</label>
-                        <input type="number" step="0.01" class="form-control" id="totalAmount" name="total_amount" required>
+                        <label for="total_amount" class="form-label">Total Amount</label>
+                        <input type="number" step="0.01" class="form-control" id="total_amount" name="total_amount" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Add Order</button>
                 </form>
