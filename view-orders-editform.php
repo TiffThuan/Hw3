@@ -15,15 +15,15 @@
                 <form method="post" action="">
                     <div class="mb-3">
                         <label for="order_date<?php echo $order['order_id']; ?>" class="form-label">Order Date</label>
-                        <input type="date" class="form-control" id="editOrderDate<?php echo $order['order_id']; ?>" name="order_date" value="<?php echo htmlspecialchars($order['order_date'] ?? ''); ?>" required>
+                        <input type="date" class="form-control" id="order_date<?php echo $order['order_id']; ?>" name="order_date" value="<?php echo htmlspecialchars($order['order_date'] ?? ''); ?>" required>
                     </div>
                     <div class="mb-3">
                         <label for="customer_id<?php echo $order['order_id']; ?>" class="form-label">Customer</label>
-                        <input type="text" class="form-control" id="editCustomerName<?php echo $order['order_id']; ?>" name="customer_name" value="<?php echo htmlspecialchars($order['firstname'] . ' ' . $order['lastname'] ?? ''); ?>" required>
+                        <input type="text" class="form-control" id="customer_id<?php echo $order['order_id']; ?>" name="customer_name" value="<?php echo htmlspecialchars($order['firstname'] . ' ' . $order['lastname'] ?? ''); ?>" required>
                     </div>
                     <div class="mb-3">
                         <label for="total_amount<?php echo $order['order_id']; ?>" class="form-label">Total Amount</label>
-                        <input type="number" step="0.01" class="form-control" id="editTotalAmount<?php echo $order['order_id']; ?>" name="total_amount" value="<?php echo htmlspecialchars($order['total_amount'] ?? ''); ?>" required>
+                        <input type="number" step="0.01" class="form-control" id="total_amount<?php echo $order['order_id']; ?>" name="total_amount" value="<?php echo htmlspecialchars($order['total_amount'] ?? ''); ?>" required>
                     </div>
                     <input type="hidden" name="order_id" value="<?php echo htmlspecialchars($order['order_id']); ?>">
                     <input type="hidden" name="actionType" value="Edit">
