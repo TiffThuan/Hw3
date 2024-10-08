@@ -44,11 +44,7 @@
                                 <input type="hidden" name="order_id" value="<?php echo $order['order_id']; ?>">
                                 <input type="hidden" name="actionType" value="Delete">
                                 <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?');">Delete</button>
-                            </form>
-                            <!-- Edit Button -->
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editOrderModal<?php echo $order['order_id']; ?>">
-                                Edit
-                            </button>
+
                         </td>
                         <td>
                             <form method="POST" action="order-details.php">
