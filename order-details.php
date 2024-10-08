@@ -9,8 +9,8 @@ include 'view-header.php';
 ini_set('display_errors', 1); 
 error_reporting(E_ALL);
 
-// Get the order_id from the URL
-$order_id = isset($_GET['order_id']) ? intval($_GET['order_id']) : null;
+// Get the order_id from POST request
+$order_id = isset($_POST['order_id']) ? intval($_POST['order_id']) : null;
 
 if ($order_id) {
     $orderDetails = selectOrderDetails($order_id);
@@ -26,4 +26,3 @@ if ($order_id) {
 
 include 'view-footer.php';
 ?>
-
