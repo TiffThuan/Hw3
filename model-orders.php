@@ -45,13 +45,13 @@ function selectOrderDetails($order_id) {
     }
 }
 
-function insertOrder($order_date, $customer_id, $total_amount) {
+function insertOrder($order_date, $cFName, $cLName, $total_amount) {
     try {
         $conn = get_db_connection();
-        $stmt = $conn->prepare("INSERT INTO `mycoffeeshop_database`.`orders` (`order_date`, `customer_id`, `total_amount`) VALUES (?, ?, ?);");
+        $stmt = $conn->prepare("INSERT INTO `mycoffeeshop_database`.`orders` (`order_date`, `firstname`, `lastname`, `total_amount`) VALUES (?, ?,?, ?);");
         
         // Bind the parameters correctly for date (string), customer_id (integer), total_amount (decimal)
-        $stmt->bind_param("sid", $order_date, $customer_id, $total_amount);
+        $stmt->bind_param("sssd", $order_date, $cFName,$cLName, $total_amount);
         $success = $stmt->execute();
     
         $stmt->close();
@@ -65,15 +65,15 @@ function insertOrder($order_date, $customer_id, $total_amount) {
     }
 }
 
-function updateOrder($order_id, $order_date, $customer_id, $total_amount) {
+function updateOrder($order_id, $order_date, $cFName,$cLName, $total_amount) {
     try {
         $conn = get_db_connection();
         $stmt = $conn->prepare("UPDATE `mycoffeeshop_database`.`orders` 
-                                SET order_date = ?, customer_id = ?, total_amount = ? 
+                                SET order_date = ?, firstname = ?, lastname=?, total_amount = ? 
                                 WHERE order_id = ?");
         
         // Bind the parameters correctly for date, customer_id, total_amount, and order_id
-        $stmt->bind_param("sidi", $order_date, $customer_id, $total_amount, $order_id);   
+        $stmt->bind_param("isssd", $order_id, $order_date,$cFName,$cLName, $total_amount);   
         $success = $stmt->execute();
         
         $stmt->close();
