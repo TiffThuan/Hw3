@@ -19,11 +19,11 @@
                     </div>
                     <div class="mb-3">
                         <label for="cFName<?php echo $order['order_id']; ?>" class="form-label">Customer</label>
-                        <input type="text" class="form-control" id="cFName<?php echo $order['order_id']; ?>" name="cFName" value="<?php echo htmlspecialchars($order['firstname']); ?>" required>
+                        <input type="text" class="form-control" id="cFName<?php echo $order['order_id']; ?>" name="cFName" value="<?php echo htmlspecialchars($order['c.firstname']); ?>" required>
                     </div>
                     <div class="mb-3">
                         <label for="cLName<?php echo $order['order_id']; ?>" class="form-label">Customer</label>
-                        <input type="text" class="form-control" id="cLName<?php echo $order['order_id']; ?>" name="cLName" value="<?php echo htmlspecialchars( $order['lastname']); ?>" required>
+                        <input type="text" class="form-control" id="cLName<?php echo $order['order_id']; ?>" name="cLName" value="<?php echo htmlspecialchars( $order['c.lastname']); ?>" required>
                     </div>
                     <div class="mb-3">
                         <label for="total_amount<?php echo $order['order_id']; ?>" class="form-label">Total Amount</label>
