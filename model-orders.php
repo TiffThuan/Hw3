@@ -19,6 +19,7 @@ function selectOrders() {
         throw $e;
     }
 }
+
 function selectOrderDetails($order_id) {
     $conn = null;
     try {
@@ -44,32 +45,44 @@ function selectOrderDetails($order_id) {
     }
 }
 
-function insertOrder($customer_id, $total_amount) {
+function insertOrder($customer_id, $order_date, $total_amount) {
     try {
         $conn = get_db_connection();
-        $stmt = $conn->prepare("INSERT INTO `mycoffeeshop_database`.`orders` (`customer_id`, `total_amount`) VALUES (?, ?);");
-        $stmt->bind_param("id", $customer_id, $total_amount);
+        $stmt = $conn->prepare("INSERT INTO `mycoffeeshop_database`.`orders` (`order_date`, `customer_id`, `total_amount`) VALUES (?, ?, ?);");
+        
+        // Bind the parameters correctly: order_date (string), customer_id (integer), total_amount (double/decimal)
+        $stmt->bind_param("sid", $order_date, $customer_id, $total_amount);
         $success = $stmt->execute();
     
+        $stmt->close();
         $conn->close();
         return $success;
     } catch (Exception $e) {
-        $conn->close();
+        if ($conn) {
+            $conn->close();
+        }
         throw $e;
     }
 }
 
-function updateOrder($order_id, $customer_id, $total_amount) {
+function updateOrder($order_id, $order_date, $customer_id, $total_amount) {
     try {
         $conn = get_db_connection();
-        $stmt = $conn->prepare("UPDATE `mycoffeeshop_database`.`orders` SET customer_id = ?, total_amount = ? WHERE order_id = ?");
-        $stmt->bind_param("idi", $customer_id, $total_amount, $order_id);   
+        $stmt = $conn->prepare("UPDATE `mycoffeeshop_database`.`orders` 
+                                SET order_date = ?, customer_id = ?, total_amount = ? 
+                                WHERE order_id = ?");
+        
+        // Bind the parameters correctly
+        $stmt->bind_param("sidi", $order_date, $customer_id, $total_amount, $order_id);   
         $success = $stmt->execute();
         
+        $stmt->close();
         $conn->close();
         return $success;
     } catch (Exception $e) {
-        $conn->close();
+        if ($conn) {
+            $conn->close();
+        }
         throw $e;
     }
 }
@@ -81,12 +94,15 @@ function deleteOrder($order_id) {
         $stmt->bind_param("i", $order_id);   
         $success = $stmt->execute();
     
+        $stmt->close();
         $conn->close();
         return $success;
     } catch (Exception $e) {
-        $conn->close();
+        if ($conn) {
+            $conn->close();
+        }
         throw $e;
     }
 }
-?>
+
 ?>
