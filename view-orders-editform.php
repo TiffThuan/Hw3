@@ -21,7 +21,7 @@
                         <input type="number" step="0.01" class="form-control" id="editTotalAmount<?php echo $order['order_id']; ?>" name="total_amount" value="<?php echo htmlspecialchars($order['total_amount'] ?? ''); ?>" required>
                     </div>
                     <input type="hidden" name="order_id" value="<?php echo htmlspecialchars($order['order_id']); ?>">
-                    <input type="hidden" name="actionType" value="Update">
+                    <input type="hidden" name="actionType" value="Edit">
                     <button type="submit" class="btn btn-primary">Save changes</button>
                 </form>
             </div>
