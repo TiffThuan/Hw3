@@ -30,7 +30,7 @@
                     <tr>
                         <td><?php echo htmlspecialchars($order['order_id']); ?></td>
                         <td><?php echo htmlspecialchars($order['order_date']); ?></td>
-                        <td><?php echo htmlspecialchars($order['firstname'] . ' ' . $order['lastname']); ?></td>
+                        <td><?php echo htmlspecialchars($order['c.firstname'] . ' ' . $order['c.lastname']); ?></td>
                         <td><?php echo htmlspecialchars($order['total_amount']); ?></td>
                         <td>
                         <?php
