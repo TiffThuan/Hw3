@@ -1,3 +1,9 @@
+
+<!-- Edit Button -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editOrderModal<?php echo $order['order_id']; ?>">
+    Edit
+</button>
+
 <!-- Edit Order Modal -->
 <div class="modal fade" id="editOrderModal<?php echo $order['order_id']; ?>" tabindex="-1" aria-labelledby="editOrderModalLabel<?php echo $order['order_id']; ?>" aria-hidden="true">
     <div class="modal-dialog">
