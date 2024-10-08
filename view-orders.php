@@ -54,7 +54,7 @@
 
                     </tr>
 
-                    <!-- Edit Order Modal -->
+<!--                     <!-- Edit Order Modal -->
                     <div class="modal fade" id="editOrderModal<?php echo $order['order_id']; ?>" tabindex="-1" aria-labelledby="editOrderModalLabel<?php echo $order['order_id']; ?>" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -66,7 +66,7 @@
                                     <form method="post" action="">
                                         <div class="mb-3">
                                             <label for="editOrderDate<?php echo $order['order_id']; ?>" class="form-label">Order Date</label>
-                                            <input type="datetime-local" class="form-control" id="editOrderDate<?php echo $order['order_id']; ?>" name="order_date" value="<?php echo htmlspecialchars($order['order_date'] ?? ''); ?>" required>
+                                            <input type="date" class="form-control" id="editOrderDate<?php echo $order['order_id']; ?>" name="order_date" value="<?php echo htmlspecialchars($order['order_date'] ?? ''); ?>" required>
                                         </div>
                                         <div class="mb-3">
                                             <label for="editCustomerName<?php echo $order['order_id']; ?>" class="form-label">Customer</label>
@@ -83,7 +83,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
             <?php
                 }
             } else {
