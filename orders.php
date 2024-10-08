@@ -12,7 +12,7 @@ include 'view-header.php';
 if (isset ($_POST['actionType'])) {
     switch($_POST['actionType']) {
         case "Add":
-            if (insertOrder($_POST['customer_id'], $_POST['total_amount'])) {
+            if (insertOrder($_POST['order_date'],$_POST['customer_id'], $_POST['total_amount'])) {
                 echo '<div class = "alert alert-success" role= "alert"> Order added ....</div>'; 
             } else {
                 echo '<div class = "alert alert-danger" role= "alert"> Error adding order ....</div>';  
@@ -20,8 +20,8 @@ if (isset ($_POST['actionType'])) {
             break;
 
         case "Edit":
-            if (isset($_POST['order_id'], $_POST['customer_id'], $_POST['total_amount'])) {
-                if (updateOrder($_POST['order_id'], $_POST['customer_id'], $_POST['total_amount'])) {
+            if (isset($_POST['order_id'], $_POST['order_date'],$_POST['customer_id'], $_POST['total_amount'])) {
+                if (updateOrder($_POST['order_id'],$_POST['order_date'], $_POST['customer_id'], $_POST['total_amount'])) {
                     echo '<div class = "alert alert-success" role= "alert"> Order edited ....</div>'; 
                 } else {
                     echo '<div class = "alert alert-danger" role= "alert"> Error editing order ....</div>';  
