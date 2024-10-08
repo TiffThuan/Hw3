@@ -21,7 +21,7 @@ if (isset ($_POST['actionType'])) {
 
         case "Edit":
             if (isset($_POST['order_id'], $_POST['order_date'],$_POST['cFName'],$_POST['cLName'], $_POST['total_amount'])) {
-                if (updateOrder($_POST['order_id'],$_POST['order_date'],$_POST['cFName'],$_POST['cLName'], $_POST['total_amount'])) {
+                if (updateOrder($_POST['order_date'],$_POST['cFName'],$_POST['cLName'], $_POST['total_amount'],$_POST['order_id'])) {
                     echo '<div class = "alert alert-success" role= "alert"> Order edited ....</div>'; 
                 } else {
                     echo '<div class = "alert alert-danger" role= "alert"> Error editing order ....</div>';  
