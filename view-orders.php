@@ -20,7 +20,6 @@
                 <th>Customer</th>
                 <th>Total Amount</th>
                 <th>Actions</th>
-                <th>View Customers</th>
             </tr>
         </thead>
         <tbody>
