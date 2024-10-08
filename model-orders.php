@@ -45,13 +45,13 @@ function selectOrderDetails($order_id) {
     }
 }
 
-function insertOrder( $order_date,$customer_id, $total_amount) {
+function insertOrder($order_date, $customer_id, $total_amount) {
     try {
         $conn = get_db_connection();
         $stmt = $conn->prepare("INSERT INTO `mycoffeeshop_database`.`orders` (`order_date`, `customer_id`, `total_amount`) VALUES (?, ?, ?);");
         
-        // Bind the parameters correctly: order_date (string), customer_id (integer), total_amount (double/decimal)
-        $stmt->bind_param("isd", $order_date, $customer_id, $total_amount);
+        // Bind the parameters correctly for date (string), customer_id (integer), total_amount (decimal)
+        $stmt->bind_param("sid", $order_date, $customer_id, $total_amount);
         $success = $stmt->execute();
     
         $stmt->close();
@@ -72,7 +72,7 @@ function updateOrder($order_id, $order_date, $customer_id, $total_amount) {
                                 SET order_date = ?, customer_id = ?, total_amount = ? 
                                 WHERE order_id = ?");
         
-        // Bind the parameters correctly
+        // Bind the parameters correctly for date, customer_id, total_amount, and order_id
         $stmt->bind_param("sidi", $order_date, $customer_id, $total_amount, $order_id);   
         $success = $stmt->execute();
         
@@ -104,5 +104,4 @@ function deleteOrder($order_id) {
         throw $e;
     }
 }
-
 ?>
