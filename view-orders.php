@@ -46,8 +46,12 @@
                             </button>
                         </td>
                         <td>
-                            <a href="order-details.php?order_id=<?php echo $order['order_id']; ?>" class="btn btn-info">View Details</a>
+                            <form method="POST" action="order-details.php">
+                                <input type="hidden" name="order_id" value="<?php echo $order['order_id']; ?>">
+                                <button type="submit" class="btn btn-info">View Details</button>
+                            </form>
                         </td>
+
                     </tr>
 
                     <!-- Edit Order Modal -->
