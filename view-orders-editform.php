@@ -10,7 +10,7 @@
                 <form method="post" action="">
                     <div class="mb-3">
                         <label for="editOrderDate<?php echo $order['order_id']; ?>" class="form-label">Order Date</label>
-                        <input type="datetime-local" class="form-control" id="editOrderDate<?php echo $order['order_id']; ?>" name="order_date" value="<?php echo htmlspecialchars($order['order_date'] ?? ''); ?>" required>
+                        <input type="date" class="form-control" id="editOrderDate<?php echo $order['order_id']; ?>" name="order_date" value="<?php echo htmlspecialchars($order['order_date'] ?? ''); ?>" required>
                     </div>
                     <div class="mb-3">
                         <label for="editCustomerName<?php echo $order['order_id']; ?>" class="form-label">Customer</label>
