@@ -21,8 +21,12 @@
                         <input type="date" class="form-control" id="order_date" name="order_date" required>
                     </div>
                     <div class="mb-3">
-                        <label for="customer_name" class="form-label">Customer Name</label>
-                        <input type="text" class="form-control" id="customer_name" name="customer_name" required>
+                        <label for="cFName" class="form-label">First Name</label>
+                        <input type="text" class="form-control" id="cFName" name="cFName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="cLName" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" id="cLName" name="cLName" required>
                     </div>
                     <div class="mb-3">
                         <label for="total_amount" class="form-label">Total Amount</label>
