@@ -18,8 +18,12 @@
                         <input type="date" class="form-control" id="order_date<?php echo $order['order_id']; ?>" name="order_date" value="<?php echo htmlspecialchars($order['order_date'] ?? ''); ?>" required>
                     </div>
                     <div class="mb-3">
-                        <label for="customer_name<?php echo $order['order_id']; ?>" class="form-label">Customer</label>
-                        <input type="text" class="form-control" id="customer_name<?php echo $order['order_id']; ?>" name="customer_name" value="<?php echo htmlspecialchars($order['firstname'] . ' ' . $order['lastname']); ?>" required>
+                        <label for="cFname<?php echo $order['order_id']; ?>" class="form-label">First Name</label>
+                        <input type="text" class="form-control" id="cFname<?php echo $order['order_id']; ?>" name="cFname" value="<?php echo htmlspecialchars($order['firstname'] ); ?>" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="cLname<?php echo $order['order_id']; ?>" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" id="cLname<?php echo $order['order_id']; ?>" name="cLname" value="<?php echo htmlspecialchars($order['lastname'] ); ?>" required>
                     </div>
                     <div class="mb-3">
                         <label for="total_amount<?php echo $order['order_id']; ?>" class="form-label">Total Amount</label>
