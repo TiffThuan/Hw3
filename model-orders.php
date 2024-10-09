@@ -89,6 +89,8 @@ function updateOrder($order_id, $order_date, $cFName,$cLName, $total_amount) {
 
 function deleteOrder($order_id) {
     try {
+        
+        deleteOrderDetails($order_id); // First, delete related order details
         $conn = get_db_connection();
         $stmt = $conn->prepare("DELETE FROM `mycoffeeshop_database`.`orders` WHERE order_id = ?");
         $stmt->bind_param("i", $order_id);   
@@ -104,4 +106,15 @@ function deleteOrder($order_id) {
         throw $e;
     }
 }
+
+function deleteOrderDetails($order_id) {
+    $conn = get_db_connection();
+    $stmt = $conn->prepare("DELETE FROM order_details WHERE order_id = ?");
+    $stmt->bind_param("i", $order_id);
+    $stmt->execute();
+    $stmt->close();
+    $conn->close();
+}
 ?>
+
+
