@@ -5,6 +5,7 @@ error_reporting(E_ALL);
 
 require_once ('util-db.php');
 require_once('model-products.php');
+require_once('model-reviews.php'); // Include reviews model
 
 $pageTitle = "Products"; 
 include 'view-header.php';
@@ -13,4 +14,3 @@ $products = selectProducts();
 include 'view-products.php'; 
 include 'view-footer.php';
 ?>
-
