@@ -10,8 +10,9 @@ include 'view-header.php';
     
     <ul>
         <li><a href="orders.php">View Orders by Customer</a></li>
-        <li><a href="customers.php">View Orders Details</a></li>
+        <li><a href="customers.php">View Customer Details</a></li>
         <li><a href="products.php">View Available Products</a></li>
+        <li><a href="reviews.php">View Product Reviews</a></li> <!-- New link to Reviews -->
     </ul>
 </div>
 
