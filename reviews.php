@@ -1,6 +1,6 @@
 <?php
 require_once('model-reviews.php');
-require_once('model-products.php'); // To get product details
+require_once('model-products.php');
 
 $pageTitle = "Product Reviews";
 include 'view-header.php';
@@ -9,18 +9,42 @@ include 'view-header.php';
 if (isset($_POST['actionType'])) {
     switch ($_POST['actionType']) {
         case 'submitReview':
-            // Call insertReview()
+            $product_id = $_POST['product_id'];
+            $customer_id = $_POST['customer_id']; // Replace with actual customer ID
+            $rating = $_POST['rating'];
+            $review_text = $_POST['review_text'];
+
+            if (insertReview($product_id, $customer_id, $rating, $review_text)) {
+                echo '<div class="alert alert-success">Review added successfully!</div>';
+            } else {
+                echo '<div class="alert alert-danger">Error adding review.</div>';
+            }
             break;
+
         case 'editReview':
-            // Call updateReview()
+            $review_id = $_POST['review_id'];
+            $rating = $_POST['rating'];
+            $review_text = $_POST['review_text'];
+
+            if (updateReview($review_id, $rating, $review_text)) {
+                echo '<div class="alert alert-success">Review updated successfully!</div>';
+            } else {
+                echo '<div class="alert alert-danger">Error updating review.</div>';
+            }
             break;
+
         case 'deleteReview':
-            // Call deleteReview()
+            $review_id = $_GET['review_id']; // Using GET to get the ID for deletion
+            if (deleteReview($review_id)) {
+                echo '<div class="alert alert-success">Review deleted successfully!</div>';
+            } else {
+                echo '<div class="alert alert-danger">Error deleting review.</div>';
+            }
             break;
     }
 }
 
-// Fetch reviews for the specified product
+// Fetch reviews for a specific product
 $product_id = isset($_GET['product_id']) ? intval($_GET['product_id']) : 0;
 $reviews = fetchReviewsByProduct($product_id);
 ?>
@@ -37,6 +61,7 @@ $reviews = fetchReviewsByProduct($product_id);
                     <br>
                     <button data-bs-toggle="modal" data-bs-target="#editReviewModal<?php echo $review['review_id']; ?>">Edit</button>
                     <button onclick="confirmDelete(<?php echo $review['review_id']; ?>)">Delete</button>
+                    
                     <?php include 'view-reviews-editform.php'; ?> <!-- Include edit form -->
                 </li>
             <?php } ?>
