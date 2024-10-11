@@ -6,6 +6,7 @@
                 <h5 class="modal-title" id="editReviewModalLabel">Edit Review</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            
             <div class="modal-body">
                 <form method="POST" action="reviews.php">
                     <input type="hidden" name="actionType" value="editReview">
