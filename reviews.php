@@ -70,8 +70,6 @@ $reviews = fetchReviewsByProduct($product_id);
     </ul>
 </div>
 <?php include 'view-reviews-newform.php'; ?>
-<div class="container mt-4">
-    <?php include 'view-reviews.php'; ?>
-</div>
+
 
 <?php include 'view-footer.php'; ?>
