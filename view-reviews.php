@@ -1,22 +1,42 @@
-<div class="reviews">
-    <h2>Product Reviews</h2>
-    <ul>
-        <?php if ($reviews && $reviews->num_rows > 0) { ?>
-            <?php while ($review = $reviews->fetch_assoc()) { ?>
-                <li>
-                    <strong>Rating:</strong> <?php echo $review['rating']; ?> 
-                    <br>
-                    <strong>Review:</strong> <?php echo htmlspecialchars($review['review_text']); ?>
-                    <br>
-                    <button data-bs-toggle="modal" data-bs-target="#editReviewModal<?php echo $review['review_id']; ?>">Edit</button>
-                    <button onclick="confirmDelete(<?php echo $review['review_id']; ?>)">Delete</button>
-                    <?php include 'view-reviews-editform.php'; ?> <!-- Include edit form -->
-                </li>
-            <?php } ?>
-        <?php } else { ?>
-            <li>No reviews yet.</li>
-        <?php } ?>
-    </ul>
+<div class="row">
+    <div class="col">
+        <h1>Product Reviews</h1>
+    </div>
+    <div class="col-auto">
+        <?php include "view-reviews-newform.php"; ?>
+    </div>
 </div>
 
-<?php include 'view-reviews-newform.php'; ?> <!-- Include add form -->
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Review ID</th>
+                <th>Rating</th>
+                <th>Review Text</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php while ($review = $reviews->fetch_assoc()) { ?>
+                <tr>
+                    <td><?php echo htmlspecialchars($review['review_id']); ?></td>
+                    <td><?php echo htmlspecialchars($review['rating']); ?></td>
+                    <td><?php echo htmlspecialchars($review['review_text']); ?></td>
+                    <td>
+                        <!-- Include edit button/modal -->
+                        <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editReviewModal<?php echo $review['review_id']; ?>">Edit</button>
+                        <?php include "view-reviews-editform.php"; ?>
+
+                        <!-- Delete button -->
+                        <form method="POST" action="reviews.php" class="d-inline">
+                            <input type="hidden" name="actionType" value="deleteReview">
+                            <input type="hidden" name="review_id" value="<?php echo $review['review_id']; ?>">
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?');">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            <?php } ?>
+        </tbody>
+    </table>
+</div>
