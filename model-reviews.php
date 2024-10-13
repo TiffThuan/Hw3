@@ -8,9 +8,9 @@ function insertReview($product_id, $customer_id, $rating, $review_text) {
         $stmt->bind_param("iiis", $product_id, $customer_id, $rating, $review_text);
         $success = $stmt->execute();
         $stmt->close();
-        return $success;
+        return $success; // Return true if successful
     } catch (Exception $e) {
-        throw $e;
+        return false; // Return false on error
     } finally {
         if ($conn) {
             $conn->close();
@@ -26,7 +26,7 @@ function fetchReviewsByProduct($product_id) {
         $stmt->execute();
         $result = $stmt->get_result();
         $stmt->close();
-        return $result;
+        return $result; // Return the result set
     } catch (Exception $e) {
         throw $e;
     } finally {
@@ -43,9 +43,9 @@ function updateReview($review_id, $rating, $review_text) {
         $stmt->bind_param("ssi", $rating, $review_text, $review_id);
         $success = $stmt->execute();
         $stmt->close();
-        return $success;
+        return $success; // Return true if successful
     } catch (Exception $e) {
-        throw $e;
+        return false; // Return false on error
     } finally {
         if ($conn) {
             $conn->close();
@@ -60,9 +60,9 @@ function deleteReview($review_id) {
         $stmt->bind_param("i", $review_id);
         $success = $stmt->execute();
         $stmt->close();
-        return $success;
+        return $success; // Return true if successful
     } catch (Exception $e) {
-        throw $e;
+        return false; // Return false on error
     } finally {
         if ($conn) {
             $conn->close();
@@ -70,15 +70,19 @@ function deleteReview($review_id) {
     }
 }
 
-function selectReviews($customer_id) {
+function selectReviews($review_id = null) {
     try {
         $conn = get_db_connection();
-        $stmt = $conn->prepare("SELECT * FROM reviews WHERE customer_id = ?");
-        $stmt->bind_param("i", $customer_id);
+        if ($review_id !== null) {
+            $stmt = $conn->prepare("SELECT * FROM reviews WHERE review_id = ?");
+            $stmt->bind_param("i", $review_id);
+        } else {
+            $stmt = $conn->prepare("SELECT * FROM reviews");
+        }
         $stmt->execute();
         $result = $stmt->get_result();
         $stmt->close();
-        return $result;
+        return $result; // Return the result set
     } catch (Exception $e) {
         throw $e;
     } finally {
