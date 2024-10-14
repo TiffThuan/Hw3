@@ -9,17 +9,22 @@ include 'view-header.php';
 if (isset($_POST['actionType'])) {
     switch ($_POST['actionType']) {
         case 'submitReview':
+            // Handle review submission
             $product_id = $_POST['product_id'];
             $customer_id = $_POST['customer_id'] ?? null; // Allow customer_id to be null
             $rating = $_POST['rating'];
             $review_text = $_POST['review_text'];
-
+        
+            // Log the values before attempting to insert
+            error_log("Adding review: Product ID: $product_id, Customer ID: $customer_id, Rating: $rating, Review Text: $review_text");
+        
             if (insertReview($product_id, $customer_id, $rating, $review_text)) {
                 echo '<div class="alert alert-success">Review added successfully!</div>';
             } else {
                 echo '<div class="alert alert-danger">Error adding review.</div>';
             }
             break;
+
 
         case 'editReview':
             $review_id = $_POST['review_id'];
