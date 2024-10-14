@@ -30,19 +30,16 @@ function insertReview($product_id, $customer_id, $rating, $review_text) {
     try {
         $conn = get_db_connection();
         $stmt = $conn->prepare("INSERT INTO reviews (product_id, customer_id, rating, review_text) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("iiis", $product_id, $customer_id, $rating, $review_text);
         
-        // Prepare variables
-        $customer_id_var = $customer_id ?: null; // Allow null for customer_id
-        $stmt->bind_param("iiis", $product_id, $customer_id_var, $rating, $review_text);
-
         $success = $stmt->execute();
         if (!$success) {
-            error_log("SQL Error: " . $stmt->error); // Log the SQL error
+            error_log("SQL Error: " . $stmt->error); // Log SQL error
         }
         $stmt->close();
         return $success; // Return true if successful
     } catch (Exception $e) {
-        error_log("Exception: " . $e->getMessage()); // Log the exception message
+        error_log($e->getMessage()); // Log exception message
         return false; // Return false on error
     } finally {
         if ($conn) {
@@ -50,6 +47,7 @@ function insertReview($product_id, $customer_id, $rating, $review_text) {
         }
     }
 }
+
 
 
 function fetchReviewsByProduct($product_id) {
