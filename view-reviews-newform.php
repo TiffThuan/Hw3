@@ -17,7 +17,7 @@
         <form method="POST" action="reviews.php">
             <input type="hidden" name="actionType" value="submitReview">
             <input type="hidden" name="product_id" value="<?php echo $product_id; ?>">
-            <input type="hidden" name="customer_id" value="1"> <!-- Replace with actual customer ID -->
+            <input type="hidden" name="customer_id" value="<?php echo isset($_SESSION['customer_id']) ? $_SESSION['customer_id'] : 1; ?>"> <!-- Dynamic customer ID -->
 
             <div class="mb-3">
                 <label for="rating" class="form-label">Rating</label>
