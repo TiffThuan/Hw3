@@ -14,23 +14,24 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form method="POST" action="reviews.php">
-            <input type="hidden" name="actionType" value="submitReview">
-            <input type="hidden" name="product_id" value="<?php echo $product_id; ?>">
-            <input type="hidden" name="customer_id" value="<?php echo isset($_SESSION['customer_id']) ? $_SESSION['customer_id'] : 1; ?>"> <!-- Dynamic customer ID -->
+            <form method="POST" action="reviews.php">
+                <input type="hidden" name="actionType" value="submitReview">
+                <input type="hidden" name="product_id" value="<?php echo $product_id; ?>">
+                <input type="hidden" name="customer_id" value="<?php echo $customer_id; ?>"> <!-- Customer ID is passed -->
+                
+                <div class="mb-3">
+                    <label for="rating" class="form-label">Rating</label>
+                    <input type="number" class="form-control" id="rating" name="rating" min="1" max="5" required>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="review_text" class="form-label">Review</label>
+                    <textarea class="form-control" id="review_text" name="review_text" required></textarea>
+                </div>
+            
+                <button type="submit" class="btn btn-primary">Submit Review</button>
+            </form>
 
-            <div class="mb-3">
-                <label for="rating" class="form-label">Rating</label>
-                <input type="number" class="form-control" id="rating" name="rating" min="1" max="5" required>
-            </div>
-
-            <div class="mb-3">
-                <label for="review_text" class="form-label">Review</label>
-                <textarea class="form-control" id="review_text" name="review_text" required></textarea>
-            </div>
-
-            <button type="submit" class="btn btn-primary">Submit Review</button>
-        </form>
       </div>
     </div>
   </div>
