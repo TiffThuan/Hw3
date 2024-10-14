@@ -1,7 +1,7 @@
 <?php
 require_once('util-db.php');
 
-function insertReview($product_id, $customer_id, $rating, $review_text) {
+function insertReview($product_id, $customer_id = null, $rating, $review_text) {
     try {
         $conn = get_db_connection();
         $stmt = $conn->prepare("INSERT INTO reviews (product_id, customer_id, rating, review_text) VALUES (?, ?, ?, ?)");
