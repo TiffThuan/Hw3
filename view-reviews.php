@@ -3,7 +3,7 @@
         <h1>Product Reviews</h1>
     </div>
     <div class="col-auto">
-        <?php include "view-reviews-newform.php"; ?>
+        <?php include "view-reviews-newform.php"; ?> <!-- Form to add a new review -->
     </div>
 </div>
 
@@ -18,7 +18,7 @@
             </tr>
         </thead>
         <tbody>
-            <?php while ($review = $reviews->fetch_assoc()) { ?>
+            <?php while ($review = $reviews->fetch_assoc()): ?>
                 <tr>
                     <td><?php echo htmlspecialchars($review['review_id']); ?></td>
                     <td><?php echo htmlspecialchars($review['rating']); ?></td>
@@ -26,7 +26,7 @@
                     <td>
                         <!-- Include edit button/modal -->
                         <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editReviewModal<?php echo $review['review_id']; ?>">Edit</button>
-                        <?php include "view-reviews-editform.php"; ?>
+                        <?php include "view-reviews-editform.php"; ?> <!-- Modal for editing the review -->
 
                         <!-- Delete button -->
                         <form method="POST" action="reviews.php" class="d-inline">
@@ -36,7 +36,7 @@
                         </form>
                     </td>
                 </tr>
-            <?php } ?>
+            <?php }; ?>
         </tbody>
     </table>
 </div>
