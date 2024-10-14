@@ -10,6 +10,7 @@ function insertReview($product_id, $customer_id = null, $rating, $review_text) {
         $stmt->close();
         return $success; // Return true if successful
     } catch (Exception $e) {
+         echo 'Error: ' . $e->getMessage(); // Display the error message for debugging
         return false; // Return false on error
     } finally {
         if ($conn) {
