@@ -29,6 +29,6 @@
                     </div>
                 </div>
             </div>
-        <?php endwhile; ?>
+        <?php } ?>
     </div>
 </div>
