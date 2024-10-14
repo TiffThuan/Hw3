@@ -38,7 +38,7 @@
                         </form>
                     </td>
                 </tr>
-            <?php endwhile; ?>
+            <?php }; ?>
         </tbody>
     </table>
 </div>
