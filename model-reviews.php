@@ -8,9 +8,13 @@ function insertReview($product_id, $customer_id, $rating, $review_text) {
         $stmt = $conn->prepare("INSERT INTO reviews (product_id, customer_id, rating, review_text) VALUES (?, ?, ?, ?)");
         $stmt->bind_param("iiis", $product_id, $customer_id, $rating, $review_text);
         $success = $stmt->execute();
+        if (!$success) {
+            error_log($stmt->error); // Log the error message
+        }
         $stmt->close();
         return $success; // Return true if successful
     } catch (Exception $e) {
+        error_log($e->getMessage()); // Log exception message
         return false; // Return false on error
     } finally {
         if ($conn) {
