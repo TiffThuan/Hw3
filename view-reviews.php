@@ -18,13 +18,15 @@
             </tr>
         </thead>
         <tbody>
-            <?php while ($review = $reviews->fetch_assoc()): ?>
+            <?php
+            $reviews = selectReviews(); // Fetch all reviews
+            while ($review = $reviews->fetch_assoc()): ?>
                 <tr>
                     <td><?php echo htmlspecialchars($review['review_id']); ?></td>
                     <td><?php echo htmlspecialchars($review['rating']); ?></td>
                     <td><?php echo htmlspecialchars($review['review_text']); ?></td>
                     <td>
-                        <!-- Include edit button/modal -->
+                        <!-- Edit button/modal -->
                         <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editReviewModal<?php echo $review['review_id']; ?>">Edit</button>
                         <?php include "view-reviews-editform.php"; ?> <!-- Modal for editing the review -->
 
@@ -36,7 +38,7 @@
                         </form>
                     </td>
                 </tr>
-            <?php }; ?>
+            <?php endwhile; ?>
         </tbody>
     </table>
 </div>
