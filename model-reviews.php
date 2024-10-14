@@ -1,7 +1,8 @@
 <?php
 require_once('util-db.php');
 
-function insertReview($product_id, $customer_id = null, $rating, $review_text) {
+
+function insertReview($product_id, $customer_id, $rating, $review_text) {
     try {
         $conn = get_db_connection();
         $stmt = $conn->prepare("INSERT INTO reviews (product_id, customer_id, rating, review_text) VALUES (?, ?, ?, ?)");
@@ -10,7 +11,6 @@ function insertReview($product_id, $customer_id = null, $rating, $review_text) {
         $stmt->close();
         return $success; // Return true if successful
     } catch (Exception $e) {
-         echo 'Error: ' . $e->getMessage(); // Display the error message for debugging
         return false; // Return false on error
     } finally {
         if ($conn) {
@@ -36,6 +36,7 @@ function fetchReviewsByProduct($product_id) {
         }
     }
 }
+
 
 function updateReview($review_id, $rating, $review_text) {
     try {
