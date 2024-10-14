@@ -4,7 +4,7 @@
     </div>
     <div class="col-auto">
         <!-- Add the hyperlink to the product list page -->
-        <a href="products.php" class="btn btn-info">View Product List</a>
+       <a href="products-with-reviews.php" class="btn btn-info">View Product List</a>
     </div>
     <div class="col-auto">
         <?php include "view-reviews-newform.php"; ?> <!-- Form to add a new review -->
