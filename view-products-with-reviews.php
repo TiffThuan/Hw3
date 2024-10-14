@@ -2,7 +2,7 @@
     <h1>Products with Reviews</h1>
     <div class="row">
         <?php while ($product = $productsWithReviews->fetch_assoc()): ?>
-            <div class="col-md-4 mb-4">
+            <div class="col-md-6 mb-4"> <!-- Change the column size for vertical layout -->
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title"><?php echo htmlspecialchars($product['product_name']); ?></h5>
@@ -16,6 +16,8 @@
                         <?php else: ?>
                             <p>No reviews yet.</p>
                         <?php endif; ?>
+
+                        <a href="view-reviews.php?product_id=<?php echo $product['productid']; ?>" class="btn btn-info">View Reviews</a> <!-- Hyperlink to reviews page -->
                     </div>
                 </div>
             </div>
