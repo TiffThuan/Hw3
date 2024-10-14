@@ -4,7 +4,7 @@
     <div class="row">
         <?php while ($product = $productsWithReviews->fetch_assoc()): ?>
             <div class="col-md-4 mb-4">
-                <div class="card">
+                <div class="card border-primary" style="background-color: #f9f9f9;">
                     <div class="card-body">
                         <h5 class="card-title"><?php echo htmlspecialchars($product['product_name']); ?></h5>
                         <p class="card-text"><?php echo htmlspecialchars($product['product_description']); ?></p>
