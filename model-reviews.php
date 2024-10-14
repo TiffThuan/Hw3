@@ -30,7 +30,8 @@ function insertReview($product_id, $customer_id, $rating, $review_text) {
     try {
         $conn = get_db_connection();
         $stmt = $conn->prepare("INSERT INTO reviews (product_id, customer_id, rating, review_text) VALUES (?, ?, ?, ?)");
-        $stmt->bind_param("iiis", $product_id, $customer_id, $rating, $review_text);
+        $stmt->bind_param("iiss", $product_id, $customer_id ?: null, $rating, $review_text);
+
         $success = $stmt->execute();
         if (!$success) {
             error_log($stmt->error); // Log the error message
