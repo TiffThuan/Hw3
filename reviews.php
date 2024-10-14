@@ -9,11 +9,11 @@ include 'view-header.php';
 if (isset($_POST['actionType'])) {
     switch ($_POST['actionType']) {
         case 'submitReview':
-            // Handle review submission
             $product_id = $_POST['product_id'];
-            $customer_id = $_POST['customer_id']; // Replace with actual customer ID
+            $customer_id = $_POST['customer_id'] ?? null; // Allow customer_id to be null
             $rating = $_POST['rating'];
             $review_text = $_POST['review_text'];
+
             if (insertReview($product_id, $customer_id, $rating, $review_text)) {
                 echo '<div class="alert alert-success">Review added successfully!</div>';
             } else {
@@ -22,10 +22,10 @@ if (isset($_POST['actionType'])) {
             break;
 
         case 'editReview':
-            // Handle review editing
             $review_id = $_POST['review_id'];
             $rating = $_POST['rating'];
             $review_text = $_POST['review_text'];
+
             if (updateReview($review_id, $rating, $review_text)) {
                 echo '<div class="alert alert-success">Review updated successfully!</div>';
             } else {
@@ -34,7 +34,6 @@ if (isset($_POST['actionType'])) {
             break;
 
         case 'deleteReview':
-            // Handle review deletion
             $review_id = $_POST['review_id'];
             if (deleteReview($review_id)) {
                 echo '<div class="alert alert-success">Review deleted successfully!</div>';
@@ -45,8 +44,9 @@ if (isset($_POST['actionType'])) {
     }
 }
 
-$reviews=selectReviews(product_id);
-<?php include 'view-reviews.php'; ?>
+// Fetch reviews (consider removing product_id if you want all reviews)
+$reviews = selectReviews(); 
+include 'view-reviews.php'; // Include reviews view
 
-
-<?php include 'view-footer.php'; ?>
+include 'view-footer.php';
+?>
