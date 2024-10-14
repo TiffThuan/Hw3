@@ -8,7 +8,7 @@ include 'view-header.php';
 // Handle review actions
 if (isset($_POST['actionType'])) {
     switch ($_POST['actionType']) {
-        case 'submitReview':
+        case 'insertReview':
             // Handle review submission
             $product_id = $_POST['product_id'];
             $customer_id = $_POST['customer_id'] ?? null; // Allow customer_id to be null
