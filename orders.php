@@ -12,10 +12,14 @@ include 'view-header.php';
 if (isset ($_POST['actionType'])) {
     switch($_POST['actionType']) {
         case "Add":
-            if (insertOrder($_POST['order_date'],$_POST['cFName'],$_POST['cLName'], $_POST['total_amount'])) {
-                echo '<div class = "alert alert-success" role= "alert"> Order added ....</div>'; 
-            } else {
-                echo '<div class = "alert alert-danger" role= "alert"> Error adding order ....</div>';  
+             if (isset( $_POST['order_date'],$_POST['cFName'],$_POST['cLName'], $_POST['total_amount'])) {
+                if (insertOrder($_POST['order_date'],$_POST['cFName'],$_POST['cLName'], $_POST['total_amount'])) {
+                    echo '<div class = "alert alert-success" role= "alert"> Order added ....</div>'; 
+                } else {
+                    echo '<div class = "alert alert-danger" role= "alert"> Error adding order ....</div>';  
+                }
+             } else {
+                echo '<div class="alert alert-danger" role="alert"> Missing data for adding.</div>';
             }
             break;
 
