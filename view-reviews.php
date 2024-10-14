@@ -3,6 +3,10 @@
         <h1>Product Reviews</h1>
     </div>
     <div class="col-auto">
+        <!-- Add the hyperlink to the product list page -->
+        <a href="products.php" class="btn btn-info">View Product List</a> <!-- Link to products page -->
+    </div>
+    <div class="col-auto">
         <?php include "view-reviews-newform.php"; ?> <!-- Form to add a new review -->
     </div>
 </div>
