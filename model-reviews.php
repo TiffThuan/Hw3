@@ -26,6 +26,7 @@ function insertReview($product_id, $customer_id, $rating, $review_text) {
     }
 }
 
+
 function fetchReviewsByProduct($product_id) {
     try {
         $conn = get_db_connection();
