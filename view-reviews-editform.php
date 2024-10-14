@@ -1,5 +1,5 @@
 <!-- Edit Review Modal -->
-<div class="modal fade" id="editReviewModal<?php echo $review['review_id']; ?>" tabindex="-1" aria-labelledby="editReviewModalLabel" aria-hidden="true">
+<div class="modal fade" id="editReviewModal<?php echo $review['review_id']; ?>" tabindex="-1" aria-labelledby="editReviewModalLabel<?php echo $review['review_id']; ?>" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -10,7 +10,7 @@
         <form method="POST" action="reviews.php">
             <input type="hidden" name="actionType" value="editReview">
             <input type="hidden" name="review_id" value="<?php echo $review['review_id']; ?>">
-            
+
             <div class="mb-3">
                 <label for="rating" class="form-label">Rating</label>
                 <input type="number" class="form-control" id="rating" name="rating" value="<?php echo $review['rating']; ?>" min="1" max="5" required>
