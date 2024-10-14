@@ -4,7 +4,7 @@
     </div>
     <div class="col-auto">
         <!-- Add the hyperlink to the product list page -->
-        <a href="products.php" class="btn btn-info">View Product List</a> <!-- Link to products page -->
+        <a href="products.php" class="btn btn-info">View Product List</a>
     </div>
     <div class="col-auto">
         <?php include "view-reviews-newform.php"; ?> <!-- Form to add a new review -->
@@ -23,6 +23,7 @@
                             <!-- Edit Button -->
                             <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editReviewModal<?php echo $review['review_id']; ?>">Edit</button>
                             <?php include "view-reviews-editform.php"; ?> <!-- Edit Modal -->
+                            
                             <!-- Delete Button -->
                             <form method="POST" action="reviews.php" class="d-inline">
                                 <input type="hidden" name="actionType" value="deleteReview">
@@ -33,6 +34,6 @@
                     </div>
                 </div>
             </div>
-        <?php } ?>
+        <?php} ?>
     </div>
 </div>
