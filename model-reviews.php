@@ -4,6 +4,27 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+function selectReviews($review_id = null) {
+    try {
+        $conn = get_db_connection();
+        if ($review_id !== null) {
+            $stmt = $conn->prepare("SELECT * FROM reviews WHERE review_id = ?");
+            $stmt->bind_param("i", $review_id);
+        } else {
+            $stmt = $conn->prepare("SELECT * FROM reviews");
+        }
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $stmt->close();
+        return $result; // Return the result set
+    } catch (Exception $e) {
+        throw $e;
+    } finally {
+        if ($conn) {
+            $conn->close();
+        }
+    }
+}
 
 function insertReview($product_id, $customer_id, $rating, $review_text) {
     try {
@@ -80,25 +101,5 @@ function deleteReview($review_id) {
     }
 }
 
-function selectReviews($review_id = null) {
-    try {
-        $conn = get_db_connection();
-        if ($review_id !== null) {
-            $stmt = $conn->prepare("SELECT * FROM reviews WHERE review_id = ?");
-            $stmt->bind_param("i", $review_id);
-        } else {
-            $stmt = $conn->prepare("SELECT * FROM reviews");
-        }
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $stmt->close();
-        return $result; // Return the result set
-    } catch (Exception $e) {
-        throw $e;
-    } finally {
-        if ($conn) {
-            $conn->close();
-        }
-    }
-}
+
 ?>
