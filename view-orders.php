@@ -61,9 +61,7 @@
 
             <?php
                 }
-            } else {
-                echo "<tr><td colspan='6'>No orders found!</td></tr>";
-            }
+            
             ?>
         </tbody>
     </table>
