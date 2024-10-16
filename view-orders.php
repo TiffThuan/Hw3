@@ -51,13 +51,12 @@
                                 <button type="submit" class="btn btn-info">View Details</button>
                             </form>
                         </td>
+                    </td>
 
                     </tr>
 
 
-                    <td>
-                        <a href="order-details.php?order_id=<?php echo $order['order_id']; ?>" class="btn btn-primary">View Orders</a>
-                    </td>
+
             <?php
                 }
             } else {
