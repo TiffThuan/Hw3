@@ -51,9 +51,10 @@
                                 <button type="submit" class="btn btn-info">View Details</button>
                             </form>
                         </td>
-                    </td>
+                        </td>
+            
 
-                    </tr>
+                </tr>
 
 
 
