@@ -32,7 +32,7 @@
                     <td><?php echo htmlspecialchars($order['order_id']); ?></td>
                     <td><?php echo htmlspecialchars($order['order_date']); ?></td>
                     <td><?php echo htmlspecialchars($order['firstname'] . ' ' . $order['lastname']); ?></td>
-                    <td><?php echo htmlspecialchars($order['email'] ?? 'N/A'); ?></td> <!-- Updated email display -->
+                    <td><?php echo htmlspecialchars($order['email'] ?? 'N/A'); ?></td>
                     <td><?php echo htmlspecialchars($order['total_amount']); ?></td>
                     <td>
                     <?php
