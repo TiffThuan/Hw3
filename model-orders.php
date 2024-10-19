@@ -100,18 +100,22 @@ function updateOrder($order_id, $order_date, $cFName, $cLName, $email, $total_am
             $customer = $result->fetch_assoc();
             $customer_id = $customer['customer_id'];
         } else {
-            // Insert new customer with firstname, lastname, and email
+            // If the customer does not exist, insert new customer with firstname, lastname, and email
             $stmt = $conn->prepare("INSERT INTO customers (firstname, lastname, email) VALUES (?, ?, ?)");
             $stmt->bind_param("sss", $cFName, $cLName, $email);
             $stmt->execute();
-            $customer_id = $stmt->insert_id;
+            $customer_id = $stmt->insert_id; // Get the new customer's ID
         }
 
         // Now update the order with the new customer_id
+        // Note: Here, we're assuming customer_id is an integer (int)
         $stmt = $conn->prepare("UPDATE orders SET order_date = ?, customer_id = ?, total_amount = ? WHERE order_id = ?");
         $stmt->bind_param("sidi", $order_date, $customer_id, $total_amount, $order_id);   
+        
+        // Execute and check for success
         $success = $stmt->execute();
         
+        // Close statement and connection
         $stmt->close();
         $conn->close();
         return $success;
