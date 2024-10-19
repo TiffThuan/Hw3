@@ -9,14 +9,12 @@ function selectOrderDetails($order_id) {
                                 FROM order_details od
                                 JOIN products p ON od.product_id = p.productid
                                 WHERE od.order_id = ?");
-        
-        // Bind the order_id to the query
         $stmt->bind_param("i", $order_id);
         $stmt->execute();
         $result = $stmt->get_result();
         $stmt->close();
 
-        return $result;
+        return $result->num_rows > 0 ? $result : false; // Return false if no rows found
     } catch (Exception $e) {
         throw $e;
     } finally {
@@ -25,6 +23,7 @@ function selectOrderDetails($order_id) {
         }
     }
 }
+
 
 function selectOrders() {
     $conn = null;
