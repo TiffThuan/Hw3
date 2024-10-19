@@ -108,7 +108,6 @@ function updateOrder($order_id, $order_date, $cFName, $cLName, $email, $total_am
         }
 
         // Now update the order with the new customer_id
-        // Note: Here, we're assuming customer_id is an integer (int)
         $stmt = $conn->prepare("UPDATE orders SET order_date = ?, customer_id = ?, total_amount = ? WHERE order_id = ?");
         $stmt->bind_param("sidi", $order_date, $customer_id, $total_amount, $order_id);   
         
