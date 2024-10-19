@@ -3,7 +3,7 @@
 function selectOrders() {
     try {
         $conn = get_db_connection();
-        $stmt = $conn->prepare("SELECT o.order_id, o.order_date, c.firstname, c.lastname, o.total_amount 
+        $stmt = $conn->prepare("SELECT o.order_id, o.order_date, c.firstname, c.lastname, c.email, o.total_amount 
                                 FROM orders o 
                                 JOIN customers c ON o.customer_id = c.customer_id");
         $stmt->execute();
@@ -19,6 +19,7 @@ function selectOrders() {
         throw $e;
     }
 }
+
 
 function selectOrderDetails($order_id) {
     $conn = null;
