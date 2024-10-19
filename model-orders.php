@@ -65,14 +65,17 @@ function insertOrder($order_date, $cFName, $cLName, $email, $total_amount) {
             $stmt = $conn->prepare("INSERT INTO customers (firstname, lastname, email) VALUES (?, ?, ?)");
             $stmt->bind_param("sss", $cFName, $cLName, $email);
             $stmt->execute();
-            $customer_id = $stmt->insert_id;
+            $customer_id = $stmt->insert_id; // Get the new customer's ID
         }
 
-        // Now insert the order with customer_id
+        // Now insert the order with the new customer_id
         $stmt = $conn->prepare("INSERT INTO orders (order_date, customer_id, total_amount) VALUES (?, ?, ?)");
-        $stmt->bind_param("sid", $order_date, $customer_id, $total_amount);
+        $stmt->bind_param("sid", $order_date, $customer_id, $total_amount);   
+        
+        // Execute and check for success
         $success = $stmt->execute();
         
+        // Close statement and connection
         $stmt->close();
         $conn->close();
         return $success;
@@ -83,6 +86,7 @@ function insertOrder($order_date, $cFName, $cLName, $email, $total_amount) {
         throw $e;
     }
 }
+
 
 
 function updateOrder($order_id, $order_date, $cFName, $cLName, $email, $total_amount) {
