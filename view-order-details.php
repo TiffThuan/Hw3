@@ -18,7 +18,7 @@
                         <td><?php echo htmlspecialchars($orderDetail['order_id']); ?></td>
                         <td><?php echo htmlspecialchars($orderDetail['product_name']); ?></td>
                         <td><?php echo htmlspecialchars($orderDetail['quantity']); ?></td>
-                        <td><?php echo htmlspecialchars($orderDetail['price']); ?></td>
+                        <td><?php echo htmlspecialchars(number_format($orderDetail['price'], 2)); ?></td>
                     </tr>
             <?php
                 }
@@ -29,3 +29,6 @@
         </tbody>
     </table>
 </div>
+
+<!-- Back Button -->
+<a href="view-orders.php" class="btn btn-secondary">Back to Orders</a>
