@@ -29,16 +29,17 @@
                         <input type="text" class="form-control" id="cLName" name="cLName" required>
                     </div>
                     <div class="mb-3">
-                        <label for="email<?php echo $order['order_id']; ?>" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email<?php echo $order['order_id']; ?>" name="email" value="<?php echo htmlspecialchars($order['email'] ?? ''); ?>" required>
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
                     </div>
-
                     <div class="mb-3">
                         <label for="total_amount" class="form-label">Total Amount</label>
                         <input type="number" step="0.01" class="form-control" id="total_amount" name="total_amount" required>
                     </div>
+                    <input type="hidden" name="actionType" value="Add">
                     <button type="submit" class="btn btn-primary">Add Order</button>
                 </form>
+
             </div>
         </div>
     </div>
