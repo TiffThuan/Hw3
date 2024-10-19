@@ -30,5 +30,3 @@
     </table>
 </div>
 
-<!-- Back Button -->
-<a href="view-orders.php" class="btn btn-secondary">Back to Orders</a>
