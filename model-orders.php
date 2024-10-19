@@ -49,30 +49,30 @@ function insertOrder($order_date, $cFName, $cLName, $total_amount) {
     try {
         $conn = get_db_connection();
         
-        // Check if customer already exists
+        // Check if customer already exists (optional)
         $stmt = $conn->prepare("SELECT customer_id FROM customers WHERE firstname = ? AND lastname = ?");
         $stmt->bind_param("ss", $cFName, $cLName);
         $stmt->execute();
         $result = $stmt->get_result();
-        $stmt->close();
 
-        if ($customer = $result->fetch_assoc()) {
+        if ($result->num_rows > 0) {
+            // Customer exists, retrieve their customer_id
+            $customer = $result->fetch_assoc();
             $customer_id = $customer['customer_id'];
         } else {
-            // Insert new customer if not found
+            // Insert new customer and get the new customer_id
             $stmt = $conn->prepare("INSERT INTO customers (firstname, lastname) VALUES (?, ?)");
             $stmt->bind_param("ss", $cFName, $cLName);
             $stmt->execute();
             $customer_id = $stmt->insert_id;
-            $stmt->close();
         }
-        
-        // Insert the order using the customer_id
+
+        // Now insert the order with customer_id
         $stmt = $conn->prepare("INSERT INTO orders (order_date, customer_id, total_amount) VALUES (?, ?, ?)");
         $stmt->bind_param("sid", $order_date, $customer_id, $total_amount);
         $success = $stmt->execute();
-        $stmt->close();
         
+        $stmt->close();
         $conn->close();
         return $success;
     } catch (Exception $e) {
@@ -83,35 +83,34 @@ function insertOrder($order_date, $cFName, $cLName, $total_amount) {
     }
 }
 
-
-function updateOrder($order_date, $cFName, $cLName, $total_amount, $order_id) {
+function updateOrder($order_id, $order_date, $cFName, $cLName, $total_amount) {
     try {
         $conn = get_db_connection();
         
-        // Check if customer already exists
+        // Find the customer_id by matching their name
         $stmt = $conn->prepare("SELECT customer_id FROM customers WHERE firstname = ? AND lastname = ?");
         $stmt->bind_param("ss", $cFName, $cLName);
         $stmt->execute();
         $result = $stmt->get_result();
-        $stmt->close();
 
-        if ($customer = $result->fetch_assoc()) {
+        if ($result->num_rows > 0) {
+            // Customer exists, retrieve their customer_id
+            $customer = $result->fetch_assoc();
             $customer_id = $customer['customer_id'];
         } else {
-            // Insert new customer if not found
+            // Insert new customer if not exists
             $stmt = $conn->prepare("INSERT INTO customers (firstname, lastname) VALUES (?, ?)");
             $stmt->bind_param("ss", $cFName, $cLName);
             $stmt->execute();
             $customer_id = $stmt->insert_id;
-            $stmt->close();
         }
-        
-        // Update the order using the customer_id
+
+        // Update the order with customer_id
         $stmt = $conn->prepare("UPDATE orders SET order_date = ?, customer_id = ?, total_amount = ? WHERE order_id = ?");
-        $stmt->bind_param("sidi", $order_date, $customer_id, $total_amount, $order_id);
+        $stmt->bind_param("sidi", $order_date, $customer_id, $total_amount, $order_id);   
         $success = $stmt->execute();
-        $stmt->close();
         
+        $stmt->close();
         $conn->close();
         return $success;
     } catch (Exception $e) {
@@ -121,6 +120,7 @@ function updateOrder($order_date, $cFName, $cLName, $total_amount, $order_id) {
         throw $e;
     }
 }
+
 
 function deleteOrder($order_id) {
     try {
