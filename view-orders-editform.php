@@ -12,7 +12,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-               <form method="post" action="">
+                <form method="post" action="">
                     <input type="hidden" name="order_id" value="<?php echo htmlspecialchars($order['order_id']); ?>">
                     <input type="hidden" name="actionType" value="Edit">
                     
@@ -32,18 +32,12 @@
                     </div>
                     
                     <div class="mb-3">
-                        <label for="email<?php echo $order['order_id']; ?>" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email<?php echo $order['order_id']; ?>" name="email" value="<?php echo htmlspecialchars($order['email']); ?>" required>
-                    </div>
-                    
-                    <div class="mb-3">
                         <label for="total_amount<?php echo $order['order_id']; ?>" class="form-label">Total Amount</label>
                         <input type="number" step="0.01" class="form-control" id="total_amount<?php echo $order['order_id']; ?>" name="total_amount" value="<?php echo htmlspecialchars($order['total_amount']); ?>" required>
                     </div>
                     
                     <button type="submit" class="btn btn-primary">Save changes</button>
                 </form>
-
             </div>
         </div>
     </div>
