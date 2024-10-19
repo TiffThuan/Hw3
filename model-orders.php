@@ -47,6 +47,7 @@ function selectOrderDetails($order_id) {
 }
 
 function insertOrder($order_date, $cFName, $cLName, $email, $total_amount) {
+    $conn = null; // Initialize connection variable
     try {
         $conn = get_db_connection();
         
@@ -64,7 +65,10 @@ function insertOrder($order_date, $cFName, $cLName, $email, $total_amount) {
             // Insert new customer with firstname, lastname, and email
             $stmt = $conn->prepare("INSERT INTO customers (firstname, lastname, email) VALUES (?, ?, ?)");
             $stmt->bind_param("sss", $cFName, $cLName, $email);
-            $stmt->execute();
+            
+            if (!$stmt->execute()) {
+                throw new Exception("Error inserting customer: " . $stmt->error);
+            }
             $customer_id = $stmt->insert_id; // Get the new customer's ID
         }
 
@@ -73,19 +77,24 @@ function insertOrder($order_date, $cFName, $cLName, $email, $total_amount) {
         $stmt->bind_param("sid", $order_date, $customer_id, $total_amount);   
         
         // Execute and check for success
-        $success = $stmt->execute();
-        
-        // Close statement and connection
-        $stmt->close();
-        $conn->close();
-        return $success;
-    } catch (Exception $e) {
-        if ($conn) {
-            $conn->close();
+        if (!$stmt->execute()) {
+            throw new Exception("Error inserting order: " . $stmt->error);
         }
-        throw $e;
+        
+        // Close statement
+        $stmt->close();
+        return true; // Return true for successful insertion
+    } catch (Exception $e) {
+        // Log or handle the error
+        echo "Error: " . $e->getMessage(); // This can be logged instead
+        return false; // Indicate failure
+    } finally {
+        if ($conn) {
+            $conn->close(); // Close the connection in the finally block
+        }
     }
 }
+
 
 
 
