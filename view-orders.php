@@ -34,6 +34,7 @@
                         <td><?php echo htmlspecialchars($order['total_amount']); ?></td>
                         <td>
                         <?php
+                        // Include the form to edit order (if necessary)
                         include "view-orders-editform.php";
                         ?>
                         </td>
@@ -46,21 +47,15 @@
                             </form>
                         </td>
                         <td>
-                            <form method="POST" action="order-details.php">
-                                <input type="hidden" name="order_id" value="<?php echo $order['order_id']; ?>">
-                                <button type="submit" class="btn btn-info">View Details</button>
-                                <a href="order-details.php?order_id=<?php echo order['order_id']; ?>" class="btn btn-primary">View Details</a>
-                            </form>
+                            <!-- View Order Details Button -->
+                            <a href="order-details.php?order_id=<?php echo $order['order_id']; ?>" class="btn btn-primary">View Details</a>
                         </td>
-                        </td>
-            
-
-                </tr>
-
-
+                    </tr>
 
             <?php
                 }
+            } else {
+                echo "<tr><td colspan='7'>No orders found.</td></tr>";
             }
             ?>
         </tbody>
