@@ -18,6 +18,7 @@
                 <th>Order ID</th>
                 <th>Order Date</th>
                 <th>Customer</th>
+                <th>Email</th> <!-- Add the email column -->
                 <th>Total Amount</th>
                 <th>Actions</th>
             </tr>
@@ -31,6 +32,7 @@
                         <td><?php echo htmlspecialchars($order['order_id']); ?></td>
                         <td><?php echo htmlspecialchars($order['order_date']); ?></td>
                         <td><?php echo htmlspecialchars($order['firstname'] . ' ' . $order['lastname']); ?></td>
+                        <td><?php echo htmlspecialchars($order['email']); ?></td> <!-- Display customer email -->
                         <td><?php echo htmlspecialchars($order['total_amount']); ?></td>
                         <td>
                         <?php
@@ -55,7 +57,7 @@
             <?php
                 }
             } else {
-                echo "<tr><td colspan='7'>No orders found.</td></tr>";
+                echo "<tr><td colspan='8'>No orders found.</td></tr>"; // Adjust the colspan to account for the extra column
             }
             ?>
         </tbody>
