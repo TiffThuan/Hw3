@@ -30,7 +30,7 @@ function selectProducts() {
 }
 
 // Function to add a new product
-function addProduct($product_name, $product_description, $price) {
+function insertProduct($product_name, $product_description, $price) {
     try {
         $conn = get_db_connection();
         $stmt = $conn->prepare("INSERT INTO products (product_name, product_description, price) VALUES (?, ?, ?)");
