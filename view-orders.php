@@ -45,9 +45,12 @@
                                 <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?');">Delete</button>
                             </form>
                         </td>
+                        <!-- View Details Button using POST -->
                         <td>
-                            <!-- View Order Details Button -->
-                            <a href="order-details.php?order_id=<?php echo $order['order_id']; ?>" class="btn btn-primary">View Details</a>
+                            <form method="POST" action="order-details.php">
+                                <input type="hidden" name="order_id" value="<?php echo $order['order_id']; ?>">
+                                <button type="submit" class="btn btn-info">View Details</button>
+                            </form>
                         </td>
                     </tr>
             <?php
