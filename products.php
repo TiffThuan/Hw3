@@ -9,7 +9,7 @@ include 'view-header.php';
 if (isset($_POST['actionType'])) {
     switch ($_POST['actionType']) {
         case 'addProduct':
-            if (insertProduct($_POST['pName'], $_POST['pDescription'], $_POST['pPrice'])) {
+            if (insertProduct($_POST['product_name'], $_POST['product_description'], $_POST['price'])) {
                 echo '<div class="alert alert-success" role="alert">Product added successfully!</div>';
             } else {
                 echo '<div class="alert alert-danger" role="alert">Error adding product.</div>';
@@ -17,8 +17,8 @@ if (isset($_POST['actionType'])) {
             break;
 
         case 'editProduct':
-            if (isset($_POST['pID'], $_POST['pName'], $_POST['pDescription'], $_POST['pPrice'])) {
-                if (updateProduct($_POST['pID'], $_POST['pName'], $_POST['pDescription'], $_POST['pPrice'])) {
+            if (isset($_POST['productid'], $_POST['product_name'], $_POST['product_description'], $_POST['price'])) {
+                if (updateProduct($_POST['productID'], $_POST['product_name'], $_POST['product_description'], $_POST['price'])) {
                     echo '<div class="alert alert-success" role="alert">Product updated successfully!</div>';
                 } else {
                     echo '<div class="alert alert-danger" role="alert">Error updating product.</div>';
@@ -29,8 +29,8 @@ if (isset($_POST['actionType'])) {
             break;
 
         case 'deleteProduct':
-            if (isset($_POST['pID'])) {
-                if (deleteProduct($_POST['pID'])) {
+            if (isset($_POST['productid'])) {
+                if (deleteProduct($_POST['productid'])) {
                     echo '<div class="alert alert-success" role="alert">Product deleted successfully!</div>';
                 } else {
                     echo '<div class="alert alert-danger" role="alert">Error deleting product.</div>';
