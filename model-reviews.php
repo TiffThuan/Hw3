@@ -48,15 +48,14 @@ function insertReview($product_id, $customer_id, $rating, $review_text) {
     }
 }
 
-function fetchReviewsByProduct($product_id) {
+function fetchProducts() {
     try {
         $conn = get_db_connection();
-        $stmt = $conn->prepare("SELECT * FROM reviews WHERE product_id = ?");
-        $stmt->bind_param("i", $product_id);
+        $stmt = $conn->prepare("SELECT * FROM products");
         $stmt->execute();
         $result = $stmt->get_result();
         $stmt->close();
-        return $result; // Return the result set
+        return $result; // Return the result set containing all products
     } catch (Exception $e) {
         throw $e;
     } finally {
