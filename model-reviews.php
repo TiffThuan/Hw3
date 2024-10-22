@@ -50,17 +50,18 @@ function insertReview($product_id, $customer_id, $rating, $review_text) {
 
 function fetchProducts() {
     try {
-        $conn = get_db_connection();
-        $stmt = $conn->prepare("SELECT * FROM products");
+        $conn = get_db_connection(); // Ensure you have this function defined to connect to your DB
+        $stmt = $conn->prepare("SELECT productid, product_name FROM products");
         $stmt->execute();
         $result = $stmt->get_result();
         $stmt->close();
-        return $result; // Return the result set containing all products
+        return $result; // Return the result set
     } catch (Exception $e) {
-        throw $e;
+        error_log($e->getMessage()); // Log any errors
+        return null; // Return null on error
     } finally {
         if ($conn) {
-            $conn->close();
+            $conn->close(); // Close the connection
         }
     }
 }
