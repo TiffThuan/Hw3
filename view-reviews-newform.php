@@ -26,7 +26,7 @@
                         $products = fetchProducts();
                         if ($products && $products->num_rows > 0) {
                             while ($product = $products->fetch_assoc()): ?>
-                                <option value="<?php echo $product['productID']; ?>"><?php echo htmlspecialchars($product['product_name']); ?></option>
+                                <option value="<?php echo $product['productid']; ?>"><?php echo htmlspecialchars($product['product_name']); ?></option>
                             <?php endwhile; 
                         } else {
                             echo '<option value="">No products available</option>';
