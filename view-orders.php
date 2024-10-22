@@ -1,12 +1,5 @@
 <h1>Orders</h1>
 <div class="table-responsive">
-    <div class="row mb-3">
-        <div class="col">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newOrderModal">
-                Add New Order
-            </button>
-        </div>
-    </div>
 
     <!-- Include the New Order Modal here -->
     <?php include 'view-orders-newform.php'; ?>
@@ -17,7 +10,7 @@
                 <th>Order ID</th>
                 <th>Order Date</th>
                 <th>Customer</th>
-                <th>Total Amount</th> <!-- Removed Email Column -->
+                <th>Total Amount</th> 
                 <th>Actions</th>
             </tr>
         </thead>
