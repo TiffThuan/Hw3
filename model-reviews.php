@@ -48,8 +48,6 @@ function insertReview($product_id, $customer_id, $rating, $review_text) {
     }
 }
 
-
-
 function fetchReviewsByProduct($product_id) {
     try {
         $conn = get_db_connection();
@@ -68,12 +66,12 @@ function fetchReviewsByProduct($product_id) {
     }
 }
 
-
-function updateReview($review_id, $rating, $review_text) {
+// UPDATED: Including product_id in the review update
+function updateReview($review_id, $product_id, $rating, $review_text) {
     try {
         $conn = get_db_connection();
-        $stmt = $conn->prepare("UPDATE reviews SET rating = ?, review_text = ? WHERE review_id = ?");
-        $stmt->bind_param("ssi", $rating, $review_text, $review_id);
+        $stmt = $conn->prepare("UPDATE reviews SET product_id = ?, rating = ?, review_text = ? WHERE review_id = ?");
+        $stmt->bind_param("iisi", $product_id, $rating, $review_text, $review_id); // Bind product_id
         $success = $stmt->execute();
         $stmt->close();
         return $success; // Return true if successful
@@ -102,6 +100,4 @@ function deleteReview($review_id) {
         }
     }
 }
-
-
 ?>
