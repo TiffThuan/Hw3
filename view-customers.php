@@ -32,14 +32,15 @@
                     
                     <td>
                         <?php
-                        include "view-customers-editform.php";
-                        ?>
-                        <?php
                         include "view-customers-newform.php"
                         ?>
                     </td>
                    
-                     
+                      <td>
+                        <?php
+                        include "view-customers-editform.php";
+                        ?>
+                    </td>                   
                   
                     <td>  
                         <form method ="post" action="">
