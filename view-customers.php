@@ -2,11 +2,7 @@
     <div class = "col">
         <h1>Customers</h1>
     </div>
-    <div class = "col-auto">
-<?php
-include "view-customers-newform.php"
-?>
-    </div> 
+
 </div>    
 
 <div class="table-responsive">
@@ -32,13 +28,18 @@ include "view-customers-newform.php"
                     <td><?php echo htmlspecialchars($customer['firstname'] . ' ' . $customer['lastname']); ?></td>
                     <td><?php echo htmlspecialchars($customer['email']); ?></td>
                     <td><?php echo htmlspecialchars($customer['phone']); ?></td>
-                
+
+                    
                     <td>
                         <?php
                         include "view-customers-editform.php";
                         ?>
                     </td>
-                    
+                    <div class = "col-auto">
+                        <?php
+                        include "view-customers-newform.php"
+                        ?>
+                    </div> 
                     <td>  
                         <form method ="post" action="">
                             <input type="hidden" name="cid" value="<?php echo $customer['customer_id']; ?> ">
