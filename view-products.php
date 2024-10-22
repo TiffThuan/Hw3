@@ -22,7 +22,7 @@
                     <!-- Delete Product Button -->
                     <form method="POST" action="products.php" style="display:inline;">
                         <input type="hidden" name="actionType" value="deleteProduct">
-                        <input type="hidden" name="product_id" value="<?php echo $product['productid']; ?>">
+                        <input type="hidden" name="productid" value="<?php echo $product['productid']; ?>">
                         <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?');">Delete</button>
                     </form>
 
