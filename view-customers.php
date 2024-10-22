@@ -34,12 +34,13 @@
                         <?php
                         include "view-customers-editform.php";
                         ?>
-                    </td>
-                    <div class = "col-auto">
                         <?php
                         include "view-customers-newform.php"
                         ?>
-                    </div> 
+                    </td>
+                   
+                     
+                  
                     <td>  
                         <form method ="post" action="">
                             <input type="hidden" name="cid" value="<?php echo $customer['customer_id']; ?> ">
