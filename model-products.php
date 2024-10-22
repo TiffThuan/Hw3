@@ -1,7 +1,4 @@
 <?php
-ini_set('display_errors', 1); 
-ini_set('display_startup_errors', 1); 
-error_reporting(E_ALL);
 
 // Function to get all products
 function selectProducts() {
@@ -29,7 +26,6 @@ function selectProducts() {
     }
 }
 
-// Function to add a new product
 function insertProduct($product_name, $product_description, $price) {
     try {
         $conn = get_db_connection();
