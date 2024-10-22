@@ -9,7 +9,7 @@
             <div class="modal-body">
                 <form method="POST" action="products.php">
                     <input type="hidden" name="actionType" value="editProduct">
-                    <input type="hidden" name="product_id" value="<?php echo $product['productid']; ?>">
+                    <input type="hidden" name="productid" value="<?php echo $product['productid']; ?>">
                     <div class="mb-3">
                         <label for="product_name">Product Name:</label>
                         <input type="text" name="product_name" class="form-control" value="<?php echo htmlspecialchars($product['product_name']); ?>" required>
