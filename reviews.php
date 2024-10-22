@@ -28,9 +28,10 @@ if (isset($_POST['actionType'])) {
 
         case 'editReview':
             $review_id = $_POST['review_id'];
+            $product_id = $_POST['product_id']; // Get the product ID from the POST data
             $rating = $_POST['rating'];
             $review_text = $_POST['review_text'];
-
+        
             if (updateReview($review_id, $product_id, $rating, $review_text)) {
                 echo '<div class="alert alert-success">Review updated successfully!</div>';
             } else {
