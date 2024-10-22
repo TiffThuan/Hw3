@@ -20,19 +20,19 @@
                 <div class="mb-3">
                     <label for="product_id" class="form-label">Select Product</label>
                     <select class="form-select" id="product_id" name="product_id" required>
-                        <option value="">Select a product</option>
+                        <option value="" disabled selected>Select a product</option>
                         <?php
                         // Fetch products to populate the dropdown
-                        $products = fetchProducts(); // Call the fetchProducts function
-                        while ($product = $products->fetch_assoc()): ?>
-                            <option value="<?php echo $product['productID']; ?>"><?php echo htmlspecialchars($product['product_name']); ?></option>
-                        <?php endwhile; ?>
+                        $products = fetchProducts();
+                        if ($products && $products->num_rows > 0) {
+                            while ($product = $products->fetch_assoc()): ?>
+                                <option value="<?php echo $product['productID']; ?>"><?php echo htmlspecialchars($product['product_name']); ?></option>
+                            <?php endwhile; 
+                        } else {
+                            echo '<option value="">No products available</option>';
+                        }
+                        ?>
                     </select>
-                </div>
-                
-                <div class="mb-3">
-                    <label for="customer_id" class="form-label">Customer ID</label>
-                    <input type="text" class="form-control" id="customer_id" name="customer_id" required>
                 </div>
                 
                 <div class="mb-3">
@@ -51,3 +51,4 @@
     </div>
   </div>
 </div>
+
