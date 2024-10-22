@@ -31,7 +31,7 @@ if (isset($_POST['actionType'])) {
             $rating = $_POST['rating'];
             $review_text = $_POST['review_text'];
 
-            if (updateReview($review_id, $product_id, $rating, $review_text)) {
+            if (updateReview($review_id, $productid, $rating, $review_text)) {
                 echo '<div class="alert alert-success">Review updated successfully!</div>';
             } else {
                 echo '<div class="alert alert-danger">Error updating review.</div>';
