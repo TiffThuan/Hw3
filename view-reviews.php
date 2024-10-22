@@ -4,11 +4,9 @@
     </div>
     <div class="col-auto">
         <!-- Add the hyperlink to the product list page -->
-       <a href="products-with-reviews.php" class="btn btn-info">View Product List</a>
+        <a href="products-with-reviews.php" class="btn btn-info">View Product List</a>
     </div>
-    <div class="col-auto">
-        <?php include "view-reviews-newform.php"; ?> <!-- Form to add a new review -->
-    </div>
+
 </div>
 
 <div class="container mt-4">
@@ -20,6 +18,9 @@
                         <h5 class="card-title">Rating: <?php echo htmlspecialchars($review['rating']); ?>/5</h5>
                         <p class="card-text"><?php echo htmlspecialchars($review['review_text']); ?></p>
                         <div>
+                            <div class="col-auto">
+                                <?php include "view-reviews-newform.php"; ?> <!-- Form to add a new review -->
+                            </div>
                             <!-- Edit Button -->
                             <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editReviewModal<?php echo $review['review_id']; ?>">Edit</button>
                             <?php include "view-reviews-editform.php"; ?> <!-- Edit Modal -->
