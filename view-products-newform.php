@@ -10,23 +10,23 @@
                 <form method="POST" action="products.php">
                     <input type="hidden" name="actionType" value="addProduct">
                     
-                    <!-- Dropdown for selecting existing product -->
+                    <!-- Dropdown for selecting an existing product -->
                     <div class="mb-3">
                         <label for="existing_product_id">Select Existing Product:</label>
                         <select class="form-select" id="existing_product_id" name="existing_product_id">
                             <option value="">Select a product</option>
                             <?php
                             // Fetch products to populate the dropdown
-                            $products = fetchProducts(); // Ensure you have this function to fetch products
+                            $products = fetchProducts(); // Ensure this function is defined correctly
                             while ($product = $products->fetch_assoc()): ?>
-                                <option value="<?php echo $product['productID']; ?>">
+                                <option value="<?php echo htmlspecialchars($product['productID']); ?>">
                                     <?php echo htmlspecialchars($product['product_name']); ?>
                                 </option>
                             <?php endwhile; ?>
                         </select>
                     </div>
 
-                    <!-- Input fields for adding new product details -->
+                    <!-- Fields for adding a new product -->
                     <div class="mb-3">
                         <label for="product_name">Product Name:</label>
                         <input type="text" name="product_name" class="form-control" required>
