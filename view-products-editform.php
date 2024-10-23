@@ -10,10 +10,26 @@
                 <form method="POST" action="products.php">
                     <input type="hidden" name="actionType" value="editProduct">
                     <input type="hidden" name="productid" value="<?php echo $product['productid']; ?>">
+                    
                     <div class="mb-3">
                         <label for="product_name">Product Name:</label>
-                        <input type="text" name="product_name" class="form-control" value="<?php echo htmlspecialchars($product['product_name']); ?>" required>
+                        <select name="product_name" class="form-control" required>
+                            <option value="" disabled>Select a product</option>
+                            <?php
+                            // Include the model to access the selectProducts function
+                            require_once 'model-products.php';  // Ensure the path is correct
+
+                            // Call the function to get all products
+                            $products = selectProducts();
+
+                            while ($row = $products->fetch_assoc()) {
+                                $selected = ($row['productid'] == $product['productid']) ? 'selected' : '';
+                                echo "<option value=\"" . htmlspecialchars($row['productid']) . "\" $selected>" . htmlspecialchars($row['product_name']) . "</option>";
+                            }
+                            ?>
+                        </select>
                     </div>
+                    
                     <div class="mb-3">
                         <label for="product_description">Description:</label>
                         <textarea name="product_description" class="form-control" required><?php echo htmlspecialchars($product['product_description']); ?></textarea>
