@@ -48,14 +48,14 @@ function selectOrderDetails($order_id) {
     }
 }
 
-function insertOrder($order_date, $cFName, $cLName, $email, $total_amount) {
+function insertOrder($order_date, $cFName, $cLName, $total_amount) {
     $conn = null; // Initialize connection variable
     try {
         $conn = get_db_connection();
         
-        // Check if customer already exists based on name and email
-        $stmt = $conn->prepare("SELECT customer_id FROM customers WHERE firstname = ? AND lastname = ? AND email = ?");
-        $stmt->bind_param("sss", $cFName, $cLName, $email);
+        // Check if customer already exists based on name
+        $stmt = $conn->prepare("SELECT customer_id FROM customers WHERE firstname = ? AND lastname = ?");
+        $stmt->bind_param("ss", $cFName, $cLName);
         $stmt->execute();
         $result = $stmt->get_result();
 
@@ -64,9 +64,9 @@ function insertOrder($order_date, $cFName, $cLName, $email, $total_amount) {
             $customer = $result->fetch_assoc();
             $customer_id = $customer['customer_id'];
         } else {
-            // Insert new customer with firstname, lastname, and email
-            $stmt = $conn->prepare("INSERT INTO customers (firstname, lastname, email) VALUES (?, ?, ?)");
-            $stmt->bind_param("sss", $cFName, $cLName, $email);
+            // Insert new customer with firstname, lastname
+            $stmt = $conn->prepare("INSERT INTO customers (firstname, lastname) VALUES (?, ?)");
+            $stmt->bind_param("ss", $cFName, $cLName);
             
             if (!$stmt->execute()) {
                 throw new Exception("Error inserting customer: " . $stmt->error);
@@ -100,13 +100,13 @@ function insertOrder($order_date, $cFName, $cLName, $email, $total_amount) {
 
 
 
-function updateOrder($order_id, $order_date, $cFName, $cLName, $email, $total_amount) {
+function updateOrder($order_id, $order_date, $cFName, $cLName, $total_amount) {
     try {
         $conn = get_db_connection();
         
-        // Check if customer already exists based on name and email
-        $stmt = $conn->prepare("SELECT customer_id FROM customers WHERE firstname = ? AND lastname = ? AND email = ?");
-        $stmt->bind_param("sss", $cFName, $cLName, $email);
+        // Check if customer already exists based on name
+        $stmt = $conn->prepare("SELECT customer_id FROM customers WHERE firstname = ? AND lastname = ?");
+        $stmt->bind_param("sss", $cFName, $cLName);
         $stmt->execute();
         $result = $stmt->get_result();
 
@@ -115,9 +115,9 @@ function updateOrder($order_id, $order_date, $cFName, $cLName, $email, $total_am
             $customer = $result->fetch_assoc();
             $customer_id = $customer['customer_id'];
         } else {
-            // If the customer does not exist, insert new customer with firstname, lastname, and email
-            $stmt = $conn->prepare("INSERT INTO customers (firstname, lastname, email) VALUES (?, ?, ?)");
-            $stmt->bind_param("sss", $cFName, $cLName, $email);
+            // If the customer does not exist, insert new customer with firstname, lastname
+            $stmt = $conn->prepare("INSERT INTO customers (firstname, lastname) VALUES (?, ?)");
+            $stmt->bind_param("ss", $cFName, $cLName);
             $stmt->execute();
             $customer_id = $stmt->insert_id; // Get the new customer's ID
         }
