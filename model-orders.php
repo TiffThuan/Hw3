@@ -106,7 +106,7 @@ function updateOrder($order_id, $order_date, $cFName, $cLName, $total_amount) {
         
         // Check if customer already exists based on name
         $stmt = $conn->prepare("SELECT customer_id FROM customers WHERE firstname = ? AND lastname = ?");
-        $stmt->bind_param("sss", $cFName, $cLName);
+        $stmt->bind_param("ss", $cFName, $cLName);
         $stmt->execute();
         $result = $stmt->get_result();
 
