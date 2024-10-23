@@ -22,9 +22,14 @@
                             // Call the function to get all products
                             $products = selectProducts();
 
-                            while ($row = $products->fetch_assoc()) {
-                                $selected = ($row['productid'] == $product['productid']) ? 'selected' : '';
-                                echo "<option value=\"" . htmlspecialchars($row['productid']) . "\" $selected>" . htmlspecialchars($row['product_name']) . "</option>";
+                            // Check how many products were returned
+                            if ($products->num_rows === 0) {
+                                echo "<option value=\"\">No products available</option>";
+                            } else {
+                                while ($row = $products->fetch_assoc()) {
+                                    $selected = ($row['productid'] == $product['productid']) ? 'selected' : '';
+                                    echo "<option value=\"" . htmlspecialchars($row['productid']) . "\" $selected>" . htmlspecialchars($row['product_name']) . "</option>";
+                                }
                             }
                             ?>
                         </select>
