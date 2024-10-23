@@ -30,13 +30,14 @@
                     <div class="d-flex justify-content-between">
                         <div>
                             
+
+                        </div>
+                        <div>
                             <!-- Include the New Order Modal here -->
                             <?php include 'view-orders-newform.php'; ?>
 
                             <!-- Include the form to edit order (if necessary) -->
                             <?php include "view-orders-editform.php"; ?>
-                        </div>
-                        <div>
                             <!-- Delete Button -->
                             <form method="post" action="" style="display:inline;">
                                 <input type="hidden" name="order_id" value="<?php echo $order['order_id']; ?>">
