@@ -28,8 +28,9 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
-        .dropdown-menu a:hover {
-            background-color: #f2f2f2;
+        .nav-item .active {
+            color: #6b3e26 !important; /* Color for active tab */
+            font-weight: bold;
         }
     </style>
 </head>
@@ -42,31 +43,19 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="index.php">Home</a>
+                    <a class="nav-link <?php if($pageTitle == 'Home') { echo 'active'; } ?>" href="index.php">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="orders.php">Orders</a>
+                    <a class="nav-link <?php if($pageTitle == 'Orders') { echo 'active'; } ?>" href="orders.php">Orders</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="customers.php">Customers</a>
+                    <a class="nav-link <?php if($pageTitle == 'Customers') { echo 'active'; } ?>" href="customers.php">Customers</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="products.php">Products</a>
+                    <a class="nav-link <?php if($pageTitle == 'Products') { echo 'active'; } ?>" href="products.php">Products</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="reviews.php">Reviews</a>
-                </li>
-                <!-- Dropdown for additional options -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        More
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Profile</a>
-                        <a class="dropdown-item" href="#">Settings</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Logout</a>
-                    </div>
+                    <a class="nav-link <?php if($pageTitle == 'Reviews') { echo 'active'; } ?>" href="reviews.php">Reviews</a>
                 </li>
             </ul>
             <!-- Optional right-side links or buttons -->
