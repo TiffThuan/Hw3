@@ -16,8 +16,7 @@
         </div>
     </div>
 
-    <!-- Include the New Customer Modal here -->
-    <?php include 'view-customers-newform.php'; ?>
+
 
     <div class="table-responsive">
         <table class="table table-striped table-bordered">
@@ -28,9 +27,7 @@
                     <th>Email</th>
                     <th>Phone</th>
                     <th>Actions</th>
-                    <th> </th>
-                    <th> </th>
-                    <th> </th>
+                    <th>View Orders</th>
                 </tr>
             </thead>
             <tbody>
@@ -44,16 +41,11 @@
                         <td><?php echo htmlspecialchars($customer['phone']); ?></td>
 
                         <td>
-                            <!-- Include the form to add a new customer -->
-                            <?php include "view-customers-newform.php"; ?>
-                        </td>
-
-                        <td>
-                            <!-- Include the form to edit customer details -->
+                            <!-- Include the New Customer Modal here -->
+                            <?php include 'view-customers-newform.php'; ?>
+                            <!-- Include the form to edit customer -->
                             <?php include "view-customers-editform.php"; ?>
-                        </td>
-
-                        <td>
+                            <!-- Delete Button -->
                             <form method="post" action="" style="display:inline;">
                                 <input type="hidden" name="cid" value="<?php echo $customer['customer_id']; ?>">
                                 <input type="hidden" name="actionType" value="Delete">
