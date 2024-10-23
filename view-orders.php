@@ -10,11 +10,15 @@
 <body>
 
 <div class="container mt-5">
-    <h1 class="text-center mb-4">Orders</h1>
-    
+    <div class="row mb-4">
+        <div class="col text-center">
+            <h1>Orders</h1>
+        </div>
+    </div>
+
     <!-- Include the New Order Modal here -->
     <?php include 'view-orders-newform.php'; ?>
-    
+
     <div class="table-responsive">
         <table class="table table-striped table-bordered">
             <thead class="thead-dark">
@@ -22,8 +26,9 @@
                     <th>Order ID</th>
                     <th>Order Date</th>
                     <th>Customer</th>
-                    <th>Total Amount</th> 
+                    <th>Total Amount</th>
                     <th>Actions</th>
+                    <th>View Details</th>
                 </tr>
             </thead>
             <tbody>
@@ -33,33 +38,38 @@
                 ?>
                         <tr>
                             <td><?php echo htmlspecialchars($order['order_id']); ?></td>
-                            <td><?php echo htmlspecialchars(date('Y-m-d H:i:s', strtotime($order['order_date']))); ?></td>
+                            <td><?php echo htmlspecialchars($order['order_date']); ?></td>
                             <td><?php echo htmlspecialchars($order['firstname'] . ' ' . $order['lastname']); ?></td>
-                            <td><?php echo htmlspecialchars('$' . number_format($order['total_amount'], 2)); ?></td>
+                            <td><?php echo htmlspecialchars($order['total_amount']); ?></td>
+
                             <td>
-                                <div class="btn-group" role="group" aria-label="Order Actions">
-                                    <!-- Include the form to edit order (if necessary) -->
-                                    <?php include "view-orders-editform.php"; ?>
+                                <!-- Include the form to edit order (if necessary) -->
+                                <?php include "view-orders-editform.php"; ?>
+                                <!-- Delete Button -->
+                                <form method="post" action="" style="display:inline;">
+                                    <input type="hidden" name="order_id" value="<?php echo $order['order_id']; ?>">
+                                    <input type="hidden" name="actionType" value="Delete">
+                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this order?');">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                                            <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                                        </svg>
+                                    </button>
+                                </form>
+                            </td>
 
-                                    <!-- Delete Button -->
-                                    <form method="post" action="" style="display:inline;">
-                                        <input type="hidden" name="order_id" value="<?php echo $order['order_id']; ?>">
-                                        <input type="hidden" name="actionType" value="Delete">
-                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this order?');">Delete</button>
-                                    </form>
-
-                                    <!-- View Details Button using POST -->
-                                    <form method="POST" action="order-details.php" style="display:inline;">
-                                        <input type="hidden" name="order_id" value="<?php echo $order['order_id']; ?>">
-                                        <button type="submit" class="btn btn-info">View Details</button>
-                                    </form>
-                                </div>
+                            <td>
+                                <!-- View Details Button using POST -->
+                                <form method="POST" action="order-details.php">
+                                    <input type="hidden" name="order_id" value="<?php echo $order['order_id']; ?>">
+                                    <button type="submit" class="btn btn-info">View Details</button>
+                                </form>
                             </td>
                         </tr>
                 <?php
                     }
                 } else {
-                    echo "<tr><td colspan='5' class='text-center'>No orders found.</td></tr>"; // Centered message for no orders
+                    echo "<tr><td colspan='6' class='text-center'>No orders found.</td></tr>"; // Adjust the colspan accordingly
                 }
                 ?>
             </tbody>
