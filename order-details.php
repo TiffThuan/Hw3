@@ -1,6 +1,6 @@
 <?php
-require_once('util-db.php');
-require_once('model-orders.php'); // Use model-orders.php for order retrieval functions
+require_once('util-db.php'); // Your database connection utilities
+require_once('model-order-details.php'); // Use model-order-details.php for order retrieval functions
 
 $pageTitle = "Order Details";
 include 'view-header.php';
@@ -9,7 +9,7 @@ include 'view-header.php';
 ini_set('display_errors', 1); 
 error_reporting(E_ALL);
 
-// POST the order_id from GET request
+// Check for order_id in POST request
 $order_id = isset($_POST['order_id']) ? intval($_POST['order_id']) : null;
 
 if ($order_id) {
