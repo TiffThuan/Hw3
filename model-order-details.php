@@ -14,7 +14,7 @@ function selectOrderDetails($order_id) {
         $result = $stmt->get_result();
         $stmt->close();
 
-        return $result->num_rows > 0 ? $result : false; // Return false if no rows found
+        return $result;
     } catch (Exception $e) {
         throw $e;
     } finally {
