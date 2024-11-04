@@ -52,10 +52,17 @@
                         </div>
                         <div>
                             <!-- View Details Button using POST -->
+                       <!--     
                             <form method="GET" action="order-details.php" style="display:inline;">
                                 <input type="hidden" name="order_id" value="<?php echo $order['order_id']; ?>">
                                 <button type="submit" class="btn btn-info btn-sm">View Details</button>
                             </form>
+                        -->
+                            <form method="POST" action="order-details.php">
+                                <input type="hidden" name="order_id" value="<?php echo $order['order_id']; ?>">
+                                <button type="submit" class="btn btn-info">View Details</button>
+                            </form>
+
 
                         </div>
                     </div>
