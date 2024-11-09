@@ -19,7 +19,13 @@
                         <td><?php echo htmlspecialchars($order['order_id']); ?></td>
                         <td><?php echo htmlspecialchars($order['order_date']); ?></td>
                         <td><?php echo htmlspecialchars($order['total_amount']); ?></td>
-                        <td><a href="order-details.php?order_id=<?php echo $order['order_id']; ?>">View Details</a></td>
+                        <td>
+                            <form method="POST" action="order-details.php">
+                                <input type="hidden" name="order_id" value="<?php echo htmlspecialchars($order['order_id']); ?>">
+                                <button type="submit" class="btn btn-info">View Details</button>
+                            </form>
+                        </td>
+
                     </tr>
             <?php
                 }
