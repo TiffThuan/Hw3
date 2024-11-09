@@ -1,19 +1,46 @@
-<?php
-require_once('util-db.php');
-$pageTitle = "Coffee Shop Management System";
-include 'view-header.php';
-?>
+<div class="container mt-5">
+    <h1>Welcome to King Coffee Shop</h1>
+    <p>Manage your business with ease. Explore orders, products, and customer reviews.</p>
 
-<div class="container">
-    <h1>Welcome to the Coffee Shop Management System</h1>
-   <p>Manage your customer orders, products, and reviews efficiently with the tools below.</p>
-    
-    <ul>
-        <li><a href="orders.php">View Orders by Customer</a></li>
-        <li><a href="customers.php">View All Customers</a></li>
-        <li><a href="products.php">View Available Products</a></li>
-        <li><a href="reviews.php">View Product Reviews</a></li> <!-- New link to Reviews -->
-    </ul>
+    <!-- Stats Section -->
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card text-white bg-primary mb-3">
+                <div class="card-header">Total Sales</div>
+                <div class="card-body">
+                    <h5 class="card-title">$12,000</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-success mb-3">
+                <div class="card-header">Total Customers</div>
+                <div class="card-body">
+                    <h5 class="card-title">250</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-info mb-3">
+                <div class="card-header">Top Product</div>
+                <div class="card-body">
+                    <h5 class="card-title">Vietnamese Coffee</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sales Chart -->
+    <div id="sales-chart" style="width: 100%; height: 400px;"></div>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script>
+        var chart = echarts.init(document.getElementById('sales-chart'));
+        chart.setOption({
+            title: { text: 'Monthly Sales' },
+            tooltip: {},
+            xAxis: { data: ['Jan', 'Feb', 'Mar', 'Apr', 'May'] },
+            yAxis: {},
+            series: [{ type: 'bar', data: [1200, 1500, 1800, 2500, 3000] }]
+        });
+    </script>
 </div>
-
-<?php include 'view-footer.php'; ?>
