@@ -1,5 +1,5 @@
 <?php
-
+error_log("Received order_id: " . $_POST['order_id']);
 // Function to fetch order details by order ID
 function selectOrderDetails($order_id) {
     $conn = null;
