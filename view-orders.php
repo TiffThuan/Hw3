@@ -43,10 +43,11 @@
 <script>
     // Define data for the chart
     const data = [
-        { name: 'Cafe Sua Da', value: 40 },
+        { name: 'Cafe Sua Da', value: 35 },
         { name: 'Cafe Den Da', value: 30 },
         { name: 'Hot Coffee', value: 20 },
-        { name: 'Espresso', value: 10 }
+        { name: 'Espresso', value: 10 },
+        { name: 'Cappucino', value: 5 }
     ];
 
     // Initialize ECharts
