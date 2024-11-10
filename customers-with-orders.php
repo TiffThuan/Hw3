@@ -1,20 +1,24 @@
 <?php
-require_once('util-db.php');
-require_once('model-customers-with-orders.php');
+require_once('util-db.php'); 
+require_once('model-orders-by-customer.php'); 
 
-ini_set('display_errors', 1); // Enable error reporting for debugging
-error_reporting(E_ALL);
+$pageTitle = "Orders by Customer"; // Page title consistency
+include 'view-header.php'; // Include the header
 
-$pageTitle = "Customers with Orders";
-include 'view-header.php';
 
-$customers = selectCustomers();
+if (isset($_POST['customer_id']) && !empty($_POST['customer_id'])) {
+    $customer_id = intval($_POST['customer_id']); 
+    $orders = selectOrdersByCustomer($customer_id); 
 
-if (!$customers || $customers->num_rows == 0) {
-    echo "No customers found or query failed!";
+    // Check if there are orders returned
+    if ($orders && $orders->num_rows > 0) {
+        include 'view-orders-by-customer.php';
+    } else {
+        echo "<p>No orders found for this customer.</p>"; 
+    }
 } else {
-    include 'view-customers-with-orders.php';
+    echo "<p>Please provide a valid customer ID.</p>";
 }
 
-include 'view-footer.php';
+include 'view-footer.php'; 
 ?>
