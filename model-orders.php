@@ -171,18 +171,36 @@ function deleteOrderDetails($order_id) {
     $conn->close();
 }
 
-function getMonthlySales() {
+function calculateMenuPercentages() {
     $conn = null;
     try {
         $conn = get_db_connection();
-        $stmt = $conn->prepare("SELECT MONTH(order_date) AS month, SUM(total_amount) AS total_sales 
-                                FROM orders 
-                                GROUP BY MONTH(order_date)");
+        $query = "
+            SELECT p.product_name, SUM(od.quantity) AS total_quantity
+            FROM order_details od
+            JOIN products p ON od.product_id = p.productid
+            GROUP BY p.product_name
+        ";
+        $stmt = $conn->prepare($query);
         $stmt->execute();
         $result = $stmt->get_result();
         $stmt->close();
 
-        return $result;
+        // Fetch the total quantity
+        $totalQuery = "SELECT SUM(quantity) AS total_quantity FROM order_details";
+        $totalResult = $conn->query($totalQuery);
+        $totalQuantity = $totalResult->fetch_assoc()['total_quantity'];
+
+        // Calculate percentages
+        $percentages = [];
+        while ($row = $result->fetch_assoc()) {
+            $percentages[] = [
+                'product_name' => $row['product_name'],
+                'percentage' => ($row['total_quantity'] / $totalQuantity) * 100
+            ];
+        }
+
+        return $percentages;
     } catch (Exception $e) {
         throw $e;
     } finally {
