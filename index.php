@@ -51,7 +51,7 @@ include "view-header.php"; // Navigation bar included here
             </thead>
             <tbody>
                 <tr>
-                    <td style="padding: 
+     
                     <td>Cafe Sua Da (Iced Coffee with Condensed Milk)</td>
                     <td>$4.00</td>
                 </tr>
