@@ -1,3 +1,14 @@
+<?php
+require_once('util-db.php');
+require_once('model-orders.php');
+
+// Fetch orders
+$orders = selectOrders();
+
+// Fetch menu contribution percentages
+$menuPercentages = calculateMenuPercentages();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,29 +52,23 @@
 
 <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
 <script>
-    // Define data for the chart
-    const data = [
-        { name: 'Cafe Sua Da', value: 35 },
-        { name: 'Cafe Den Da', value: 30 },
-        { name: 'Hot Coffee', value: 20 },
-        { name: 'Espresso', value: 10 },
-        { name: 'Cappuccino', value: 5 }
-    ];
+    // Use data from PHP to render the chart
+    const data = <?php echo json_encode(array_map(function ($item) {
+        return [
+            'name' => $item['product_name'],
+            'value' => round($item['percentage'], 2)
+        ];
+    }, $menuPercentages)); ?>;
 
-    // Log data to ensure it's passed correctly
-    console.log(data);
-
-    // Initialize ECharts
     const chart = echarts.init(document.getElementById('menu-pie-chart'));
-
-    // Set options for a basic pie chart
     chart.setOption({
         title: {
             text: 'Menu Contribution',
             left: 'center'
         },
         tooltip: {
-            trigger: 'item'
+            trigger: 'item',
+            formatter: '{a} <br/>{b}: {c}%'
         },
         series: [
             {
