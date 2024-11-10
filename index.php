@@ -56,22 +56,22 @@ include "view-header.php"; // Navigation bar included here
                     <td>$4.00</td>
                 </tr>
                 <tr>
-                    <td style="padding: 
+                    
                     <td>Cafe Den Da (Iced Black Coffee)</td>
                     <td>$3.50</td>
                 </tr>
                 <tr>
-                    <td style="padding: 
+                   
                     <td>Hot Coffee</td>
                     <td>$3.00</td>
                 </tr>
                 <tr>
-                    <td style="padding: 
+                   
                     <td>Espresso</td>
                     <td>$2.50</td>
                 </tr>
                 <tr>
-                    <td style="padding: 
+                  
                     <td>Cappuccino</td>
                     <td>$4.50</td>
                 </tr>
