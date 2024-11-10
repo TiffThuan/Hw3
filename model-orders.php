@@ -170,6 +170,29 @@ function deleteOrderDetails($order_id) {
     $stmt->close();
     $conn->close();
 }
+
+function getMonthlySales() {
+    $conn = null;
+    try {
+        $conn = get_db_connection();
+        $stmt = $conn->prepare("SELECT MONTH(order_date) AS month, SUM(total_amount) AS total_sales 
+                                FROM orders 
+                                GROUP BY MONTH(order_date)");
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $stmt->close();
+
+        return $result;
+    } catch (Exception $e) {
+        throw $e;
+    } finally {
+        if ($conn) {
+            $conn->close();
+        }
+    }
+}
+
+
 ?>
 
 
