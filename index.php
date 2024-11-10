@@ -39,33 +39,39 @@ include "view-header.php"; // Navigation bar included here
     </div>
 
     <!-- Coffee Menu Section -->
-    <div class="mt-4">
-        <h2 class="text-center">Our Coffee Menu</h2>
-        <table class="table table-bordered text-center" style="color: blue;">
-            <thead>
+<div class="mt-4">
+    <h2 class="text-center" style="color: #6b3e26; font-weight: bold;">Our Coffee Menu</h2>
+    <div class="table-responsive">
+        <table class="table table-hover text-center" style="border: 2px solid #6b3e26; color: #333;">
+            <thead style="background-color: #6b3e26; color: white;">
                 <tr>
-                    <th>Coffee</th>
-                    <th>Price</th>
+                    <th style="font-size: 1.2em;">Coffee</th>
+                    <th style="font-size: 1.2em;">Price</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
+                    <td style="padding: 
                     <td>Cafe Sua Da (Iced Coffee with Condensed Milk)</td>
                     <td>$4.00</td>
                 </tr>
                 <tr>
+                    <td style="padding: 
                     <td>Cafe Den Da (Iced Black Coffee)</td>
                     <td>$3.50</td>
                 </tr>
                 <tr>
+                    <td style="padding: 
                     <td>Hot Coffee</td>
                     <td>$3.00</td>
                 </tr>
                 <tr>
+                    <td style="padding: 
                     <td>Espresso</td>
                     <td>$2.50</td>
                 </tr>
                 <tr>
+                    <td style="padding: 
                     <td>Cappuccino</td>
                     <td>$4.50</td>
                 </tr>
