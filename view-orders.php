@@ -16,7 +16,7 @@
 
     <!-- Menu Contribution Chart -->
     <div class="row mb-4">
-        <div id="menu-chart" style="width: 100%; height: 300px;"></div>
+        <div id="menu-pie-chart" style="width: 100%; height: 300px;"></div>
     </div>
 
     <div class="list-group">
@@ -47,11 +47,14 @@
         { name: 'Cafe Den Da', value: 30 },
         { name: 'Hot Coffee', value: 20 },
         { name: 'Espresso', value: 10 },
-        { name: 'Cappucino', value: 5 }
+        { name: 'Cappuccino', value: 5 }
     ];
 
+    // Log data to ensure it's passed correctly
+    console.log(data);
+
     // Initialize ECharts
-    const chart = echarts.init(document.getElementById('menu-chart'));
+    const chart = echarts.init(document.getElementById('menu-pie-chart'));
 
     // Set options for a basic pie chart
     chart.setOption({
