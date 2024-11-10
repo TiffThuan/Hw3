@@ -45,3 +45,5 @@ $customers = selectCustomers();
 include 'view-customers.php'; 
 include 'view-footer.php';
 ?>
+
+
