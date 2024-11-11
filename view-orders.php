@@ -67,7 +67,7 @@
 
         const chart = echarts.init(document.getElementById('menu-pie-chart'));
         chart.setOption({
-            title: { text: 'Menu Contribution', left: 'center' },
+            title: { text: 'Product Contribution', left: 'center' },
             tooltip: { trigger: 'item', formatter: '{a} <br/>{b}: {c}%' },
             series: [{
                 name: 'Menu Items',
