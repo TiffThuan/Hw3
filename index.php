@@ -4,28 +4,30 @@ require_once('util-db.php');
 $pageTitle = "Welcome to King Coffee Shop";
 include "view-header.php";
 
-// Database Connection
 $conn = get_db_connection();
 if (!$conn) {
     die("Database connection failed: " . mysqli_connect_error());
 }
 
-// Fetch Data
 $totalSales = $conn->query("SELECT SUM(total_amount) AS total FROM orders")->fetch_assoc()['total'] ?? 0;
 $totalCustomers = $conn->query("SELECT COUNT(DISTINCT customer_id) AS total FROM orders")->fetch_assoc()['total'] ?? 0;
-$topProduct = $conn->query("
+
+$topProductQuery = "
     SELECT p.product_name
     FROM order_details od
     JOIN products p ON od.product_id = p.productid
     GROUP BY p.product_name
     ORDER BY SUM(od.quantity) DESC
-    LIMIT 1")->fetch_assoc()['product_name'] ?? 'No Data';
+    LIMIT 1";
+$topProductResult = $conn->query($topProductQuery);
+$topProduct = $topProductResult->fetch_assoc()['product_name'] ?? 'No Data';
 
-$monthlySalesResult = $conn->query("
+$monthlySalesQuery = "
     SELECT DATE_FORMAT(order_date, '%b') AS month, SUM(total_amount) AS total
     FROM orders
     GROUP BY DATE_FORMAT(order_date, '%Y-%m')
-    ORDER BY order_date");
+    ORDER BY order_date";
+$monthlySalesResult = $conn->query($monthlySalesQuery);
 
 $months = [];
 $sales = [];
@@ -35,7 +37,9 @@ if ($monthlySalesResult) {
         $sales[] = $row['total'];
     }
 }
+
 $conn->close();
+
 ?>
 
 <div class="container mt-4">
