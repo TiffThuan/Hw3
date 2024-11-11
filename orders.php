@@ -5,11 +5,12 @@ error_reporting(E_ALL);
 
 require_once('util-db.php');
 require_once('model-orders.php');
+// Pass data to the view
+$pageTitle = "Orders";
+include 'view-orders.php'; // Render the view
 
 // Fetch data from the database
 $orders = selectOrders(); 
 $menuPercentages = calculateMenuPercentages(); // Ensure percentages are dynamically fetched
 
-// Pass data to the view
-$pageTitle = "Orders";
-include 'view-orders.php'; // Render the view
+?>
