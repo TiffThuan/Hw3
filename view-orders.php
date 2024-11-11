@@ -48,11 +48,6 @@ $menuPercentages = calculateMenuPercentages();
             echo "<div class='list-group-item text-center'>No orders found.</div>";
         }
         ?>
-        <form method="POST" action="order-details.php">
-            <input type="hidden" name="order_id" value="<?php echo $order['order_id']; ?>">
-            <button type="submit" class="btn btn-info btn-sm">View Details</button>
-        </form>
-        <a href="order-details.php?order_id=<?php echo $order['order_id']; ?>" class="btn btn-info btn-sm">View Details</a>
 
     </div>
 
