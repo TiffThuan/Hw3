@@ -7,6 +7,15 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
 </head>
 <body>
+    <div class="container mt-5">
+    <div class="row mb-4">
+        <div class="col text-center">
+            <h1>Welcome to King Coffee Shop</h1>
+            <p class="lead">
+                At King Coffee Shop, we take pride in our signature product: <strong>Cafe Sua Da</strong>, a rich and aromatic Vietnamese iced coffee made with condensed milk. Experience the perfect blend of bold coffee and creamy sweetness that has captivated coffee lovers worldwide.
+            </p>
+        </div>
+    </div>
 <div class="container mt-5">
     <div class="row mb-4">
         <div class="col text-center">
