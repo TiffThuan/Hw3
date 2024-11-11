@@ -11,12 +11,12 @@
         <!-- Row for Welcome and Pie Chart -->
         <div class="row mb-4">
             <!-- Welcome Section -->
-            <div class="col-md-6 text-center">
-                <h1>Welcome to King Coffee Shop</h1>
-                <p class="lead">
-                    At King Coffee Shop, we take pride in our signature product: <strong>Cafe Sua Da</strong>, a rich and aromatic Vietnamese iced coffee made with condensed milk. Experience the perfect blend of bold coffee and creamy sweetness that has captivated coffee lovers worldwide.
-                </p>
-            </div>
+                <div class="col-md-6 text-center">
+                    <h1>The Heart of King Coffee Shop</h1>
+                    <p class="lead">
+                        From bustling mornings to relaxing afternoons, <strong>Cafe Sua Da</strong> remains the favorite choice of our loyal customers. This bold and creamy Vietnamese iced coffee has consistently topped our orders, earning its place as the true hallmark of the King Coffee Shop experience.
+                    </p>
+                </div>
             <!-- Pie Chart Section -->
             <div class="col-md-6">
                 <div id="menu-pie-chart" style="width: 100%; height: 300px;"></div>
