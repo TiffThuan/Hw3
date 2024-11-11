@@ -8,12 +8,17 @@ include 'view-header.php';
 require_once('util-db.php');
 require_once('model-orders.php');
 
-// Fetch data from the database
+// Fetch orders and menu data
+$orders = selectOrders(); 
+$menuPercentages = calculateMenuPercentages(); 
 
-$orders = selectOrders(); // Get the orders
-$menuPercentages = calculateMenuPercentages(); // Get menu percentages
+// Check if an order_id is passed to display its details
+$orderDetails = [];
+if (isset($_GET['order_id']) && is_numeric($_GET['order_id'])) {
+    $orderDetails = selectOrderDetails(intval($_GET['order_id']));
+}
 
-// Include the view and footer
+// Include the orders view
 include 'view-orders.php';
 include 'view-footer.php';
 ?>
