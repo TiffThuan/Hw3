@@ -1,38 +1,31 @@
 <?php
-require_once('util-db.php'); // Ensure database connection is available
+require_once('util-db.php');
 
 $pageTitle = "Welcome to King Coffee Shop";
-include "view-header.php"; // Navigation bar
+include "view-header.php";
 
-// Fetch data
+// Database Connection
 $conn = get_db_connection();
 if (!$conn) {
     die("Database connection failed: " . mysqli_connect_error());
 }
 
-// Total Sales
+// Fetch Data
 $totalSales = $conn->query("SELECT SUM(total_amount) AS total FROM orders")->fetch_assoc()['total'] ?? 0;
-
-// Total Customers
 $totalCustomers = $conn->query("SELECT COUNT(DISTINCT customer_id) AS total FROM orders")->fetch_assoc()['total'] ?? 0;
-
-// Top Product
-$topProductQuery = "
+$topProduct = $conn->query("
     SELECT p.product_name
     FROM order_details od
     JOIN products p ON od.product_id = p.productid
     GROUP BY p.product_name
     ORDER BY SUM(od.quantity) DESC
-    LIMIT 1";
-$topProduct = $conn->query($topProductQuery)->fetch_assoc()['product_name'] ?? 'No Data';
+    LIMIT 1")->fetch_assoc()['product_name'] ?? 'No Data';
 
-// Monthly Sales Data
-$monthlySalesQuery = "
+$monthlySalesResult = $conn->query("
     SELECT DATE_FORMAT(order_date, '%b') AS month, SUM(total_amount) AS total
     FROM orders
     GROUP BY DATE_FORMAT(order_date, '%Y-%m')
-    ORDER BY order_date";
-$monthlySalesResult = $conn->query($monthlySalesQuery);
+    ORDER BY order_date");
 
 $months = [];
 $sales = [];
@@ -42,22 +35,16 @@ if ($monthlySalesResult) {
         $sales[] = $row['total'];
     }
 }
-
-$conn->close(); // Close connection
+$conn->close();
 ?>
 
 <div class="container mt-4">
-    <!-- Introduction Section -->
-    <div class="text-center">
-        <h1>Welcome to King Coffee Shop!</h1>
-        <p><em>Home of the best Vietnamese coffee in Oklahoma</em></p>
-        <p>Try our signature <strong>Cafe Sua Da</strong>, loved by coffee enthusiasts worldwide.</p>
-    </div>
+    <h1 class="text-center">Welcome to King Coffee Shop!</h1>
+    <p>Experience the best Vietnamese coffee in Oklahoma. Try our signature <strong>Cafe Sua Da</strong>.</p>
 
-    <!-- Stats Section -->
-    <div class="row mt-4 text-center">
+    <div class="row text-center mt-4">
         <div class="col-md-4">
-            <div class="card bg-primary text-white mb-3">
+            <div class="card bg-primary text-white">
                 <div class="card-header">Total Sales</div>
                 <div class="card-body">
                     <h5>$<?php echo number_format($totalSales, 2); ?></h5>
@@ -65,7 +52,7 @@ $conn->close(); // Close connection
             </div>
         </div>
         <div class="col-md-4">
-            <div class="card bg-success text-white mb-3">
+            <div class="card bg-success text-white">
                 <div class="card-header">Total Customers</div>
                 <div class="card-body">
                     <h5><?php echo $totalCustomers; ?></h5>
@@ -73,7 +60,7 @@ $conn->close(); // Close connection
             </div>
         </div>
         <div class="col-md-4">
-            <div class="card bg-info text-white mb-3">
+            <div class="card bg-info text-white">
                 <div class="card-header">Top Product</div>
                 <div class="card-body">
                     <h5><?php echo htmlspecialchars($topProduct); ?></h5>
@@ -82,14 +69,9 @@ $conn->close(); // Close connection
         </div>
     </div>
 
-    <!-- Sales Chart Section -->
-    <div class="mt-5">
-        <h3 class="text-center">Monthly Sales Chart</h3>
-        <div id="sales-chart" style="height: 300px;"></div>
-    </div>
+    <div id="sales-chart" style="height: 300px;"></div>
 </div>
 
-<!-- ECharts Script -->
 <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
 <script>
     const chart = echarts.init(document.getElementById('sales-chart'));
