@@ -6,6 +6,9 @@ include "view-header.php"; // Navigation bar
 
 // Fetch data
 $conn = get_db_connection();
+if (!$conn) {
+    die("Database connection failed: " . mysqli_connect_error());
+}
 
 // Total Sales
 $totalSales = $conn->query("SELECT SUM(total_amount) AS total FROM orders")->fetch_assoc()['total'] ?? 0;
@@ -33,9 +36,11 @@ $monthlySalesResult = $conn->query($monthlySalesQuery);
 
 $months = [];
 $sales = [];
-while ($row = $monthlySalesResult->fetch_assoc()) {
-    $months[] = $row['month'];
-    $sales[] = $row['total'];
+if ($monthlySalesResult) {
+    while ($row = $monthlySalesResult->fetch_assoc()) {
+        $months[] = $row['month'];
+        $sales[] = $row['total'];
+    }
 }
 
 $conn->close(); // Close connection
