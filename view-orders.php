@@ -43,7 +43,7 @@
                                     <strong>Customer:</strong> <?php echo htmlspecialchars($order['firstname'] . ' ' . $order['lastname']); ?><br>
                                     <strong>Total Amount:</strong> $<?php echo htmlspecialchars($order['total_amount']); ?>
                                 </p>
-                                <a href="order-details.php?order_id=<?php echo htmlspecialchars($order['order_id']); ?>" class="btn btn-primary btn-sm">View Details</a>
+                                   <a href="order-details.php?order_id=<?php echo htmlspecialchars($order['order_id']); ?>" class="btn btn-primary btn-sm">View Details</a>
                             </div>
                         </div>
                     </div>
