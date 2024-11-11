@@ -31,32 +31,33 @@
         </div>
 
         <!-- Order List as Cards -->
-        <div class="row">
+       <div class="accordion" id="orderAccordion">
             <?php if ($orders && $orders->num_rows > 0): ?>
                 <?php while ($order = $orders->fetch_assoc()): ?>
-                    <div class="col-md-4">
-                        <div class="card mb-4 shadow-sm">
-                            <div class="card-body">
-                                <h5 class="card-title">Order ID: <?php echo htmlspecialchars($order['order_id']); ?></h5>
-                                <p class="card-text">
-                                    <strong>Order Date:</strong> <?php echo htmlspecialchars($order['order_date']); ?><br>
-                                    <strong>Customer:</strong> <?php echo htmlspecialchars($order['firstname'] . ' ' . $order['lastname']); ?><br>
-                                    <strong>Total Amount:</strong> $<?php echo htmlspecialchars($order['total_amount']); ?>
-                                </p>
-                                    <form method="POST" action="order-details.php" style="display:inline;">
-                                        <input type="hidden" name="order_id" value="<?php echo htmlspecialchars($order['order_id']); ?>">
-                                        <button type="submit" class="btn btn-primary btn-sm">View Details</button>
-                                    </form>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading<?php echo $order['order_id']; ?>">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?php echo $order['order_id']; ?>" aria-expanded="false" aria-controls="collapse<?php echo $order['order_id']; ?>">
+                                Order ID: <?php echo htmlspecialchars($order['order_id']); ?>
+                            </button>
+                        </h2>
+                        <div id="collapse<?php echo $order['order_id']; ?>" class="accordion-collapse collapse" aria-labelledby="heading<?php echo $order['order_id']; ?>" data-bs-parent="#orderAccordion">
+                            <div class="accordion-body">
+                                <strong>Order Date:</strong> <?php echo htmlspecialchars($order['order_date']); ?><br>
+                                <strong>Customer:</strong> <?php echo htmlspecialchars($order['firstname'] . ' ' . $order['lastname']); ?><br>
+                                <strong>Total Amount:</strong> $<?php echo htmlspecialchars($order['total_amount']); ?><br>
+                                <form method="POST" action="order-details.php">
+                                    <input type="hidden" name="order_id" value="<?php echo $order['order_id']; ?>">
+                                    <button type="submit" class="btn btn-primary btn-sm mt-2">View Details</button>
+                                </form>
                             </div>
                         </div>
                     </div>
                 <?php endwhile; ?>
             <?php else: ?>
-                <div class="col-12 text-center">
-                    <p>No orders found.</p>
-                </div>
+                <div class="text-center">No orders found.</div>
             <?php endif; ?>
         </div>
+
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
