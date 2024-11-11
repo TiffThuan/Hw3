@@ -19,20 +19,28 @@
         <div id="menu-pie-chart" style="width: 100%; height: 300px;"></div>
     </div>
 
-    <!-- Order List -->
-    <div class="list-group">
+    <!-- Order List as Cards -->
+    <div class="row">
         <?php if ($orders && $orders->num_rows > 0): ?>
             <?php while ($order = $orders->fetch_assoc()): ?>
-                <div class="list-group-item">
-                    <h5 class="mb-1">Order ID: <?php echo htmlspecialchars($order['order_id']); ?></h5>
-                    <p><strong>Order Date:</strong> <?php echo htmlspecialchars($order['order_date']); ?></p>
-                    <p><strong>Customer:</strong> <?php echo htmlspecialchars($order['firstname'] . ' ' . $order['lastname']); ?></p>
-                    <p><strong>Total Amount:</strong> $<?php echo htmlspecialchars($order['total_amount']); ?></p>
-                    <a href="orders.php?order_id=<?php echo htmlspecialchars($order['order_id']); ?>" class="btn btn-info btn-sm">View Details</a>
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">Order ID: <?php echo htmlspecialchars($order['order_id']); ?></h5>
+                            <p class="card-text">
+                                <strong>Order Date:</strong> <?php echo htmlspecialchars($order['order_date']); ?><br>
+                                <strong>Customer:</strong> <?php echo htmlspecialchars($order['firstname'] . ' ' . $order['lastname']); ?><br>
+                                <strong>Total Amount:</strong> $<?php echo htmlspecialchars($order['total_amount']); ?>
+                            </p>
+                            <a href="orders.php?order_id=<?php echo htmlspecialchars($order['order_id']); ?>" class="btn btn-primary btn-sm">View Details</a>
+                        </div>
+                    </div>
                 </div>
             <?php endwhile; ?>
         <?php else: ?>
-            <div class="list-group-item text-center">No orders found.</div>
+            <div class="col-12 text-center">
+                <p>No orders found.</p>
+            </div>
         <?php endif; ?>
     </div>
 
