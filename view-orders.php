@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo htmlspecialchars($pageTitle); ?></title>
+    <title>Orders</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
 </head>
 <body>
 <div class="container mt-5">
     <div class="row mb-4">
         <div class="col text-center">
-            <h1><?php echo htmlspecialchars($pageTitle); ?></h1>
+            <h1>Orders</h1>
         </div>
     </div>
 
@@ -21,31 +21,49 @@
 
     <!-- Order List -->
     <div class="list-group">
-        <?php
-        if ($orders && $orders->num_rows > 0) {
-            while ($order = $orders->fetch_assoc()) {
-        ?>
-            <div class="list-group-item">
-                <h5 class="mb-1">Order ID: <?php echo htmlspecialchars($order['order_id']); ?></h5>
-                <p><strong>Order Date:</strong> <?php echo htmlspecialchars($order['order_date']); ?></p>
-                <p><strong>Customer:</strong> <?php echo htmlspecialchars($order['firstname'] . ' ' . $order['lastname']); ?></p>
-                <p><strong>Total Amount:</strong> $<?php echo htmlspecialchars($order['total_amount']); ?></p>
-                <!-- Add View Details Hyperlink -->
-                <a href="order-details.php?order_id=<?php echo htmlspecialchars($order['order_id']); ?>" class="btn btn-info btn-sm">View Details</a>
-            </div>
-        <?php
-            }
-        } else {
-            echo "<div class='list-group-item text-center'>No orders found.</div>";
-        }
-        ?>
+        <?php if ($orders && $orders->num_rows > 0): ?>
+            <?php while ($order = $orders->fetch_assoc()): ?>
+                <div class="list-group-item">
+                    <h5 class="mb-1">Order ID: <?php echo htmlspecialchars($order['order_id']); ?></h5>
+                    <p><strong>Order Date:</strong> <?php echo htmlspecialchars($order['order_date']); ?></p>
+                    <p><strong>Customer:</strong> <?php echo htmlspecialchars($order['firstname'] . ' ' . $order['lastname']); ?></p>
+                    <p><strong>Total Amount:</strong> $<?php echo htmlspecialchars($order['total_amount']); ?></p>
+                    <a href="orders.php?order_id=<?php echo htmlspecialchars($order['order_id']); ?>" class="btn btn-info btn-sm">View Details</a>
+                </div>
+            <?php endwhile; ?>
+        <?php else: ?>
+            <div class="list-group-item text-center">No orders found.</div>
+        <?php endif; ?>
     </div>
 
+    <!-- Order Details Section -->
+    <?php if (!empty($orderDetails)): ?>
+        <div class="mt-5">
+            <h2 class="text-center">Order Details</h2>
+            <table class="table table-bordered mt-3">
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($orderDetails as $detail): ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($detail['product_name']); ?></td>
+                            <td><?php echo htmlspecialchars($detail['quantity']); ?></td>
+                            <td>$<?php echo htmlspecialchars(number_format($detail['price'], 2)); ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    <?php endif; ?>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
 <script>
-    // Prepare data for the pie chart
     const data = <?php echo json_encode(array_map(function ($item) {
         return [
             'name' => $item['product_name'],
@@ -53,26 +71,23 @@
         ];
     }, $menuPercentages)); ?>;
 
-    // Render the pie chart
     const chart = echarts.init(document.getElementById('menu-pie-chart'));
     chart.setOption({
         title: { text: 'Menu Contribution', left: 'center' },
         tooltip: { trigger: 'item', formatter: '{a} <br/>{b}: {c}%' },
-        series: [
-            {
-                name: 'Menu Items',
-                type: 'pie',
-                radius: '50%',
-                data: data,
-                emphasis: {
-                    itemStyle: {
-                        shadowBlur: 10,
-                        shadowOffsetX: 0,
-                        shadowColor: 'rgba(0, 0, 0, 0.5)'
-                    }
+        series: [{
+            name: 'Menu Items',
+            type: 'pie',
+            radius: '50%',
+            data: data,
+            emphasis: {
+                itemStyle: {
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
                 }
             }
-        ]
+        }]
     });
 </script>
 </body>
