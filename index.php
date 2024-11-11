@@ -4,21 +4,18 @@ require_once('util-db.php');
 $pageTitle = "Welcome to King Coffee Shop";
 include "view-header.php";
 
-// Database Connection
 $conn = get_db_connection();
 if (!$conn) {
     die("Database connection failed: " . mysqli_connect_error());
 }
 
-// Fetch Total Sales
-$totalSalesResult = $conn->query("SELECT SUM(total_amount) AS total FROM orders");
-$totalSales = $totalSalesResult ? $totalSalesResult->fetch_assoc()['total'] : 0;
+// Total Sales
+$totalSales = $conn->query("SELECT SUM(total_amount) AS total FROM orders")->fetch_assoc()['total'] ?? 0;
 
-// Fetch Total Customers
-$totalCustomersResult = $conn->query("SELECT COUNT(DISTINCT customer_id) AS total FROM orders");
-$totalCustomers = $totalCustomersResult ? $totalCustomersResult->fetch_assoc()['total'] : 0;
+// Total Customers
+$totalCustomers = $conn->query("SELECT COUNT(DISTINCT customer_id) AS total FROM orders")->fetch_assoc()['total'] ?? 0;
 
-// Fetch Top Product
+// Top Product
 $topProductQuery = "
     SELECT p.product_name
     FROM order_details od
@@ -26,10 +23,9 @@ $topProductQuery = "
     GROUP BY p.product_name
     ORDER BY SUM(od.quantity) DESC
     LIMIT 1";
-$topProductResult = $conn->query($topProductQuery);
-$topProduct = $topProductResult ? $topProductResult->fetch_assoc()['product_name'] : 'No Data';
+$topProduct = $conn->query($topProductQuery)->fetch_assoc()['product_name'] ?? 'No Data';
 
-// Fetch Monthly Sales
+// Monthly Sales Data
 $monthlySalesQuery = "
     SELECT DATE_FORMAT(MIN(order_date), '%b') AS month, SUM(total_amount) AS total
     FROM orders
@@ -46,10 +42,15 @@ if ($monthlySalesResult) {
     }
 }
 
-$conn->close(); // Close connection
+// Coffee Menu
+$menuQuery = "SELECT product_name, price FROM products";
+$menuResult = $conn->query($menuQuery);
+
+$conn->close();
 ?>
 
 <div class="container mt-4">
+    <!-- Welcome Section -->
     <h1 class="text-center">Welcome to King Coffee Shop!</h1>
     <p class="text-center">Experience the best Vietnamese coffee in Oklahoma. Try our signature <strong>Cafe Sua Da</strong>.</p>
 
@@ -78,6 +79,35 @@ $conn->close(); // Close connection
                     <h5><?php echo htmlspecialchars($topProduct); ?></h5>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Menu Section -->
+    <div class="mt-5">
+        <h3 class="text-center">Our Coffee Menu</h3>
+        <div class="table-responsive">
+            <table class="table table-striped text-center">
+                <thead>
+                    <tr>
+                        <th>Coffee</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if ($menuResult && $menuResult->num_rows > 0): ?>
+                        <?php while ($menu = $menuResult->fetch_assoc()): ?>
+                            <tr>
+                                <td><?php echo htmlspecialchars($menu['product_name']); ?></td>
+                                <td>$<?php echo number_format($menu['price'], 2); ?></td>
+                            </tr>
+                        <?php endwhile; ?>
+                    <?php else: ?>
+                        <tr>
+                            <td colspan="2">No menu items found.</td>
+                        </tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
         </div>
     </div>
 
