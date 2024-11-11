@@ -176,6 +176,8 @@ function calculateMenuPercentages() {
     $conn = null;
     try {
         $conn = get_db_connection();
+
+        // Query to calculate the total quantity per product
         $query = "
             SELECT p.product_name, SUM(od.quantity) AS total_quantity
             FROM order_details od
@@ -187,17 +189,17 @@ function calculateMenuPercentages() {
         $result = $stmt->get_result();
         $stmt->close();
 
-        // Fetch the total quantity
+        // Fetch the total quantity for all products
         $totalQuery = "SELECT SUM(quantity) AS total_quantity FROM order_details";
         $totalResult = $conn->query($totalQuery);
         $totalQuantity = $totalResult->fetch_assoc()['total_quantity'];
 
-        // Calculate percentages
+        // Calculate percentages for each product
         $percentages = [];
         while ($row = $result->fetch_assoc()) {
             $percentages[] = [
                 'product_name' => $row['product_name'],
-                'percentage' => round(($row['total_quantity'] / $totalQuantity) * 100, 2)
+                'percentage' => ($row['total_quantity'] / $totalQuantity) * 100
             ];
         }
 
