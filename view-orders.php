@@ -12,9 +12,9 @@
         <div class="row mb-4">
             <!-- Welcome Section -->
             <div class="col-md-6 text-center">
-                <h1>The Heart of our King Coffee Shop</h1>
+                <h1>Welcome to King Coffee Shop</h1>
                 <p class="lead">
-                    From bustling mornings to relaxing afternoons, <strong>Cafe Sua Da</strong>, remains the favorite choice of our loyal customers. This bold and creamy Vietnamese iced coffee has consistently topped our orders, earning its place as the true hallmark of the King Coffee Shop experience.
+                    At King Coffee Shop, we take pride in our signature product: <strong>Cafe Sua Da</strong>, a rich and aromatic Vietnamese iced coffee made with condensed milk. Experience the perfect blend of bold coffee and creamy sweetness that has captivated coffee lovers worldwide.
                 </p>
             </div>
             <!-- Pie Chart Section -->
@@ -67,7 +67,7 @@
 
         const chart = echarts.init(document.getElementById('menu-pie-chart'));
         chart.setOption({
-            title: { text: 'Product Contribution', left: 'center' },
+            title: { text: 'Menu Contribution', left: 'center' },
             tooltip: { trigger: 'item', formatter: '{a} <br/>{b}: {c}%' },
             series: [{
                 name: 'Menu Items',
