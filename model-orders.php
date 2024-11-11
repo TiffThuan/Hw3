@@ -4,9 +4,11 @@ function selectOrders() {
     $conn = null;
     try {
         $conn = get_db_connection();
-        $stmt = $conn->prepare("SELECT o.order_id, o.order_date, c.firstname, c.lastname, o.total_amount 
-                                FROM orders o 
-                                JOIN customers c ON o.customer_id = c.customer_id");
+        $stmt = $conn->prepare("
+            SELECT o.order_id, o.order_date, c.firstname, c.lastname, o.total_amount 
+            FROM orders o 
+            JOIN customers c ON o.customer_id = c.customer_id
+        ");
         $stmt->execute();
         $result = $stmt->get_result();
         $stmt->close();
@@ -20,7 +22,6 @@ function selectOrders() {
         }
     }
 }
-
 
 
 function selectOrderDetails($order_id) {
@@ -196,7 +197,7 @@ function calculateMenuPercentages() {
         while ($row = $result->fetch_assoc()) {
             $percentages[] = [
                 'product_name' => $row['product_name'],
-                'percentage' => ($row['total_quantity'] / $totalQuantity) * 100
+                'percentage' => round(($row['total_quantity'] / $totalQuantity) * 100, 2)
             ];
         }
 
@@ -209,7 +210,6 @@ function calculateMenuPercentages() {
         }
     }
 }
-
 
 ?>
 
