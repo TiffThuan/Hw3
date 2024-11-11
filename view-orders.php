@@ -32,22 +32,24 @@ $menuPercentages = calculateMenuPercentages();
 
     <div class="list-group">
         <?php
+        $orders = selectOrders(); // Dynamically fetch latest data
         if ($orders && $orders->num_rows > 0) {
             while ($order = $orders->fetch_assoc()) {
-        ?>
+                ?>
                 <div class="list-group-item">
                     <h5 class="mb-1">Order ID: <?php echo htmlspecialchars($order['order_id']); ?></h5>
                     <p><strong>Order Date:</strong> <?php echo htmlspecialchars($order['order_date']); ?></p>
                     <p><strong>Customer:</strong> <?php echo htmlspecialchars($order['firstname'] . ' ' . $order['lastname']); ?></p>
                     <p><strong>Total Amount:</strong> $<?php echo htmlspecialchars($order['total_amount']); ?></p>
                 </div>
-        <?php
+                <?php
             }
         } else {
             echo "<div class='list-group-item text-center'>No orders found.</div>";
         }
         ?>
     </div>
+
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
