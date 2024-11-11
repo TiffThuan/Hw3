@@ -21,19 +21,26 @@
 
     <!-- Order List -->
     <div class="list-group">
-        <?php if ($orders && $orders->num_rows > 0): ?>
-            <?php while ($order = $orders->fetch_assoc()): ?>
-                <div class="list-group-item">
-                    <h5 class="mb-1">Order ID: <?php echo htmlspecialchars($order['order_id']); ?></h5>
-                    <p><strong>Order Date:</strong> <?php echo htmlspecialchars($order['order_date']); ?></p>
-                    <p><strong>Customer:</strong> <?php echo htmlspecialchars($order['firstname'] . ' ' . $order['lastname']); ?></p>
-                    <p><strong>Total Amount:</strong> $<?php echo htmlspecialchars($order['total_amount']); ?></p>
-                </div>
-            <?php endwhile; ?>
-        <?php else: ?>
-            <div class="list-group-item text-center">No orders found.</div>
-        <?php endif; ?>
+        <?php
+        if ($orders && $orders->num_rows > 0) {
+            while ($order = $orders->fetch_assoc()) {
+        ?>
+            <div class="list-group-item">
+                <h5 class="mb-1">Order ID: <?php echo htmlspecialchars($order['order_id']); ?></h5>
+                <p><strong>Order Date:</strong> <?php echo htmlspecialchars($order['order_date']); ?></p>
+                <p><strong>Customer:</strong> <?php echo htmlspecialchars($order['firstname'] . ' ' . $order['lastname']); ?></p>
+                <p><strong>Total Amount:</strong> $<?php echo htmlspecialchars($order['total_amount']); ?></p>
+                <!-- Add View Details Hyperlink -->
+                <a href="order-details.php?order_id=<?php echo htmlspecialchars($order['order_id']); ?>" class="btn btn-info btn-sm">View Details</a>
+            </div>
+        <?php
+            }
+        } else {
+            echo "<div class='list-group-item text-center'>No orders found.</div>";
+        }
+        ?>
     </div>
+
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
