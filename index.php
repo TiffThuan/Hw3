@@ -4,18 +4,21 @@ require_once('util-db.php');
 $pageTitle = "Welcome to King Coffee Shop";
 include "view-header.php";
 
+// Database Connection
 $conn = get_db_connection();
 if (!$conn) {
     die("Database connection failed: " . mysqli_connect_error());
 }
 
-// Total Sales
-$totalSales = $conn->query("SELECT SUM(total_amount) AS total FROM orders")->fetch_assoc()['total'] ?? 0;
+// Fetch Total Sales
+$totalSalesResult = $conn->query("SELECT SUM(total_amount) AS total FROM orders");
+$totalSales = $totalSalesResult ? $totalSalesResult->fetch_assoc()['total'] : 0;
 
-// Total Customers
-$totalCustomers = $conn->query("SELECT COUNT(DISTINCT customer_id) AS total FROM orders")->fetch_assoc()['total'] ?? 0;
+// Fetch Total Customers
+$totalCustomersResult = $conn->query("SELECT COUNT(DISTINCT customer_id) AS total FROM orders");
+$totalCustomers = $totalCustomersResult ? $totalCustomersResult->fetch_assoc()['total'] : 0;
 
-// Top Product
+// Fetch Top Product
 $topProductQuery = "
     SELECT p.product_name
     FROM order_details od
@@ -23,9 +26,10 @@ $topProductQuery = "
     GROUP BY p.product_name
     ORDER BY SUM(od.quantity) DESC
     LIMIT 1";
-$topProduct = $conn->query($topProductQuery)->fetch_assoc()['product_name'] ?? 'No Data';
+$topProductResult = $conn->query($topProductQuery);
+$topProduct = $topProductResult ? $topProductResult->fetch_assoc()['product_name'] : 'No Data';
 
-// Monthly Sales Data
+// Fetch Monthly Sales
 $monthlySalesQuery = "
     SELECT DATE_FORMAT(MIN(order_date), '%b') AS month, SUM(total_amount) AS total
     FROM orders
@@ -42,15 +46,10 @@ if ($monthlySalesResult) {
     }
 }
 
-// Coffee Menu
-$menuQuery = "SELECT product_name, price FROM products";
-$menuResult = $conn->query($menuQuery);
-
-$conn->close();
+$conn->close(); // Close connection
 ?>
 
 <div class="container mt-4">
-    <!-- Welcome Section -->
     <h1 class="text-center">Welcome to King Coffee Shop!</h1>
     <p class="text-center">Experience the best Vietnamese coffee in Oklahoma. Try our signature <strong>Cafe Sua Da</strong>.</p>
 
@@ -81,35 +80,41 @@ $conn->close();
             </div>
         </div>
     </div>
-
-    <!-- Menu Section -->
-    <div class="mt-5">
-        <h3 class="text-center">Our Coffee Menu</h3>
+    <!-- Coffee Menu Section -->
+    <div class="mt-4">
+        <h2 class="text-center" style="color: #6b3e26; font-weight: bold;">Our Coffee Menu</h2>
         <div class="table-responsive">
-            <table class="table table-striped text-center">
-                <thead>
+            <table class="table table-hover text-center" style="border: 2px solid #6b3e26; color: #333;">
+                <thead style="background-color: #6b3e26; color: white;">
                     <tr>
-                        <th>Coffee</th>
-                        <th>Price</th>
+                        <th style="font-size: 1.2em;">Coffee</th>
+                        <th style="font-size: 1.2em;">Price</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php if ($menuResult && $menuResult->num_rows > 0): ?>
-                        <?php while ($menu = $menuResult->fetch_assoc()): ?>
-                            <tr>
-                                <td><?php echo htmlspecialchars($menu['product_name']); ?></td>
-                                <td>$<?php echo number_format($menu['price'], 2); ?></td>
-                            </tr>
-                        <?php endwhile; ?>
-                    <?php else: ?>
-                        <tr>
-                            <td colspan="2">No menu items found.</td>
-                        </tr>
-                    <?php endif; ?>
+                    <tr>
+                        <td>Cafe Sua Da (Iced Coffee with Condensed Milk)</td>
+                        <td>$4.00</td>
+                    </tr>
+                    <tr>
+                        <td>Cafe Den Da (Iced Black Coffee)</td>
+                        <td>$3.50</td>
+                    </tr>
+                    <tr>
+                        <td>Hot Coffee</td>
+                        <td>$3.00</td>
+                    </tr>
+                    <tr>
+                        <td>Espresso</td>
+                        <td>$2.50</td>
+                    </tr>
+                    <tr>
+                        <td>Cappuccino</td>
+                        <td>$4.50</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
-    </div>
 
     <!-- Sales Chart Section -->
     <div class="mt-5">
