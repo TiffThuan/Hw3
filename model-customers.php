@@ -1,78 +1,41 @@
 <?php
 function selectCustomers() {
-    try {
-        $conn = get_db_connection();
-        $stmt = $conn->prepare("SELECT customer_id, firstname, lastname, email, phone FROM customers");
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $conn->close();
-        return $result;
-    } catch (Exception $e) {
-        $conn->close();
-        throw $e;
-    }
+    $conn = get_db_connection();
+    $stmt = $conn->prepare("SELECT customer_id, firstname, lastname, email, phone FROM customers");
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $stmt->close();
+    $conn->close();
+    return $result;
 }
 
 function insertCustomers($cFName, $cLName, $cEmail, $cPhone) {
-    try {
-        $conn = get_db_connection();
-        $stmt = $conn->prepare("INSERT INTO `mycoffeeshop_database`.`customers`
-                                (`firstname`, `lastname`, `email`, `phone`)
-                                VALUES (?, ?, ?, ?);");
-        $stmt->bind_param("ssss", $cFName, $cLName, $cEmail, $cPhone);
-        $success = $stmt->execute();
-    
-        $conn->close();
-        return $success;
-    } catch (Exception $e) {
-        $conn->close();
-        throw $e;
-    }
+    $conn = get_db_connection();
+    $stmt = $conn->prepare("INSERT INTO customers (firstname, lastname, email, phone) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("ssss", $cFName, $cLName, $cEmail, $cPhone);
+    $success = $stmt->execute();
+    $stmt->close();
+    $conn->close();
+    return $success;
 }
-
-
 
 function updateCustomers($cFName, $cLName, $cEmail, $cPhone, $cid) {
-    try {
-        $conn = get_db_connection();
-        $stmt = $conn->prepare("UPDATE `mycoffeeshop_database`.`customers` SET
-                                firstname = ?, 
-                                lastname = ?, 
-                                email = ?, 
-                                phone = ? 
-                                WHERE customer_id = ?");
-        $stmt->bind_param("ssssi", $cFName, $cLName, $cEmail, $cPhone, $cid);   
-        $success = $stmt->execute();
-        
-        // Check for execution error
-        if (!$success) {
-            echo "SQL Error: " . $stmt->error; // Output error message
-        }
-        
-        $conn->close();
-        return $success;
-    } catch (Exception $e) {
-        $conn->close();
-        error_log("Error updating customer: " . $e->getMessage()); // Log the error
-        throw $e; // Optionally rethrow the error
-    }
+    $conn = get_db_connection();
+    $stmt = $conn->prepare("UPDATE customers SET firstname = ?, lastname = ?, email = ?, phone = ? WHERE customer_id = ?");
+    $stmt->bind_param("ssssi", $cFName, $cLName, $cEmail, $cPhone, $cid);
+    $success = $stmt->execute();
+    $stmt->close();
+    $conn->close();
+    return $success;
 }
-
-
 
 function deleteCustomers($cid) {
-    try {
-        $conn = get_db_connection();
-        $stmt = $conn->prepare("DELETE FROM `mycoffeeshop_database`.`customers` WHERE customer_id = ?");
-        $stmt->bind_param("i", $cid);   // i: one interger value
-        $success = $stmt->execute();
-    
-        $conn->close();
-        return $success;
-    } catch (Exception $e) {
-        $conn->close();
-        throw $e;
-    }
+    $conn = get_db_connection();
+    $stmt = $conn->prepare("DELETE FROM customers WHERE customer_id = ?");
+    $stmt->bind_param("i", $cid);
+    $success = $stmt->execute();
+    $stmt->close();
+    $conn->close();
+    return $success;
 }
 ?>
-
