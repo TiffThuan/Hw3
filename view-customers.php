@@ -12,8 +12,11 @@
 
     <!-- Introduction Section -->
     <div class="alert alert-info text-center">
-        <p>Welcome! Manage your existing customers below or register a new customer using the "Add Customer" button.</p>
+        <p>Welcome! Manage your existing customers below or register a new customer.</p>
     </div>
+
+    <!-- Search Bar -->
+    <input type="text" id="customerSearch" class="form-control mb-4" placeholder="Search customers by name or email...">
 
     <!-- Customers Table -->
     <table class="table table-striped table-hover" id="customerTable">
@@ -58,7 +61,10 @@
     </table>
 </div>
 
-
+<div class="container mt-5">
+    <h3 class="text-center">New Customers Over Time</h3>
+    <div id="customer-chart" style="height: 400px;"></div>
+</div>
 
 <script>
     // JavaScript for Search Filter
@@ -77,27 +83,21 @@
 
 <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
 <script>
-    // Search Filter
-    const searchInput = document.getElementById('customerSearch');
-    const tableRows = document.querySelectorAll('#customerTable tbody tr');
-
-    searchInput.addEventListener('input', () => {
-        const filter = searchInput.value.toLowerCase();
-        tableRows.forEach(row => {
-            const name = row.cells[1].textContent.toLowerCase();
-            const email = row.cells[2].textContent.toLowerCase();
-            row.style.display = name.includes(filter) || email.includes(filter) ? '' : 'none';
-        });
-    });
-
     // ECharts for New Customers
     const chart = echarts.init(document.getElementById('customer-chart'));
     chart.setOption({
-        title: { text: 'New Customers Over Time' },
-        tooltip: {},
+        title: { text: 'New Customers Over Time', left: 'center' },
+        tooltip: { trigger: 'axis' },
         xAxis: { type: 'category', data: <?php echo json_encode($months); ?> },
-        yAxis: { type: 'value' },
-        series: [{ type: 'bar', data: <?php echo json_encode($newCustomers); ?> }]
+        yAxis: { type: 'value', name: 'New Customers' },
+        series: [{
+            name: 'New Customers',
+            type: 'bar',
+            data: <?php echo json_encode($newCustomers); ?>,
+            itemStyle: {
+                color: '#6b3e26'
+            }
+        }]
     });
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
