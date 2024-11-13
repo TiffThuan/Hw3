@@ -1,49 +1,29 @@
 <?php
-require_once ('util-db.php');
+require_once('util-db.php');
 require_once('model-customers.php');
 
-$pageTitle = "Customers"; 
+$pageTitle = "Customers";
 include 'view-header.php';
 
-if (isset ($_POST['actionType'])) {
-    switch($_POST['actionType']) {
-        case "Add":
-            if (insertCustomers($_POST['cFName'], $_POST['cLName'], $_POST['cEmail'], $_POST['cPhone'])) {
-                echo '<div class = "alert alert-success" role= "alert"> Customer added ....</div>'; 
-            } else {
-                echo '<div class = "alert alert-danger" role= "alert"> Error added ....</div>';  
-            }
-            break;
+if (!empty($_POST['actionType'])) {
+    $action = $_POST['actionType'];
+    $cid = $_POST['cid'] ?? null;
+    $success = false;
 
-        case "Edit":
-            if (isset($_POST['cid'], $_POST['cFName'], $_POST['cLName'], $_POST['cEmail'], $_POST['cPhone'])) {
-                if (updateCustomers($_POST['cFName'], $_POST['cLName'], $_POST['cEmail'], $_POST['cPhone'], $_POST['cid'])) {
-                    echo '<div class = "alert alert-success" role= "alert"> Customer edited ....</div>'; 
-                } else {
-                    echo '<div class = "alert alert-danger" role= "alert"> Error edited ....</div>';  
-                }
-            } else {
-                echo '<div class="alert alert-danger" role="alert"> Missing data for editing.</div>';
-            }
-            break;
-
-        case "Delete":
-            if (isset($_POST['cid'])) {
-                if (deleteCustomers($_POST['cid'])) {
-                    echo '<div class = "alert alert-success" role= "alert"> Customer deleted ....</div>'; 
-                } else {
-                    echo '<div class = "alert alert-danger" role= "alert"> Error deleted ....</div>';  
-                }
-            } else {
-                echo '<div class="alert alert-danger" role="alert"> Invalid or missing customer ID.</div>';
-            }
-            break;
+    if ($action === "Add") {
+        $success = insertCustomers($_POST['cFName'], $_POST['cLName'], $_POST['cEmail'], $_POST['cPhone']);
+    } elseif ($action === "Edit" && $cid) {
+        $success = updateCustomers($_POST['cFName'], $_POST['cLName'], $_POST['cEmail'], $_POST['cPhone'], $cid);
+    } elseif ($action === "Delete" && $cid) {
+        $success = deleteCustomers($cid);
     }
+
+    echo '<div class="alert alert-' . ($success ? 'success' : 'danger') . '" role="alert">' .
+        ($success ? ucfirst($action) . ' successful.' : 'Error during ' . strtolower($action) . '.') .
+        '</div>';
 }
 
 $customers = selectCustomers();
-include 'view-customers.php'; 
+include 'view-customers.php';
 include 'view-footer.php';
 ?>
-
-
