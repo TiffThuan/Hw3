@@ -10,6 +10,11 @@
 <div class="container mt-5">
     <h1 class="text-center mb-4">Customers</h1>
 
+    <!-- Introduction Section -->
+    <div class="alert alert-info text-center">
+        <p>Welcome! Manage your existing customers below or register a new customer using the "Add Customer" button.</p>
+    </div>
+
     <!-- Add New Customer Button -->
     <div class="d-flex justify-content-between mb-3">
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newCustomerModal">Add Customer</button>
