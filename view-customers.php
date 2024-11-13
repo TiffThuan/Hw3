@@ -8,98 +8,64 @@
 </head>
 <body>
 <div class="container mt-5">
-    <div class="row mb-4">
-        <div class="col text-center">
-            <h1>Customers</h1>
-        </div>
-    </div>
-
-    <!-- Search Box -->
-    <div class="mb-4">
-        <input type="text" id="customerSearch" class="form-control" placeholder="Search customers by name or email...">
-    </div>
-
-    <!-- Customer Table -->
-    <div class="table-responsive">
-        <table class="table table-striped table-bordered" id="customerTable">
-            <thead class="thead-dark">
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php while ($customer = $customers->fetch_assoc()): ?>
+    <h1 class="text-center mb-4">Customers</h1>
+    <!-- Search Input -->
+    <input type="text" id="customerSearch" class="form-control mb-3" placeholder="Search customers by name or email...">
+    <!-- Customers Table -->
+    <table class="table table-striped table-hover" id="customerTable">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php while ($customer = $customers->fetch_assoc()): ?>
                 <tr>
                     <td><?php echo htmlspecialchars($customer['customer_id']); ?></td>
                     <td><?php echo htmlspecialchars($customer['firstname'] . ' ' . $customer['lastname']); ?></td>
                     <td><?php echo htmlspecialchars($customer['email']); ?></td>
                     <td><?php echo htmlspecialchars($customer['phone']); ?></td>
                     <td>
-                        <!-- Edit -->
-                        <form method="post" action="" style="display:inline;">
-                            <input type="hidden" name="cid" value="<?php echo $customer['customer_id']; ?>">
-                            <input type="hidden" name="actionType" value="Edit">
-                            <button class="btn btn-primary btn-sm">Edit</button>
-                        </form>
-                        <!-- Delete -->
+                        <!-- View Orders Button -->
+                        <a href="customers-with-orders.php?customer_id=<?php echo $customer['customer_id']; ?>" 
+                           target="_blank" 
+                           class="btn btn-info btn-sm mb-1">
+                           View Orders
+                        </a>
+                        <!-- Delete Button -->
                         <form method="post" action="" style="display:inline;">
                             <input type="hidden" name="cid" value="<?php echo $customer['customer_id']; ?>">
                             <input type="hidden" name="actionType" value="Delete">
-                            <button class="btn btn-danger btn-sm">Delete</button>
+                            <button class="btn btn-danger btn-sm" 
+                                    onclick="return confirm('Are you sure you want to delete this customer?');">
+                                Delete
+                            </button>
                         </form>
                     </td>
                 </tr>
-                <?php endwhile; ?>
-            </tbody>
-        </table>
-    </div>
-
-    <!-- ECharts Integration -->
-    <div class="mt-5">
-        <h3 class="text-center">Customer Email Domains</h3>
-        <div id="email-chart" style="height: 300px;"></div>
-    </div>
+            <?php endwhile; ?>
+        </tbody>
+    </table>
 </div>
 
-<!-- Scripts -->
-<script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+<!-- JavaScript for Search Filter -->
 <script>
-    // Filter Customer Table
+    // Get search input and table rows
     const searchInput = document.getElementById('customerSearch');
     const tableRows = document.querySelectorAll('#customerTable tbody tr');
 
-    searchInput.addEventListener('input', function () {
-        const filter = this.value.toLowerCase();
+    // Add event listener for search input
+    searchInput.addEventListener('input', () => {
+        const filter = searchInput.value.toLowerCase();
         tableRows.forEach(row => {
-            const name = row.cells[1].textContent.toLowerCase();
-            const email = row.cells[2].textContent.toLowerCase();
-            row.style.display = (name.includes(filter) || email.includes(filter)) ? '' : 'none';
+            const name = row.cells[1].textContent.toLowerCase(); // Name column
+            const email = row.cells[2].textContent.toLowerCase(); // Email column
+            row.style.display = name.includes(filter) || email.includes(filter) ? '' : 'none'; // Filter rows
         });
-    });
-
-    // Highlight Rows on Hover
-    tableRows.forEach(row => {
-        row.addEventListener('mouseenter', () => row.style.backgroundColor = '#f1f1f1');
-        row.addEventListener('mouseleave', () => row.style.backgroundColor = '');
-    });
-
-    // Email Domain Chart
-    const emailChart = echarts.init(document.getElementById('email-chart'));
-    emailChart.setOption({
-        title: { text: 'Customer Email Distribution', left: 'center' },
-        tooltip: { trigger: 'item' },
-        series: [{
-            name: 'Email Domains',
-            type: 'pie',
-            radius: '50%',
-            data: <?php echo json_encode(array_map(function ($row) {
-                return ['name' => $row['domain'], 'value' => $row['count']];
-            }, iterator_to_array($emailDomains))); ?>
-        }]
     });
 </script>
 </body>
