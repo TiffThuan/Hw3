@@ -5,25 +5,36 @@ require_once('model-customers.php');
 $pageTitle = "Customers";
 include 'view-header.php';
 
-if (!empty($_POST['actionType'])) {
+// Handle form submissions
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['actionType'])) {
     $action = $_POST['actionType'];
     $cid = $_POST['cid'] ?? null;
     $success = false;
 
+    // Perform actions based on `actionType`
     if ($action === "Add") {
-        $success = insertCustomers($_POST['cFName'], $_POST['cLName'], $_POST['cEmail'], $_POST['cPhone']);
+        if (!empty($_POST['cFName']) && !empty($_POST['cLName']) && !empty($_POST['cEmail']) && !empty($_POST['cPhone'])) {
+            $success = insertCustomers($_POST['cFName'], $_POST['cLName'], $_POST['cEmail'], $_POST['cPhone']);
+        }
     } elseif ($action === "Edit" && $cid) {
-        $success = updateCustomers($_POST['cFName'], $_POST['cLName'], $_POST['cEmail'], $_POST['cPhone'], $cid);
+        if (!empty($_POST['cFName']) && !empty($_POST['cLName']) && !empty($_POST['cEmail']) && !empty($_POST['cPhone'])) {
+            $success = updateCustomers($_POST['cFName'], $_POST['cLName'], $_POST['cEmail'], $_POST['cPhone'], $cid);
+        }
     } elseif ($action === "Delete" && $cid) {
         $success = deleteCustomers($cid);
     }
 
-    echo '<div class="alert alert-' . ($success ? 'success' : 'danger') . '" role="alert">' .
-        ($success ? ucfirst($action) . ' successful.' : 'Error during ' . strtolower($action) . '.') .
-        '</div>';
+    // Provide feedback
+    $feedback = $success
+        ? '<div class="alert alert-success" role="alert">' . ucfirst($action) . ' successful.</div>'
+        : '<div class="alert alert-danger" role="alert">Error during ' . strtolower($action) . '.</div>';
+    echo $feedback;
 }
 
+// Fetch all customers for display
 $customers = selectCustomers();
+
+// Include the view
 include 'view-customers.php';
 include 'view-footer.php';
 ?>
