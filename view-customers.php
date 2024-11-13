@@ -9,10 +9,12 @@
 <body>
 <div class="container mt-5">
     <h1 class="text-center mb-4">Customers</h1>
+
     <!-- Add New Customer Button -->
-    <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#newCustomerModal">Add Customer</button>
-    <!-- Search Input -->
-    <input type="text" id="customerSearch" class="form-control mb-3" placeholder="Search customers by name or email...">
+    <div class="d-flex justify-content-between mb-3">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newCustomerModal">Add Customer</button>
+        <input type="text" id="customerSearch" class="form-control w-50" placeholder="Search customers by name or email...">
+    </div>
 
     <!-- Customers Table -->
     <table class="table table-striped table-hover" id="customerTable">
