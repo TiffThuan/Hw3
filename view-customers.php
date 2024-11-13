@@ -9,8 +9,11 @@
 <body>
 <div class="container mt-5">
     <h1 class="text-center mb-4">Customers</h1>
+    <!-- Add New Customer Button -->
+    <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#newCustomerModal">Add Customer</button>
     <!-- Search Input -->
     <input type="text" id="customerSearch" class="form-control mb-3" placeholder="Search customers by name or email...">
+
     <!-- Customers Table -->
     <table class="table table-striped table-hover" id="customerTable">
         <thead class="table-dark">
@@ -36,37 +39,41 @@
                            class="btn btn-info btn-sm mb-1">
                            View Orders
                         </a>
+                        <!-- Edit Button -->
+                        <button class="btn btn-warning btn-sm mb-1" data-bs-toggle="modal" 
+                                data-bs-target="#editCustomerModal<?php echo $customer['customer_id']; ?>">Edit</button>
                         <!-- Delete Button -->
                         <form method="post" action="" style="display:inline;">
                             <input type="hidden" name="cid" value="<?php echo $customer['customer_id']; ?>">
                             <input type="hidden" name="actionType" value="Delete">
-                            <button class="btn btn-danger btn-sm" 
-                                    onclick="return confirm('Are you sure you want to delete this customer?');">
-                                Delete
-                            </button>
+                            <button class="btn btn-danger btn-sm" onclick="return confirm('Delete this customer?');">Delete</button>
                         </form>
                     </td>
                 </tr>
+                <!-- Include the Edit Customer Modal -->
+                <?php include 'view-customers-editform.php'; ?>
             <?php endwhile; ?>
         </tbody>
     </table>
 </div>
 
-<!-- JavaScript for Search Filter -->
+<!-- Include Add Customer Modal -->
+<?php include 'view-customers-newform.php'; ?>
+
 <script>
-    // Get search input and table rows
+    // JavaScript for Search Filter
     const searchInput = document.getElementById('customerSearch');
     const tableRows = document.querySelectorAll('#customerTable tbody tr');
 
-    // Add event listener for search input
     searchInput.addEventListener('input', () => {
         const filter = searchInput.value.toLowerCase();
         tableRows.forEach(row => {
-            const name = row.cells[1].textContent.toLowerCase(); // Name column
-            const email = row.cells[2].textContent.toLowerCase(); // Email column
-            row.style.display = name.includes(filter) || email.includes(filter) ? '' : 'none'; // Filter rows
+            const name = row.cells[1].textContent.toLowerCase();
+            const email = row.cells[2].textContent.toLowerCase();
+            row.style.display = name.includes(filter) || email.includes(filter) ? '' : 'none';
         });
     });
 </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
