@@ -10,12 +10,9 @@
 <div class="container mt-5">
     <h1 class="text-center mb-4">Customers</h1>
 
-    <!-- Add New Customer Button -->
-    <div class="d-flex justify-content-between mb-3">
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newCustomerModal">
-            Add Customer
-        </button>
-        <input type="text" id="customerSearch" class="form-control w-50" placeholder="Search customers by name or email...">
+    <!-- Introduction Section -->
+    <div class="alert alert-info text-center">
+        <p>Welcome! Manage your existing customers below or register a new customer using the "Add Customer" button.</p>
     </div>
 
     <!-- Customers Table -->
@@ -37,9 +34,16 @@
                     <td><?php echo htmlspecialchars($customer['email']); ?></td>
                     <td><?php echo htmlspecialchars($customer['phone']); ?></td>
                     <td>
-                        <!-- Edit Button -->
-                        <button class="btn btn-warning btn-sm mb-1" data-bs-toggle="modal" 
-                                data-bs-target="#editCustomerModal<?php echo $customer['customer_id']; ?>">Edit</button>
+                        <!-- View Orders Button -->
+                        <a href="customers-with-orders.php?customer_id=<?php echo $customer['customer_id']; ?>" 
+                           target="_blank" 
+                           class="btn btn-info btn-sm mb-1">
+                           View Orders
+                        </a>
+                        <!-- Include Add Customer Modal -->
+                        <?php include 'view-customers-newform.php'; ?>
+                        <!-- Include the Edit Customer Modal -->
+                        <?php include 'view-customers-editform.php'; ?>
                         <!-- Delete Button -->
                         <form method="post" action="" style="display:inline;">
                             <input type="hidden" name="cid" value="<?php echo $customer['customer_id']; ?>">
@@ -48,15 +52,13 @@
                         </form>
                     </td>
                 </tr>
-                <!-- Include the Edit Customer Modal -->
-                <?php include 'view-customers-editform.php'; ?>
+
             <?php endwhile; ?>
         </tbody>
     </table>
 </div>
 
-<!-- Include Add Customer Modal -->
-<?php include 'view-customers-newform.php'; ?>
+
 
 <script>
     // JavaScript for Search Filter
@@ -70,6 +72,32 @@
             const email = row.cells[2].textContent.toLowerCase();
             row.style.display = name.includes(filter) || email.includes(filter) ? '' : 'none';
         });
+    });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+<script>
+    // Search Filter
+    const searchInput = document.getElementById('customerSearch');
+    const tableRows = document.querySelectorAll('#customerTable tbody tr');
+
+    searchInput.addEventListener('input', () => {
+        const filter = searchInput.value.toLowerCase();
+        tableRows.forEach(row => {
+            const name = row.cells[1].textContent.toLowerCase();
+            const email = row.cells[2].textContent.toLowerCase();
+            row.style.display = name.includes(filter) || email.includes(filter) ? '' : 'none';
+        });
+    });
+
+    // ECharts for New Customers
+    const chart = echarts.init(document.getElementById('customer-chart'));
+    chart.setOption({
+        title: { text: 'New Customers Over Time' },
+        tooltip: {},
+        xAxis: { type: 'category', data: <?php echo json_encode($months); ?> },
+        yAxis: { type: 'value' },
+        series: [{ type: 'bar', data: <?php echo json_encode($newCustomers); ?> }]
     });
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
