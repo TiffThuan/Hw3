@@ -5,7 +5,8 @@ function selectOrders() {
     try {
         $conn = get_db_connection();
         $stmt = $conn->prepare("
-            SELECT o.order_id, o.order_date, c.firstname, c.lastname, o.total_amount 
+            SELECT o.order_id, o.order_date, o.total_amount, o.payment_method, o.status,
+                   c.customer_id, c.firstname, c.lastname 
             FROM orders o 
             JOIN customers c ON o.customer_id = c.customer_id
         ");
