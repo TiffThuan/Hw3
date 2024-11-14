@@ -13,6 +13,7 @@
             </div>
             <div class="modal-body">
                 <form method="post" action="">
+                    <!-- Customer Name -->
                     <div class="mb-3">
                         <label for="cFName" class="form-label">First Name</label>
                         <input type="text" class="form-control" id="cFName" name="cFName" required>
@@ -21,6 +22,8 @@
                         <label for="cLName" class="form-label">Last Name</label>
                         <input type="text" class="form-control" id="cLName" name="cLName" required>
                     </div>
+
+                    <!-- Other Order Details -->
                     <div class="mb-3">
                         <label for="order_date" class="form-label">Order Date</label>
                         <input type="date" class="form-control" id="order_date" name="order_date" required>
@@ -37,6 +40,15 @@
                             <option value="Other">Other</option>
                         </select>
                     </div>
+                    <div class="mb-3">
+                        <label for="status" class="form-label">Status</label>
+                        <select class="form-select" id="status" name="status" required>
+                            <option value="Pending">Pending</option>
+                            <option value="Completed">Completed</option>
+                            <option value="Cancelled">Cancelled</option>
+                        </select>
+                    </div>
+
                     <input type="hidden" name="actionType" value="Add">
                     <button type="submit" class="btn btn-success">Add Order</button>
                 </form>
