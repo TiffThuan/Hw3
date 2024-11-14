@@ -35,9 +35,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['actionType']) && $_PO
     }
 }
 
-echo "<pre>";
-print_r($_POST);
-echo "</pre>";
 
 
 // Check if an order_id is passed to display its details
