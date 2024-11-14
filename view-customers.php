@@ -15,64 +15,60 @@
         <p>Welcome! Manage your existing customers below or register a new customer.</p>
     </div>
 
-    <!-- Search Bar -->
-    <input type="text" id="customerSearch" class="form-control mb-4" placeholder="Search customers by name or email...">
+    <!-- Accordion for Customers -->
+    <div class="accordion" id="customerAccordion">
+        <?php if ($customersWithOrders && $customersWithOrders->num_rows > 0): ?>
+            <?php while ($row = $customersWithOrders->fetch_assoc()): ?>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading<?php echo $row['customer_id']; ?>">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?php echo $row['customer_id']; ?>" aria-expanded="false" aria-controls="collapse<?php echo $row['customer_id']; ?>">
+                            <?php echo htmlspecialchars($row['firstname'] . ' ' . $row['lastname']); ?>
+                        </button>
+                    </h2>
+                    <div id="collapse<?php echo $row['customer_id']; ?>" class="accordion-collapse collapse" aria-labelledby="heading<?php echo $row['customer_id']; ?>" data-bs-parent="#customerAccordion">
+                        <div class="accordion-body">
+                            <strong>Email:</strong> <?php echo htmlspecialchars($row['email']); ?><br>
+                            <strong>Phone:</strong> <?php echo htmlspecialchars($row['phone']); ?><br>
+                            <strong>Latest Order Date:</strong> <?php echo htmlspecialchars($row['order_date'] ?? 'No Orders'); ?><br>
+                            <strong>Product(s):</strong> <?php echo htmlspecialchars($row['product_names'] ?? 'N/A'); ?><br>
+                            <strong>Total Quantity:</strong> <?php echo htmlspecialchars($row['total_quantity'] ?? 0); ?><br>
+                            <strong>Total Amount:</strong> $<?php echo htmlspecialchars($row['total_amount'] ?? '0.00'); ?><br>
+                            <a href="view-order-details.php?customer_id=<?php echo $row['customer_id']; ?>" class="btn btn-primary btn-sm mt-2">View Order Details</a>
+                        </div>
+                    </div>
+                </div>
+            <?php endwhile; ?>
+        <?php else: ?>
+            <div class="text-center">No customer data available.</div>
+        <?php endif; ?>
+    </div>
 
-    <!-- Customers Table -->
-    <table class="table table-striped table-hover" id="customerTable">
-        <thead class="table-dark">
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Latest Order Date</th>
-                <th>Product(s)</th>
-                <th>Quantity</th>
-                <th>Total Amount</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php if ($customersWithOrders && $customersWithOrders->num_rows > 0): ?>
-                <?php while ($row = $customersWithOrders->fetch_assoc()): ?>
-                    <tr>
-                        <td><?php echo htmlspecialchars($row['customer_id']); ?></td>
-                        <td><?php echo htmlspecialchars($row['firstname'] . ' ' . $row['lastname']); ?></td>
-                        <td><?php echo htmlspecialchars($row['email']); ?></td>
-                        <td><?php echo htmlspecialchars($row['phone']); ?></td>
-                        <td><?php echo htmlspecialchars($row['order_date'] ?? 'No Orders'); ?></td>
-                        <td><?php echo htmlspecialchars($row['product_names'] ?? 'N/A'); ?></td>
-                        <td><?php echo htmlspecialchars($row['total_quantity'] ?? 0); ?></td>
-                        <td><?php echo htmlspecialchars($row['total_amount'] ?? '0.00'); ?></td>
-                    </tr>
-                <?php endwhile; ?>
-            <?php else: ?>
-                <tr>
-                    <td colspan="8" class="text-center">No customer data available.</td>
-                </tr>
-            <?php endif; ?>
-        </tbody>
-    </table>
+    <!-- Chart for New Customers -->
+    <div class="container mt-5">
+        <h3 class="text-center">New Customers Over Time</h3>
+        <div id="customer-chart" style="height: 400px;"></div>
+    </div>
 </div>
 
-<!-- ECharts Script -->
+<!-- Chart JS -->
 <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
 <script>
     const customerChart = echarts.init(document.getElementById('customer-chart'));
-    const months = <?php echo json_encode($months); ?>;
-    const newCustomers = <?php echo json_encode($newCustomers); ?>;
-    customerChart.setOption({
+    const options = {
         title: { text: 'Customer Growth Over Time', left: 'center' },
-        xAxis: { type: 'category', data: months },
-        yAxis: { type: 'value' },
+        tooltip: { trigger: 'axis' },
+        xAxis: { type: 'category', data: <?php echo json_encode($months); ?> },
+        yAxis: { type: 'value', name: 'New Customers' },
         series: [{
             name: 'New Customers',
             type: 'bar',
-            data: newCustomers,
+            data: <?php echo json_encode($newCustomers); ?>,
             itemStyle: { color: '#6b3e26' },
         }],
-    });
+    };
+    customerChart.setOption(options);
 </script>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
