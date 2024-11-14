@@ -53,7 +53,7 @@ function selectOrderDetails($order_id) {
 function insertOrder($order_date, $cFName, $cLName, $total_amount, $payment_method, $status) {
     $conn = get_db_connection();
     try {
-        // Check if customer exists
+        // Check if customer already exists
         $stmt = $conn->prepare("SELECT customer_id FROM customers WHERE firstname = ? AND lastname = ?");
         $stmt->bind_param("ss", $cFName, $cLName);
         $stmt->execute();
@@ -67,28 +67,28 @@ function insertOrder($order_date, $cFName, $cLName, $total_amount, $payment_meth
             // Insert new customer
             $stmt = $conn->prepare("INSERT INTO customers (firstname, lastname) VALUES (?, ?)");
             $stmt->bind_param("ss", $cFName, $cLName);
-            $stmt->execute();
+            if (!$stmt->execute()) {
+                throw new Exception("Failed to insert customer: " . $stmt->error);
+            }
             $customer_id = $stmt->insert_id;
         }
 
-        // Insert order
-        $stmt = $conn->prepare("
-            INSERT INTO orders (order_date, customer_id, total_amount, payment_method, status) 
-            VALUES (?, ?, ?, ?, ?)
-        ");
+        // Insert new order
+        $stmt = $conn->prepare("INSERT INTO orders (order_date, customer_id, total_amount, payment_method, status) VALUES (?, ?, ?, ?, ?)");
         $stmt->bind_param("sidss", $order_date, $customer_id, $total_amount, $payment_method, $status);
-        $success = $stmt->execute();
-
-        $stmt->close();
-        $conn->close();
-        return $success;
-    } catch (Exception $e) {
-        if ($conn) {
-            $conn->close();
+        if (!$stmt->execute()) {
+            throw new Exception("Failed to insert order: " . $stmt->error);
         }
-        throw $e;
+
+        return true;
+    } catch (Exception $e) {
+        echo "<div class='alert alert-danger'>Error: {$e->getMessage()}</div>";
+        return false;
+    } finally {
+        $conn->close();
     }
 }
+
 
 function updateOrder($order_id, $order_date, $cFName, $cLName, $total_amount, $payment_method, $status) {
     try {
