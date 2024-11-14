@@ -48,28 +48,37 @@ function getCustomerOrderDetails() {
     try {
         $stmt = $conn->prepare("
             SELECT 
-                c.customer_id, c.firstname, c.lastname, c.email, c.phone,
-                MAX(o.order_date) AS order_date,
-                GROUP_CONCAT(p.product_name SEPARATOR ', ') AS product_names,
+                c.customer_id, 
+                c.firstname, 
+                c.lastname, 
+                c.email, 
+                c.phone, 
+                MAX(o.order_date) AS order_date, 
+                GROUP_CONCAT(DISTINCT p.product_name SEPARATOR ', ') AS product_names,
                 SUM(od.quantity) AS total_quantity,
-                SUM(o.total_amount) AS total_amount
+                SUM(od.price * od.quantity) AS total_amount
             FROM customers c
             LEFT JOIN orders o ON c.customer_id = o.customer_id
             LEFT JOIN order_details od ON o.order_id = od.order_id
             LEFT JOIN products p ON od.product_id = p.productid
             GROUP BY c.customer_id
+            ORDER BY MAX(o.order_date) DESC
         ");
-        $stmt->execute();
+        if (!$stmt->execute()) {
+            error_log("Error executing query: " . $stmt->error);
+            return null;
+        }
         $result = $stmt->get_result();
         $stmt->close();
         return $result;
     } catch (Exception $e) {
-        error_log("Error fetching customer order details: " . $e->getMessage());
+        error_log("Error in getCustomerOrderDetails: " . $e->getMessage());
         return null;
     } finally {
         $conn->close();
     }
 }
+
 
 
 error_log("Months: " . print_r($months, true));
