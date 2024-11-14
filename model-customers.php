@@ -2,12 +2,16 @@
 function selectCustomers() {
     $conn = get_db_connection();
     $stmt = $conn->prepare("SELECT customer_id, firstname, lastname, email, phone FROM customers");
-    $stmt->execute();
+    if (!$stmt->execute()) {
+        error_log("Database error: " . $stmt->error);
+        return false;
+    }
     $result = $stmt->get_result();
     $stmt->close();
     $conn->close();
     return $result;
 }
+
 
 function insertCustomers($cFName, $cLName, $cEmail, $cPhone) {
     $conn = get_db_connection();
