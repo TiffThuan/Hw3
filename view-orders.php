@@ -13,7 +13,7 @@
         <!-- Welcome Section -->
         <div class="col-md-6 text-center">
             <h1>The Heart of King Coffee Shop</h1>
-            <p class="lead">From bustling mornings to relaxing afternoons, <strong>Cafe Sua Da</strong> remains the favorite choice of our loyal customers.</p>
+            <p class="lead">Manage and explore customer orders seamlessly.</p>
         </div>
         <!-- Pie Chart Section -->
         <div class="col-md-6">
@@ -26,6 +26,11 @@
         <div class="col text-center">
             <h1>Orders</h1>
         </div>
+    </div>
+
+    <!-- Add New Order Button -->
+    <div class="mb-4 text-end">
+        <?php include 'view-orders-newform.php'; ?>
     </div>
 
     <!-- Order List -->
@@ -44,9 +49,13 @@
                             <strong>Customer:</strong> <?php echo htmlspecialchars($order['firstname'] . ' ' . $order['lastname']); ?><br>
                             <strong>Total Amount:</strong> $<?php echo htmlspecialchars($order['total_amount']); ?><br>
                             <strong>Payment Method:</strong> <?php echo htmlspecialchars($order['payment_method']); ?><br>
-                            <form method="POST" action="order-details.php">
+                            <!-- Include Edit Order Modal -->
+                            <?php include 'view-orders-editform.php'; ?>
+                            <!-- Delete Button -->
+                            <form method="post" action="" style="display:inline;">
                                 <input type="hidden" name="order_id" value="<?php echo $order['order_id']; ?>">
-                                <button type="submit" class="btn btn-primary btn-sm mt-2">View Details</button>
+                                <input type="hidden" name="actionType" value="Delete">
+                                <button type="submit" class="btn btn-danger btn-sm mt-2" onclick="return confirm('Delete this order?');">Delete</button>
                             </form>
                         </div>
                     </div>
@@ -58,40 +67,8 @@
     </div>
 </div>
 
-<!-- Dynamic Modal for Transaction Feedback -->
-<div class="modal fade" id="transactionModal" tabindex="-1" aria-labelledby="transactionModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="transactionModalLabel">Transaction Details</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body" id="transactionModalBody">
-                <!-- Content will be dynamically updated -->
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-    // Display Modal with Transaction Details
-    function showTransactionModal(message) {
-        const modalBody = document.getElementById('transactionModalBody');
-        modalBody.innerHTML = message;
-        const transactionModal = new bootstrap.Modal(document.getElementById('transactionModal'));
-        transactionModal.show();
-    }
-
-    // Example: Trigger modal after page loads for demo purposes
-    <?php if (isset($_SESSION['transaction_message'])): ?>
-        showTransactionModal('<?php echo $_SESSION['transaction_message']; ?>');
-        <?php unset($_SESSION['transaction_message']); ?>
-    <?php endif; ?>
-</script>
-
 <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
 <script>
-    // Dynamic Pie Chart (Menu Contribution)
     const data = <?php echo json_encode(array_map(function ($item) {
         return ['name' => $item['product_name'], 'value' => round($item['percentage'], 2)];
     }, $menuPercentages)); ?>;
