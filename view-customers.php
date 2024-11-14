@@ -80,7 +80,6 @@
         });
     });
 </script>
-
 <div class="container mt-5">
     <h3 class="text-center">Customer Growth Over Time</h3>
     <div id="customer-chart" style="height: 400px;"></div>
