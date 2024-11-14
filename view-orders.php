@@ -26,7 +26,6 @@
         <div class="row mb-4">
             <div class="col text-center">
                 <h1>Orders</h1>
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newOrderModal">Add New Order</button>
             </div>
         </div>
 
