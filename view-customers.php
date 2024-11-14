@@ -33,17 +33,23 @@
             </tr>
         </thead>
         <tbody>
-            <?php while ($row = $customersWithOrders->fetch_assoc()): ?>
-                <tr>
-                    <td><?php echo htmlspecialchars($row['customer_id']); ?></td>
-                    <td><?php echo htmlspecialchars($row['firstname'] . ' ' . $row['lastname']); ?></td>
-                    <td><?php echo htmlspecialchars($row['email']); ?></td>
-                    <td><?php echo htmlspecialchars($row['phone']); ?></td>
-                    <td><?php echo htmlspecialchars($row['order_date'] ?? 'No Orders'); ?></td>
-                    <td><?php echo htmlspecialchars($row['product_name'] ?? 'N/A'); ?></td>
-                    <td><?php echo htmlspecialchars($row['quantity'] ?? 0); ?></td>
-                    <td><?php echo htmlspecialchars($row['total_amount'] ?? '0.00'); ?></td>
-                    <td>
+            <?php if ($customersWithOrders && $customersWithOrders->num_rows > 0): ?>
+                <?php while ($row = $customersWithOrders->fetch_assoc()): ?>
+                    <tr>
+                        <td><?php echo htmlspecialchars($row['customer_id']); ?></td>
+                        <td><?php echo htmlspecialchars($row['firstname'] . ' ' . $row['lastname']); ?></td>
+                        <td><?php echo htmlspecialchars($row['email']); ?></td>
+                        <td><?php echo htmlspecialchars($row['phone']); ?></td>
+                        <td><?php echo htmlspecialchars($row['order_date'] ?? 'No Orders'); ?></td>
+                        <td><?php echo htmlspecialchars($row['product_names'] ?? 'N/A'); ?></td>
+                        <td><?php echo htmlspecialchars($row['total_quantity'] ?? 0); ?></td>
+                        <td><?php echo htmlspecialchars($row['total_amount'] ?? '0.00'); ?></td>
+                    </tr>
+                <?php endwhile; ?>
+            <?php else: ?>
+                    <tr>
+                        <td colspan="8" class="text-center">No customer data available.</td>
+                    </tr>
                         <!-- View Orders Button -->
                         <a href="customers-with-orders.php?customer_id=<?php echo $customer['customer_id']; ?>" 
                            target="_blank" 
