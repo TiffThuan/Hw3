@@ -42,24 +42,23 @@ function deleteCustomers($cid) {
 function getNewCustomersOverTime() {
     $conn = get_db_connection();
     $stmt = $conn->prepare("
-        SELECT DATE_FORMAT(MIN(created_at), '%b %Y') AS month, COUNT(*) AS new_customers
+        SELECT DATE_FORMAT(created_at, '%b %Y') AS month, COUNT(*) AS new_customers
         FROM customers
         GROUP BY DATE_FORMAT(created_at, '%Y-%m')
         ORDER BY MIN(created_at)
     ");
-    $stmt->execute();
+    if (!$stmt->execute()) {
+        error_log("SQL Error: " . $stmt->error);
+        return [];
+    }
     $result = $stmt->get_result();
-
     $data = [];
     while ($row = $result->fetch_assoc()) {
-        $data[] = [
-            'month' => $row['month'],
-            'new_customers' => $row['new_customers']
-        ];
+        $data[] = $row;
     }
-
     $stmt->close();
     $conn->close();
     return $data;
 }
+
 ?>
