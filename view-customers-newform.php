@@ -15,7 +15,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form class="row g-3" method="post" action="">
+              <form class="row g-3" method="post" action="customers.php">
+                    <!-- Your form fields -->
                     <div class="col-md-6">
                         <label for="cFName" class="form-label">First Name</label>
                         <input type="text" class="form-control" id="cFName" name="cFName" required>
@@ -37,6 +38,7 @@
                         <button type="submit" class="btn btn-primary">Save</button>
                     </div>
                 </form>
+
             </div>
         </div>
     </div>
