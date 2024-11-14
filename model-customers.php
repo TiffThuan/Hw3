@@ -39,6 +39,32 @@ function deleteCustomers($cid) {
     return $success;
 }
 
+function getCustomerOrderDetails() {
+    $conn = get_db_connection();
+    try {
+        $stmt = $conn->prepare("
+            SELECT 
+                c.customer_id, c.firstname, c.lastname, 
+                o.order_date, o.total_amount, od.quantity, p.product_name
+            FROM customers c
+            LEFT JOIN orders o ON c.customer_id = o.customer_id
+            LEFT JOIN order_details od ON o.order_id = od.order_id
+            LEFT JOIN products p ON od.product_id = p.productid
+            ORDER BY o.order_date DESC
+        ");
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $stmt->close();
+        return $result;
+    } catch (Exception $e) {
+        error_log("Error fetching customer order details: " . $e->getMessage());
+        return null;
+    } finally {
+        $conn->close();
+    }
+}
+
+
 function getNewCustomersOverTime() {
     $conn = get_db_connection();
     $stmt = $conn->prepare("
