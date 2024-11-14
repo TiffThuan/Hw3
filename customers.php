@@ -5,6 +5,11 @@ require_once('model-customers.php');
 $pageTitle = "Customers";
 include 'view-header.php';
 
+if (!$customersWithOrders || $customersWithOrders->num_rows == 0) {
+    error_log("No customers with orders found.");
+} else {
+    error_log("Customers with orders: " . print_r($customersWithOrders->fetch_all(MYSQLI_ASSOC), true));
+}
 // Handle form submissions
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['actionType'])) {
     $action = $_POST['actionType'];
