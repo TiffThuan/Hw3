@@ -72,7 +72,10 @@ function insertOrder($order_date, $cFName, $cLName, $total_amount, $payment_meth
         }
 
         // Insert order
-        $stmt = $conn->prepare("INSERT INTO orders (order_date, customer_id, total_amount, payment_method, status) VALUES (?, ?, ?, ?, ?)");
+        $stmt = $conn->prepare("
+            INSERT INTO orders (order_date, customer_id, total_amount, payment_method, status) 
+            VALUES (?, ?, ?, ?, ?)
+        ");
         $stmt->bind_param("sidss", $order_date, $customer_id, $total_amount, $payment_method, $status);
         $success = $stmt->execute();
 
@@ -86,7 +89,6 @@ function insertOrder($order_date, $cFName, $cLName, $total_amount, $payment_meth
         throw $e;
     }
 }
-
 
 function updateOrder($order_id, $order_date, $cFName, $cLName, $total_amount, $payment_method, $status) {
     try {
