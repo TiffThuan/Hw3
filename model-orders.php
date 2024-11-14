@@ -1,28 +1,27 @@
 <?php
 
 function selectOrders() {
-    $conn = null;
+    $conn = get_db_connection();
     try {
-        $conn = get_db_connection();
         $stmt = $conn->prepare("
             SELECT o.order_id, o.order_date, o.total_amount, o.payment_method, o.status,
                    c.customer_id, c.firstname, c.lastname 
             FROM orders o 
             JOIN customers c ON o.customer_id = c.customer_id
+            ORDER BY o.order_date DESC
         ");
         $stmt->execute();
         $result = $stmt->get_result();
         $stmt->close();
-
         return $result;
     } catch (Exception $e) {
-        throw $e;
+        error_log("Error in selectOrders: " . $e->getMessage());
+        return null;
     } finally {
-        if ($conn) {
-            $conn->close();
-        }
+        $conn->close();
     }
 }
+
 
 
 function selectOrderDetails($order_id) {
