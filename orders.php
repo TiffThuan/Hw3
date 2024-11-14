@@ -36,6 +36,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['actionType'] === 'Add') {
     }
 }
 
+echo "<pre>";
+print_r($_POST);
+echo "</pre>";
+
+
 // Check if an order_id is passed to display its details
 $orderDetails = [];
 if (isset($_GET['order_id']) && is_numeric($_GET['order_id'])) {
