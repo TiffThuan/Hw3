@@ -16,32 +16,35 @@
     </div>
 
     <!-- Accordion for Customers -->
-<div class="accordion" id="customerAccordion">
-    <?php while ($row = $customersWithOrders->fetch_assoc()): ?>
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="heading<?php echo $row['customer_id']; ?>">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?php echo $row['customer_id']; ?>" aria-expanded="false" aria-controls="collapse<?php echo $row['customer_id']; ?>">
-                    <?php echo htmlspecialchars($row['firstname'] . ' ' . $row['lastname']); ?>
-                </button>
-            </h2>
-            <div id="collapse<?php echo $row['customer_id']; ?>" class="accordion-collapse collapse" aria-labelledby="heading<?php echo $row['customer_id']; ?>" data-bs-parent="#customerAccordion">
-                <div class="accordion-body">
-                    <strong>Email:</strong> <?php echo htmlspecialchars($row['email']); ?><br>
-                    <strong>Phone:</strong> <?php echo htmlspecialchars($row['phone']); ?><br>
-                    <strong>Latest Order Date:</strong> <?php echo htmlspecialchars($row['order_date'] ?? 'No Orders'); ?><br>
-                    <strong>Product(s):</strong> <?php echo htmlspecialchars($row['product_names'] ?? 'N/A'); ?><br>
-                    <strong>Total Quantity:</strong> <?php echo htmlspecialchars($row['total_quantity'] ?? 0); ?><br>
-                    <strong>Total Amount:</strong> $<?php echo htmlspecialchars($row['total_amount'] ?? '0.00'); ?><br>
-                    <a href="view-order-details.php?customer_id=<?php echo $row['customer_id']; ?>" 
-                       class="btn btn-info btn-sm mb-1">
-                       View Orders
-                    </a>
+    <div class="accordion" id="customerAccordion">
+        <?php if ($customersWithOrders && $customersWithOrders->num_rows > 0): ?>
+            <?php while ($row = $customersWithOrders->fetch_assoc()): ?>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading<?php echo $row['customer_id']; ?>">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?php echo $row['customer_id']; ?>" aria-expanded="false" aria-controls="collapse<?php echo $row['customer_id']; ?>">
+                            <?php echo htmlspecialchars($row['firstname'] . ' ' . $row['lastname']); ?>
+                        </button>
+                    </h2>
+                    <div id="collapse<?php echo $row['customer_id']; ?>" class="accordion-collapse collapse" aria-labelledby="heading<?php echo $row['customer_id']; ?>" data-bs-parent="#customerAccordion">
+                        <div class="accordion-body">
+                            <strong>Email:</strong> <?php echo htmlspecialchars($row['email'] ?? 'Not Provided'); ?><br>
+                            <strong>Phone:</strong> <?php echo htmlspecialchars($row['phone'] ?? 'Not Provided'); ?><br>
+                            <strong>Latest Order Date:</strong> <?php echo htmlspecialchars($row['order_date'] ?? 'No Orders'); ?><br>
+                            <strong>Product(s):</strong> <?php echo htmlspecialchars($row['product_names'] ?? 'N/A'); ?><br>
+                            <strong>Total Quantity:</strong> <?php echo htmlspecialchars($row['total_quantity'] ?? 0); ?><br>
+                            <strong>Total Amount:</strong> $<?php echo htmlspecialchars($row['total_amount'] ?? '0.00'); ?><br>
+                            <!-- Button to view full details -->
+                            <a href="view-order-details.php?customer_id=<?php echo $row['customer_id']; ?>" class="btn btn-primary btn-sm mt-2">
+                                View Full Order Details
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                
-            </div>
-        </div>
-    <?php endwhile; ?>
-</div>
+            <?php endwhile; ?>
+        <?php else: ?>
+            <div class="text-center alert alert-warning">No customer data available.</div>
+        <?php endif; ?>
+    </div>
 
 
     <!-- Chart for New Customers -->
