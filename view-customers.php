@@ -32,7 +32,12 @@
                     <strong>Product(s):</strong> <?php echo htmlspecialchars($row['product_names'] ?? 'N/A'); ?><br>
                     <strong>Total Quantity:</strong> <?php echo htmlspecialchars($row['total_quantity'] ?? 0); ?><br>
                     <strong>Total Amount:</strong> $<?php echo htmlspecialchars($row['total_amount'] ?? '0.00'); ?><br>
+                    <a href="view-order-details.php?customer_id=<?php echo $row['customer_id']; ?>" 
+                       class="btn btn-info btn-sm mb-1">
+                       View Orders
+                    </a>
                 </div>
+                
             </div>
         </div>
     <?php endwhile; ?>
