@@ -13,9 +13,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['actionType'])) {
 
     if ($action === "Add") {
         // Ensure all required fields are present
+    if ($action === "Add") {
         if (!empty($_POST['cFName']) && !empty($_POST['cLName']) && !empty($_POST['cEmail']) && !empty($_POST['cPhone'])) {
             $success = insertCustomers($_POST['cFName'], $_POST['cLName'], $_POST['cEmail'], $_POST['cPhone']);
+            // Provide feedback
+            echo $success 
+                ? '<div class="alert alert-success" role="alert">Customer added successfully.</div>'
+                : '<div class="alert alert-danger" role="alert">Failed to add customer.</div>';
         }
+    }
     } elseif ($action === "Edit" && $cid) {
         if (!empty($_POST['cFName']) && !empty($_POST['cLName']) && !empty($_POST['cEmail']) && !empty($_POST['cPhone'])) {
             $success = updateCustomers($_POST['cFName'], $_POST['cLName'], $_POST['cEmail'], $_POST['cPhone'], $cid);
