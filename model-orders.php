@@ -52,36 +52,33 @@ function selectOrderDetails($order_id) {
 function insertOrder($order_date, $cFName, $cLName, $total_amount, $payment_method, $status) {
     $conn = get_db_connection();
     try {
-        // Check if customer already exists
+        // Check if customer exists
         $stmt = $conn->prepare("SELECT customer_id FROM customers WHERE firstname = ? AND lastname = ?");
         $stmt->bind_param("ss", $cFName, $cLName);
         $stmt->execute();
         $result = $stmt->get_result();
 
         if ($result->num_rows > 0) {
-            // Customer exists
             $customer = $result->fetch_assoc();
             $customer_id = $customer['customer_id'];
         } else {
-            // Insert new customer
             $stmt = $conn->prepare("INSERT INTO customers (firstname, lastname) VALUES (?, ?)");
             $stmt->bind_param("ss", $cFName, $cLName);
-            if (!$stmt->execute()) {
-                throw new Exception("Failed to insert customer: " . $stmt->error);
-            }
+            $stmt->execute();
             $customer_id = $stmt->insert_id;
         }
 
-        // Insert new order
-        $stmt = $conn->prepare("INSERT INTO orders (order_date, customer_id, total_amount, payment_method, status) VALUES (?, ?, ?, ?, ?)");
+        $stmt = $conn->prepare("
+            INSERT INTO orders (order_date, customer_id, total_amount, payment_method, status)
+            VALUES (?, ?, ?, ?, ?)
+        ");
         $stmt->bind_param("sidss", $order_date, $customer_id, $total_amount, $payment_method, $status);
-        if (!$stmt->execute()) {
-            throw new Exception("Failed to insert order: " . $stmt->error);
-        }
+        $success = $stmt->execute();
+        $stmt->close();
 
-        return true;
+        return $success;
     } catch (Exception $e) {
-        echo "<div class='alert alert-danger'>Error: {$e->getMessage()}</div>";
+        error_log("Error in insertOrder: " . $e->getMessage());
         return false;
     } finally {
         $conn->close();
