@@ -38,6 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['actionType'])) {
 
 // Fetch all customers for display
 $customers = selectCustomers();
+$customersWithOrders = getCustomerOrderDetails();
 
 // Include the view
 include 'view-customers.php';
