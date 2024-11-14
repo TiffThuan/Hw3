@@ -48,20 +48,16 @@ function getCustomerOrderDetails() {
     try {
         $stmt = $conn->prepare("
             SELECT 
-                c.customer_id, 
-                c.firstname, 
-                c.lastname, 
-                c.email, 
-                c.phone, 
-                o.order_date, 
-                o.total_amount, 
-                od.quantity, 
-                p.product_name
+                c.customer_id, c.firstname, c.lastname, c.email, c.phone,
+                MAX(o.order_date) AS order_date, SUM(o.total_amount) AS total_amount,
+                GROUP_CONCAT(p.product_name SEPARATOR ', ') AS product_names,
+                SUM(od.quantity) AS total_quantity
             FROM customers c
             LEFT JOIN orders o ON c.customer_id = o.customer_id
             LEFT JOIN order_details od ON o.order_id = od.order_id
             LEFT JOIN products p ON od.product_id = p.productid
-            ORDER BY c.customer_id, o.order_date DESC
+            GROUP BY c.customer_id
+            ORDER BY MAX(o.order_date) DESC
         ");
         $stmt->execute();
         $result = $stmt->get_result();
@@ -74,7 +70,6 @@ function getCustomerOrderDetails() {
         $conn->close();
     }
 }
-
 
 
 function getNewCustomersOverTime() {
