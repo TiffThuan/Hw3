@@ -99,4 +99,5 @@ function getNewCustomersOverTime() {
     return $data;
 }
 
+
 ?>
