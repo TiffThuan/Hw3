@@ -33,10 +33,7 @@
                             <strong>Product(s):</strong> <?php echo htmlspecialchars($row['product_names'] ?? 'N/A'); ?><br>
                             <strong>Total Quantity:</strong> <?php echo htmlspecialchars($row['total_quantity'] ?? 0); ?><br>
                             <strong>Total Amount:</strong> $<?php echo htmlspecialchars($row['total_amount'] ?? '0.00'); ?><br>
-                            <!-- Button to view full details -->
-                            <a href="view-order-details.php?customer_id=<?php echo $row['customer_id']; ?>" class="btn btn-primary btn-sm mt-2">
-                                View Full Order Details
-                            </a>
+                            <a href="view-order-details.php?customer_id=<?php echo $row['customer_id']; ?>" class="btn btn-primary btn-sm mt-2">View Full Order Details</a>
                         </div>
                     </div>
                 </div>
