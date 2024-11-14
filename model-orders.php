@@ -51,11 +51,9 @@ function selectOrderDetails($order_id) {
 }
 
 function insertOrder($order_date, $cFName, $cLName, $total_amount, $payment_method, $status) {
-    $conn = null;
+    $conn = get_db_connection();
     try {
-        $conn = get_db_connection();
-
-        // Check if the customer exists
+        // Check if customer exists
         $stmt = $conn->prepare("SELECT customer_id FROM customers WHERE firstname = ? AND lastname = ?");
         $stmt->bind_param("ss", $cFName, $cLName);
         $stmt->execute();
@@ -69,34 +67,25 @@ function insertOrder($order_date, $cFName, $cLName, $total_amount, $payment_meth
             // Insert new customer
             $stmt = $conn->prepare("INSERT INTO customers (firstname, lastname) VALUES (?, ?)");
             $stmt->bind_param("ss", $cFName, $cLName);
-            if (!$stmt->execute()) {
-                throw new Exception("Failed to insert new customer: " . $stmt->error);
-            }
+            $stmt->execute();
             $customer_id = $stmt->insert_id;
         }
 
-        // Insert the order
-        $stmt = $conn->prepare("
-            INSERT INTO orders (order_date, customer_id, total_amount, payment_method, status)
-            VALUES (?, ?, ?, ?, ?)
-        ");
+        // Insert order
+        $stmt = $conn->prepare("INSERT INTO orders (order_date, customer_id, total_amount, payment_method, status) VALUES (?, ?, ?, ?, ?)");
         $stmt->bind_param("sidss", $order_date, $customer_id, $total_amount, $payment_method, $status);
-        if (!$stmt->execute()) {
-            throw new Exception("Failed to insert new order: " . $stmt->error);
-        }
+        $success = $stmt->execute();
 
-        return true;
+        $stmt->close();
+        $conn->close();
+        return $success;
     } catch (Exception $e) {
-        echo "Error: " . $e->getMessage();
-        return false;
-    } finally {
         if ($conn) {
             $conn->close();
         }
+        throw $e;
     }
 }
-
-
 
 
 function updateOrder($order_id, $order_date, $cFName, $cLName, $total_amount, $payment_method, $status) {
