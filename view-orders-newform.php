@@ -1,5 +1,5 @@
-<!-- Button to Trigger Modal -->
-<button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#newOrderModal">
+<!-- Button to trigger the New Order Modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newOrderModal">
     Add New Order
 </button>
 
@@ -18,15 +18,19 @@
                         <input type="date" class="form-control" id="order_date" name="order_date" required>
                     </div>
                     <div class="mb-3">
-                        <label for="customer_id" class="form-label">Customer ID</label>
-                        <input type="number" class="form-control" id="customer_id" name="customer_id" required>
-                    </div>
-                    <div class="mb-3">
                         <label for="total_amount" class="form-label">Total Amount</label>
                         <input type="number" step="0.01" class="form-control" id="total_amount" name="total_amount" required>
                     </div>
+                    <div class="mb-3">
+                        <label for="payment_method" class="form-label">Payment Method</label>
+                        <select class="form-control" id="payment_method" name="payment_method" required>
+                            <option value="Credit Card">Credit Card</option>
+                            <option value="Cash">Cash</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
                     <input type="hidden" name="actionType" value="Add">
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="submit" class="btn btn-primary">Add Order</button>
                 </form>
             </div>
         </div>
