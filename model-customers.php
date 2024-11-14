@@ -71,7 +71,8 @@ function getCustomerOrderDetails() {
     }
 }
 
-
+error_log("Months: " . print_r($months, true));
+error_log("New Customers: " . print_r($newCustomers, true));
 function getNewCustomersOverTime() {
     $conn = get_db_connection();
     $stmt = $conn->prepare("
@@ -80,10 +81,7 @@ function getNewCustomersOverTime() {
         GROUP BY DATE_FORMAT(created_at, '%Y-%m')
         ORDER BY MIN(created_at)
     ");
-    if (!$stmt->execute()) {
-        error_log("SQL Error: " . $stmt->error);
-        return [];
-    }
+    $stmt->execute();
     $result = $stmt->get_result();
     $data = [];
     while ($row = $result->fetch_assoc()) {
