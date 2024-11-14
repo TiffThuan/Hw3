@@ -59,6 +59,7 @@
         title: { text: 'Customer Growth Over Time', left: 'center' },
         tooltip: { trigger: 'axis' },
         xAxis: { type: 'category', data: <?php echo json_encode($months); ?> },
+        
         yAxis: { type: 'value', name: 'New Customers' },
         series: [{
             name: 'New Customers',
