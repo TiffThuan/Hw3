@@ -50,51 +50,48 @@ function selectOrderDetails($order_id) {
     }
 }
 
-function insertOrder($order_date, $cFName, $cLName, $total_amount) {
-    $conn = null; // Initialize connection variable
+function insertOrder($order_date, $cFName, $cLName, $total_amount, $payment_method, $status) {
+    $conn = null;
     try {
         $conn = get_db_connection();
-        
-        // Check if customer already exists based on name
+
+        // Check if the customer exists
         $stmt = $conn->prepare("SELECT customer_id FROM customers WHERE firstname = ? AND lastname = ?");
         $stmt->bind_param("ss", $cFName, $cLName);
         $stmt->execute();
         $result = $stmt->get_result();
 
         if ($result->num_rows > 0) {
-            // Customer exists, retrieve their customer_id
+            // Customer exists
             $customer = $result->fetch_assoc();
             $customer_id = $customer['customer_id'];
         } else {
-            // Insert new customer with firstname, lastname
+            // Insert new customer
             $stmt = $conn->prepare("INSERT INTO customers (firstname, lastname) VALUES (?, ?)");
             $stmt->bind_param("ss", $cFName, $cLName);
-            
             if (!$stmt->execute()) {
-                throw new Exception("Error inserting customer: " . $stmt->error);
+                throw new Exception("Failed to insert new customer: " . $stmt->error);
             }
-            $customer_id = $stmt->insert_id; // Get the new customer's ID
+            $customer_id = $stmt->insert_id;
         }
 
-        // Now insert the order with the new customer_id
-        $stmt = $conn->prepare("INSERT INTO orders (order_date, customer_id, total_amount) VALUES (?, ?, ?)");
-        $stmt->bind_param("sid", $order_date, $customer_id, $total_amount);   
-        
-        // Execute and check for success
+        // Insert the order
+        $stmt = $conn->prepare("
+            INSERT INTO orders (order_date, customer_id, total_amount, payment_method, status)
+            VALUES (?, ?, ?, ?, ?)
+        ");
+        $stmt->bind_param("sidss", $order_date, $customer_id, $total_amount, $payment_method, $status);
         if (!$stmt->execute()) {
-            throw new Exception("Error inserting order: " . $stmt->error);
+            throw new Exception("Failed to insert new order: " . $stmt->error);
         }
-        
-        // Close statement
-        $stmt->close();
-        return true; // Return true for successful insertion
+
+        return true;
     } catch (Exception $e) {
-        // Log or handle the error
-        echo "Error: " . $e->getMessage(); // This can be logged instead
-        return false; // Indicate failure
+        echo "Error: " . $e->getMessage();
+        return false;
     } finally {
         if ($conn) {
-            $conn->close(); // Close the connection in the finally block
+            $conn->close();
         }
     }
 }
@@ -102,38 +99,39 @@ function insertOrder($order_date, $cFName, $cLName, $total_amount) {
 
 
 
-function updateOrder($order_id, $order_date, $cFName, $cLName, $total_amount) {
+function updateOrder($order_id, $order_date, $cFName, $cLName, $total_amount, $payment_method, $status) {
     try {
         $conn = get_db_connection();
-        
-        // Check if customer already exists based on name
+
+        // Check if the customer exists
         $stmt = $conn->prepare("SELECT customer_id FROM customers WHERE firstname = ? AND lastname = ?");
         $stmt->bind_param("ss", $cFName, $cLName);
         $stmt->execute();
         $result = $stmt->get_result();
 
         if ($result->num_rows > 0) {
-            // Customer exists, retrieve their customer_id
             $customer = $result->fetch_assoc();
             $customer_id = $customer['customer_id'];
         } else {
-            // If the customer does not exist, insert new customer with firstname, lastname
+            // Insert new customer
             $stmt = $conn->prepare("INSERT INTO customers (firstname, lastname) VALUES (?, ?)");
             $stmt->bind_param("ss", $cFName, $cLName);
             $stmt->execute();
-            $customer_id = $stmt->insert_id; // Get the new customer's ID
+            $customer_id = $stmt->insert_id;
         }
 
-        // Now update the order with the new customer_id
-        $stmt = $conn->prepare("UPDATE orders SET order_date = ?, customer_id = ?, total_amount = ? WHERE order_id = ?");
-        $stmt->bind_param("sidi", $order_date, $customer_id, $total_amount, $order_id);   
-        
-        // Execute and check for success
+        // Update the order
+        $stmt = $conn->prepare("
+            UPDATE orders
+            SET order_date = ?, customer_id = ?, total_amount = ?, payment_method = ?, status = ?
+            WHERE order_id = ?
+        ");
+        $stmt->bind_param("sidssi", $order_date, $customer_id, $total_amount, $payment_method, $status, $order_id);
         $success = $stmt->execute();
-        
-        // Close statement and connection
+
         $stmt->close();
         $conn->close();
+
         return $success;
     } catch (Exception $e) {
         if ($conn) {
@@ -142,6 +140,7 @@ function updateOrder($order_id, $order_date, $cFName, $cLName, $total_amount) {
         throw $e;
     }
 }
+
 
 
 function deleteOrder($order_id) {
