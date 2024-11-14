@@ -80,10 +80,11 @@ function getCustomerOrderDetails() {
 }
 
 
-
 error_log("Months: " . print_r($months, true));
 error_log("New Customers: " . print_r($newCustomers, true));
+
 function getNewCustomersOverTime() {
+    
     $conn = get_db_connection();
     $stmt = $conn->prepare("
         SELECT DATE_FORMAT(created_at, '%b %Y') AS month, COUNT(*) AS new_customers
