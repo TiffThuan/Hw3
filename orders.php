@@ -1,4 +1,5 @@
 <?php
+// Enable error reporting for debugging
 ini_set('display_errors', 1); 
 ini_set('display_startup_errors', 1); 
 error_reporting(E_ALL);
@@ -7,7 +8,6 @@ $pageTitle = "Orders";
 include 'view-header.php';
 require_once('util-db.php');
 require_once('model-orders.php');
-
 
 // Fetch orders and menu data
 $orders = selectOrders(); 
@@ -42,7 +42,6 @@ $orderDetails = [];
 if (isset($_GET['order_id']) && is_numeric($_GET['order_id'])) {
     $orderDetails = selectOrderDetails(intval($_GET['order_id']));
 }
-
 
 // Include the orders view
 include 'view-orders.php';
