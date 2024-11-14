@@ -14,26 +14,25 @@ $orders = selectOrders();
 $menuPercentages = calculateMenuPercentages(); 
 
 // Handle Add Order Action
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['actionType']) && $_POST['actionType'] === 'Add') {
-    $cFName = $_POST['cFName'] ?? null;
-    $cLName = $_POST['cLName'] ?? null;
-    $order_date = $_POST['order_date'] ?? null;
-    $total_amount = $_POST['total_amount'] ?? null;
-    $payment_method = $_POST['payment_method'] ?? null;
-    $status = $_POST['status'] ?? null;
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['actionType'] === 'Add') {
+    $cFName = $_POST['cFName'] ?? '';
+    $cLName = $_POST['cLName'] ?? '';
+    $order_date = $_POST['order_date'] ?? '';
+    $total_amount = $_POST['total_amount'] ?? 0.0;
+    $payment_method = $_POST['payment_method'] ?? '';
+    $status = $_POST['status'] ?? '';
 
-    // Validate all required inputs
+    // Debugging
+    echo "<pre>";
+    print_r($_POST);
+    echo "</pre>";
+    exit;
+
     if ($cFName && $cLName && $order_date && $total_amount && $payment_method && $status) {
-        // Call the function to insert the order
         $success = insertOrder($order_date, $cFName, $cLName, $total_amount, $payment_method, $status);
-
-        if ($success) {
-            echo "<div class='alert alert-success'>Order added successfully!</div>";
-        } else {
-            echo "<div class='alert alert-danger'>Failed to add the order. Please try again.</div>";
-        }
+        echo $success ? "Order added successfully." : "Failed to add order.";
     } else {
-        echo "<div class='alert alert-danger'>All fields are required. Please fill out the form completely.</div>";
+        echo "All fields are required.";
     }
 }
 
