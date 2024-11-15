@@ -28,6 +28,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['actionType'])) {
         . '</div>';
 }
 
+$customersWithOrders = getCustomerOrderDetails();
+if ($customersWithOrders) {
+    error_log("Customer Order Details: " . print_r($customersWithOrders->fetch_assoc(), true));
+} else {
+    error_log("No customer data fetched.");
+}
+
 // Fetch data
 $customersWithOrders = getCustomerOrderDetails();
 $newCustomersData = getNewCustomersOverTime();
