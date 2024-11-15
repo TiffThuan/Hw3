@@ -13,14 +13,10 @@
     <!-- Introduction Section -->
     <div class="alert alert-info text-center">
         <p>Welcome! Manage your existing customers below or register a new customer.</p>
-    </div>
 
-    <!-- Button to trigger Add New Customer Modal -->
-    <div class="text-end mb-4">
-        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#newCustomerModal">
-            Add New Customer
-        </button>
     </div>
+    <!-- Include Add Customer Modal -->
+    <?php include 'view-customers-newform.php'; ?>
 
     <!-- Accordion for Customers -->
     <div class="accordion" id="customerAccordion">
@@ -40,17 +36,14 @@
                             <strong>Product(s):</strong> <?php echo htmlspecialchars($row['product_names'] ?? 'N/A'); ?><br>
                             <strong>Total Quantity:</strong> <?php echo htmlspecialchars($row['total_quantity'] ?? 0); ?><br>
                             <strong>Total Amount:</strong> $<?php echo htmlspecialchars($row['total_amount'] ?? '0.00'); ?><br>
-
-                            <!-- Edit Button -->
-                            <button type="button" class="btn btn-warning btn-sm mt-2" data-bs-toggle="modal" data-bs-target="#editCustomerModal<?php echo htmlspecialchars($row['customer_id']); ?>">
-                                Edit
-                            </button>
-                            
-                            <!-- Include Edit Form Modal -->
-                            <?php include 'view-customers-editform.php'; ?>
-
-                            <!-- Delete Form -->
-                            <form method="post" action="customers.php" style="display:inline;">
+                            <!-- View Order Details -->
+                            <a href="view-order-details.php?customer_id=<?php echo htmlspecialchars($row['customer_id']); ?>" class="btn btn-primary btn-sm mt-2">
+                                View Full Order Details
+                            </a>
+                            <!-- Edit Customer Button -->
+                            <button class="btn btn-warning btn-sm mt-2" data-bs-toggle="modal" data-bs-target="#editCustomerModal<?php echo htmlspecialchars($row['customer_id']); ?>">Edit</button>
+                            <!-- Delete Customer Form -->
+                            <form method="post" action="" style="display:inline;">
                                 <input type="hidden" name="cid" value="<?php echo htmlspecialchars($row['customer_id']); ?>">
                                 <input type="hidden" name="actionType" value="Delete">
                                 <button class="btn btn-danger btn-sm mt-2" onclick="return confirm('Are you sure you want to delete this customer?');">Delete</button>
@@ -58,6 +51,8 @@
                         </div>
                     </div>
                 </div>
+                <!-- Include Edit Customer Modal -->
+                <?php include 'view-customers-editform.php'; ?>
             <?php endwhile; ?>
         <?php else: ?>
             <div class="text-center alert alert-warning">No customer data available.</div>
@@ -71,8 +66,6 @@
     </div>
 </div>
 
-<!-- Include Add New Customer Modal -->
-<?php include 'view-customers-newform.php'; ?>
 
 <!-- Chart JS -->
 <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
