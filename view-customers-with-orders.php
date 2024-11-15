@@ -1,66 +1,28 @@
-<h1>Customers with Orders</h1>
-
-<div class="row">
-    <?php
-    if ($customers->num_rows == 0) {
-        echo "<div class='col-12'><p>No customers found.</p></div>";
-    } else {
-        while ($customer = $customers->fetch_assoc()) {
-            ?>
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <div class="card-body">
-                        <!-- Customer Name -->
-                        <h5 class="card-title"><?php echo $customer['firstname'] . ' ' . $customer['lastname']; ?></h5>
-
-                        <!-- Customer Address -->
-                        <p class="card-text">
-                            <small class="text-muted">Address: <?php echo $customer['address']; ?></small>
-                        </p>
-
-                        <!-- Order List -->
-                        <div class="order-list">
-                            <?php
-                            // Fetch the orders for each customer using selectCustomersWithOrders()
-                            $orders = selectCustomersWithOrders($customer['customer_id']);
-                            if ($orders->num_rows == 0) {
-                                echo "<p>No orders found for this customer.</p>";
-                            } else {
-                                ?>
-                                <table class="table table-sm table-bordered">
-                                    <thead class="thead-light">
-                                        <tr>
-                                            <th>Order ID</th>
-                                            <th>Status</th>
-                                            <th>Total Amount</th>
-                                            <th>Order Date</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-                                        while ($order = $orders->fetch_assoc()) {
-                                            ?>
-                                            <tr>
-                                                <td><?php echo $order['order_id']; ?></td>
-                                                <td><?php echo $order['status']; ?></td>
-                                                <td><?php echo $order['total_amount']; ?></td>
-                                                <td><?php echo $order['order_date']; ?></td>
-                                            </tr>
-                                            <?php
-                                        }
-                                        ?>
-                                    </tbody>
-                                </table>
-                                <?php
-                            }
-                            ?>
+<div class="container mt-5">
+    <h1 class="text-center">Customers and Their Orders</h1>
+    <div class="row">
+        <?php if ($customersWithOrders && $customersWithOrders->num_rows > 0): ?>
+            <?php while ($customer = $customersWithOrders->fetch_assoc()): ?>
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title"><?php echo htmlspecialchars($customer['firstname'] . ' ' . $customer['lastname']); ?></h5>
+                            <p class="card-text">
+                                <strong>Email:</strong> <?php echo htmlspecialchars($customer['email'] ?? 'N/A'); ?><br>
+                                <strong>Phone:</strong> <?php echo htmlspecialchars($customer['phone'] ?? 'N/A'); ?><br>
+                                <strong>Latest Order:</strong> <?php echo htmlspecialchars($customer['order_date'] ?? 'No Orders'); ?><br>
+                                <strong>Total Orders:</strong> <?php echo htmlspecialchars($customer['total_quantity'] ?? 0); ?><br>
+                                <strong>Total Amount:</strong> $<?php echo htmlspecialchars($customer['total_amount'] ?? '0.00'); ?>
+                            </p>
+                            <a href="view-order-details.php?customer_id=<?php echo $customer['customer_id']; ?>" class="btn btn-primary btn-sm">View Orders</a>
                         </div>
                     </div>
                 </div>
+            <?php endwhile; ?>
+        <?php else: ?>
+            <div class="col-12 text-center">
+                <p>No customers with orders found.</p>
             </div>
-            <?php
-        }
-    }
-    ?>
+        <?php endif; ?>
+    </div>
 </div>
-
