@@ -29,7 +29,6 @@ function deleteCustomers($cid) {
     return $success;
 }
 
-
 function selectCustomers() {
     $conn = get_db_connection();
     $stmt = $conn->prepare("SELECT customer_id, firstname, lastname, email, phone FROM customers");
