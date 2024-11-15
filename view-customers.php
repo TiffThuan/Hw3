@@ -61,8 +61,8 @@
                             <div class="d-flex justify-content-between">
                                 <!-- View Full Orders -->
                                 <a href="customers-with-orders.php?customer_id=<?php echo htmlspecialchars($row['customer_id']); ?>" class="btn btn-primary btn-sm">View Orders</a>
-                                <!-- Edit Button -->
-                                <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editCustomerModal<?php echo $row['customer_id']; ?>">Edit</button>
+                                <!-- Include Edit Modal -->
+                                <?php include 'view-customers-editform.php'; ?>
                                 <!-- Delete Button -->
                                 <form method="post" action="customers.php" style="display:inline;">
                                     <input type="hidden" name="cid" value="<?php echo htmlspecialchars($row['customer_id']); ?>">
@@ -73,8 +73,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- Include Edit Modal -->
-                <?php include 'view-customers-editform.php'; ?>
+
             <?php endwhile; ?>
         <?php else: ?>
             <div class="text-center alert alert-warning">No customer data available.</div>
