@@ -2,15 +2,11 @@
 require_once('util-db.php');
 require_once('model-customers.php');
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 $pageTitle = "Customers";
 include 'view-header.php';
 
 // Handle form submissions
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['actionType'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['actionType'])) {
     $action = $_POST['actionType'];
     $cid = $_POST['cid'] ?? null;
     $success = false;
@@ -32,14 +28,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['actionType'])) {
         . '</div>';
 }
 
-$customersWithOrders = getCustomerOrderDetails();
-if ($customersWithOrders) {
-    error_log("Customer Order Details: " . print_r($customersWithOrders->fetch_assoc(), true));
-} else {
-    error_log("No customer data fetched.");
-}
-
 // Fetch data
+$customers = selectCustomers();
 $customersWithOrders = getCustomerOrderDetails();
 $newCustomersData = getNewCustomersOverTime();
 $months = array_column($newCustomersData, 'month');
