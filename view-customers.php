@@ -38,6 +38,11 @@
                             <strong>Total Amount:</strong> $<?php echo htmlspecialchars($row['total_amount'] ?? '0.00'); ?><br>
                             <a href="view-order-details.php?customer_id=<?php echo htmlspecialchars($row['customer_id']); ?>" class="btn btn-primary btn-sm mt-2">View Full Order Details</a>
                             <?php include 'view-customers-editform.php'; ?>
+                             <form method="post" action="customers.php" style="display: inline;">
+                                <input type="hidden" name="cid" value="<?php echo htmlspecialchars($row['customer_id']); ?>">
+                                <input type="hidden" name="actionType" value="Delete">
+                                <button type="submit" class="btn btn-danger btn-sm mt-2" onclick="return confirm('Are you sure you want to delete this customer?');">Delete</button>
+                            </form>
                         </div>
                     </div>
                 </div>
