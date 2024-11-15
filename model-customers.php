@@ -30,7 +30,7 @@ function getCustomerOrderDetails() {
             LEFT JOIN orders o ON c.customer_id = o.customer_id
             LEFT JOIN order_details od ON o.order_id = od.order_id
             LEFT JOIN products p ON od.product_id = p.productid
-            GROUP BY c.customer_id
+            GROUP BY c.customer_id, c.firstname, c.lastname, c.email, c.phone
             ORDER BY MAX(o.order_date) DESC
         ");
         if (!$stmt->execute()) {
