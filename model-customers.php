@@ -51,9 +51,11 @@ function getCustomerOrderDetails() {
 function getNewCustomersOverTime() {
     $conn = get_db_connection();
     $stmt = $conn->prepare("
-        SELECT DATE_FORMAT(created_at, '%b %Y') AS month, COUNT(*) AS new_customers
+        SELECT 
+            DATE_FORMAT(created_at, '%b %Y') AS month, 
+            COUNT(*) AS new_customers
         FROM customers
-        GROUP BY DATE_FORMAT(created_at, '%Y-%m')
+        GROUP BY DATE_FORMAT(created_at, '%b %Y')
         ORDER BY MIN(created_at)
     ");
     $stmt->execute();
@@ -66,4 +68,5 @@ function getNewCustomersOverTime() {
     $conn->close();
     return $data;
 }
+
 ?>
