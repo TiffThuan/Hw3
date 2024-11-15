@@ -40,8 +40,8 @@
                             <a href="view-order-details.php?customer_id=<?php echo htmlspecialchars($row['customer_id']); ?>" class="btn btn-primary btn-sm mt-2">
                                 View Full Order Details
                             </a>
-                            <!-- Edit Customer Button -->
-                            <button class="btn btn-warning btn-sm mt-2" data-bs-toggle="modal" data-bs-target="#editCustomerModal<?php echo htmlspecialchars($row['customer_id']); ?>">Edit</button>
+                            <!-- Include Edit Customer Modal -->
+                            <?php include 'view-customers-editform.php'; ?>
                             <!-- Delete Customer Form -->
                             <form method="post" action="" style="display:inline;">
                                 <input type="hidden" name="cid" value="<?php echo htmlspecialchars($row['customer_id']); ?>">
@@ -51,8 +51,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- Include Edit Customer Modal -->
-                <?php include 'view-customers-editform.php'; ?>
+
             <?php endwhile; ?>
         <?php else: ?>
             <div class="text-center alert alert-warning">No customer data available.</div>
