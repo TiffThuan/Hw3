@@ -5,11 +5,6 @@ require_once('model-customers.php');
 $pageTitle = "Customers";
 include 'view-header.php';
 
-if (!$customersWithOrders || $customersWithOrders->num_rows == 0) {
-    error_log("No customers with orders found.");
-} else {
-    error_log("Customers with orders: " . print_r($customersWithOrders->fetch_all(MYSQLI_ASSOC), true));
-}
 // Handle form submissions
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['actionType'])) {
     $action = $_POST['actionType'];
@@ -37,6 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['actionType'])) {
 $customers = selectCustomers();
 $customersWithOrders = getCustomerOrderDetails();
 $newCustomersData = getNewCustomersOverTime();
+
+// Extract data for the ECharts bar chart
 $months = array_column($newCustomersData, 'month');
 $newCustomers = array_column($newCustomersData, 'new_customers');
 
