@@ -61,37 +61,33 @@
     <?php include 'view-customers-newform.php'; ?>
 
   
-    <div class="accordion" id="customerAccordion">
+    <!-- Customers Card Grid -->
+    <div class="row g-4">
         <?php if ($customersWithOrders && $customersWithOrders->num_rows > 0): ?>
             <?php while ($row = $customersWithOrders->fetch_assoc()): ?>
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="heading<?php echo htmlspecialchars($row['customer_id']); ?>">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?php echo htmlspecialchars($row['customer_id']); ?>" aria-expanded="false" aria-controls="collapse<?php echo htmlspecialchars($row['customer_id']); ?>">
-                            <?php echo htmlspecialchars($row['firstname'] . ' ' . $row['lastname']); ?>
-                        </button>
-                    </h2>
-                    <div id="collapse<?php echo htmlspecialchars($row['customer_id']); ?>" class="accordion-collapse collapse" aria-labelledby="heading<?php echo htmlspecialchars($row['customer_id']); ?>" data-bs-parent="#customerAccordion">
-                        <div class="accordion-body">
-                            <strong>Email:</strong> <?php echo htmlspecialchars($row['email'] ?? 'Not Provided'); ?><br>
-                            <strong>Phone:</strong> <?php echo htmlspecialchars($row['phone'] ?? 'Not Provided'); ?><br>
-                            <strong>Latest Order Date:</strong> <?php echo htmlspecialchars($row['order_date'] ?? 'No Orders'); ?><br>
-                            <strong>Products:</strong> <?php echo htmlspecialchars($row['product_names'] ?? 'N/A'); ?><br>
-                            <strong>Total Quantity:</strong> <?php echo htmlspecialchars($row['total_quantity'] ?? 0); ?><br>
-                            <strong>Total Amount:</strong> $<?php echo htmlspecialchars($row['total_amount'] ?? '0.00'); ?><br>
-
-                            <!-- Actions -->
-                            <div class="d-flex justify-content-between mt-3">
-                                <!-- View Orders -->
-                                <a href="customers-with-details.php?customer_id=<?php echo htmlspecialchars($row['customer_id']); ?>" class="btn btn-primary btn-sm">View Orders</a>
-
-                                <!-- Edit Modal -->
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <?php echo htmlspecialchars($row['firstname'] . ' ' . $row['lastname']); ?>
+                            </h5>
+                            <p class="card-text">
+                                <strong>Email:</strong> <?php echo htmlspecialchars($row['email'] ?? 'Not Provided'); ?><br>
+                                <strong>Phone:</strong> <?php echo htmlspecialchars($row['phone'] ?? 'Not Provided'); ?><br>
+                                <strong>Latest Order Date:</strong> <?php echo htmlspecialchars($row['order_date'] ?? 'No Orders'); ?><br>
+                                <strong>Product(s):</strong> <?php echo htmlspecialchars($row['product_names'] ?? 'N/A'); ?><br>
+                                <strong>Total Quantity:</strong> <?php echo htmlspecialchars($row['total_quantity'] ?? 0); ?><br>
+                                <strong>Total Amount:</strong> $<?php echo htmlspecialchars($row['total_amount'] ?? '0.00'); ?>
+                            </p>
+                            <div class="d-flex justify-content-between">
+                                <a href="view-order-details.php?customer_id=<?php echo htmlspecialchars($row['customer_id']); ?>" class="btn btn-primary btn-sm">View Orders</a>
+                                <!-- Edit Customer -->
                                 <?php include 'view-customers-editform.php'; ?>
-
-                                <!-- Delete -->
-                                <form method="post" action="customers.php" style="display:inline;">
+                                <!-- Delete Customer -->
+                                <form method="post" action="" class="d-inline">
                                     <input type="hidden" name="cid" value="<?php echo htmlspecialchars($row['customer_id']); ?>">
                                     <input type="hidden" name="actionType" value="Delete">
-                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this customer?');">Delete</button>
+                                    <button class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this customer?');">Delete</button>
                                 </form>
                             </div>
                         </div>
@@ -102,8 +98,6 @@
             <div class="text-center alert alert-warning">No customer data available.</div>
         <?php endif; ?>
     </div>
-</div>
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
