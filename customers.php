@@ -39,3 +39,4 @@ $newCustomers = array_column($newCustomersData, 'new_customers');
 include 'view-customers.php';
 include 'view-footer.php';
 ?>
+
