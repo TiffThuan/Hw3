@@ -35,36 +35,31 @@
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="index.php">King Coffee Shop</a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-brown" style="background-color: #6b3e26;">
+        <a class="navbar-brand text-white" href="index.php">☕ King Coffee Shop</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link <?php if($pageTitle == 'Home') { echo 'active'; } ?>" href="index.php">Home</a>
+                    <a class="nav-link text-white" href="index.php">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?php if($pageTitle == 'Orders') { echo 'active'; } ?>" href="orders.php">Orders</a>
+                    <a class="nav-link text-white" href="orders.php">Orders</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?php if($pageTitle == 'Customers') { echo 'active'; } ?>" href="customers.php">Customers</a>
+                    <a class="nav-link text-white" href="customers.php">Customers</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?php if($pageTitle == 'Products') { echo 'active'; } ?>" href="products.php">Products</a>
+                    <a class="nav-link text-white" href="products.php">Products</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?php if($pageTitle == 'Reviews') { echo 'active'; } ?>" href="reviews.php">Reviews</a>
-                </li>
-            </ul>
-            <!-- Optional right-side links or buttons -->
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="login.php">Login</a>
+                    <a class="nav-link text-white" href="reviews.php">Reviews</a>
                 </li>
             </ul>
         </div>
     </nav>
+
 
     <div class="container mt-4">
