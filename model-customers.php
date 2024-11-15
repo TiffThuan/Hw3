@@ -43,6 +43,7 @@ function deleteCustomers($cid) {
     return $success;
 }
 
+
 function getCustomerOrderDetails() {
     $conn = get_db_connection();
     try {
