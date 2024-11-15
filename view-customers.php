@@ -61,42 +61,33 @@
     <?php include 'view-customers-newform.php'; ?>
 
   
-    <!-- Customer Cards -->
-    <div class="row">
+    <div class="accordion" id="customerAccordion">
         <?php if ($customersWithOrders && $customersWithOrders->num_rows > 0): ?>
             <?php while ($row = $customersWithOrders->fetch_assoc()): ?>
-                <div class="col-md-4 mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title"><?php echo htmlspecialchars($row['firstname'] . ' ' . $row['lastname']); ?></h5>
-                            <p class="card-text">
-                                <strong>Email:</strong> <?php echo htmlspecialchars($row['email'] ?? 'Not Provided'); ?><br>
-                                <strong>Phone:</strong> <?php echo htmlspecialchars($row['phone'] ?? 'Not Provided'); ?><br>
-                                <strong>Total Orders:</strong> <?php echo htmlspecialchars($row['order_count'] ?? 0); ?><br>
-                                <button class="btn btn-info btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?php echo htmlspecialchars($row['customer_id']); ?>" aria-expanded="false" aria-controls="collapse<?php echo htmlspecialchars($row['customer_id']); ?>">
-                                    View Details
-                                </button>
-                            </p>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading<?php echo htmlspecialchars($row['customer_id']); ?>">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?php echo htmlspecialchars($row['customer_id']); ?>" aria-expanded="false" aria-controls="collapse<?php echo htmlspecialchars($row['customer_id']); ?>">
+                            <?php echo htmlspecialchars($row['firstname'] . ' ' . $row['lastname']); ?>
+                        </button>
+                    </h2>
+                    <div id="collapse<?php echo htmlspecialchars($row['customer_id']); ?>" class="accordion-collapse collapse" aria-labelledby="heading<?php echo htmlspecialchars($row['customer_id']); ?>" data-bs-parent="#customerAccordion">
+                        <div class="accordion-body">
+                            <strong>Email:</strong> <?php echo htmlspecialchars($row['email'] ?? 'Not Provided'); ?><br>
+                            <strong>Phone:</strong> <?php echo htmlspecialchars($row['phone'] ?? 'Not Provided'); ?><br>
+                            <strong>Latest Order Date:</strong> <?php echo htmlspecialchars($row['order_date'] ?? 'No Orders'); ?><br>
+                            <strong>Products:</strong> <?php echo htmlspecialchars($row['product_names'] ?? 'N/A'); ?><br>
+                            <strong>Total Quantity:</strong> <?php echo htmlspecialchars($row['total_quantity'] ?? 0); ?><br>
+                            <strong>Total Amount:</strong> $<?php echo htmlspecialchars($row['total_amount'] ?? '0.00'); ?><br>
 
-                            <!-- Accordion for Customer Details -->
-                            <div class="collapse" id="collapse<?php echo htmlspecialchars($row['customer_id']); ?>">
-                                <div class="mt-3">
-                                    <strong>Latest Order Date:</strong> <?php echo htmlspecialchars($row['order_date'] ?? 'No Orders'); ?><br>
-                                    <strong>Products:</strong> <?php echo htmlspecialchars($row['product_names'] ?? 'N/A'); ?><br>
-                                    <strong>Total Quantity:</strong> <?php echo htmlspecialchars($row['total_quantity'] ?? 0); ?><br>
-                                    <strong>Total Amount:</strong> $<?php echo htmlspecialchars($row['total_amount'] ?? '0.00'); ?><br>
-                                </div>
-                            </div>
-
-                            <!-- Action Buttons -->
+                            <!-- Actions -->
                             <div class="d-flex justify-content-between mt-3">
                                 <!-- View Orders -->
-                                <a href="customers-with-orders.php?customer_id=<?php echo htmlspecialchars($row['customer_id']); ?>" class="btn btn-primary btn-sm">View Orders</a>
-                                
+                                <a href="customers-with-details.php?customer_id=<?php echo htmlspecialchars($row['customer_id']); ?>" class="btn btn-primary btn-sm">View Orders</a>
+
                                 <!-- Edit Modal -->
                                 <?php include 'view-customers-editform.php'; ?>
 
-                                <!-- Delete Button -->
+                                <!-- Delete -->
                                 <form method="post" action="customers.php" style="display:inline;">
                                     <input type="hidden" name="cid" value="<?php echo htmlspecialchars($row['customer_id']); ?>">
                                     <input type="hidden" name="actionType" value="Delete">
