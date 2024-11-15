@@ -29,11 +29,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['actionType'])) {
 }
 
 // Fetch data
-$customers = selectCustomers();
 $customersWithOrders = getCustomerOrderDetails();
 $newCustomersData = getNewCustomersOverTime();
-
-// Extract data for the ECharts bar chart
 $months = array_column($newCustomersData, 'month');
 $newCustomers = array_column($newCustomersData, 'new_customers');
 
