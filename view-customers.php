@@ -7,21 +7,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
 </head>
 <body>
-<div class="container mt-5">
-    <h1 class="text-center mb-4">Customers</h1>
-
-    <!-- Introduction Section -->
-    <div class="alert alert-info text-center">
-        <p>Welcome! Manage your existing customers below or register a new customer.</p>
-    </div>
     <!-- Chart for New Customers -->
-    <div class="container mt-5">
-        <h3 class="text-center">New Customers Over Time</h3>
-        <div id="customer-chart" style="height: 400px;"></div>
-    </div>
+<div class="container mt-5">
+    <h3 class="text-center">New Customers Over Time</h3>
+    <div id="customer-chart" style="height: 400px;"></div>
 </div>
 
-<!-- Chart JS -->
 <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
 <script>
     const customerChart = echarts.init(document.getElementById('customer-chart'));
@@ -39,13 +30,19 @@
     };
     customerChart.setOption(options);
 </script>
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Customers</h1>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Introduction Section -->
+    <div class="alert alert-info text-center">
+        <p>Welcome! Manage your existing customers below or register a new customer.</p>
+    </div>
+
     <!-- Button to Add New Customer -->
     <?php include 'view-customers-newform.php'; ?>
 
     <!-- Accordion for Customers -->
-    <div class="accordion" id="customerAccordion">
+    <div class="accordion mt-4" id="customerAccordion">
         <?php if ($customersWithOrders && $customersWithOrders->num_rows > 0): ?>
             <?php while ($row = $customersWithOrders->fetch_assoc()): ?>
                 <div class="accordion-item">
@@ -81,5 +78,6 @@
 </div>
 
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
