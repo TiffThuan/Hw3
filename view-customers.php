@@ -15,6 +15,11 @@
         <p>Welcome! Manage your existing customers below or register a new customer.</p>
     </div>
 
+    <!-- Add Customer Button -->
+    <div class="text-end mb-4">
+        <?php include 'view-customers-newform.php'; ?>
+    </div>
+
     <!-- Accordion for Customers -->
     <div class="accordion" id="customerAccordion">
         <?php if ($customersWithOrders && $customersWithOrders->num_rows > 0): ?>
@@ -33,7 +38,17 @@
                             <strong>Product(s):</strong> <?php echo htmlspecialchars($row['product_names'] ?? 'N/A'); ?><br>
                             <strong>Total Quantity:</strong> <?php echo htmlspecialchars($row['total_quantity'] ?? 0); ?><br>
                             <strong>Total Amount:</strong> $<?php echo htmlspecialchars($row['total_amount'] ?? '0.00'); ?><br>
-                            <a href="view-order-details.php?customer_id=<?php echo htmlspecialchars($row['customer_id']); ?>" class="btn btn-primary btn-sm mt-2">View Full Order Details</a>
+
+                            <!-- Action Buttons -->
+                            <div class="mt-3">
+                                <a href="view-order-details.php?customer_id=<?php echo htmlspecialchars($row['customer_id']); ?>" class="btn btn-info btn-sm">View Orders</a>
+                                <?php include 'view-customers-editform.php'; ?>
+                                <form method="post" action="customers.php" class="d-inline">
+                                    <input type="hidden" name="cid" value="<?php echo $row['customer_id']; ?>">
+                                    <input type="hidden" name="actionType" value="Delete">
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this customer?');">Delete</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
