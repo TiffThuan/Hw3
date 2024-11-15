@@ -14,10 +14,14 @@
             background: #ffffff;
             border: none;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+            border-radius: 10px;
         }
         .accordion-button:not(.collapsed) {
             background-color: #e8f0fe;
             color: #000;
+        }
+        .btn {
+            margin: 0 5px;
         }
     </style>
 </head>
@@ -68,16 +72,30 @@
                             <p class="card-text">
                                 <strong>Email:</strong> <?php echo htmlspecialchars($row['email'] ?? 'Not Provided'); ?><br>
                                 <strong>Phone:</strong> <?php echo htmlspecialchars($row['phone'] ?? 'Not Provided'); ?><br>
-                                <strong>Latest Order Date:</strong> <?php echo htmlspecialchars($row['order_date'] ?? 'No Orders'); ?><br>
-                                <strong>Product(s):</strong> <?php echo htmlspecialchars($row['product_names'] ?? 'N/A'); ?><br>
-                                <strong>Total Quantity:</strong> <?php echo htmlspecialchars($row['total_quantity'] ?? 0); ?><br>
-                                <strong>Total Amount:</strong> $<?php echo htmlspecialchars($row['total_amount'] ?? '0.00'); ?><br>
+                                <strong>Total Orders:</strong> <?php echo htmlspecialchars($row['order_count'] ?? 0); ?><br>
+                                <button class="btn btn-info btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?php echo htmlspecialchars($row['customer_id']); ?>" aria-expanded="false" aria-controls="collapse<?php echo htmlspecialchars($row['customer_id']); ?>">
+                                    View Details
+                                </button>
                             </p>
-                            <div class="d-flex justify-content-between">
-                                <!-- View Full Orders -->
+
+                            <!-- Accordion for Customer Details -->
+                            <div class="collapse" id="collapse<?php echo htmlspecialchars($row['customer_id']); ?>">
+                                <div class="mt-3">
+                                    <strong>Latest Order Date:</strong> <?php echo htmlspecialchars($row['order_date'] ?? 'No Orders'); ?><br>
+                                    <strong>Products:</strong> <?php echo htmlspecialchars($row['product_names'] ?? 'N/A'); ?><br>
+                                    <strong>Total Quantity:</strong> <?php echo htmlspecialchars($row['total_quantity'] ?? 0); ?><br>
+                                    <strong>Total Amount:</strong> $<?php echo htmlspecialchars($row['total_amount'] ?? '0.00'); ?><br>
+                                </div>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="d-flex justify-content-between mt-3">
+                                <!-- View Orders -->
                                 <a href="customers-with-orders.php?customer_id=<?php echo htmlspecialchars($row['customer_id']); ?>" class="btn btn-primary btn-sm">View Orders</a>
-                                <!-- Include Edit Modal -->
+                                
+                                <!-- Edit Modal -->
                                 <?php include 'view-customers-editform.php'; ?>
+
                                 <!-- Delete Button -->
                                 <form method="post" action="customers.php" style="display:inline;">
                                     <input type="hidden" name="cid" value="<?php echo htmlspecialchars($row['customer_id']); ?>">
@@ -88,7 +106,6 @@
                         </div>
                     </div>
                 </div>
-
             <?php endwhile; ?>
         <?php else: ?>
             <div class="text-center alert alert-warning">No customer data available.</div>
