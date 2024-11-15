@@ -16,11 +16,6 @@
     </div>
 
     <!-- Include Add Customer Modal -->
-    <div class="text-end mb-4">
-        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#newCustomerModal">
-            Add New Customer
-        </button>
-    </div>
     <?php include 'view-customers-newform.php'; ?>
 
     <!-- Accordion for Customers -->
@@ -47,8 +42,6 @@
                             </a>
                             <!-- Edit Customer Modal -->
                             <button class="btn btn-warning btn-sm mt-2" data-bs-toggle="modal" data-bs-target="#editCustomerModal<?php echo htmlspecialchars($row['customer_id']); ?>">
-                                Edit
-                            </button>
                             <?php include 'view-customers-editform.php'; ?>
                             <!-- Delete Customer Form -->
                             <form method="post" action="" style="display:inline;">
