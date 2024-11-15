@@ -13,9 +13,14 @@
     <!-- Introduction Section -->
     <div class="alert alert-info text-center">
         <p>Welcome! Manage your existing customers below or register a new customer.</p>
-
     </div>
+
     <!-- Include Add Customer Modal -->
+    <div class="text-end mb-4">
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#newCustomerModal">
+            Add New Customer
+        </button>
+    </div>
     <?php include 'view-customers-newform.php'; ?>
 
     <!-- Accordion for Customers -->
@@ -40,7 +45,10 @@
                             <a href="view-order-details.php?customer_id=<?php echo htmlspecialchars($row['customer_id']); ?>" class="btn btn-primary btn-sm mt-2">
                                 View Full Order Details
                             </a>
-                            <!-- Include Edit Customer Modal -->
+                            <!-- Edit Customer Modal -->
+                            <button class="btn btn-warning btn-sm mt-2" data-bs-toggle="modal" data-bs-target="#editCustomerModal<?php echo htmlspecialchars($row['customer_id']); ?>">
+                                Edit
+                            </button>
                             <?php include 'view-customers-editform.php'; ?>
                             <!-- Delete Customer Form -->
                             <form method="post" action="" style="display:inline;">
@@ -51,7 +59,6 @@
                         </div>
                     </div>
                 </div>
-
             <?php endwhile; ?>
         <?php else: ?>
             <div class="text-center alert alert-warning">No customer data available.</div>
@@ -64,7 +71,6 @@
         <div id="customer-chart" style="height: 400px;"></div>
     </div>
 </div>
-
 
 <!-- Chart JS -->
 <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
