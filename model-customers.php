@@ -28,7 +28,7 @@ function deleteCustomers($cid) {
     $conn->close();
     return $success;
 }
-?>
+
 
 function selectCustomers() {
     $conn = get_db_connection();
