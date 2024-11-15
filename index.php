@@ -49,37 +49,42 @@ if ($monthlySalesResult) {
 $conn->close(); // Close connection
 ?>
 
-<div class="container mt-4">
-    <h1 class="text-center">Welcome to King Coffee Shop!</h1>
-    <p class="text-center">Experience the best Vietnamese coffee in Oklahoma. Try our signature <strong>Cafe Sua Da</strong>.</p>
+<!-- Hero Section -->
+<div class="hero-section text-center text-white" style="background-image: url('path/to/coffee-background.jpg'); background-size: cover; padding: 100px 0;">
+    <h1 class="display-4">Welcome to King Coffee Shop</h1>
+    <p class="lead">Experience the rich flavors of authentic Vietnamese coffee.</p>
+</div>
 
+<div class="container mt-4">
+    <h2 class="text-center mb-4" style="color: #6b3e26;">Our Highlights</h2>
     <!-- Stats Section -->
-    <div class="row text-center mt-4">
+    <div class="row text-center">
         <div class="col-md-4">
-            <div class="card bg-primary text-white">
-                <div class="card-header">Total Sales</div>
+            <div class="card border-dark">
+                <div class="card-header bg-dark text-white">Total Sales</div>
                 <div class="card-body">
                     <h5>$<?php echo number_format($totalSales, 2); ?></h5>
                 </div>
             </div>
         </div>
         <div class="col-md-4">
-            <div class="card bg-success text-white">
-                <div class="card-header">Total Customers</div>
+            <div class="card border-dark">
+                <div class="card-header bg-dark text-white">Total Customers</div>
                 <div class="card-body">
                     <h5><?php echo $totalCustomers; ?></h5>
                 </div>
             </div>
         </div>
         <div class="col-md-4">
-            <div class="card bg-info text-white">
-                <div class="card-header">Top Product</div>
+            <div class="card border-dark">
+                <div class="card-header bg-dark text-white">Top Product</div>
                 <div class="card-body">
                     <h5><?php echo htmlspecialchars($topProduct); ?></h5>
                 </div>
             </div>
         </div>
     </div>
+
     <!-- Coffee Menu Section -->
     <div class="mt-4">
         <h2 class="text-center" style="color: #6b3e26; font-weight: bold;">Our Coffee Menu</h2>
@@ -115,6 +120,7 @@ $conn->close(); // Close connection
                 </tbody>
             </table>
         </div>
+    </div>
 
     <!-- Sales Chart Section -->
     <div class="mt-5">
@@ -127,11 +133,11 @@ $conn->close(); // Close connection
 <script>
     const chart = echarts.init(document.getElementById('sales-chart'));
     chart.setOption({
-        title: { text: 'Monthly Sales' },
-        tooltip: {},
+        title: { text: 'Monthly Sales', left: 'center' },
+        tooltip: { trigger: 'axis' },
         xAxis: { type: 'category', data: <?php echo json_encode($months); ?> },
         yAxis: { type: 'value' },
-        series: [{ type: 'bar', data: <?php echo json_encode($sales); ?> }]
+        series: [{ type: 'bar', data: <?php echo json_encode($sales); ?> }],
     });
 </script>
 
