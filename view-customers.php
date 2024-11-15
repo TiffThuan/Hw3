@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
 
-To integrate the new layout (accordion and card) into your customers page, ensure it supports the add/edit/delete functionality with modals and includes a background style for enhanced visual appeal.
-
-Here's the complete corrected view-customers.php:
-
-view-customers.php
-php
-Copy code
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -66,27 +57,28 @@ Copy code
     <?php include 'view-customers-newform.php'; ?>
 
   
-        <!-- Customer List -->
-    <div class="accordion mb-5" id="customerAccordion">
+    <!-- Customer Cards -->
+    <div class="row">
         <?php if ($customersWithOrders && $customersWithOrders->num_rows > 0): ?>
             <?php while ($row = $customersWithOrders->fetch_assoc()): ?>
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="heading<?php echo htmlspecialchars($row['customer_id']); ?>">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?php echo htmlspecialchars($row['customer_id']); ?>" aria-expanded="false" aria-controls="collapse<?php echo htmlspecialchars($row['customer_id']); ?>">
-                            <?php echo htmlspecialchars($row['firstname'] . ' ' . $row['lastname']); ?>
-                        </button>
-                    </h2>
-                    <div id="collapse<?php echo htmlspecialchars($row['customer_id']); ?>" class="accordion-collapse collapse" aria-labelledby="heading<?php echo htmlspecialchars($row['customer_id']); ?>" data-bs-parent="#customerAccordion">
-                        <div class="accordion-body">
-                            <strong>Email:</strong> <?php echo htmlspecialchars($row['email'] ?? 'Not Provided'); ?><br>
-                            <strong>Phone:</strong> <?php echo htmlspecialchars($row['phone'] ?? 'Not Provided'); ?><br>
-                            <strong>Latest Order Date:</strong> <?php echo htmlspecialchars($row['order_date'] ?? 'No Orders'); ?><br>
-                            <strong>Product(s):</strong> <?php echo htmlspecialchars($row['product_names'] ?? 'N/A'); ?><br>
-                            <strong>Total Quantity:</strong> <?php echo htmlspecialchars($row['total_quantity'] ?? 0); ?><br>
-                            <strong>Total Amount:</strong> $<?php echo htmlspecialchars($row['total_amount'] ?? '0.00'); ?><br>
-                            <div class="d-flex justify-content-between mt-3">
-                                <a href="customers-with-orders.php?customer_id=<?php echo htmlspecialchars($row['customer_id']); ?>" class="btn btn-info btn-sm">View Orders</a>
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title"><?php echo htmlspecialchars($row['firstname'] . ' ' . $row['lastname']); ?></h5>
+                            <p class="card-text">
+                                <strong>Email:</strong> <?php echo htmlspecialchars($row['email'] ?? 'Not Provided'); ?><br>
+                                <strong>Phone:</strong> <?php echo htmlspecialchars($row['phone'] ?? 'Not Provided'); ?><br>
+                                <strong>Latest Order Date:</strong> <?php echo htmlspecialchars($row['order_date'] ?? 'No Orders'); ?><br>
+                                <strong>Product(s):</strong> <?php echo htmlspecialchars($row['product_names'] ?? 'N/A'); ?><br>
+                                <strong>Total Quantity:</strong> <?php echo htmlspecialchars($row['total_quantity'] ?? 0); ?><br>
+                                <strong>Total Amount:</strong> $<?php echo htmlspecialchars($row['total_amount'] ?? '0.00'); ?><br>
+                            </p>
+                            <div class="d-flex justify-content-between">
+                                <!-- View Full Orders -->
+                                <a href="customers-with-orders.php?customer_id=<?php echo htmlspecialchars($row['customer_id']); ?>" class="btn btn-primary btn-sm">View Orders</a>
+                                <!-- Include Edit Modal -->
                                 <?php include 'view-customers-editform.php'; ?>
+                                <!-- Delete Button -->
                                 <form method="post" action="customers.php" style="display:inline;">
                                     <input type="hidden" name="cid" value="<?php echo htmlspecialchars($row['customer_id']); ?>">
                                     <input type="hidden" name="actionType" value="Delete">
@@ -96,12 +88,13 @@ Copy code
                         </div>
                     </div>
                 </div>
+
             <?php endwhile; ?>
         <?php else: ?>
             <div class="text-center alert alert-warning">No customer data available.</div>
         <?php endif; ?>
     </div>
-
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
