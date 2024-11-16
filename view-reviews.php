@@ -121,6 +121,9 @@
 
 
 <!-- Reviews Accordion -->
+<!-- Add Review Modal Trigger -->
+<?php include 'view-reviews-newform.php'; ?>
+
 <div class="accordion mt-4" id="reviewsAccordion">
     <?php while ($review = $reviews->fetch_assoc()): ?>
         <div class="accordion-item">
@@ -149,12 +152,6 @@
         </div>
     <?php endwhile; ?>
 </div>
-
-<!-- Add Review Modal Trigger -->
-<div class="mt-4 text-end">
-    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#newReviewModal">Add New Review</button>
-</div>
-<?php include 'view-reviews-newform.php'; ?>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
