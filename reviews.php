@@ -52,6 +52,7 @@ if (isset($_POST['actionType'])) {
 
 // Fetch reviews (consider removing product_id if you want all reviews)
 $reviews = selectReviews(); 
+$topReviews = getTopReviews(); // Fetch top 2 reviews
 include 'view-reviews.php'; // Include reviews view
 
 include 'view-footer.php';
