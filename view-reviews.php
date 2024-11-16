@@ -100,22 +100,25 @@
         </div>
 
 <!-- Reviews Section -->
-<div class="row">
-    <div class="col-12">
-        <h3>What Our Customers Say</h3>
-        <p>Read the latest reviews from our beloved customers:</p>
-        <div class="top-reviews">
-            <?php foreach ($topReviews as $topReview): ?>
-                <blockquote class="blockquote">
-                    <p><?php echo htmlspecialchars($topReview['review_text']); ?></p>
-                    <footer class="blockquote-footer">
-                        <?php echo htmlspecialchars($topReview['customer_name']); ?> - <?php echo htmlspecialchars($topReview['rating']); ?>/5
-                    </footer>
-                </blockquote>
+
+<div class="reviews-section">
+    <h3>Top Reviews</h3>
+    <?php if (!empty($topReviews)): ?>
+        <ul class="list-group">
+            <?php foreach ($topReviews as $review): ?>
+                <li class="list-group-item">
+                    <strong><?php echo htmlspecialchars($review['customer_name']); ?>:</strong>
+                    <?php echo htmlspecialchars($review['content']); ?>
+                    <br>
+                    <em>Rating: <?php echo htmlspecialchars($review['rating']); ?>/5</em>
+                </li>
             <?php endforeach; ?>
-        </div>
-    </div>
+        </ul>
+    <?php else: ?>
+        <div class="alert alert-warning">No reviews available.</div>
+    <?php endif; ?>
 </div>
+
 
 <!-- Reviews Accordion -->
 <div class="accordion mt-4" id="reviewsAccordion">
