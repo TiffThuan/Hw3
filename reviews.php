@@ -2,7 +2,7 @@
 require_once('model-reviews.php');
 require_once('model-products.php');
 
-$pageTitle = "King Coffee Shop Reviews";
+$pageTitle = "King Coffee Shop - Find Us";
 include 'view-header.php';
 
 // Handle review actions
