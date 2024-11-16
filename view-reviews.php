@@ -102,22 +102,24 @@
 <!-- Reviews Section -->
 
 <div class="reviews-section">
-    <h3>Top Reviews</h3>
-    <?php if (!empty($topReviews)): ?>
-        <ul class="list-group">
-            <?php foreach ($topReviews as $review): ?>
-                <li class="list-group-item">
-                    <strong><?php echo htmlspecialchars($review['customer_name']); ?>:</strong>
-                    <?php echo htmlspecialchars($review['content']); ?>
-                    <br>
-                    <em>Rating: <?php echo htmlspecialchars($review['rating']); ?>/5</em>
-                </li>
-            <?php endforeach; ?>
-        </ul>
-    <?php else: ?>
-        <div class="alert alert-warning">No reviews available.</div>
-    <?php endif; ?>
+    <h3 class="text-center mb-4">Top Reviews</h3>
+    <div class="row">
+        <?php foreach (array_slice($topReviews, 0, 2) as $review): ?>
+            <div class="col-md-6 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><?php echo htmlspecialchars($review['customer_name']); ?></h5>
+                        <p class="card-text"><?php echo htmlspecialchars($review['content']); ?></p>
+                        <p class="card-text text-muted">
+                            <em>Rating: <?php echo htmlspecialchars($review['rating']); ?>/5</em>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
 </div>
+
 
 
 <!-- Reviews Accordion -->
