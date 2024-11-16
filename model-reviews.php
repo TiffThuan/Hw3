@@ -148,28 +148,28 @@ function fetchReviewsWithDetails() {
     }
 }
 
-function getTopReviews($limit = 2) {
+function getTopReviews() {
     $conn = get_db_connection();
     try {
         $stmt = $conn->prepare("
-            SELECT r.content, r.rating, CONCAT(c.firstname, ' ', c.lastname) AS customer_name
+            SELECT r.review_id, r.rating, r.review_text, p.product_name, c.firstname, c.lastname
             FROM reviews r
-            JOIN customers c ON r.customer_id = c.customer_id
+            JOIN products p ON r.product_id = p.productid
+            LEFT JOIN customers c ON r.customer_id = c.customer_id
             ORDER BY r.rating DESC, r.created_at DESC
-            LIMIT ?
+            LIMIT 2
         ");
-        $stmt->bind_param("i", $limit);
         $stmt->execute();
         $result = $stmt->get_result();
-        $reviews = $result->fetch_all(MYSQLI_ASSOC);
         $stmt->close();
-        return $reviews;
+        return $result;
     } catch (Exception $e) {
-        error_log("Error fetching reviews: " . $e->getMessage());
-        return [];
+        error_log("Error fetching top reviews: " . $e->getMessage());
+        return null;
     } finally {
         $conn->close();
     }
 }
+
 
 ?>
