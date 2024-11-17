@@ -17,6 +17,9 @@
         .accordion-button.collapsed::after {
             transform: rotate(0deg);
         }
+        .reviews-dropdown {
+            margin-top: 2rem;
+        }
     </style>
 </head>
 <body>
@@ -96,56 +99,62 @@
             </div>
         </div>
 
-        <!-- Reviews Section -->
-        <div class="reviews-section mt-4">
-            <h3 class="text-center mb-4">Top Reviews</h3>
-            <div class="row">
-                <?php foreach (array_slice($topReviews, 0, 2) as $review): ?>
-                    <div class="col-md-6 mb-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title"><?php echo htmlspecialchars($review['customer_name']); ?></h5>
-                                <p class="card-text"><?php echo htmlspecialchars($review['content']); ?></p>
-                                <p class="card-text text-muted">
-                                    <em>Rating: <?php echo htmlspecialchars($review['rating']); ?>/5</em>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                <?php endforeach; ?>
-            </div>
-        </div>
+<!-- Reviews Section -->
 
-        <!-- Full Reviews Accordion -->
-        <div class="accordion mt-4" id="reviewsAccordion">
-            <?php while ($review = $reviews->fetch_assoc()): ?>
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="heading<?php echo $review['review_id']; ?>">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?php echo $review['review_id']; ?>" aria-expanded="false" aria-controls="collapse<?php echo $review['review_id']; ?>">
-                            Review #<?php echo htmlspecialchars($review['review_id']); ?>: <?php echo htmlspecialchars($review['rating']); ?>/5
-                        </button>
-                    </h2>
-                    <div id="collapse<?php echo $review['review_id']; ?>" class="accordion-collapse collapse" aria-labelledby="heading<?php echo $review['review_id']; ?>" data-bs-parent="#reviewsAccordion">
-                        <div class="accordion-body">
-                            <p><?php echo htmlspecialchars($review['review_text']); ?></p>
-                            <div class="mt-3">
-                                <!-- Edit Button -->
-                                <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editReviewModal<?php echo $review['review_id']; ?>">Edit</button>
-                                <?php include "view-reviews-editform.php"; ?>
-
-                                <!-- Delete Button -->
-                                <form method="POST" action="reviews.php" class="d-inline">
-                                    <input type="hidden" name="actionType" value="deleteReview">
-                                    <input type="hidden" name="review_id" value="<?php echo $review['review_id']; ?>">
-                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this review?');">Delete</button>
-                                </form>
-                            </div>
-                        </div>
+<div class="reviews-section">
+    <h3 class="text-center mb-4">Top Reviews</h3>
+    <div class="row">
+        <?php foreach (array_slice($topReviews, 0, 2) as $review): ?>
+            <div class="col-md-6 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><?php echo htmlspecialchars($review['customer_name']); ?></h5>
+                        <p class="card-text"><?php echo htmlspecialchars($review['content']); ?></p>
+                        <p class="card-text text-muted">
+                            <em>Rating: <?php echo htmlspecialchars($review['rating']); ?>/5</em>
+                        </p>
                     </div>
                 </div>
-            <?php endwhile; ?>
-        </div>
+            </div>
+        <?php endforeach; ?>
     </div>
+</div>
+
+
+
+<!-- Reviews Accordion -->
+<!-- Add Review Modal Trigger -->
+<?php include 'view-reviews-newform.php'; ?>
+
+<div class="accordion mt-4" id="reviewsAccordion">
+    <?php while ($review = $reviews->fetch_assoc()): ?>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="heading<?php echo $review['review_id']; ?>">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?php echo $review['review_id']; ?>" aria-expanded="false" aria-controls="collapse<?php echo $review['review_id']; ?>">
+                    Review #<?php echo htmlspecialchars($review['review_id']); ?>: <?php echo htmlspecialchars($review['rating']); ?>/5
+                </button>
+            </h2>
+            <div id="collapse<?php echo $review['review_id']; ?>" class="accordion-collapse collapse" aria-labelledby="heading<?php echo $review['review_id']; ?>" data-bs-parent="#reviewsAccordion">
+                <div class="accordion-body">
+                    <p><?php echo htmlspecialchars($review['review_text']); ?></p>
+                    <div class="mt-3">
+                        <!-- Edit Button -->
+                        <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editReviewModal<?php echo $review['review_id']; ?>">Edit</button>
+                        <?php include "view-reviews-editform.php"; ?>
+
+                        <!-- Delete Button -->
+                        <form method="POST" action="reviews.php" class="d-inline">
+                            <input type="hidden" name="actionType" value="deleteReview">
+                            <input type="hidden" name="review_id" value="<?php echo $review['review_id']; ?>">
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this review?');">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php endwhile; ?>
+</div>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
