@@ -100,45 +100,33 @@
         </div>
 
 <!-- Reviews Section -->
-
 <div class="reviews-section">
-    <h3 class="text-center mb-4 text-uppercase" style="letter-spacing: 2px; color: #6b3e26;">Top Reviews</h3>
+    <h3 class="text-center mb-4 text-uppercase" style="color: #6b3e26; font-weight: bold;">Top Reviews</h3>
     <div class="row">
         <?php foreach (array_slice($topReviews, 0, 2) as $review): ?>
             <div class="col-md-6 mb-4">
-                <div class="card shadow-sm border-0" style="border-radius: 10px; overflow: hidden;">
-                    <div class="card-body p-4" style="background: linear-gradient(135deg, #fef7e0, #f9e0ac);">
-                        <div class="d-flex align-items-center mb-3">
-                            <!-- Reviewer Avatar -->
-                            <div class="avatar rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-3" 
-                                 style="width: 50px; height: 50px; font-size: 1.2rem;">
-                                <?php echo strtoupper(substr($review['firstname'], 0, 1) . substr($review['lastname'], 0, 1)); ?>
-                            </div>
-                            <!-- Reviewer Name -->
-                            <h5 class="mb-0 text-dark">
-                                <?php echo htmlspecialchars($review['firstname'] . ' ' . $review['lastname']); ?>
-                            </h5>
-                        </div>
+                <div class="card shadow border-0" style="border-radius: 15px; overflow: hidden;">
+                    <div class="card-body p-4" style="background-color: #fdf8ec;">
+                        <!-- Reviewer's Name -->
+                        <h5 class="card-title" style="color: #6b3e26; font-weight: bold;">
+                            <?php echo htmlspecialchars($review['firstname'] ?? 'Anonymous') . ' ' . htmlspecialchars($review['lastname'] ?? ''); ?>
+                        </h5>
 
                         <!-- Review Text -->
-                        <p class="card-text mb-4" style="font-size: 1rem; color: #5a4a3b;">
-                            "<?php echo htmlspecialchars($review['review_text']); ?>"
+                        <p class="card-text" style="font-size: 1rem; color: #5a4a3b;">
+                            "<?php echo htmlspecialchars($review['review_text'] ?? 'No review content available.'); ?>"
                         </p>
 
                         <!-- Rating -->
-                        <div class="rating mb-3">
+                        <div class="mb-3">
                             <?php for ($i = 1; $i <= 5; $i++): ?>
-                                <?php if ($i <= $review['rating']): ?>
-                                    <i class="fas fa-star text-warning"></i>
-                                <?php else: ?>
-                                    <i class="far fa-star text-warning"></i>
-                                <?php endif; ?>
+                                <i class="fa<?php echo $i <= ($review['rating'] ?? 0) ? 's' : 'r'; ?> fa-star text-warning"></i>
                             <?php endfor; ?>
                         </div>
 
-                        <!-- Product Name -->
-                        <p class="text-muted small">
-                            <em>Reviewed product: <?php echo htmlspecialchars($review['product_name']); ?></em>
+                        <!-- Reviewed Product -->
+                        <p class="text-muted small mb-0">
+                            <em>Reviewed product: <?php echo htmlspecialchars($review['product_name'] ?? 'Unknown product'); ?></em>
                         </p>
                     </div>
                 </div>
