@@ -47,6 +47,36 @@
             text-align: center;
         }
     </style>
+
+    <style>
+    /* Table Row Hover */
+    .table-hover tbody tr:hover {
+        background-color: #fdf8ec;
+    }
+
+    /* Table Header */
+    .table-light th {
+        color: #6b3e26;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    /* Action Buttons */
+    .btn {
+        transition: all 0.2s ease;
+    }
+
+    .btn:hover {
+        transform: scale(1.05);
+    }
+
+    /* Product Image */
+    td img {
+        max-height: 80px;
+        object-fit: cover;
+    }
+</style>
+
 </head>
 <body>
     <div class="container my-5">
@@ -55,33 +85,54 @@
         <!-- Current Products Section -->
         <section class="mb-5">
             <h2 class="mb-4 text-center">Current Products</h2>
-            <div class="row g-4">
-                <?php while ($product = $currentProducts->fetch_assoc()): ?>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="card product-card h-100 shadow-sm border-0 position-relative">
-                            <!-- Featured Ribbon (Optional) -->
-                            <?php if ($product['featured'] ?? false): ?>
-                                <span class="position-absolute top-0 start-0 badge bg-primary text-white" style="z-index: 10; padding: 0.5rem 1rem; font-size: 0.9rem;">Featured</span>
-                            <?php endif; ?>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th style="width: 10%;">Image</th>
+                            <th style="width: 40%;">Product Name</th>
+                            <th style="width: 30%;">Description</th>
+                            <th style="width: 10%;">Price</th>
+                            <th style="width: 10%;">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php while ($product = $currentProducts->fetch_assoc()): ?>
+                            <tr>
+                                <!-- Product Image -->
+                                <td>
+                                    <img src="images/products/<?php echo htmlspecialchars($product['productid']); ?>.jpg" 
+                                         alt="<?php echo htmlspecialchars($product['product_name']); ?>" 
+                                         style="width: 100%; height: auto; object-fit: cover; border-radius: 5px;">
+                                </td>
         
-                            <!-- Product Image -->
-                            <img src="images/products/<?php echo htmlspecialchars($product['productid']); ?>.jpg" 
-                                 class="card-img-top" 
-                                 alt="<?php echo htmlspecialchars($product['product_name']); ?>" 
-                                 style="height: 250px; object-fit: cover;">
+                                <!-- Product Name -->
+                                <td>
+                                    <h6 class="fw-bold"><?php echo htmlspecialchars($product['product_name']); ?></h6>
+                                </td>
         
-                            <!-- Product Details -->
-                            <div class="card-body text-center d-flex flex-column">
-                                <h5 class="card-title fw-bold mb-2"><?php echo htmlspecialchars($product['product_name']); ?></h5>
-                                <p class="card-text text-muted mb-3"><?php echo htmlspecialchars($product['product_description']); ?></p>
-                                <p class="card-text text-success fw-bold mb-3">$<?php echo htmlspecialchars($product['price']); ?></p>
-                                <button class="btn btn-primary mt-auto w-100">Learn More</button>
-                            </div>
-                        </div>
-                    </div>
-                <?php endwhile; ?>
+                                <!-- Product Description -->
+                                <td>
+                                    <p class="text-muted"><?php echo htmlspecialchars($product['product_description']); ?></p>
+                                </td>
+        
+                                <!-- Product Price -->
+                                <td>
+                                    <span class="text-success fw-bold">$<?php echo htmlspecialchars($product['price']); ?></span>
+                                </td>
+        
+                                <!-- Actions -->
+                                <td>
+                                    <button class="btn btn-primary btn-sm mb-2 w-100">Learn More</button>
+                                    <button class="btn btn-warning btn-sm mb-2 w-100">Edit</button>
+                                </td>
+                            </tr>
+                        <?php endwhile; ?>
+                    </tbody>
+                </table>
             </div>
         </section>
+
 
 
         <!-- Promotions Section -->
