@@ -101,9 +101,12 @@
                             <tr>
                                 <!-- Product Image -->
                                 <td>
-                                    <img src="images/products/<?php echo htmlspecialchars($product['productid']); ?>.jpg" 
-                                         alt="<?php echo htmlspecialchars($product['product_name']); ?>" 
-                                         style="width: 100%; height: auto; object-fit: cover; border-radius: 5px;">
+                                    <div style="width: 80px; height: 80px; overflow: hidden; border-radius: 10px; border: 1px solid #ddd;">
+                                        <img src="images/products/<?php echo htmlspecialchars($product['productid']); ?>.jpg" 
+                                             alt="<?php echo htmlspecialchars($product['product_name']); ?>" 
+                                             onerror="this.src='images/placeholder.jpg';" 
+                                             style="width: 100%; height: 100%; object-fit: cover;">
+                                    </div>
                                 </td>
         
                                 <!-- Product Name -->
