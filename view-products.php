@@ -180,7 +180,13 @@
             <!-- First Planned Product -->
             <div class="col-lg-6">
                 <div class="card shadow-sm border-0">
-                    <img src="images/mockup1.jpg" alt="Planned Product 1" class="card-img-top" style="height: 300px; object-fit: cover;">
+                    <!-- Image with Placeholder -->
+                    <div style="height: 300px; overflow: hidden; border-radius: 10px;">
+                        <img src="images/mockup1.jpg" 
+                             alt="Summer Delight Iced Coffee" 
+                             onerror="this.src='images/placeholder.jpg';" 
+                             style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
                     <div class="card-body text-center">
                         <h5 class="card-title">Summer Delight Iced Coffee</h5>
                         <p class="card-text">A refreshing blend of iced coffee with hints of vanilla and caramel. Perfect for the summer heat!</p>
@@ -192,7 +198,13 @@
             <!-- Second Planned Product -->
             <div class="col-lg-6">
                 <div class="card shadow-sm border-0">
-                    <img src="images/mockup2.jpg" alt="Planned Product 2" class="card-img-top" style="height: 300px; object-fit: cover;">
+                    <!-- Image with Placeholder -->
+                    <div style="height: 300px; overflow: hidden; border-radius: 10px;">
+                        <img src="images/mockup2.jpg" 
+                             alt="Gourmet Matcha Latte" 
+                             onerror="this.src='images/placeholder.jpg';" 
+                             style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
                     <div class="card-body text-center">
                         <h5 class="card-title">Gourmet Matcha Latte</h5>
                         <p class="card-text">A premium matcha latte with organic Japanese matcha and creamy oat milk.</p>
@@ -202,6 +214,7 @@
             </div>
         </div>
     </section>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
