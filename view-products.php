@@ -28,7 +28,14 @@
 <section>
     <h2 class="text-center mb-4" style="color: #6b3e26;">Available Products</h2>
     <div class="row g-4">
-        <?php while ($product = $products->fetch_assoc()) { ?>
+        <?php 
+        $productIds = []; // To track displayed products and avoid duplicates
+        while ($product = $products->fetch_assoc()) { 
+            if (in_array($product['productid'], $productIds)) {
+                continue; // Skip duplicate product
+            }
+            $productIds[] = $product['productid']; // Track displayed product IDs
+        ?>
             <div class="col-md-6">
                 <div class="card h-100 shadow-sm" style="border-radius: 10px;">
                     <!-- Product Image -->
