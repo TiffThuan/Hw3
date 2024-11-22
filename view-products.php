@@ -180,11 +180,9 @@
             <!-- First Planned Product -->
             <div class="col-lg-6">
                 <div class="card shadow-sm border-0">
-                    <!-- Image with Placeholder -->
                     <div style="height: 300px; overflow: hidden; border-radius: 10px;">
-                        <img src="images/mockup1.jpg" 
+                        <img src=""C:\Users\tifft\OneDrive\OU CLASS\18. MIS- 4013 Ecommerce Web\images\mockup1.jpg"" 
                              alt="Summer Delight Iced Coffee" 
-                             onerror="this.src='images/placeholder.jpg';" 
                              style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
                     <div class="card-body text-center">
@@ -198,11 +196,9 @@
             <!-- Second Planned Product -->
             <div class="col-lg-6">
                 <div class="card shadow-sm border-0">
-                    <!-- Image with Placeholder -->
                     <div style="height: 300px; overflow: hidden; border-radius: 10px;">
-                        <img src="images/mockup2.jpg" 
+                        <img src="C:\Users\tifft\OneDrive\OU CLASS\18. MIS- 4013 Ecommerce Web\images\mockup2.jpg" 
                              alt="Gourmet Matcha Latte" 
-                             onerror="this.src='images/placeholder.jpg';" 
                              style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
                     <div class="card-body text-center">
@@ -214,6 +210,7 @@
             </div>
         </div>
     </section>
+
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
