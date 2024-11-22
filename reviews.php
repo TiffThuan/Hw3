@@ -50,9 +50,20 @@ if (isset($_POST['actionType'])) {
     }
 }
 
-// Fetch reviews (consider removing product_id if you want all reviews)
+$topReviewsResult = getTopReviews(); // Fetch top 2 reviews
+$topReviews = [];
+
+if ($topReviewsResult) {
+    // Convert the result set to an array
+    $topReviews = $topReviewsResult->fetch_all(MYSQLI_ASSOC);
+} else {
+    error_log("Failed to fetch top reviews.");
+}
+
+// Fetch all reviews for the accordion
 $reviews = selectReviews(); 
-$topReviews = getTopReviews(); // Fetch top 2 reviews
+
+
 include 'view-reviews.php'; // Include reviews view
 
 include 'view-footer.php';
