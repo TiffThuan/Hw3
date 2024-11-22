@@ -105,60 +105,36 @@
             </div>
         </section>
 
-  <!-- New Arrivals Section -->
-<section class="mb-5">
-    <h2 class="mb-4 text-center">New Arrivals</h2>
-    <div id="newArrivalsCarousel" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            <?php 
-            $active = 'active'; // To mark the first product as active
-            while ($product = $newArrivals->fetch_assoc() && $product['productid']): ?>
-                <div class="carousel-item <?php echo $active; ?>">
-                    <div class="card mx-auto" style="width: 80%; border: none;">
-                        <img src="images/products/<?php echo htmlspecialchars($product['productid']); ?>.jpg" 
-                             class="d-block w-100" 
-                             alt="<?php echo htmlspecialchars($product['product_name']); ?>" 
-                             style="height: 400px; object-fit: cover; border-radius: 10px;">
-                        <div class="card-body text-center">
-                            <h5 class="card-title"><?php echo htmlspecialchars($product['product_name']); ?></h5>
-                            <p class="card-text"><?php echo htmlspecialchars($product['product_description']); ?></p>
-                            <p class="card-text text-success fw-bold">$<?php echo htmlspecialchars($product['price']); ?></p>
-                        </div>
+
+ <!-- New Arrivals (Planned Products) Section -->
+    <section class="mb-5">
+        <h2 class="mb-4 text-center">Planned Products for Future Sale</h2>
+        <div class="row g-4">
+            <!-- First Planned Product -->
+            <div class="col-lg-6">
+                <div class="card shadow-sm border-0">
+                    <img src="images/mockup1.jpg" alt="Planned Product 1" class="card-img-top" style="height: 300px; object-fit: cover;">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Summer Delight Iced Coffee</h5>
+                        <p class="card-text">A refreshing blend of iced coffee with hints of vanilla and caramel. Perfect for the summer heat!</p>
+                        <p class="badge bg-warning text-dark">Coming Soon</p>
                     </div>
                 </div>
-                <?php $active = ''; // Reset active after the first item ?>
-            <?php endwhile; ?>
-        </div>
-        <!-- Carousel Controls -->
-        <button class="carousel-control-prev" type="button" data-bs-target="#newArrivalsCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#newArrivalsCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>
-</section>
-      <!-- New Arrivals Section -->
-        <section class="mb-5">
-            <h2 class="mb-4 text-center">New Arrivals</h2>
-            <div class="row g-4">
-                <?php while ($product = $newArrivals->fetch_assoc()): ?>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="card h-100 shadow-sm">
-                            <img src="images/products/<?php echo htmlspecialchars($product['productid']); ?>.jpg" class="card-img-top" alt="<?php echo htmlspecialchars($product['product_name']); ?>" style="height: 200px; object-fit: cover;">
-                            <div class="card-body text-center">
-                                <h5 class="card-title"><?php echo htmlspecialchars($product['product_name']); ?></h5>
-                                <p class="card-text"><?php echo htmlspecialchars($product['product_description']); ?></p>
-                                <p class="card-text text-success fw-bold">$<?php echo htmlspecialchars($product['price']); ?></p>
-                            </div>
-                        </div>
-                    </div>
-                <?php endwhile; ?>
             </div>
-        </section>
-    </div>
+    
+            <!-- Second Planned Product -->
+            <div class="col-lg-6">
+                <div class="card shadow-sm border-0">
+                    <img src="images/mockup2.jpg" alt="Planned Product 2" class="card-img-top" style="height: 300px; object-fit: cover;">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Gourmet Matcha Latte</h5>
+                        <p class="card-text">A premium matcha latte with organic Japanese matcha and creamy oat milk.</p>
+                        <p class="badge bg-warning text-dark">Coming Soon</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
