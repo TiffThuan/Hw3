@@ -152,7 +152,12 @@ function getTopReviews() {
     $conn = get_db_connection();
     try {
         $stmt = $conn->prepare("
-            SELECT r.review_id, r.rating, r.review_text, p.product_name, c.firstname, c.lastname
+            SELECT DISTINCT
+                r.review_id, 
+                r.rating, 
+                r.review_text AS content, 
+                p.product_name, 
+                CONCAT(c.firstname, ' ', c.lastname) AS customer_name
             FROM reviews r
             JOIN products p ON r.product_id = p.productid
             LEFT JOIN customers c ON r.customer_id = c.customer_id
@@ -170,6 +175,7 @@ function getTopReviews() {
         $conn->close();
     }
 }
+
 
 
 ?>
