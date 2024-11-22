@@ -108,24 +108,17 @@
             <div class="col-md-6 mb-4">
                 <div class="card shadow border-0" style="border-radius: 15px; overflow: hidden;">
                     <div class="card-body p-4" style="background-color: #fdf8ec;">
-                        <!-- Reviewer's Name -->
                         <h5 class="card-title" style="color: #6b3e26; font-weight: bold;">
-                            <?php echo htmlspecialchars($review['firstname'] ?? 'Anonymous') . ' ' . htmlspecialchars($review['lastname'] ?? ''); ?>
+                            <?php echo htmlspecialchars($review['customer_name'] ?? 'Anonymous'); ?>
                         </h5>
-
-                        <!-- Review Text -->
                         <p class="card-text" style="font-size: 1rem; color: #5a4a3b;">
-                            "<?php echo htmlspecialchars($review['review_text'] ?? 'No review content available.'); ?>"
+                            "<?php echo htmlspecialchars($review['content'] ?? 'No review content available.'); ?>"
                         </p>
-
-                        <!-- Rating -->
                         <div class="mb-3">
                             <?php for ($i = 1; $i <= 5; $i++): ?>
                                 <i class="fa<?php echo $i <= ($review['rating'] ?? 0) ? 's' : 'r'; ?> fa-star text-warning"></i>
                             <?php endfor; ?>
                         </div>
-
-                        <!-- Reviewed Product -->
                         <p class="text-muted small mb-0">
                             <em>Reviewed product: <?php echo htmlspecialchars($review['product_name'] ?? 'Unknown product'); ?></em>
                         </p>
@@ -135,7 +128,6 @@
         <?php endforeach; ?>
     </div>
 </div>
-
 
 
 
