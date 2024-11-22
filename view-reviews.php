@@ -104,7 +104,7 @@
 <div class="reviews-section">
     <h3 class="text-center mb-4 text-uppercase" style="color: #6b3e26; font-weight: bold;">Top Reviews</h3>
     <div class="row">
-        <?php foreach (array_slice($topReviews, 0, 3) as $review): ?>
+        <?php foreach (array_slice($topReviews, 0, 2) as $review): ?>
             <div class="col-md-6 mb-4">
                 <div class="card shadow border-0" style="border-radius: 15px; overflow: hidden;">
                     <div class="card-body p-4" style="background-color: #fdf8ec;">
