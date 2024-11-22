@@ -174,14 +174,14 @@
 
 
  <!-- New Arrivals (Planned Products) Section -->
-    <section class="mb-5">
+       <section class="mb-5">
         <h2 class="mb-4 text-center">Planned Products for Future Sale</h2>
         <div class="row g-4">
             <!-- First Planned Product -->
             <div class="col-lg-6">
                 <div class="card shadow-sm border-0">
                     <div style="height: 300px; overflow: hidden; border-radius: 10px;">
-                        <img src=""C:\Users\tifft\OneDrive\OU CLASS\18. MIS- 4013 Ecommerce Web\images\mockup1.jpg"" 
+                        <img src="images/mockup1.jpg" 
                              alt="Summer Delight Iced Coffee" 
                              style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
@@ -197,7 +197,7 @@
             <div class="col-lg-6">
                 <div class="card shadow-sm border-0">
                     <div style="height: 300px; overflow: hidden; border-radius: 10px;">
-                        <img src="C:\Users\tifft\OneDrive\OU CLASS\18. MIS- 4013 Ecommerce Web\images\mockup2.jpg" 
+                        <img src="images/mockup2.jpg" 
                              alt="Gourmet Matcha Latte" 
                              style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
@@ -210,6 +210,7 @@
             </div>
         </div>
     </section>
+
 
 
 
