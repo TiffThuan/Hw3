@@ -1,6 +1,4 @@
 <?php
-
-// Function to get all products
 function selectProducts() {
     try {
         $conn = get_db_connection();
@@ -14,16 +12,13 @@ function selectProducts() {
         $stmt->close();
         return $result;
     } catch (Exception $e) {
-        error_log("Error in selectProducts: " . $e->getMessage());
-        throw $e;
+        error_log("Error fetching products: " . $e->getMessage());
+        return null;
     } finally {
-        if ($conn) {
-            $conn->close();
-        }
+        $conn->close();
     }
 }
 
-// Function to fetch new arrivals (recently added products)
 function fetchNewArrivals() {
     try {
         $conn = get_db_connection();
@@ -38,69 +33,58 @@ function fetchNewArrivals() {
         $stmt->close();
         return $result;
     } catch (Exception $e) {
-        error_log("Error in fetchNewArrivals: " . $e->getMessage());
-        throw $e;
+        error_log("Error fetching new arrivals: " . $e->getMessage());
+        return null;
     } finally {
-        if ($conn) {
-            $conn->close();
-        }
+        $conn->close();
     }
 }
 
-// Function to insert a new product
-function insertProduct($product_name, $product_description, $price) {
+function insertProduct($name, $description, $price) {
     try {
         $conn = get_db_connection();
         $stmt = $conn->prepare("INSERT INTO products (product_name, product_description, price, created_at) VALUES (?, ?, ?, NOW())");
-        $stmt->bind_param("ssd", $product_name, $product_description, $price);
+        $stmt->bind_param("ssd", $name, $description, $price);
         $success = $stmt->execute();
         $stmt->close();
         return $success;
     } catch (Exception $e) {
-        error_log("Error in insertProduct: " . $e->getMessage());
-        throw $e;
+        error_log("Error inserting product: " . $e->getMessage());
+        return false;
     } finally {
-        if ($conn) {
-            $conn->close();
-        }
+        $conn->close();
     }
 }
 
-// Function to update an existing product
-function updateProduct($productid, $product_name, $product_description, $price) {
+function updateProduct($id, $name, $description, $price) {
     try {
         $conn = get_db_connection();
         $stmt = $conn->prepare("UPDATE products SET product_name = ?, product_description = ?, price = ? WHERE productid = ?");
-        $stmt->bind_param("ssdi", $product_name, $product_description, $price, $productid);
+        $stmt->bind_param("ssdi", $name, $description, $price, $id);
         $success = $stmt->execute();
         $stmt->close();
         return $success;
     } catch (Exception $e) {
-        error_log("Error in updateProduct: " . $e->getMessage());
-        throw $e;
+        error_log("Error updating product: " . $e->getMessage());
+        return false;
     } finally {
-        if ($conn) {
-            $conn->close();
-        }
+        $conn->close();
     }
 }
 
-// Function to delete a product
-function deleteProduct($productid) {
+function deleteProduct($id) {
     try {
         $conn = get_db_connection();
         $stmt = $conn->prepare("DELETE FROM products WHERE productid = ?");
-        $stmt->bind_param("i", $productid);
+        $stmt->bind_param("i", $id);
         $success = $stmt->execute();
         $stmt->close();
         return $success;
     } catch (Exception $e) {
-        error_log("Error in deleteProduct: " . $e->getMessage());
-        throw $e;
+        error_log("Error deleting product: " . $e->getMessage());
+        return false;
     } finally {
-        if ($conn) {
-            $conn->close();
-        }
+        $conn->close();
     }
 }
 ?>
