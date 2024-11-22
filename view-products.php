@@ -105,7 +105,42 @@
             </div>
         </section>
 
-        <!-- New Arrivals Section -->
+  <!-- New Arrivals Section -->
+<section class="mb-5">
+    <h2 class="mb-4 text-center">New Arrivals</h2>
+    <div id="newArrivalsCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <?php 
+            $active = 'active'; // To mark the first product as active
+            while ($product = $newArrivals->fetch_assoc() && $product['productid']): ?>
+                <div class="carousel-item <?php echo $active; ?>">
+                    <div class="card mx-auto" style="width: 80%; border: none;">
+                        <img src="images/products/<?php echo htmlspecialchars($product['productid']); ?>.jpg" 
+                             class="d-block w-100" 
+                             alt="<?php echo htmlspecialchars($product['product_name']); ?>" 
+                             style="height: 400px; object-fit: cover; border-radius: 10px;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title"><?php echo htmlspecialchars($product['product_name']); ?></h5>
+                            <p class="card-text"><?php echo htmlspecialchars($product['product_description']); ?></p>
+                            <p class="card-text text-success fw-bold">$<?php echo htmlspecialchars($product['price']); ?></p>
+                        </div>
+                    </div>
+                </div>
+                <?php $active = ''; // Reset active after the first item ?>
+            <?php endwhile; ?>
+        </div>
+        <!-- Carousel Controls -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#newArrivalsCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#newArrivalsCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</section>
+      <!-- New Arrivals Section -->
         <section class="mb-5">
             <h2 class="mb-4 text-center">New Arrivals</h2>
             <div class="row g-4">
