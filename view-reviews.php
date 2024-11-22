@@ -108,8 +108,10 @@
             <div class="col-md-6 mb-3">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title"><?php echo htmlspecialchars($review['customer_name']); ?></h5>
-                        <p class="card-text"><?php echo htmlspecialchars($review['content']); ?></p>
+                        <h5 class="card-title">
+                            <?php echo htmlspecialchars($review['firstname'] . ' ' . $review['lastname']); ?>
+                        </h5>
+                        <p class="card-text"><?php echo htmlspecialchars($review['review_text']); ?></p>
                         <p class="card-text text-muted">
                             <em>Rating: <?php echo htmlspecialchars($review['rating']); ?>/5</em>
                         </p>
@@ -119,6 +121,7 @@
         <?php endforeach; ?>
     </div>
 </div>
+
 
 
 
