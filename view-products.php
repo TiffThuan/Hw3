@@ -58,18 +58,31 @@
             <div class="row g-4">
                 <?php while ($product = $currentProducts->fetch_assoc()): ?>
                     <div class="col-lg-4 col-md-6">
-                        <div class="card h-100 shadow-sm">
-                            <img src="images/products/<?php echo htmlspecialchars($product['productid']); ?>.jpg" class="card-img-top" alt="<?php echo htmlspecialchars($product['product_name']); ?>" style="height: 200px; object-fit: cover;">
-                            <div class="card-body text-center">
-                                <h5 class="card-title"><?php echo htmlspecialchars($product['product_name']); ?></h5>
-                                <p class="card-text"><?php echo htmlspecialchars($product['product_description']); ?></p>
-                                <p class="card-text text-success fw-bold">$<?php echo htmlspecialchars($product['price']); ?></p>
+                        <div class="card product-card h-100 shadow-sm border-0 position-relative">
+                            <!-- Featured Ribbon (Optional) -->
+                            <?php if ($product['featured'] ?? false): ?>
+                                <span class="position-absolute top-0 start-0 badge bg-primary text-white" style="z-index: 10; padding: 0.5rem 1rem; font-size: 0.9rem;">Featured</span>
+                            <?php endif; ?>
+        
+                            <!-- Product Image -->
+                            <img src="images/products/<?php echo htmlspecialchars($product['productid']); ?>.jpg" 
+                                 class="card-img-top" 
+                                 alt="<?php echo htmlspecialchars($product['product_name']); ?>" 
+                                 style="height: 250px; object-fit: cover;">
+        
+                            <!-- Product Details -->
+                            <div class="card-body text-center d-flex flex-column">
+                                <h5 class="card-title fw-bold mb-2"><?php echo htmlspecialchars($product['product_name']); ?></h5>
+                                <p class="card-text text-muted mb-3"><?php echo htmlspecialchars($product['product_description']); ?></p>
+                                <p class="card-text text-success fw-bold mb-3">$<?php echo htmlspecialchars($product['price']); ?></p>
+                                <button class="btn btn-primary mt-auto w-100">Learn More</button>
                             </div>
                         </div>
                     </div>
                 <?php endwhile; ?>
             </div>
         </section>
+
 
         <!-- Promotions Section -->
         <section class="mb-5">
