@@ -1,10 +1,4 @@
-<?php
-require_once('model-products.php');
 
-// Fetch current and new products
-$currentProducts = fetchProducts();
-$newArrivals = fetchNewArrivals(); // Add a new function for fetching recently added products
-?>
 
 <!DOCTYPE html>
 <html lang="en">
