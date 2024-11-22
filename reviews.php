@@ -62,7 +62,7 @@ if ($topReviewsResult) {
 
 // Fetch all reviews for the accordion
 $reviews = selectReviews(); 
-
+error_log(print_r($topReviews, true));
 
 include 'view-reviews.php'; // Include reviews view
 
