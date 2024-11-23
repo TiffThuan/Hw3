@@ -55,6 +55,34 @@ $conn->close(); // Close connection
     <p class="lead">Experience the rich flavors of authentic Vietnamese coffee.</p>
 </div>
 
+<!-- Mission, Vision, and Our Story Section -->
+<div class="container mt-5">
+    <div class="row">
+        <!-- Mission Statement -->
+        <div class="col-md-4">
+            <h3 class="text-center" style="color: #6b3e26;">Our Mission</h3>
+            <p style="text-align: justify;">
+                At King Coffee Shop, our mission is to inspire and nurture the human spirit by providing an exceptional coffee experience. We are committed to serving high-quality, ethically sourced coffee while fostering a welcoming environment for our community.
+            </p>
+        </div>
+        <!-- Vision Statement -->
+        <div class="col-md-4">
+            <h3 class="text-center" style="color: #6b3e26;">Our Vision</h3>
+            <p style="text-align: justify;">
+                Our vision is to be the premier destination for coffee enthusiasts, recognized for our dedication to quality, sustainability, and community engagement. We aspire to expand our reach while maintaining our core values and personalized service.
+            </p>
+        </div>
+        <!-- Our Story -->
+        <div class="col-md-4">
+            <h3 class="text-center" style="color: #6b3e26;">Our Story</h3>
+            <p style="text-align: justify;">
+                Founded in 2024, King Coffee Shop began as a small neighborhood café with a passion for authentic Vietnamese coffee. Over the years, we have grown into a beloved local establishment, known for our signature brews and commitment to excellence. Our journey is a testament to our dedication to quality and community.
+            </p>
+        </div>
+    </div>
+</div>
+
+
 <div class="container mt-4">
     <h2 class="text-center mb-4" style="color: #6b3e26;">Our Highlights</h2>
     <!-- Stats Section -->
