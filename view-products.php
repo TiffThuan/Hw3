@@ -96,7 +96,7 @@
             <div class="col-lg-6">
                 <div class="card shadow-sm border-0">
                     <div style="height: 300px; overflow: hidden; border-radius: 10px;">
-                        <img src="https://images.pexels.com/photos/302901/pexels-photo-302901.jpeg"
+                        <img src="https://images.pexels.com/photos/28056725/pexels-photo-28056725/free-photo-of-a-table-with-two-drinks-and-a-bottle-of-wine.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                              alt="Summer Delight Iced Coffee"
                              style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
