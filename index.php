@@ -117,6 +117,18 @@ $conn->close(); // Close connection
                         <td>Cappuccino</td>
                         <td>$4.50</td>
                     </tr>
+                    <tr>
+                        <td>Latte</td>
+                        <td>$4.00</td>
+                    </tr>
+                    <tr>
+                        <td>Mocha</td>
+                        <td>$4.75</td>
+                    </tr>
+                    <tr>
+                        <td>Yogurt Shake</td>
+                        <td>$2.85</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
