@@ -46,16 +46,17 @@
                     <a class="nav-link text-white" href="index.php">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="orders.php">Orders</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="customers.php">Customers</a>
+                    <a class="nav-link text-white" href="orders.php">About</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-white" href="products.php">Products</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="reviews.php">Reviews</a>
+                    <a class="nav-link text-white" href="customers.php">Blogs</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="reviews.php">Find Us</a>
                 </li>
             </ul>
         </div>
