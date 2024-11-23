@@ -172,9 +172,10 @@
             
                                     <!-- Actions -->
                                     <td>
-                                        <button class="btn btn-primary btn-sm mb-2 w-100">Learn More</button>
-                                        <button class="btn btn-warning btn-sm mb-2 w-100">Edit</button>
+                                        <a href="products-with-reviews.php?productid=<?php echo htmlspecialchars($product['productid']); ?>" class="btn btn-primary btn-sm mb-2 w-100">Learn More</a>
+                                        <a href="view-products-editform.php?productid=<?php echo htmlspecialchars($product['productid']); ?>" class="btn btn-warning btn-sm mb-2 w-100">Edit</a>
                                     </td>
+                                    
                                 </tr>
                             <?php endwhile; ?>
                         </tbody>
