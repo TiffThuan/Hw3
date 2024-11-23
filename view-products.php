@@ -82,6 +82,46 @@
     <div class="container my-5">
         <h1 class="text-center mb-5">Our Products</h1>
 
+        
+ <!-- New Arrivals (Planned Products) Section -->
+    <section class="mb-5">
+        <h2 class="mb-4 text-center">Planned Products for Future Sale</h2>
+        <div class="row g-4">
+            <!-- First Planned Product -->
+            <div class="col-lg-6">
+                <div class="card shadow-sm border-0">
+                    <div style="height: 300px; overflow: hidden; border-radius: 10px;">
+                        <img src="https://www.pexels.com/photo/iced-coffee-in-a-clear-glass-302901/"
+                             alt="Summer Delight Iced Coffee"
+                             style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Summer Delight Iced Coffee</h5>
+                        <p class="card-text">A refreshing blend of iced coffee with hints of vanilla and caramel. Perfect for the summer heat!</p>
+                        <p class="badge bg-warning text-dark">Coming Soon</p>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Second Planned Product -->
+            <div class="col-lg-6">
+                <div class="card shadow-sm border-0">
+                    <div style="height: 300px; overflow: hidden; border-radius: 10px;">
+                        <img src="https://unsplash.com/photos/5lZhD2qQ2SE"
+                             alt="Gourmet Matcha Latte"
+                             style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Gourmet Matcha Latte</h5>
+                        <p class="card-text">A premium matcha latte with organic Japanese matcha and creamy oat milk.</p>
+                        <p class="badge bg-warning text-dark">Coming Soon</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
         <!-- Current Products Section -->
             <section class="mb-5">
                 <h2 class="mb-4 text-center">Current Products</h2>
@@ -172,45 +212,6 @@
                 <a href="loyalty-program.php" class="btn btn-warning">Join Now</a>
             </div>
         </section>
-
-
- <!-- New Arrivals (Planned Products) Section -->
-    <section class="mb-5">
-        <h2 class="mb-4 text-center">Planned Products for Future Sale</h2>
-        <div class="row g-4">
-            <!-- First Planned Product -->
-            <div class="col-lg-6">
-                <div class="card shadow-sm border-0">
-                    <div style="height: 300px; overflow: hidden; border-radius: 10px;">
-                        <img src="https://www.pexels.com/photo/iced-coffee-in-a-clear-glass-302901/"
-                             alt="Summer Delight Iced Coffee"
-                             style="width: 100%; height: 100%; object-fit: cover;">
-                    </div>
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Summer Delight Iced Coffee</h5>
-                        <p class="card-text">A refreshing blend of iced coffee with hints of vanilla and caramel. Perfect for the summer heat!</p>
-                        <p class="badge bg-warning text-dark">Coming Soon</p>
-                    </div>
-                </div>
-            </div>
-    
-            <!-- Second Planned Product -->
-            <div class="col-lg-6">
-                <div class="card shadow-sm border-0">
-                    <div style="height: 300px; overflow: hidden; border-radius: 10px;">
-                        <img src="https://unsplash.com/photos/5lZhD2qQ2SE"
-                             alt="Gourmet Matcha Latte"
-                             style="width: 100%; height: 100%; object-fit: cover;">
-                    </div>
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Gourmet Matcha Latte</h5>
-                        <p class="card-text">A premium matcha latte with organic Japanese matcha and creamy oat milk.</p>
-                        <p class="badge bg-warning text-dark">Coming Soon</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
 
 
