@@ -112,7 +112,7 @@
             <div class="col-lg-6">
                 <div class="card shadow-sm border-0">
                     <div style="height: 300px; overflow: hidden; border-radius: 10px;">
-                        <img src="https://images.pexels.com/photos/28893064/pexels-photo-28893064.jpeg"
+                        <img src="https://images.pexels.com/photos/5947112/pexels-photo-5947112.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                              alt="Gourmet Matcha Latte"
                              style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
@@ -146,16 +146,17 @@
 
                             <?php
                             $productImages = [
-                                6 => ' https://images.pexels.com/photos/7493980/pexels-photo-7493980.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1  ', // Cà Phê Đen Đá
-                                5 => 'https://images.pexels.com/photos/26238863/pexels-photo-26238863/free-photo-of-coffee-with-ice-prepared-at-cafe.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1 ', // Cà Phê Sữa Đá
-                                1 => ' https://images.pexels.com/photos/2299028/pexels-photo-2299028.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1  ', // Cappucino
-                                3 => ' https://images.pexels.com/photos/3551717/pexels-photo-3551717.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1  ', //Espresso
-                                7 => '  https://images.pexels.com/photos/10540638/pexels-photo-10540638.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1   ', //  Hot Coffee
-                                2 => ' https://images.pexels.com/photos/2112749/pexels-photo-2112749.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1 ', //  Latte
-                                4 => ' https://images.pexels.com/photos/11755450/pexels-photo-11755450.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1  ', // Mocha
-                                46 => 'https://images.pexels.com/photos/7937399/pexels-photo-7937399.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', // Yogurt Shake
+                                1 => ' https://images.pexels.com/photos/312418/pexels-photo-312418.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', // cappucino
+                                2 => 'https://images.pexels.com/photos/7493980/pexels-photo-7493980.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1 ', // latte
+                                3 => ' https://images.pexels.com/photos/2299028/pexels-photo-2299028.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1  ', //espresso
+                                4 => ' https://images.pexels.com/photos/3551717/pexels-photo-3551717.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1  ', // Mocha
+                                5 => 'https://images.pexels.com/photos/10540638/pexels-photo-10540638.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1  ', //  Cafesua Da
+                                6 => ' https://images.pexels.com/photos/2112749/pexels-photo-2112749.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1 ', //  Café Den 
+                                7 => ' https://images.pexels.com/photos/11755450/pexels-photo-11755450.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1  ', // Hot coffee
+                                8 => 'https://images.pexels.com/photos/7937399/pexels-photo-7937399.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', // Yogurt Shake
                             ];
                             ?>
+
 
 
                             <?php while ($product = $currentProducts->fetch_assoc()): ?>
