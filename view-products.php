@@ -148,9 +148,9 @@
                                     <!-- Product Image -->
                                     <td>
                                         <div style="width: 80px; height: 80px; overflow: hidden; border-radius: 10px; border: 1px solid #ddd;">
-                                            <img src="images/products/<?php echo htmlspecialchars($product['productid']); ?>.jpg" 
-                                                 alt="<?php echo htmlspecialchars($product['product_name']); ?>" 
-                                                 onerror="this.onerror=null; this.src='images/placeholder.jpg';" 
+                                            <img src="https://images.pexels.com/photos/302901/pexels-photo-302901.jpeg"
+                                                 alt="Cappuccino"
+                                                 onerror="this.onerror=null; this.src='images/placeholder.jpg';"
                                                  style="width: 100%; height: 100%; object-fit: cover;">
                                         </div>
                                     </td>
