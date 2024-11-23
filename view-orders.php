@@ -28,6 +28,8 @@
                 <h1>Orders</h1>
             </div>
         </div>
+        
+    <?php include 'view-orders-newform.php'; ?>
 
         <!-- Orders List -->
         <div class="accordion" id="orderAccordion">
@@ -69,7 +71,7 @@
         </div>
     </div>
 
-    <?php include 'view-orders-newform.php'; ?>
+
 
     <!-- ECharts Script -->
     <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
