@@ -112,7 +112,7 @@
             <div class="col-lg-6">
                 <div class="card shadow-sm border-0">
                     <div style="height: 300px; overflow: hidden; border-radius: 10px;">
-                        <img src="https://images.unsplash.com/photo-1532634896-26909d0d4b6a"
+                        <img src="https://images.pexels.com/photos/28893064/pexels-photo-28893064.jpeg"
                              alt="Gourmet Matcha Latte"
                              style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
