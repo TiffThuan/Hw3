@@ -148,7 +148,7 @@
                                     <!-- Product Image -->
                                     <td>
                                         <div style="width: 80px; height: 80px; overflow: hidden; border-radius: 10px; border: 1px solid #ddd;">
-                                            <img src="https://images.pexels.com/photos/302901/pexels-photo-302901.jpeg"
+                                            <img src="https://images.pexels.com/photos/373888/pexels-photo-373888.jpeg"
                                                  alt="Cappuccino"
                                                  onerror="this.onerror=null; this.src='images/placeholder.jpg';"
                                                  style="width: 100%; height: 100%; object-fit: cover;">
