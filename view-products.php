@@ -90,7 +90,7 @@
 
 <!-- New Arrivals (Planned Products) Section -->
     <section class="mb-5">
-        <h2 class="mb-4 text-center">Planned Products for Future Sale</h2>
+        <h2 class="mb-4 text-center">New Beverage Rehearsal </h2>
         <div class="row g-4">
             <!-- First Planned Product -->
             <div class="col-lg-6">
