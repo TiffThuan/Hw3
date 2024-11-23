@@ -174,15 +174,15 @@
 
 
  <!-- New Arrivals (Planned Products) Section -->
-       <section class="mb-5">
+    <section class="mb-5">
         <h2 class="mb-4 text-center">Planned Products for Future Sale</h2>
         <div class="row g-4">
             <!-- First Planned Product -->
             <div class="col-lg-6">
                 <div class="card shadow-sm border-0">
                     <div style="height: 300px; overflow: hidden; border-radius: 10px;">
-                        <img src="images/mockup1.jpg" 
-                             alt="Summer Delight Iced Coffee" 
+                        <img src="https://www.pexels.com/photo/iced-coffee-in-a-clear-glass-302901/"
+                             alt="Summer Delight Iced Coffee"
                              style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
                     <div class="card-body text-center">
@@ -197,8 +197,8 @@
             <div class="col-lg-6">
                 <div class="card shadow-sm border-0">
                     <div style="height: 300px; overflow: hidden; border-radius: 10px;">
-                        <img src="images/mockup2.jpg" 
-                             alt="Gourmet Matcha Latte" 
+                        <img src="https://unsplash.com/photos/5lZhD2qQ2SE"
+                             alt="Gourmet Matcha Latte"
                              style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
                     <div class="card-body text-center">
