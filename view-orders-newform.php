@@ -1,6 +1,9 @@
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+
 <!-- Button to trigger the New Order Modal -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newOrderModal">
-    <i class="bi bi-cart" style="font-size: 1.2rem; color: white;"></i> New Order
+    <i class="bi bi-cart" style="font-size: 1.5rem; color: white;"></i>
 </button>
 
 <!-- Modal -->
