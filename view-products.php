@@ -143,13 +143,27 @@
                             </tr>
                         </thead>
                         <tbody>
+
+                            <?php
+                            $productImages = [
+                                1 => 'https://images.pexels.com/photos/26238863/pexels-photo-26238863/free-photo-of-coffee-with-ice-prepared-at-cafe.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', // Cà Phê Đen Đá
+                                2 => 'https://images.pexels.com/photos/10540638/pexels-photo-10540638.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', // Cà Phê Sữa Đá
+                                3 => 'https://images.pexels.com/photos/2112749/pexels-photo-2112749.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', // Cappucino
+                                4 => 'https://images.pexels.com/photos/2299028/pexels-photo-2299028.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', //Espresso
+                                5 => 'https://images.pexels.com/photos/11755450/pexels-photo-11755450.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', //  Hot Coffee
+                                6 => 'https://images.pexels.com/photos/7493980/pexels-photo-7493980.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', //  Latte
+                                7 => 'https://images.pexels.com/photos/3551717/pexels-photo-3551717.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', // Mocha
+                                8 => 'https://images.pexels.com/photos/7937399/pexels-photo-7937399.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', // Yogurt Shake
+                            ];
+                            ?>
+
                             <?php while ($product = $currentProducts->fetch_assoc()): ?>
                                 <tr>
                                     <!-- Product Image -->
                                     <td>
                                         <div style="width: 80px; height: 80px; overflow: hidden; border-radius: 10px; border: 1px solid #ddd;">
-                                            <img src="https://images.pexels.com/photos/373888/pexels-photo-373888.jpeg"
-                                                 alt="Cappuccino"
+                                            <img src="<?php echo $productImages[$product['productid']] ?? 'images/placeholder.jpg'; ?>"
+                                                 alt="<?php echo htmlspecialchars($product['product_name']); ?>"
                                                  onerror="this.onerror=null; this.src='images/placeholder.jpg';"
                                                  style="width: 100%; height: 100%; object-fit: cover;">
                                         </div>
