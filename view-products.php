@@ -7,15 +7,17 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
+        /* General Styles */
         body {
             font-family: Arial, sans-serif;
         }
-
+        
         h1, h2, h3 {
             font-weight: bold;
             color: #6b3e26;
         }
-
+        
+        /* Section Header */
         .section-header {
             background-color: #fdf8ec;
             padding: 20px;
@@ -23,58 +25,58 @@
             border-radius: 10px;
             margin-bottom: 30px;
         }
-
-        .promotion-card {
-            background: linear-gradient(135deg, #f9e0ac, #fef7e0);
-            padding: 20px;
+        
+        /* Card Styles */
+        .card, .promotion-card, .loyalty-card {
             border-radius: 10px;
-        }
-
-        .card {
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
-
+        
         .card:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
         }
-
+        
+        .promotion-card {
+            background: linear-gradient(135deg, #f9e0ac, #fef7e0);
+            padding: 20px;
+        }
+        
         .loyalty-card {
             background-color: #fef7e0;
             border: 1px solid #f9e0ac;
             padding: 20px;
-            border-radius: 10px;
             text-align: center;
         }
-    </style>
+        
+        /* Table Styles */
+        .table-hover tbody tr:hover {
+            background-color: #fdf8ec;
+        }
+        
+        .table-light th {
+            color: #6b3e26;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        /* Button Styles */
+        .btn {
+            transition: transform 0.2s ease;
+        }
+        
+        .btn:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Image Styles */
+        td img, .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
 
-    <style>
-    /* Table Row Hover */
-    .table-hover tbody tr:hover {
-        background-color: #fdf8ec;
-    }
-
-    /* Table Header */
-    .table-light th {
-        color: #6b3e26;
-        font-weight: bold;
-        text-align: center;
-    }
-
-    /* Action Buttons */
-    .btn {
-        transition: all 0.2s ease;
-    }
-
-    .btn:hover {
-        transform: scale(1.05);
-    }
-
-    /* Product Image */
-    td img {
-        max-height: 80px;
-        object-fit: cover;
-    }
 </style>
 
 </head>
