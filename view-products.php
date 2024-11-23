@@ -81,7 +81,7 @@
 <body>
     <div class="container my-5">
         <h1 class="text-center mb-5">Our Products</h1>
-        <p class="text-center lead">
+        <p class="lead">
             Welcome to our Products page, where we proudly showcase our curated selection of premium coffee beverages and delightful treats. Each offering is crafted with the finest ingredients to provide an exceptional experience for every palate. Explore our diverse menu and discover your next favorite indulgence.
         </p>
     </div>
