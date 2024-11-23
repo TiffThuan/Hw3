@@ -1,6 +1,6 @@
 <!-- Button to trigger the New Order Modal -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newOrderModal">
-    Add New Order
+    <i class="bi bi-cart" style="font-size: 1.2rem; color: white;"></i> New Order
 </button>
 
 <!-- Modal -->
@@ -8,7 +8,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="newOrderModalLabel">Add New Order</h5>
+                <h5 class="modal-title" id="newOrderModalLabel">New Order</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
