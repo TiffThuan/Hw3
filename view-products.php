@@ -151,7 +151,7 @@
                                 3 => ' https://images.pexels.com/photos/2299028/pexels-photo-2299028.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1  ', //espresso
                                 4 => ' https://images.pexels.com/photos/3551717/pexels-photo-3551717.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1  ', // Mocha
                                 5 => 'https://images.pexels.com/photos/10540638/pexels-photo-10540638.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1  ', //  Cafesua Da
-                                6 => ' https://images.pexels.com/photos/2112749/pexels-photo-2112749.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1 ', //  Café Den 
+                                6 => ' https://images.pexels.com/photos/26238863/pexels-photo-26238863/free-photo-of-coffee-with-ice-prepared-at-cafe.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1 ', //  Café Den 
                                 7 => ' https://images.pexels.com/photos/11755450/pexels-photo-11755450.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1  ', // Hot coffee
                                 8 => 'https://images.pexels.com/photos/7937399/pexels-photo-7937399.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', // Yogurt Shake
                             ];
