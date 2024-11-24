@@ -40,7 +40,6 @@
             <div class="container">
                 <h2 class="display-5">Welcome to King Coffee Shop's Customer Management</h2>
                 <p class="lead">Manage your existing customers below or register a new customer to enhance our community.</p>
-                <a href="register-customer.php" class="btn btn-primary btn-lg mt-3">Register New Customer</a>
             </div>
         </div>
         
