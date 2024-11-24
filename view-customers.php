@@ -43,49 +43,6 @@
             </div>
         </div>
 
-              <!-- Pagination (if needed) -->
-        <!-- Add your pagination logic here -->
-        <div class="container mt-5">
-            <h3 class="text-center">New Customers Over Time</h3>
-            <p class="text-center">This chart displays the number of new customers acquired each month.</p>
-            <div id="customer-chart" style="height: 400px;"></div>
-        </div>
-
-        <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
-        <script>
-            const customerChart = echarts.init(document.getElementById('customer-chart'));
-            const options = {
-                title: { text: 'Customer Growth Over Time', left: 'center' },
-                tooltip: { trigger: 'axis' },
-                xAxis: { type: 'category', data: <?php echo json_encode($months); ?> },
-                yAxis: { type: 'value', name: 'New Customers' },
-                series: [{
-                    name: 'New Customers',
-                    type: 'bar',
-                    data: <?php echo json_encode($newCustomers); ?>,
-                    itemStyle: { color: '#6b3e26' },
-                }],
-            };
-            customerChart.setOption(options);
-        </script>
-
-
-        <!-- Chart for New Customers -->
-        <div class="container mt-5">
-            <h3 class="text-center">New Customers Over Time</h3>
-            <div id="customer-chart" style="height: 400px;"></div>
-        </div>
-    </div>
-
-        <!-- Customer Feedback Section -->
-        <div class="container mt-5">
-            <div class="alert text-center" style="background-image: url('https://www.pexels.com/photo/coffee-background/'); background-size: cover; background-position: center; color: white; padding: 50px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
-                <h2 class="mb-4" style="font-weight: bold;">Customer Feedback</h2>
-                <p>At King Coffee Shop, we highly value our customers' opinions. Your feedback helps us enhance our services and deliver exceptional experiences. We invite you to explore the feedback shared by our valued customers.</p>
-                <a href="view-customers-with-orders.php" class="btn btn-success btn-lg mt-3" style="background-color: #3b2f2f; border: none;">Explore Customer Feedback</a>
-            </div>
-        </div>
-
         <!-- Button to Add New Customer -->
         <?php include 'view-customers-newform.php'; ?>
 
@@ -134,14 +91,18 @@
             <?php endif; ?>
         </div>
 
-  
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
-    <script>
-        // Search Functionality
-        document.getElementById('searchInput').addEventListener('input', function() {
-            const filter = this.value.toLowerCase();
-            const accordionItems = document.querySelectorAll('.accordion-item');
+        <!-- Chart for New Customers -->
+        <div class="container mt-5">
+            <h3 class="text-center">New Customers Over Time</h3>
+            <p class="text-center">This chart displays the number of new customers acquired each month.</p>
+            <div id="customer-chart" style="height: 400px;"></div>
+        </div>
 
+        <!-- Customer Feedback Section -->
+        <div class="container mt-5">
+            <div class="alert text-center" style="background-image: url('https://www.pexels.com/photo/coffee-background/'); background-size: cover; background-position: center; color: white; padding: 50px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+                <h2 class="mb-4" style="font-weight: bold;">Customer Feedback</h2>
+                <p>At King Coffee Shop, we highly value our customers' opinions. Your feedback helps us enhance our services and deliver exceptional experiences. We invite you to explore the feedback shared by our valued customers.</p>
+                <a href="view-customers
 ::contentReference[oaicite:0]{index=0}
  
