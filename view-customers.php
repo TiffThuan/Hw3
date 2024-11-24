@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
     <style>
         body {
-            background-image: url('coffee-background.jpg'); /* Ensure this image exists in your project directory */
+            background-image: url('coffee-background.jpg');
             background-size: cover;
             background-attachment: fixed;
             background-repeat: no-repeat;
@@ -18,38 +18,20 @@
             border: none;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
             border-radius: 10px;
-            color: #333;
+        }
+        .accordion-button:not(.collapsed) {
+            background-color: #e8f0fe;
+            color: #000;
         }
         .btn {
             margin: 0 5px;
         }
+        .search-bar {
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
-    <!-- Chart for New Customers -->
-    <div class="container mt-5">
-        <h3 class="text-center">New Customers Over Time</h3>
-        <div id="customer-chart" style="height: 400px;"></div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
-    <script>
-        const customerChart = echarts.init(document.getElementById('customer-chart'));
-        const options = {
-            title: { text: 'Customer Growth Over Time', left: 'center' },
-            tooltip: { trigger: 'axis' },
-            xAxis: { type: 'category', data: <?php echo json_encode($months); ?> },
-            yAxis: { type: 'value', name: 'New Customers' },
-            series: [{
-                name: 'New Customers',
-                type: 'bar',
-                data: <?php echo json_encode($newCustomers); ?>,
-                itemStyle: { color: '#6b3e26' },
-            }],
-        };
-        customerChart.setOption(options);
-    </script>
-
     <div class="container mt-5">
         <h1 class="text-center mb-4">Customers</h1>
 
@@ -61,17 +43,24 @@
         <!-- Button to Add New Customer -->
         <?php include 'view-customers-newform.php'; ?>
 
-        <!-- Customers Card Grid -->
-        <div class="row g-4">
+        <!-- Search Bar -->
+        <div class="search-bar">
+            <input type="text" id="searchInput" class="form-control" placeholder="Search customers by name, email, or phone...">
+        </div>
+
+        <!-- Customers Accordion -->
+        <div class="accordion" id="customersAccordion">
             <?php if ($customersWithOrders && $customersWithOrders->num_rows > 0): ?>
                 <?php while ($row = $customersWithOrders->fetch_assoc()): ?>
-                    <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <?php echo htmlspecialchars($row['firstname'] . ' ' . $row['lastname']); ?>
-                                </h5>
-                                <p class="card-text">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading<?php echo $row['customer_id']; ?>">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?php echo $row['customer_id']; ?>" aria-expanded="false" aria-controls="collapse<?php echo $row['customer_id']; ?>">
+                                <?php echo htmlspecialchars($row['firstname'] . ' ' . $row['lastname']); ?>
+                            </button>
+                        </h2>
+                        <div id="collapse<?php echo $row['customer_id']; ?>" class="accordion-collapse collapse" aria-labelledby="heading<?php echo $row['customer_id']; ?>" data-bs-parent="#customersAccordion">
+                            <div class="accordion-body">
+                                <p>
                                     <strong>Email:</strong> <?php echo htmlspecialchars($row['email'] ?? 'Not Provided'); ?><br>
                                     <strong>Phone:</strong> <?php echo htmlspecialchars($row['phone'] ?? 'Not Provided'); ?><br>
                                     <strong>Latest Order Date:</strong> <?php echo htmlspecialchars($row['order_date'] ?? 'No Orders'); ?><br>
@@ -98,8 +87,24 @@
                 <div class="text-center alert alert-warning">No customer data available.</div>
             <?php endif; ?>
         </div>
+
+        <!-- Pagination (if needed) -->
+        <!-- Add your pagination logic here -->
+
+        <!-- Chart for New Customers -->
+        <div class="container mt-5">
+            <h3 class="text-center">New Customers Over Time</h3>
+            <div id="customer-chart" style="height: 400px;"></div>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script>
+        // Search Functionality
+        document.getElementById('searchInput').addEventListener('input', function() {
+            const filter = this.value.toLowerCase();
+            const accordionItems = document.querySelectorAll('.accordion-item');
+
+::contentReference[oaicite:0]{index=0}
+ 
