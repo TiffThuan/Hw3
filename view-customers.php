@@ -85,7 +85,7 @@
             </div>
         </div>
 
-        <!-- Button to Add New Customer -->
+        <!-- Button to Register New Customer -->
         <?php include 'view-customers-newform.php'; ?>
 
         <!-- Search Bar -->
@@ -93,6 +93,7 @@
             <input type="text" id="searchInput" class="form-control" placeholder="Search customers by name, email, or phone...">
         </div>
 
+      
         <!-- Customers Accordion -->
         <div class="accordion" id="customersAccordion">
             <?php if ($customersWithOrders && $customersWithOrders->num_rows > 0): ?>
@@ -132,7 +133,7 @@
                 <div class="text-center alert alert-warning">No customer data available.</div>
             <?php endif; ?>
         </div>
-    </div>
+
 
     <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
     <script>
