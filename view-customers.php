@@ -44,8 +44,8 @@
         <!-- Introduction Section -->
         <div class="jumbotron text-center" style="background: linear-gradient(135deg, #d4a373, #ffebc7); color: #3b2f2f; padding: 50px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
             <div class="container">
-                <h2 class="display-5">Welcome to King Coffee Shop's Customer Management</h2>
-                <p class="lead">Manage your existing customers below or register a new customer to enhance our community.</p>
+                <h2 class="display-5"> Our King Coffee Shop's Customer Loyalty</h2>
+                <p class="lead">As a start-up coffee shop, we aim to bring the core value and unique Vietnamese coffee to the USA to enhance the coffee diversification in our community. No matter who you are, where you are from or what your job is, we CARE for you. Our coffee is not only satisfying cafe enthusiasts but everyone at all ages as well as gender</p>
             </div>
         </div>
 
