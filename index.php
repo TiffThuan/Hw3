@@ -57,7 +57,7 @@ $conn->close(); // Close connection
 
 
 <!-- Commitment, Who are we, our story -->
-<div class="container mt-5 commitment-section">
+<div id="commitment-section" class="container mt-5">
     <div class="row">
         <!-- Commitment Statement -->
         <div class="col-md-4">
@@ -82,6 +82,19 @@ $conn->close(); // Close connection
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var section = document.getElementById("commitment-section");
+        if (section) {
+            section.style.backgroundImage = "url('https://images.pexels.com/photos/302901/pexels-photo-302901.jpeg')";
+            section.style.backgroundSize = "cover";
+            section.style.backgroundPosition = "center";
+            section.style.padding = "50px 0";
+            section.style.color = "#fff";
+        }
+    });
+</script>
 
 
 
@@ -183,5 +196,6 @@ $conn->close(); // Close connection
         series: [{ type: 'bar', data: <?php echo json_encode($sales); ?> }],
     });
 </script>
+
 
 <?php include "view-footer.php"; ?>
