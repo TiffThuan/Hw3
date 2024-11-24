@@ -55,26 +55,28 @@ $conn->close(); // Close connection
     <p class="lead">Experience the rich flavors of authentic Vietnamese coffee.</p>
 </div>
 
+
+<!-- Commitment, Who are we, our story -->
 <div class="container mt-5 commitment-section">
     <div class="row">
         <!-- Commitment Statement -->
         <div class="col-md-4">
-            <h3 class="text-center" style="color: #6b3e26;">Our Commitment</h3>
-            <p style="text-align: justify;">
+            <h3 class="text-center">Our Commitment</h3>
+            <p>
                 At King Coffee Shop, we bring the best quality. Our target is to inspire and nurture the human spirit by providing an exceptional coffee experience. We are committed to serving high-quality, ethically sourced coffee while fostering a welcoming environment for our community.
             </p>
         </div>
         <!-- Who We Are Statement -->
         <div class="col-md-4">
-            <h3 class="text-center" style="color: #6b3e26;">Who We Are</h3>
-            <p style="text-align: justify;">
+            <h3 class="text-center">Who We Are</h3>
+            <p>
                 We are a team of coffee enthusiasts dedicated to delivering an exceptional experience to our customers. Our baristas are trained to craft each cup with precision and care, ensuring that every visit to King Coffee Shop is memorable. We believe in building lasting relationships with our patrons and contributing positively to our community.
             </p>
         </div>
         <!-- Our Story -->
         <div class="col-md-4">
-            <h3 class="text-center" style="color: #6b3e26;">Our Story</h3>
-            <p style="text-align: justify;">
+            <h3 class="text-center">Our Story</h3>
+            <p>
                 Founded in 2024, King Coffee Shop began as a small neighborhood café with a passion for authentic Vietnamese coffee. Over the years, we have grown into a beloved local establishment, known for our signature brews and commitment to excellence. Our journey is a testament to our dedication to quality and community.
             </p>
         </div>
