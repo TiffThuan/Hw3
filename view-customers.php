@@ -36,20 +36,23 @@
         <h1 class="text-center mb-4">Customers</h1>
 
         <!-- Introduction Section -->
-        <div class="jumbotron text-center bg-light p-4 rounded">
+        <div class="jumbotron text-center" style="background: linear-gradient(135deg, #d4a373, #ffebc7); color: #3b2f2f; padding: 50px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
             <div class="container">
                 <h2 class="display-5">Welcome to King Coffee Shop's Customer Management</h2>
                 <p class="lead">Manage your existing customers below or register a new customer to enhance our community.</p>
+                <a href="register-customer.php" class="btn btn-primary btn-lg mt-3" style="background-color: #6b3e26; border: none;">Register New Customer</a>
             </div>
         </div>
         
+        <!-- Customer Feedback Section -->
         <div class="container mt-5">
-            <div class="alert alert-info text-center">
-                <h2>Customer Feedback</h2>
+            <div class="alert text-center" style="background-image: url('https://www.pexels.com/photo/coffee-background/'); background-size: cover; background-position: center; color: white; padding: 50px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+                <h2 class="mb-4" style="font-weight: bold;">Customer Feedback</h2>
                 <p>At King Coffee Shop, we highly value our customers' opinions. Your feedback helps us enhance our services and deliver exceptional experiences. We invite you to explore the feedback shared by our valued customers.</p>
-                <a href="view-products-with-reviews.php" class="btn btn-primary btn-lg mt-3">Explore Customer Feedback</a>
+                <a href="view-products-with-reviews.php" class="btn btn-success btn-lg mt-3" style="background-color: #3b2f2f; border: none;">Explore Customer Feedback</a>
             </div>
         </div>
+
         <!-- Button to Add New Customer -->
         <?php include 'view-customers-newform.php'; ?>
 
