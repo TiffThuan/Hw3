@@ -100,7 +100,10 @@ $conn->close(); // Close connection
 
 
 <div class="container mt-4">
-    <h2 class="text-center mb-4" style="color: #6b3e26;">Our Highlights</h2>
+    <h2 class="text-center mb-4" style="color: #6b3e26;">The Details </h2>
+        <p style="font-style: italic;">
+           It is what we do best!
+        </p>
     <!-- Stats Section -->
     <div class="row text-center">
         <div class="col-md-4">
