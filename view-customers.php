@@ -29,6 +29,12 @@
         .search-bar {
             margin-bottom: 20px;
         }
+        .chart-container {
+            margin-bottom: 20px; /* Adjust this value as needed */
+        }
+        .feedback-section {
+            margin-top: 20px; /* Adjust this value as needed */
+        }
     </style>
 </head>
 <body>
@@ -40,6 +46,22 @@
             <div class="container">
                 <h2 class="display-5">Welcome to King Coffee Shop's Customer Management</h2>
                 <p class="lead">Manage your existing customers below or register a new customer to enhance our community.</p>
+            </div>
+        </div>
+
+        <!-- Chart for New Customers -->
+        <div class="chart-container">
+            <h3 class="text-center">New Customers Over Time</h3>
+            <p class="text-center">This chart displays the number of new customers acquired each month.</p>
+            <div id="customer-chart" style="height: 400px;"></div>
+        </div>
+
+        <!-- Customer Feedback Section -->
+        <div class="feedback-section">
+            <div class="alert text-center" style="background-image: url('https://www.pexels.com/photo/coffee-background/'); background-size: cover; background-position: center; color: white; padding: 50px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+                <h2 class="mb-4" style="font-weight: bold;">Customer Feedback</h2>
+                <p>At King Coffee Shop, we highly value our customers' opinions. Your feedback helps us enhance our services and deliver exceptional experiences. We invite you to explore the feedback shared by our valued customers.</p>
+                <a href="view-customers-with-orders.php" class="btn btn-success btn-lg mt-3" style="background-color: #3b2f2f; border: none;">Explore Customer Feedback</a>
             </div>
         </div>
 
@@ -90,19 +112,12 @@
                 <div class="text-center alert alert-warning">No customer data available.</div>
             <?php endif; ?>
         </div>
+    </div>
 
-        <!-- Chart for New Customers -->
-        <div class="container mt-5">
-            <h3 class="text-center">New Customers Over Time</h3>
-            <p class="text-center">This chart displays the number of new customers acquired each month.</p>
-            <div id="customer-chart" style="height: 400px;"></div>
-        </div>
-
-        <!-- Customer Feedback Section -->
-        <div class="container mt-5">
-            <div class="alert text-center" style="background-image: url('https://www.pexels.com/photo/coffee-background/'); background-size: cover; background-position: center; color: white; padding: 50px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
-                <h2 class="mb-4" style="font-weight: bold;">Customer Feedback</h2>
-                <p>At King Coffee Shop, we highly value our customers' opinions. Your feedback helps us enhance our services and deliver exceptional experiences. We invite you to explore the feedback shared by our valued customers.</p>
-                <a href="view-customers
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script>
+        const customerChart = echarts.init(document.getElementById('customer-chart'));
+        const options = {
+            title: { text: 'Customer Growth Over Time', left: 'center'
 ::contentReference[oaicite:0]{index=0}
  
