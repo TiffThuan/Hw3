@@ -35,6 +35,11 @@
         .feedback-section {
             margin-top: 20px; /* Adjust this value as needed */
         }
+        .new-customer {
+        background-color: #e0ffe0; /* Light green background */
+        border-left: 5px solid #4caf50; /* Green border */
+        padding-left: 10px;
+        }
     </style>
 </head>
 <body>
@@ -74,7 +79,7 @@
             customerChart.setOption(options);
         </script>
 
-
+    
 
         <!-- Customer Feedback Section -->
         <div class="feedback-section">
@@ -95,6 +100,12 @@
 
       
         <!-- Customers Accordion -->
+        <?php
+        // Assuming $row['is_new'] is a boolean indicating if the customer is new
+        $newCustomerClass = $row['is_new'] ? 'new-customer' : '';
+        ?>
+        <div class="accordion-item <?php echo $newCustomerClass; ?>">
+            
         <div class="accordion" id="customersAccordion">
             <?php if ($customersWithOrders && $customersWithOrders->num_rows > 0): ?>
                 <?php while ($row = $customersWithOrders->fetch_assoc()): ?>
@@ -135,6 +146,7 @@
         </div>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
     <script>
