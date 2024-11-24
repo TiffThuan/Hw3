@@ -137,6 +137,10 @@
 
     <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
     <script>
+    document.getElementById('searchInput').addEventListener('input', function() {
+            const filter = this.value.toLowerCase();
+            const accordionItems = document.querySelectorAll('.accordion-item');
+
         const customerChart = echarts.init(document.getElementById('customer-chart'));
         const options = {
             title: { text: 'Customer Growth Over Time', left: 'center'
