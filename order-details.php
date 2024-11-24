@@ -6,14 +6,14 @@ $pageTitle = "Order Details";
 include 'view-header.php';
 
 // Debug $_POST
-if (empty($_POST)) {
+if (empty($_GET)) {
     echo "<div class='alert alert-warning'>No data received. Please use the 'View Details' button.</div>";
     include 'view-footer.php';
     exit;
 }
 
 // Fetch order_id from POST
-$order_id = isset($_POST['order_id']) ? intval($_POST['order_id']) : null;
+$order_id = isset($_GET['order_id']) ? intval($_GET['order_id']) : null;
 
 if ($order_id) {
     $orderDetails = selectOrderDetails($order_id); // Fetch details from the database
