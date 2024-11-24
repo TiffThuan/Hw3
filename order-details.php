@@ -10,8 +10,8 @@ $orderDetails = null;
 $order_id = null;
 
 // Retrieve order_id from GET parameters
-if (isset($_GET['order_id']) && is_numeric($_GET['order_id'])) {
-    $order_id = intval($_GET['order_id']);
+if (isset($_POST['order_id']) && is_numeric($_POST['order_id'])) {
+    $order_id = intval($_POST['order_id']);
     // Fetch order details from the database
     $orderDetails = selectOrderDetails($order_id);
 } else {
@@ -20,7 +20,7 @@ if (isset($_GET['order_id']) && is_numeric($_GET['order_id'])) {
 }
 
 // Fetch order_id from POST
-$order_id = isset($_GET['order_id']) ? intval($_GET['order_id']) : null;
+$order_id = isset($_POST['order_id']) ? intval($_POST['order_id']) : null;
 
 if ($order_id) {
     $orderDetails = selectOrderDetails($order_id); // Fetch details from the database
