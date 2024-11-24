@@ -50,11 +50,24 @@
         </div>
 
         <!-- Chart for New Customers -->
-        <div class="chart-container">
-            <h3 class="text-center">New Customers Over Time</h3>
-            <p class="text-center">This chart displays the number of new customers acquired each month.</p>
-            <div id="customer-chart" style="height: 400px;"></div>
-        </div>
+        <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+        <script>
+            const customerChart = echarts.init(document.getElementById('customer-chart'));
+            const options = {
+                title: { text: 'Customer Growth Over Time', left: 'center' },
+                tooltip: { trigger: 'axis' },
+                xAxis: { type: 'category', data: <?php echo json_encode($months); ?> },
+                yAxis: { type: 'value', name: 'New Customers' },
+                series: [{
+                    name: 'New Customers',
+                    type: 'bar',
+                    data: <?php echo json_encode($newCustomers); ?>,
+                    itemStyle: { color: '#6b3e26' },
+                }],
+            };
+            customerChart.setOption(options);
+        </script
+
 
         <!-- Customer Feedback Section -->
         <div class="feedback-section">
