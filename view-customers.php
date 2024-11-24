@@ -48,7 +48,7 @@
             <div class="alert text-center" style="background-image: url('https://www.pexels.com/photo/coffee-background/'); background-size: cover; background-position: center; color: white; padding: 50px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
                 <h2 class="mb-4" style="font-weight: bold;">Customer Feedback</h2>
                 <p>At King Coffee Shop, we highly value our customers' opinions. Your feedback helps us enhance our services and deliver exceptional experiences. We invite you to explore the feedback shared by our valued customers.</p>
-                <a href="view-products-with-reviews.php" class="btn btn-success btn-lg mt-3" style="background-color: #3b2f2f; border: none;">Explore Customer Feedback</a>
+                <a href="view-customers-with-orders.php" class="btn btn-success btn-lg mt-3" style="background-color: #3b2f2f; border: none;">Explore Customer Feedback</a>
             </div>
         </div>
 
