@@ -5,10 +5,17 @@ require_once('model-orders.php');
 $pageTitle = "Order Details";
 include 'view-header.php';
 
-// Debug $_POST
-if (empty($_GET)) {
-    echo "<div class='alert alert-warning'>No data received. Please use the 'View Details' button.</div>";
-    include 'view-footer.php';
+// Initialize variables
+$orderDetails = null;
+$order_id = null;
+
+// Retrieve order_id from GET parameters
+if (isset($_GET['order_id']) && is_numeric($_GET['order_id'])) {
+    $order_id = intval($_GET['order_id']);
+    // Fetch order details from the database
+    $orderDetails = selectOrderDetails($order_id);
+} else {
+    echo "<div class='alert alert-danger'>Invalid or missing Order ID. Please provide a valid Order ID.</div>";
     exit;
 }
 
