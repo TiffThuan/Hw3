@@ -50,6 +50,12 @@
         </div>
 
         <!-- Chart for New Customers -->
+        <div class="container mt-5">
+            <h3 class="text-center">New Customers Over Time</h3>
+            <p class="text-center">This chart displays the number of new customers acquired each month.</p>
+            <div id="customer-chart" style="height: 400px;"></div>
+        </div>
+        
         <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
         <script>
             const customerChart = echarts.init(document.getElementById('customer-chart'));
@@ -66,7 +72,8 @@
                 }],
             };
             customerChart.setOption(options);
-        </script
+        </script>
+
 
 
         <!-- Customer Feedback Section -->
