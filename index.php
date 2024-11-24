@@ -55,21 +55,20 @@ $conn->close(); // Close connection
     <p class="lead">Experience the rich flavors of authentic Vietnamese coffee.</p>
 </div>
 
-<!-- Mission, Vision, and Our Story Section -->
-<div class="container mt-5">
+<div class="container mt-5 commitment-section">
     <div class="row">
-        <!-- Mission Statement -->
+        <!-- Commitment Statement -->
         <div class="col-md-4">
-            <h3 class="text-center" style="color: #6b3e26;">Our Mission</h3>
+            <h3 class="text-center" style="color: #6b3e26;">Our Commitment</h3>
             <p style="text-align: justify;">
-                At King Coffee Shop, our mission is to inspire and nurture the human spirit by providing an exceptional coffee experience. We are committed to serving high-quality, ethically sourced coffee while fostering a welcoming environment for our community.
+                At King Coffee Shop, we bring the best quality. Our target is to inspire and nurture the human spirit by providing an exceptional coffee experience. We are committed to serving high-quality, ethically sourced coffee while fostering a welcoming environment for our community.
             </p>
         </div>
-        <!-- Vision Statement -->
+        <!-- Who We Are Statement -->
         <div class="col-md-4">
-            <h3 class="text-center" style="color: #6b3e26;">Our Vision</h3>
+            <h3 class="text-center" style="color: #6b3e26;">Who We Are</h3>
             <p style="text-align: justify;">
-                Our vision is to be the premier destination for coffee enthusiasts, recognized for our dedication to quality, sustainability, and community engagement. We aspire to expand our reach while maintaining our core values and personalized service.
+                We are a team of coffee enthusiasts dedicated to delivering an exceptional experience to our customers. Our baristas are trained to craft each cup with precision and care, ensuring that every visit to King Coffee Shop is memorable. We believe in building lasting relationships with our patrons and contributing positively to our community.
             </p>
         </div>
         <!-- Our Story -->
@@ -81,6 +80,8 @@ $conn->close(); // Close connection
         </div>
     </div>
 </div>
+
+
 
 
 <div class="container mt-4">
