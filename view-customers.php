@@ -36,10 +36,21 @@
         <h1 class="text-center mb-4">Customers</h1>
 
         <!-- Introduction Section -->
-        <div class="alert alert-info text-center">
-            <p>Welcome! Manage your existing customers below or register a new customer.</p>
+        <div class="jumbotron text-center bg-light p-4 rounded">
+            <div class="container">
+                <h2 class="display-5">Welcome to King Coffee Shop's Customer Management</h2>
+                <p class="lead">Manage your existing customers below or register a new customer to enhance our community.</p>
+                <a href="register-customer.php" class="btn btn-primary btn-lg mt-3">Register New Customer</a>
+            </div>
         </div>
-
+        
+        <div class="container mt-5">
+            <div class="alert alert-info text-center">
+                <h2>Customer Feedback</h2>
+                <p>At King Coffee Shop, we highly value our customers' opinions. Your feedback helps us enhance our services and deliver exceptional experiences. We invite you to explore the feedback shared by our valued customers.</p>
+                <a href="view-reviews.php" class="btn btn-primary btn-lg mt-3">Explore Customer Feedback</a>
+            </div>
+        </div>
         <!-- Button to Add New Customer -->
         <?php include 'view-customers-newform.php'; ?>
 
