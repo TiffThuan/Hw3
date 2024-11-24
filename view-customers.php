@@ -48,7 +48,7 @@
             <div class="alert alert-info text-center">
                 <h2>Customer Feedback</h2>
                 <p>At King Coffee Shop, we highly value our customers' opinions. Your feedback helps us enhance our services and deliver exceptional experiences. We invite you to explore the feedback shared by our valued customers.</p>
-                <a href="view-reviews.php" class="btn btn-primary btn-lg mt-3">Explore Customer Feedback</a>
+                <a href="view-products-with-reviews.php" class="btn btn-primary btn-lg mt-3">Explore Customer Feedback</a>
             </div>
         </div>
         <!-- Button to Add New Customer -->
