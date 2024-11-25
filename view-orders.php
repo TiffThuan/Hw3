@@ -22,6 +22,15 @@
             </div>
         </div>
 
+        <div class="cta-section">
+            <img src="https://images.pexels.com/photos/21771307/pexels-photo-21771307/free-photo-of-order-here-board-in-cafe.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="King Coffee">
+            <h2>Experience the Richness of King Coffee</h2>
+            <p>Indulge in our signature blends crafted to perfection. Order now and savor the authentic taste that sets King Coffee apart.</p>
+        </div>
+            
+        <?php include 'view-orders-newform.php'; ?>
+
+        
         <!-- Orders Section -->
         <div class="row mb-4">
             <div class="col text-center">
@@ -29,7 +38,7 @@
             </div>
         </div>
         
-    <?php include 'view-orders-newform.php'; ?>
+
 
         <!-- Orders List -->
         <div class="accordion" id="orderAccordion">
