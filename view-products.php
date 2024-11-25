@@ -220,7 +220,7 @@
                     <div class="promotion-card shadow-sm">
                         <h5 class="fw-bold">Limited-Time Offer</h5>
                         <p>Buy 2 pastries and get 1 coffee free. Don't miss out on this deal!</p>
-                        <a href="promotion-details.php" class="btn btn-success w-100">Learn More</a>
+                        <a href="view-orders.php" class="btn btn-success w-100">Learn More</a>
                     </div>
                 </div>
             </div>
@@ -232,7 +232,7 @@
             <div class="loyalty-card shadow-sm">
                 <h5 class="fw-bold">Join Our Loyalty Program</h5>
                 <p>Earn points for every dollar you spend and redeem them for exclusive rewards. It's our way of saying thank you!</p>
-                <a href="loyalty-program.php" class="btn btn-warning">Join Now</a>
+                <a href="view-customers.php" class="btn btn-warning">Join Now</a>
             </div>
         </section>
 
