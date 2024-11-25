@@ -37,52 +37,46 @@
                     
         <?php include 'view-orders-newform.php'; ?>
 
-        <!-- Orders Dropdown -->
-        <div class="dropdown mb-4">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="ordersDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                Orders
-            </button>
-            <ul class="dropdown-menu p-3" aria-labelledby="ordersDropdown" style="width: 100%; max-width: 100%; min-width: 300px;">
-                <!-- Orders Accordion -->
-                <div class="accordion" id="orderAccordion">
-                    <?php if ($orders && $orders->num_rows > 0): ?>
-                        <?php while ($order = $orders->fetch_assoc()): ?>
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="heading<?php echo htmlspecialchars($order['order_id']); ?>">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?php echo htmlspecialchars($order['order_id']); ?>" aria-expanded="false" aria-controls="collapse<?php echo htmlspecialchars($order['order_id']); ?>">
-                                        Order ID: <?php echo htmlspecialchars($order['order_id']); ?> - $<?php echo htmlspecialchars($order['total_amount']); ?>
-                                    </button>
-                                </h2>
-                                <div id="collapse<?php echo htmlspecialchars($order['order_id']); ?>" class="accordion-collapse collapse" aria-labelledby="heading<?php echo htmlspecialchars($order['order_id']); ?>" data-bs-parent="#orderAccordion">
-                                    <div class="accordion-body">
-                                        <strong>Order Date:</strong> <?php echo htmlspecialchars($order['order_date']); ?><br>
-                                        <strong>Customer:</strong> <?php echo htmlspecialchars($order['firstname'] . ' ' . $order['lastname']); ?><br>
-                                        <strong>Total Amount:</strong> $<?php echo htmlspecialchars($order['total_amount']); ?><br>
-                                        <strong>Payment Method:</strong> <?php echo htmlspecialchars($order['payment_method'] ?? 'Not Provided'); ?><br>
-                                        <strong>Status:</strong> <?php echo htmlspecialchars($order['status'] ?? 'Not Provided'); ?><br>
-        
-                                        <!-- Buttons for Actions -->
-                                        <form method="POST" action="order-details.php" style="display: inline;">
-                                            <input type="hidden" name="order_id" value="<?php echo htmlspecialchars($order['order_id']); ?>">
-                                            <button type="submit" class="btn btn-primary btn-sm mt-2">View Details</button>
-                                        </form>
-                                        <button class="btn btn-warning btn-sm mt-2" data-bs-toggle="modal" data-bs-target="#editOrderModal<?php echo htmlspecialchars($order['order_id']); ?>">Edit</button>
-                                        <form method="POST" action="" style="display: inline;">
-                                            <input type="hidden" name="actionType" value="Delete">
-                                            <input type="hidden" name="order_id" value="<?php echo htmlspecialchars($order['order_id']); ?>">
-                                            <button type="submit" class="btn btn-danger btn-sm mt-2" onclick="return confirm('Are you sure you want to delete this order?');">Delete</button>
-                                        </form>
-                                    </div>
-                                </div>
+
+        <!-- Orders List -->
+        <div class="accordion" id="orderAccordion">
+            <?php if ($orders && $orders->num_rows > 0): ?>
+                <?php while ($order = $orders->fetch_assoc()): ?>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading<?php echo htmlspecialchars($order['order_id']); ?>">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?php echo htmlspecialchars($order['order_id']); ?>" aria-expanded="false" aria-controls="collapse<?php echo htmlspecialchars($order['order_id']); ?>">
+                                Order ID: <?php echo htmlspecialchars($order['order_id']); ?> - $<?php echo htmlspecialchars($order['total_amount']); ?>
+                            </button>
+                        </h2>
+                        <div id="collapse<?php echo htmlspecialchars($order['order_id']); ?>" class="accordion-collapse collapse" aria-labelledby="heading<?php echo htmlspecialchars($order['order_id']); ?>" data-bs-parent="#orderAccordion">
+                            <div class="accordion-body">
+                                <strong>Order Date:</strong> <?php echo htmlspecialchars($order['order_date']); ?><br>
+                                <strong>Customer:</strong> <?php echo htmlspecialchars($order['firstname'] . ' ' . $order['lastname']); ?><br>
+                                <strong>Total Amount:</strong> $<?php echo htmlspecialchars($order['total_amount']); ?><br>
+                                <strong>Payment Method:</strong> <?php echo htmlspecialchars($order['payment_method'] ?? 'Not Provided'); ?><br>
+                                <strong>Status:</strong> <?php echo htmlspecialchars($order['status'] ?? 'Not Provided'); ?><br>
+
+                                <!-- Buttons for Actions -->
+                                <form method="POST" action="order-details.php" style="display: inline;">
+                                    <input type="hidden" name="order_id" value="<?php echo htmlspecialchars($order['order_id']); ?>">
+                                    <button type="submit" class="btn btn-primary btn-sm mt-2">View Details</button>
+                                </form>
+                                <button class="btn btn-warning btn-sm mt-2" data-bs-toggle="modal" data-bs-target="#editOrderModal<?php echo htmlspecialchars($order['order_id']); ?>">Edit</button>
+                                <form method="POST" action="" style="display: inline;">
+                                    <input type="hidden" name="actionType" value="Delete">
+                                    <input type="hidden" name="order_id" value="<?php echo htmlspecialchars($order['order_id']); ?>">
+                                    <button type="submit" class="btn btn-danger btn-sm mt-2" onclick="return confirm('Are you sure you want to delete this order?');">Delete</button>
+                                </form>
                             </div>
-                            <?php include 'view-orders-editform.php'; ?>
-                        <?php endwhile; ?>
-                    <?php else: ?>
-                        <div class="text-center">No orders found.</div>
-                    <?php endif; ?>
-                </div>
-            </ul>
+                        </div>
+                    </div>
+                    <?php include 'view-orders-editform.php'; ?>
+                <?php endwhile; ?>
+            <?php else: ?>
+                <div class="text-center">No orders found.</div>
+            <?php endif; ?>
         </div>
+    </div>
 
 
 
