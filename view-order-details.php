@@ -36,6 +36,9 @@
             </tbody>
         </table>
     </div>
+    <div class="text-center mt-4">
+        <a href="index.php" class="btn btn-primary">Return to Home Page</a>
+    </div>
 </div>
 </body>
 </html>
