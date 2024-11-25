@@ -29,15 +29,13 @@
                 Discover the authentic taste of our premium Vietnamese coffee. Whether you're a long-time enthusiast or new to our brews, we invite you to savor the unique flavors that set King Coffee apart.
             </p>
         </div>
-        
-
-            
-        <?php include 'view-orders-newform.php'; ?>
 
         <div class="cta-section">
             <h3> Explore Our Ordering Records </h3>
             <p> Dive into our comprehensive order history to discover the variety of coffee delights we offer and see how our customers savor their experiences with us. </p>
         </div>
+                    
+        <?php include 'view-orders-newform.php'; ?>
         
         <!-- Orders Section -->
         <div class="row mb-4">
