@@ -3,7 +3,7 @@
 
 <!-- Button to trigger the New Order Modal -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newOrderModal">
-    <i class="bi bi-cart" style="font-size: 1.5rem; color: white;"></i>
+    <i class="bi bi-cart" style="font-size: 1.5rem; color: white;"></i> Order Now
 </button>
 
 <!-- Modal -->
