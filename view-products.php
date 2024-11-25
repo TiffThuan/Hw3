@@ -210,10 +210,7 @@
                     <div class="promotion-card shadow-sm">
                         <h5 class="fw-bold">Get 20% Off Your First Order!</h5>
                         <p>Sign up now and enjoy an exclusive discount on your first purchase with us.</p>
-                        <form method="POST" action="register-discount.php">
-                            <input type="email" name="email" class="form-control mb-3" placeholder="Enter your email" required>
-                             <?php include 'view-customers-newform.php'; ?>
-                        </form>
+                        <?php include 'view-customers-newform.php'; ?>
                     </div>
                 </div>
                 <div class="col-md-6">
