@@ -212,7 +212,6 @@
                         <p>Sign up now and enjoy an exclusive discount on your first purchase with us.</p>
                         <form method="POST" action="register-discount.php">
                             <input type="email" name="email" class="form-control mb-3" placeholder="Enter your email" required>
-                             <a href="view-customers-newform.php" class="btn btn-warning">Register Now</a>
                              <?php include 'view-customers-newform.php'; ?>
                         </form>
                     </div>
