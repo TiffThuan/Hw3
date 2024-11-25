@@ -219,7 +219,7 @@
                 <div class="col-md-6">
                     <div class="promotion-card shadow-sm">
                         <h5 class="fw-bold">Limited-Time Offer</h5>
-                        <p>Buy 2 pastries and get 1 coffee free. Don't miss out on this deal!</p>
+                        <p>Buy 2 COFFEE and get 1 new recipe free. Don't miss out on this deal!</p>
                         <a href="view-products.php" class="btn btn-success w-100">Learn More</a>
                     </div>
                 </div>
