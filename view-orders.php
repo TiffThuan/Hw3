@@ -22,19 +22,23 @@
             </div>
         </div>
 
-        <div class="cta-section">
-            <h2>Experience the Richness of King Coffee</h2>
-            <p>Discover the authentic taste of our premium Vietnamese coffee. Whether you're a long-time enthusiast or new to our brews, we invite you to savor the unique flavors that set King Coffee apart.</p>
+
+        <div class="cta-section text-center py-5" style="background-color: #f8f9fa; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <h2 class="mb-3" style="font-weight: bold; color: #343a40;">Experience the Richness of King Coffee</h2>
+            <p class="mb-4" style="color: #6c757d;">
+                Discover the authentic taste of our premium Vietnamese coffee. Whether you're a long-time enthusiast or new to our brews, we invite you to savor the unique flavors that set King Coffee apart.
+            </p>
         </div>
+        
+
             
         <?php include 'view-orders-newform.php'; ?>
 
-        <div class="cta-section text-center py-5" style="background-color: #f8f9fa; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-            <h3 class="mb-3" style="font-weight: bold; color: #343a40;">Explore Our Ordering Records</h3>
-            <p class="mb-4" style="color: #6c757d;">
-                Dive into our comprehensive order history to discover the variety of coffee delights we offer and see how our customers savor their experiences with us.
-            </p>
+        <div class="cta-section">
+            <h3> Explore Our Ordering Records </h3>
+            <p> Dive into our comprehensive order history to discover the variety of coffee delights we offer and see how our customers savor their experiences with us. </p>
         </div>
+        
         <!-- Orders Section -->
         <div class="row mb-4">
             <div class="col text-center">
