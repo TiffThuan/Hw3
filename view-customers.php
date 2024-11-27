@@ -94,59 +94,77 @@
         <?php include 'view-customers-newform.php'; ?>
 
         <!-- Search Bar -->
-        <div class="search-bar">
-            <input type="text" id="searchInput" class="form-control" placeholder="Search customers by name, email, or phone...">
+        <div class="search-bar mb-3">
+            <input type="text" id="searchInput" class="form-control" placeholder="Search customers by name, email, or phone..." onkeyup="filterCustomers()">
         </div>
-
-      
-        <!-- Customers Accordion -->
-        <?php
-        // Assuming $row['is_new'] is a boolean indicating if the customer is new
-        $newCustomerClass = $row['is_new'] ? 'new-customer' : '';
-        ?>
-        <div class="accordion-item <?php echo $newCustomerClass; ?>">
-            
-        <div class="accordion" id="customersAccordion">
-            <?php if ($customersWithOrders && $customersWithOrders->num_rows > 0): ?>
-                <?php while ($row = $customersWithOrders->fetch_assoc()): ?>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="heading<?php echo $row['customer_id']; ?>">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?php echo $row['customer_id']; ?>" aria-expanded="false" aria-controls="collapse<?php echo $row['customer_id']; ?>">
-                                <?php echo htmlspecialchars($row['firstname'] . ' ' . $row['lastname']); ?>
-                            </button>
-                        </h2>
-                        <div id="collapse<?php echo $row['customer_id']; ?>" class="accordion-collapse collapse" aria-labelledby="heading<?php echo $row['customer_id']; ?>" data-bs-parent="#customersAccordion">
-                            <div class="accordion-body">
-                                <p>
-                                    <strong>Email:</strong> <?php echo htmlspecialchars($row['email'] ?? 'Not Provided'); ?><br>
-                                    <strong>Phone:</strong> <?php echo htmlspecialchars($row['phone'] ?? 'Not Provided'); ?><br>
-                                    <strong>Latest Order Date:</strong> <?php echo htmlspecialchars($row['order_date'] ?? 'No Orders'); ?><br>
-                                    <strong>Product(s):</strong> <?php echo htmlspecialchars($row['product_names'] ?? 'N/A'); ?><br>
-                                    <strong>Total Quantity:</strong> <?php echo htmlspecialchars($row['total_quantity'] ?? 0); ?><br>
-                                    <strong>Total Amount:</strong> $<?php echo htmlspecialchars($row['total_amount'] ?? '0.00'); ?>
-                                </p>
-                                <div class="d-flex justify-content-between">
-                                    <a href="view-order-details.php?customer_id=<?php echo htmlspecialchars($row['customer_id']); ?>" class="btn btn-primary btn-sm">View Orders</a>
-                                    <!-- Edit Customer -->
-                                    <?php include 'view-customers-editform.php'; ?>
-                                    <!-- Delete Customer -->
-                                    <form method="post" action="" class="d-inline">
-                                        <input type="hidden" name="cid" value="<?php echo htmlspecialchars($row['customer_id']); ?>">
-                                        <input type="hidden" name="actionType" value="Delete">
-                                        <button class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this customer?');">Delete</button>
-                                    </form>
+        
+        <!-- Customer List Card -->
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Customer List</h5>
+            </div>
+            <div class="card-body">
+                <!-- Customers Accordion -->
+                <div class="accordion" id="customersAccordion">
+                    <?php if ($customersWithOrders && $customersWithOrders->num_rows > 0): ?>
+                        <?php while ($row = $customersWithOrders->fetch_assoc()): ?>
+                            <?php $newCustomerClass = $row['is_new'] ? 'new-customer' : ''; ?>
+                            <div class="accordion-item customer-item <?php echo $newCustomerClass; ?>" data-search="<?php echo htmlspecialchars($row['firstname'] . ' ' . $row['lastname'] . ' ' . $row['email'] . ' ' . $row['phone']); ?>">
+                                <h2 class="accordion-header" id="heading<?php echo $row['customer_id']; ?>">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?php echo $row['customer_id']; ?>" aria-expanded="false" aria-controls="collapse<?php echo $row['customer_id']; ?>">
+                                        <?php echo htmlspecialchars($row['firstname'] . ' ' . $row['lastname']); ?>
+                                    </button>
+                                </h2>
+                                <div id="collapse<?php echo $row['customer_id']; ?>" class="accordion-collapse collapse" aria-labelledby="heading<?php echo $row['customer_id']; ?>" data-bs-parent="#customersAccordion">
+                                    <div class="accordion-body">
+                                        <p>
+                                            <strong>Email:</strong> <?php echo htmlspecialchars($row['email'] ?? 'Not Provided'); ?><br>
+                                            <strong>Phone:</strong> <?php echo htmlspecialchars($row['phone'] ?? 'Not Provided'); ?><br>
+                                            <strong>Latest Order Date:</strong> <?php echo htmlspecialchars($row['order_date'] ?? 'No Orders'); ?><br>
+                                            <strong>Product(s):</strong> <?php echo htmlspecialchars($row['product_names'] ?? 'N/A'); ?><br>
+                                            <strong>Total Quantity:</strong> <?php echo htmlspecialchars($row['total_quantity'] ?? 0); ?><br>
+                                            <strong>Total Amount:</strong> $<?php echo htmlspecialchars($row['total_amount'] ?? '0.00'); ?>
+                                        </p>
+                                        <div class="d-flex justify-content-between">
+                                            <a href="view-order-details.php?customer_id=<?php echo htmlspecialchars($row['customer_id']); ?>" class="btn btn-primary btn-sm">View Orders</a>
+                                            <!-- Edit Customer -->
+                                            <?php include 'view-customers-editform.php'; ?>
+                                            <!-- Delete Customer -->
+                                            <form method="post" action="" class="d-inline">
+                                                <input type="hidden" name="cid" value="<?php echo htmlspecialchars($row['customer_id']); ?>">
+                                                <input type="hidden" name="actionType" value="Delete">
+                                                <button class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this customer?');">Delete</button>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                <?php endwhile; ?>
-            <?php else: ?>
-                <div class="text-center alert alert-warning">No customer data available.</div>
-            <?php endif; ?>
+                        <?php endwhile; ?>
+                    <?php else: ?>
+                        <div class="text-center alert alert-warning">No customer data available.</div>
+                    <?php endif; ?>
+                </div>
+            </div>
         </div>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-    </div>
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+        
+        <script>
+        function filterCustomers() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const customerItems = document.querySelectorAll('.customer-item');
+            
+            customerItems.forEach(item => {
+                const searchText = item.getAttribute('data-search').toLowerCase();
+                if (searchText.includes(input)) {
+                    item.style.display = '';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+        </script>
 
     <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
     <script>
