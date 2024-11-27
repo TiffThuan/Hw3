@@ -37,46 +37,77 @@
                     
         <?php include 'view-orders-newform.php'; ?>
 
-
-        <!-- Orders List -->
-        <div class="accordion" id="orderAccordion">
-            <?php if ($orders && $orders->num_rows > 0): ?>
-                <?php while ($order = $orders->fetch_assoc()): ?>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="heading<?php echo htmlspecialchars($order['order_id']); ?>">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?php echo htmlspecialchars($order['order_id']); ?>" aria-expanded="false" aria-controls="collapse<?php echo htmlspecialchars($order['order_id']); ?>">
-                                Order ID: <?php echo htmlspecialchars($order['order_id']); ?> - $<?php echo htmlspecialchars($order['total_amount']); ?>
-                            </button>
-                        </h2>
-                        <div id="collapse<?php echo htmlspecialchars($order['order_id']); ?>" class="accordion-collapse collapse" aria-labelledby="heading<?php echo htmlspecialchars($order['order_id']); ?>" data-bs-parent="#orderAccordion">
-                            <div class="accordion-body">
-                                <strong>Order Date:</strong> <?php echo htmlspecialchars($order['order_date']); ?><br>
-                                <strong>Customer:</strong> <?php echo htmlspecialchars($order['firstname'] . ' ' . $order['lastname']); ?><br>
-                                <strong>Total Amount:</strong> $<?php echo htmlspecialchars($order['total_amount']); ?><br>
-                                <strong>Payment Method:</strong> <?php echo htmlspecialchars($order['payment_method'] ?? 'Not Provided'); ?><br>
-                                <strong>Status:</strong> <?php echo htmlspecialchars($order['status'] ?? 'Not Provided'); ?><br>
-
-                                <!-- Buttons for Actions -->
-                                <form method="POST" action="order-details.php" style="display: inline;">
-                                    <input type="hidden" name="order_id" value="<?php echo htmlspecialchars($order['order_id']); ?>">
-                                    <button type="submit" class="btn btn-primary btn-sm mt-2">View Details</button>
-                                </form>
-                                <button class="btn btn-warning btn-sm mt-2" data-bs-toggle="modal" data-bs-target="#editOrderModal<?php echo htmlspecialchars($order['order_id']); ?>">Edit</button>
-                                <form method="POST" action="" style="display: inline;">
-                                    <input type="hidden" name="actionType" value="Delete">
-                                    <input type="hidden" name="order_id" value="<?php echo htmlspecialchars($order['order_id']); ?>">
-                                    <button type="submit" class="btn btn-danger btn-sm mt-2" onclick="return confirm('Are you sure you want to delete this order?');">Delete</button>
-                                </form>
+    
+       <!-- Orders List Card -->
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Orders List</h5>
+            </div>
+            <div class="card-body">
+                <!-- Search Bar -->
+                <div class="search-bar mb-3">
+                    <input type="text" id="searchOrderInput" class="form-control" placeholder="Search orders by ID, customer name, or status..." onkeyup="filterOrders()">
+                </div>
+        
+                <!-- Orders Accordion -->
+                <div class="accordion" id="orderAccordion">
+                    <?php if ($orders && $orders->num_rows > 0): ?>
+                        <?php while ($order = $orders->fetch_assoc()): ?>
+                            <div class="accordion-item order-item" data-search="<?php echo htmlspecialchars($order['order_id'] . ' ' . $order['firstname'] . ' ' . $order['lastname'] . ' ' . $order['status']); ?>">
+                                <h2 class="accordion-header" id="heading<?php echo htmlspecialchars($order['order_id']); ?>">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?php echo htmlspecialchars($order['order_id']); ?>" aria-expanded="false" aria-controls="collapse<?php echo htmlspecialchars($order['order_id']); ?>">
+                                        Order ID: <?php echo htmlspecialchars($order['order_id']); ?> - $<?php echo htmlspecialchars($order['total_amount']); ?>
+                                    </button>
+                                </h2>
+                                <div id="collapse<?php echo htmlspecialchars($order['order_id']); ?>" class="accordion-collapse collapse" aria-labelledby="heading<?php echo htmlspecialchars($order['order_id']); ?>" data-bs-parent="#orderAccordion">
+                                    <div class="accordion-body">
+                                        <strong>Order Date:</strong> <?php echo htmlspecialchars($order['order_date']); ?><br>
+                                        <strong>Customer:</strong> <?php echo htmlspecialchars($order['firstname'] . ' ' . $order['lastname']); ?><br>
+                                        <strong>Total Amount:</strong> $<?php echo htmlspecialchars($order['total_amount']); ?><br>
+                                        <strong>Payment Method:</strong> <?php echo htmlspecialchars($order['payment_method'] ?? 'Not Provided'); ?><br>
+                                        <strong>Status:</strong> <?php echo htmlspecialchars($order['status'] ?? 'Not Provided'); ?><br>
+        
+                                        <!-- Buttons for Actions -->
+                                        <form method="POST" action="order-details.php" style="display: inline;">
+                                            <input type="hidden" name="order_id" value="<?php echo htmlspecialchars($order['order_id']); ?>">
+                                            <button type="submit" class="btn btn-primary btn-sm mt-2">View Details</button>
+                                        </form>
+                                        <button class="btn btn-warning btn-sm mt-2" data-bs-toggle="modal" data-bs-target="#editOrderModal<?php echo htmlspecialchars($order['order_id']); ?>">Edit</button>
+                                        <form method="POST" action="" style="display: inline;">
+                                            <input type="hidden" name="actionType" value="Delete">
+                                            <input type="hidden" name="order_id" value="<?php echo htmlspecialchars($order['order_id']); ?>">
+                                            <button type="submit" class="btn btn-danger btn-sm mt-2" onclick="return confirm('Are you sure you want to delete this order?');">Delete</button>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <?php include 'view-orders-editform.php'; ?>
-                <?php endwhile; ?>
-            <?php else: ?>
-                <div class="text-center">No orders found.</div>
-            <?php endif; ?>
+                            <?php include 'view-orders-editform.php'; ?>
+                        <?php endwhile; ?>
+                    <?php else: ?>
+                        <div class="text-center alert alert-warning">No orders found.</div>
+                    <?php endif; ?>
+                </div>
+            </div>
         </div>
-    </div>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+        
+        <script>
+        function filterOrders() {
+            const input = document.getElementById('searchOrderInput').value.toLowerCase();
+            const orderItems = document.querySelectorAll('.order-item');
+            
+            orderItems.forEach(item => {
+                const searchText = item.getAttribute('data-search').toLowerCase();
+                if (searchText.includes(input)) {
+                    item.style.display = '';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+        </script>
 
 
 
