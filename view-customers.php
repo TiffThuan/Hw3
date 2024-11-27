@@ -44,8 +44,6 @@
 </head>
 <body>
     <div class="container mt-5">
-        <h1 class="text-center mb-4">Customers</h1>
-
         <!-- Introduction Section -->
         <div class="jumbotron text-center" style="background: linear-gradient(135deg, #d4a373, #ffebc7); color: #3b2f2f; padding: 50px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
             <div class="container">
