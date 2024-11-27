@@ -144,34 +144,63 @@
 <!-- Add Review Modal Trigger -->
 <?php include 'view-reviews-newform.php'; ?>
 
-<div class="accordion mt-4" id="reviewsAccordion">
-    <?php while ($review = $reviews->fetch_assoc()): ?>
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="heading<?php echo $review['review_id']; ?>">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?php echo $review['review_id']; ?>" aria-expanded="false" aria-controls="collapse<?php echo $review['review_id']; ?>">
-                    Review #<?php echo htmlspecialchars($review['review_id']); ?>: <?php echo htmlspecialchars($review['rating']); ?>/5
-                </button>
-            </h2>
-            <div id="collapse<?php echo $review['review_id']; ?>" class="accordion-collapse collapse" aria-labelledby="heading<?php echo $review['review_id']; ?>" data-bs-parent="#reviewsAccordion">
-                <div class="accordion-body">
-                    <p><?php echo htmlspecialchars($review['review_text']); ?></p>
-                    <div class="mt-3">
-                        <!-- Edit Button -->
-                        <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editReviewModal<?php echo $review['review_id']; ?>">Edit</button>
-                        <?php include "view-reviews-editform.php"; ?>
-
-                        <!-- Delete Button -->
-                        <form method="POST" action="reviews.php" class="d-inline">
-                            <input type="hidden" name="actionType" value="deleteReview">
-                            <input type="hidden" name="review_id" value="<?php echo $review['review_id']; ?>">
-                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this review?');">Delete</button>
-                        </form>
+<!-- Review Banner Section -->
+    <div class="section-background container mt-5">
+        <h3 class="text-center">Customer Reviews</h3>
+        
+        <!-- Search Bar -->
+        <div class="mt-3 mb-4">
+            <input type="text" id="reviewSearchInput" class="form-control" placeholder="Search reviews by ID, rating, or text..." onkeyup="filterReviews()">
+        </div>
+    
+        <!-- Accordion for Reviews -->
+        <div class="accordion" id="reviewsAccordion">
+            <?php while ($review = $reviews->fetch_assoc()): ?>
+                <div class="accordion-item review-item" data-search="<?php echo htmlspecialchars($review['review_id'] . ' ' . $review['rating'] . ' ' . $review['review_text']); ?>">
+                    <h2 class="accordion-header" id="heading<?php echo $review['review_id']; ?>">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?php echo $review['review_id']; ?>" aria-expanded="false" aria-controls="collapse<?php echo $review['review_id']; ?>">
+                            Review #<?php echo htmlspecialchars($review['review_id']); ?>: <?php echo htmlspecialchars($review['rating']); ?>/5
+                        </button>
+                    </h2>
+                    <div id="collapse<?php echo $review['review_id']; ?>" class="accordion-collapse collapse" aria-labelledby="heading<?php echo $review['review_id']; ?>" data-bs-parent="#reviewsAccordion">
+                        <div class="accordion-body">
+                            <p><?php echo htmlspecialchars($review['review_text']); ?></p>
+                            <div class="mt-3">
+                                <!-- Edit Button -->
+                                <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editReviewModal<?php echo $review['review_id']; ?>">Edit</button>
+                                <?php include "view-reviews-editform.php"; ?>
+    
+                                <!-- Delete Button -->
+                                <form method="POST" action="reviews.php" class="d-inline">
+                                    <input type="hidden" name="actionType" value="deleteReview">
+                                    <input type="hidden" name="review_id" value="<?php echo $review['review_id']; ?>">
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this review?');">Delete</button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            <?php endwhile; ?>
         </div>
-    <?php endwhile; ?>
-</div>
+    </div>
+    
+    <!-- JavaScript for Search Functionality -->
+    <script>
+        function filterReviews() {
+            const input = document.getElementById('reviewSearchInput').value.toLowerCase();
+            const reviewItems = document.querySelectorAll('.review-item');
+            
+            reviewItems.forEach(item => {
+                const searchText = item.getAttribute('data-search').toLowerCase();
+                if (searchText.includes(input)) {
+                    item.style.display = '';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+    </script>
+
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
