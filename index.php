@@ -50,7 +50,7 @@ $conn->close(); // Close connection
 ?>
 
 <!-- Hero Section -->
-<div class="hero-section text-center text-white" style="background-image: url('https://images.pexels.com/photos/19299641/pexels-photo-19299641/free-photo-of-sidewalk-cafe-with-books-in-the-window.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'); background-size: cover; padding: 100px 0;">
+<div class="hero-section text-center text-white" style="background-image: url('https://images.pexels.com/photos/2416877/pexels-photo-2416877.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'); background-size: cover; padding: 100px 0;">
     <h1 class="display-4">Welcome to King Coffee Shop</h1>
     <p class="lead">Experience the rich flavors of authentic Vietnamese coffee.</p>
 </div>
@@ -185,19 +185,24 @@ $conn->close(); // Close connection
         <h3 class="text-center">Monthly Sales Chart</h3>
         <div id="sales-chart" style="height: 300px;"></div>
     </div>
-</div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script>
+        const chart = echarts.init(document.getElementById('sales-chart'));
+        chart.setOption({
+            backgroundColor: '#d4edda', // Light green background color
+            title: { text: 'Monthly Sales', left: 'center' },
+            tooltip: { trigger: 'axis' },
+            xAxis: { type: 'category', data: <?php echo json_encode($months); ?> },
+            yAxis: { type: 'value' },
+            series: [{ 
+                type: 'bar', 
+                data: <?php echo json_encode($sales); ?>,
+                itemStyle: { color: '#28a745' } // Optional: Green bar color
+            }],
+        });
+    </script>
 
-<script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
-<script>
-    const chart = echarts.init(document.getElementById('sales-chart'));
-    chart.setOption({
-        title: { text: 'Monthly Sales', left: 'center' },
-        tooltip: { trigger: 'axis' },
-        xAxis: { type: 'category', data: <?php echo json_encode($months); ?> },
-        yAxis: { type: 'value' },
-        series: [{ type: 'bar', data: <?php echo json_encode($sales); ?> }],
-    });
-</script>
 
 
 <?php include "view-footer.php"; ?>
