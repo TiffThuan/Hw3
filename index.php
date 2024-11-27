@@ -50,11 +50,10 @@ $conn->close(); // Close connection
 ?>
 
 <!-- Hero Section -->
-<div class="hero-section text-center text-white" style="background-image: url('path/to/coffee-background.jpg'); background-size: cover; padding: 100px 0;">
+<div class="hero-section text-center text-white" style="background-image: url('https://images.pexels.com/photos/9371714/pexels-photo-9371714.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'); background-size: cover; padding: 100px 0;">
     <h1 class="display-4">Welcome to King Coffee Shop</h1>
     <p class="lead">Experience the rich flavors of authentic Vietnamese coffee.</p>
 </div>
-
 
 <!-- Commitment, Who are we, our story -->
 <div id="commitment-section" class="container mt-5">
