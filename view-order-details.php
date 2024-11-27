@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order Details</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
 </head>
@@ -10,7 +11,7 @@
     <h1 class="text-center">Order Details</h1>
     <div class="table-responsive mt-3">
         <table class="table table-bordered">
-            <thead class="thead-dark">
+            <thead class="table-dark">
                 <tr>
                     <th>Order ID</th>
                     <th>Product Name</th>
@@ -20,13 +21,14 @@
             </thead>
             <tbody>
                 <?php
-                if ($orderDetails && $orderDetails->num_rows > 0) {
+                $order_id = $order_id ?? 'Unknown'; // Ensure order_id is defined
+                if (isset($orderDetails) && $orderDetails->num_rows > 0) {
                     while ($orderDetail = $orderDetails->fetch_assoc()) {
                         echo "<tr>
                             <td>" . htmlspecialchars($orderDetail['order_id']) . "</td>
                             <td>" . htmlspecialchars($orderDetail['product_name']) . "</td>
                             <td>" . htmlspecialchars($orderDetail['quantity']) . "</td>
-                            <td>$" . htmlspecialchars(number_format($orderDetail['price'], 2)) . "</td>
+                            <td>$" . htmlspecialchars(number_format(floatval($orderDetail['price'] ?? 0), 2)) . "</td>
                         </tr>";
                     }
                 } else {
@@ -37,7 +39,7 @@
         </table>
     </div>
     <div class="text-center mt-4">
-        <a href="index.php" class="btn btn-primary">Return to Home Page</a>
+        <a href="index.php" class="btn btn-primary btn-lg">Return to Home Page</a>
     </div>
 </div>
 </body>
