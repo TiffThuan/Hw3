@@ -36,7 +36,7 @@
                     <p><strong>Phone:</strong> +1 555-COFFEE</p>
                     <div class="map mt-3">
                         <iframe
-                            src="https://www.google.com/maps/place/1317+SW+124th+St,+Oklahoma+City,+OK+73170/@35.3438413,-97.5431835,16z/data=!3m1!4b1!4m6!3m5!1s0x87b21345d12f1e4b:0xfe79d70cab57e747!8m2!3d35.3438413!4d-97.5406086!16s%2Fg%2F11c4db2mbz?entry=ttu&g_ep=EgoyMDI0MTEyNC4xIKXMDSoASAFQAw%3D%3D"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509639!2d144.95592601568152!3d-37.81720974252773!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf4c5f52bfbf8f273!2s123%20Coffee%20Lane!5e0!3m2!1sen!2sus!4v1681234567890!5m2!1sen!2sus"
                             width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                     </div>
                 </div>
