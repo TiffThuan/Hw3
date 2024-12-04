@@ -153,7 +153,7 @@
                                 5 => 'https://images.pexels.com/photos/10540638/pexels-photo-10540638.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1  ', //  Cafesua Da
                                 6 => ' https://images.pexels.com/photos/26238863/pexels-photo-26238863/free-photo-of-coffee-with-ice-prepared-at-cafe.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1 ', //  Café Den 
                                 7 => ' https://images.pexels.com/photos/11755450/pexels-photo-11755450.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1  ', // Hot coffee
-                                8 => 'https://images.pexels.com/photos/7937399/pexels-photo-7937399.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', // Yogurt Shake
+                                8 => 'https://images.pexels.com/photos/5150130/pexels-photo-5150130.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', // Yogurt Shake
                             ];
                             ?>
 
