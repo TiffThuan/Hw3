@@ -126,7 +126,185 @@
                                         <div class="d-flex justify-content-between">
                                             <a href="view-order-details.php?customer_id=<?php echo htmlspecialchars($row['customer_id']); ?>" class="btn btn-primary btn-sm">View Orders</a>
                                             <!-- Edit Customer -->
-                                            <?php include 'view-customers-editform.php'; ?>
+                                            <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customers Data Tracking</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-image: url('coffee-background.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            color: #fff;
+        }
+        .card {
+            background: #ffffff;
+            border: none;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+            border-radius: 10px;
+        }
+        .accordion-button:not(.collapsed) {
+            background-color: #e8f0fe;
+            color: #000;
+        }
+        .btn {
+            margin: 0 5px;
+        }
+        .search-bar {
+            margin-bottom: 20px;
+        }
+        .chart-container {
+            margin-bottom: 20px; /* Adjust this value as needed */
+        }
+        .feedback-section {
+            margin-top: 20px; /* Adjust this value as needed */
+        }
+        .new-customer {
+        background-color: #e0ffe0; /* Light green background */
+        border-left: 5px solid #4caf50; /* Green border */
+        padding-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <!-- Introduction Section -->
+        <div class="jumbotron text-center" style="background: linear-gradient(135deg, #d4a373, #ffebc7); color: #3b2f2f; padding: 50px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+            <div class="container">
+                <h2 class="display-5"> Our King Coffee Shop's Customer Loyalty</h2>
+                <p class="lead">As a start-up coffee shop, we aim to bring the core value and unique Vietnamese coffee to the USA to enhance the coffee diversification in our community. No matter who you are, where you are from or what your job is, we CARE for you. Our coffee is not only satisfying cafe enthusiasts but everyone at all ages as well as gender</p>
+            </div>
+        </div>
+
+        <!-- Chart for New Customers -->
+        <div class="container mt-5">
+            <h3 class="text-center">New Customers Over Time</h3>
+            <p class="text-center">This chart displays the number of new customers acquired each month.</p>
+            <div id="customer-chart" style="height: 400px;"></div>
+        </div>
+        
+        <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+        <script>
+            const customerChart = echarts.init(document.getElementById('customer-chart'));
+            const options = {
+                title: { text: 'Customer Growth Over Time', left: 'center' },
+                tooltip: { trigger: 'axis' },
+                xAxis: { type: 'category', data: <?php echo json_encode($months); ?> },
+                yAxis: { type: 'value', name: 'New Customers' },
+                series: [{
+                    name: 'New Customers',
+                    type: 'bar',
+                    data: <?php echo json_encode($newCustomers); ?>,
+                    itemStyle: { color: '#6b3e26' },
+                }],
+            };
+            customerChart.setOption(options);
+        </script>
+
+    
+
+        <!-- Customer Feedback Section -->
+        <div class="feedback-section">
+            <div class="alert text-center" style="background-image: url('https://images.pexels.com/photos/2956954/pexels-photo-2956954.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'); background-size: cover; background-position: center; color: white; padding: 50px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+                <h2 class="mb-4" style="font-weight: bold;">Customer Feedback</h2>
+                <p>At King Coffee Shop, we highly value our customers' opinions. Your feedback helps us enhance our services and deliver exceptional experiences. We invite you to explore the feedback shared by our valued customers.</p>
+                <a href="view-customers-with-orders.php" class="btn btn-success btn-lg mt-3" style="background-color: #3b2f2f; border: none;">Explore Customer Feedback</a>
+            </div>
+        </div>
+
+        <!-- Button to Register New Customer -->
+        <?php include 'view-customers-newform.php'; ?>
+
+        <!-- Search Bar -->
+        <div class="search-bar mb-3">
+            <input type="text" id="searchInput" class="form-control" placeholder="Search customers by name, email, or phone..." onkeyup="filterCustomers()">
+        </div>
+        
+        <!-- Customer List Card -->
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Customer List</h5>
+            </div>
+            <div class="card-body">
+                <!-- Customers Accordion -->
+                <div class="accordion" id="customersAccordion">
+                    <?php if ($customersWithOrders && $customersWithOrders->num_rows > 0): ?>
+                        <?php while ($row = $customersWithOrders->fetch_assoc()): ?>
+                            <?php $newCustomerClass = $row['is_new'] ? 'new-customer' : ''; ?>
+                            <div class="accordion-item customer-item <?php echo $newCustomerClass; ?>" data-search="<?php echo htmlspecialchars($row['firstname'] . ' ' . $row['lastname'] . ' ' . $row['email'] . ' ' . $row['phone']); ?>">
+                                <h2 class="accordion-header" id="heading<?php echo $row['customer_id']; ?>">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?php echo $row['customer_id']; ?>" aria-expanded="false" aria-controls="collapse<?php echo $row['customer_id']; ?>">
+                                        <?php echo htmlspecialchars($row['firstname'] . ' ' . $row['lastname']); ?>
+                                    </button>
+                                </h2>
+                                <div id="collapse<?php echo $row['customer_id']; ?>" class="accordion-collapse collapse" aria-labelledby="heading<?php echo $row['customer_id']; ?>" data-bs-parent="#customersAccordion">
+                                    <div class="accordion-body">
+                                        <p>
+                                            <strong>Email:</strong> <?php echo htmlspecialchars($row['email'] ?? 'Not Provided'); ?><br>
+                                            <strong>Phone:</strong> <?php echo htmlspecialchars($row['phone'] ?? 'Not Provided'); ?><br>
+                                            <strong>Latest Order Date:</strong> <?php echo htmlspecialchars($row['order_date'] ?? 'No Orders'); ?><br>
+                                            <strong>Product(s):</strong> <?php echo htmlspecialchars($row['product_names'] ?? 'N/A'); ?><br>
+                                            <strong>Total Quantity:</strong> <?php echo htmlspecialchars($row['total_quantity'] ?? 0); ?><br>
+                                            <strong>Total Amount:</strong> $<?php echo htmlspecialchars($row['total_amount'] ?? '0.00'); ?>
+                                        </p>
+                                        <div class="d-flex justify-content-between">
+                                            <a href="view-order-details.php?customer_id=<?php echo htmlspecialchars($row['customer_id']); ?>" class="btn btn-primary btn-sm">View Orders</a>
+                                            <!-- Edit Customer -->
+                                           <a href="view-customers-editform.php?customer_id=<?php echo htmlspecialchars($row['customer_id']); ?>" 
+                                               class="btn btn-secondary btn-sm">Edit</a>
+                    
+                                            <!-- Delete Customer -->
+                                            <form method="post" action="" class="d-inline">
+                                                <input type="hidden" name="cid" value="<?php echo htmlspecialchars($row['customer_id']); ?>">
+                                                <input type="hidden" name="actionType" value="Delete">
+                                                <button class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this customer?');">Delete</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endwhile; ?>
+                    <?php else: ?>
+                        <div class="text-center alert alert-warning">No customer data available.</div>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+        
+        <script>
+        function filterCustomers() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const customerItems = document.querySelectorAll('.customer-item');
+            
+            customerItems.forEach(item => {
+                const searchText = item.getAttribute('data-search').toLowerCase();
+                if (searchText.includes(input)) {
+                    item.style.display = '';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+        </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script>
+    document.getElementById('searchInput').addEventListener('input', function() {
+            const filter = this.value.toLowerCase();
+            const accordionItems = document.querySelectorAll('.accordion-item');
+
+        const customerChart = echarts.init(document.getElementById('customer-chart'));
+        const options = {
+            title: { text: 'Customer Growth Over Time', left: 'center'
+::contentReference[oaicite:0]{index=0}
+ 
                                             <!-- Delete Customer -->
                                             <form method="post" action="" class="d-inline">
                                                 <input type="hidden" name="cid" value="<?php echo htmlspecialchars($row['customer_id']); ?>">
