@@ -14,6 +14,9 @@ function updateCustomers($cFName, $cLName, $cEmail, $cPhone, $cid) {
     $stmt = $conn->prepare("UPDATE customers SET firstname = ?, lastname = ?, email = ?, phone = ? WHERE customer_id = ?");
     $stmt->bind_param("ssssi", $cFName, $cLName, $cEmail, $cPhone, $cid);
     $success = $stmt->execute();
+    if (!$success) {
+        error_log("Update failed: " . $stmt->error);
+    }
     $stmt->close();
     $conn->close();
     return $success;
